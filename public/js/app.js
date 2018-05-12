@@ -13880,8 +13880,6 @@ window.axios = __webpack_require__(19);
 
 window.Vue = __webpack_require__(38);
 
-Vue.prototype.$http = window.axios;
-
 var app = new Vue({
     el: '#app'
 });
