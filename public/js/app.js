@@ -13887,7 +13887,13 @@ window.axios = __webpack_require__(5);
 window.Vue = __webpack_require__(38);
 
 var app = new Vue({
-    el: '#app'
+    el: '#app',
+    created: function created() {},
+    methods: {
+        click: function click() {
+            alert('click');
+        }
+    }
 });
 
 /***/ }),

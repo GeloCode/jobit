@@ -10,9 +10,7 @@
     </head>
     <body>            
         <div class="container" id="app">
-           <div id="toast-container">
-                <div class="toast toast-success">NICE</div>
-            </div>
+           <button class="btn btn-primary" v-on:click="click()">Click</button>
         </div>
 
     <script src="{{ asset('js/app.js') }}"></script>
