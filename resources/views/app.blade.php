@@ -10,9 +10,9 @@
     </head>
     <body>            
         <div class="container" id="app">
-           
-            @yield('content')
-
+           <div id="toast-container">
+                <div class="toast toast-success">NICE</div>
+            </div>
         </div>
 
     <script src="{{ asset('js/app.js') }}"></script>
