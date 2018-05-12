@@ -1,0 +1,36 @@
+roles:
+
+    empresa:
+
+    
+
+    usuario:
+
+    Atributos:
+        Categoria[sistemas, programador (front, back, full), analista]
+        Provincia
+        Rango salarial
+
+    Acciones:
+
+        ver ofertas
+        inscribirse
+        administracion datos propios:
+            telefono
+            mail
+            contraseña
+        Pagina presentación:
+            portfolio
+            perfil
+        Solicitudes abiertas
+        Redes sociales
+        link github
+        link linkedin
+        link stackoverflow
+
+
+    
+
+
+
+
