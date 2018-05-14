@@ -18,7 +18,7 @@ Usuario:
         inscribirse
         administracion datos propios:
             telefono
-            mail
+            mail    
             contraseña
         Pagina presentación:
             portfolio
