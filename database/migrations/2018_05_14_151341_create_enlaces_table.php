@@ -15,7 +15,7 @@ class CreateEnlacesTable extends Migration
     {
         Schema::create('enlaces', function (Blueprint $table) {
             $table->increments('id');
-            $table->number('user_id');
+            $table->integer('user_id');
             $table->string('web');
             $table->string('enlace');
             $table->timestamps();

@@ -15,8 +15,8 @@ class CreateInscripcionsTable extends Migration
     {
         Schema::create('inscripciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->number('user_id');
-            $table->number('oferta_id');
+            $table->integer('user_id');
+            $table->integer('oferta_id');
             $table->timestamps();
         });
     }
