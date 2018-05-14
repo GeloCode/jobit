@@ -23,10 +23,10 @@ class Oferta extends Model
     }
 
     /**
-     * Hacemos la relación de que una provincia le pertenece a muchas ofertas .
+     * Hacemos la relación de que una provincia tiene muchas ofertas .
      */
-    public function provincia()
+    public function provincias()
     {
-        return $this->belongsTo(Provincia::class);
+        return $this->hasMany(Provincia::class);
     }
 }
