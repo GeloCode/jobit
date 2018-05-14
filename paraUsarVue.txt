@@ -3,9 +3,9 @@ Instrucciones:
 Las cosas de vue, las haremos en nuestro archivo app.js que se encuentra en la carpeta de resources/js/app.js.
 Para que se nos efectuen los cambios que haremos en el app.js tenemos que escribir npm run dev en la linea de comandos.
 
-Esto nos compilarï¿½ todo en el public/js/app.js --> Las cosas de JavaScript
+Esto nos compilará todo en el public/js/app.js --> Las cosas de JavaScript
 Y en public/css/app.css --> Las cosas de CSS
 
-Para aï¿½adir los archivos a la vista le ponemos --> <link rel="stylesheet" href="{{ asset('css/app.css') }}"> (Dentro del head)
+Para añadir los archivos a la vista le ponemos --> <link rel="stylesheet" href="{{ asset('css/app.css') }}"> (Dentro del head)
 
 					       --> <script src="{{ asset('js/app.js') }}"></script> (Antes del /body)
