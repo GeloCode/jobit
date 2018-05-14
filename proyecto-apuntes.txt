@@ -1,19 +1,18 @@
-empresa:
-    solicitantes [Usuarios -  id]
-    ofertas [Ofertas -id_oferta, id_empresa]
-    atributos: nombre, direccion, telefono, descripcion, provincia, cp.
+roles:
 
-Usuario:
-    Categoria: [sistemas, programador (front, back, full), analista]
-    lenguajes:
-        id
-        usuario_id
-        lenguaje
+    empresa:
+
+    
+
+    usuario:
+
     Atributos:
+        Categoria[sistemas, programador (front, back, full), analista]
         Provincia
         Rango salarial
-        Datos_personales.
+
     Acciones:
+
         ver ofertas
         inscribirse
         administracion datos propios:
@@ -28,32 +27,10 @@ Usuario:
         link github
         link linkedin
         link stackoverflow
-Ofertas:
-    id_oferta
-    id_empresa
-    titulo
-    descripcion
-Inscripciones:
-    id_oferta
-    id_usuario
-    fecha_inscripcion
--------------------------------------------------------------------------------
-portfolio:
-    Atributos:
-        id
-        usuario_id
-        proyecto_id
-        titulo
-        descripcion
-proyecto:
-    atributos:
-        id
-        usuario_id
-        titulo
-        descripcion
-        imagen
-enlaces_de_interes:
-    id
-    usuario_id
-    web
-    enlace
+
+
+    
+
+
+
+
