@@ -14,8 +14,9 @@ class CreatePortfoliosTable extends Migration
     public function up()
     {
         Schema::create('portfolios', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id');
+            $table->increments('id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
             $table->string('titulo');
             $table->string('descripcion');
             $table->timestamps();

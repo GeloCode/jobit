@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEnlacesTable extends Migration
+class CreateCategoriasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateEnlacesTable extends Migration
      */
     public function up()
     {
-        Schema::create('enlaces', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id');
-            $table->string('web');
-            $table->string('enlace');
+        Schema::create('categorias', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
+            $table->string('nombre');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateEnlacesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enlaces');
+        Schema::dropIfExists('categorias');
     }
 }

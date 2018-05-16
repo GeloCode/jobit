@@ -14,9 +14,11 @@ class CreateProyectosTable extends Migration
     public function up()
     {
         Schema::create('proyectos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('portfolio_id');
-            $table->integer('user_id');
+            $table->increments('id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
+            $table->integer('portfolio_id')->unsigned();
+            $table->foreign('portfolio_id')->references('id')->on('portfolios')->onUpdate('cascade');
             $table->string('titulo');
             $table->string('descripcion');
             $table->binary('imagen');
