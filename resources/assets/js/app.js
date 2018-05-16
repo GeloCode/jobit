@@ -4,14 +4,8 @@ window.axios = require('axios');
 
 window.Vue = require('vue');
 
-const app = new Vue({
-    el: '#app',
-    created: function(){
+Vue.component('example', require('./components/ExampleComponent.vue'));
 
-    },
-    methods: {
-        click: function(){
-            alert('click');
-        }
-    }
+const app = new Vue({
+    el: '#app'
 });
