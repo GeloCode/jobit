@@ -23,8 +23,9 @@ class CreateProyectosTable extends Migration
             $table->string('descripcion');
             $table->binary('imagen');
             $table->timestamps();
-        });
-    }
+             });
+         }
+         
 
     /**
      * Reverse the migrations.

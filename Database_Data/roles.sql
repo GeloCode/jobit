@@ -1,0 +1,2 @@
+INSERT INTO `roles` (`id`, `nombre`, `created_at`, `updated_at`) VALUES (1, 'Empresa', '2018-05-15 00:00:00', '2018-05-15 00:00:00');
+INSERT INTO `roles` (`id`, `nombre`, `created_at`, `updated_at`) VALUES (2, 'Solicitante', '2018-05-15 00:00:00', '2018-05-15 00:00:00');
