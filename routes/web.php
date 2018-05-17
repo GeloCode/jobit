@@ -14,33 +14,6 @@
 Route::get('/', function () {
     return view('app');
 });
-<<<<<<< HEAD
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-=======
-
-Route::get('/superofertas', function() {
-    return view('ofertas.ofertas');
-});
-
-/**
- *  Se mapean automaticamente todas las funciones resource del controlador de oferta.
- */
-Route::resource('ofertas', 'OfertaController');
-
-/**
- *  Se mapean automaticamente todas las funciones resource del controlador de user.
- */
-Route::resource('users', 'UserController');
-
-/**
- *  Cuando llamemos a esta ruta por axios nos devolverá un JSON con todas las ofertas para ese usuario.
-**/
-Route::get('/getOfertasByUserId/{id}', 'OfertaController@getOfertasByUserId');
-
-/**
- *  Cuando llamemos a esta ruta por axios nos devolverá booleana para saber si es empresa o no.
-**/
-Route::get('/userEsEmpresa/{id}', 'UserController@esEmpresa');
->>>>>>> c9e2b03dd70cd022ec582b432541154ffe6a3f4a
