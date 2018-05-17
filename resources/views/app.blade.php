@@ -10,7 +10,7 @@
     </head>
     <body>            
         <div class="container" id="app">
-           <button class="btn btn-primary" v-on:click="click()">Click</button>
+            <example></example>
         </div>
 
     <script src="{{ asset('js/app.js') }}"></script>
