@@ -13897,9 +13897,18 @@ var ofertas = new Vue({
     created: function created() {
         this.getOfertas();
         this.isEmpresa();
+        this.getProvincias();
     },
     data: {
         ofertas: [],
+        oferta: {
+            id: '',
+            provincia_id: '',
+            titulo: '',
+            descripcion: '',
+            vacantes: ''
+        },
+        provincias: [],
         esEmpresa: '',
         errors: []
     },
@@ -13912,13 +13921,49 @@ var ofertas = new Vue({
                 _this.ofertas = response.data;
             });
         },
-        isEmpresa: function isEmpresa($id) {
+        deleteOferta: function deleteOferta(oferta) {
             var _this2 = this;
 
-            var url = 'isEmpleado/' + 2;
+            if (confirm('Estas Seguro?')) {
+                var url = 'ofertas/' + oferta.id;
+                axios.delete(url).then(function (response) {
+                    _this2.getOfertas();
+                });
+            }
+        },
+        addOferta: function addOferta(oferta) {
+            var _this3 = this;
+
+            var url = 'oferta';
+            axios.post(url, {
+                user_id: 2, //TODO Cambiarlo por el id de usuario real
+                provincia_id: this.oferta.provincia_id,
+                titulo: this.oferta.titulo,
+                descripcion: this.oferta.titulo,
+                vacantes: this.oferta.vacantes
+            }).then(function (response) {
+                _this3.getOfertas();
+                _this3.oferta = {};
+                toastr.success('Nueva oferta insertada correctamente!');
+            }).catch(function (error) {
+                _this3.errors = error.response.data;
+            });
+        },
+        isEmpresa: function isEmpresa(id) {
+            var _this4 = this;
+
+            var url = 'isEmpleado/' + 2; //TODO Cambairlo por el id del usuario
             axios.get(url).then(function (response) {
                 var role = response.data;
-                _this2.esEmpresa = role == 'Empresa' ? true : false;
+                _this4.esEmpresa = role == 'Empresa' ? true : false;
+            });
+        },
+        getProvincias: function getProvincias() {
+            var _this5 = this;
+
+            var url = 'provincias';
+            axios.get(url).then(function (response) {
+                _this5.provincias = response.data;
             });
         }
     }

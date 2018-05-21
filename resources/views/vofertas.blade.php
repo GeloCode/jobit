@@ -8,44 +8,36 @@
 
 <body>
     <div class="container mx-auto">
-        <div id="ofertas" class="row">
-            <div class="col-sm-12">
-                <h1 class="page-header">CRUD Laravel & VUE</h1>
-            </div>
-            <div class="col-sm-7">
-                <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create">
-                Nueva Tarea
-            </a>
-                <table class="table table-hover table-striped" v-if="!esEmpresa">
-                    <thead>
-                        <tr>
-                        <th>ID</th>
-                            <th>Titulo</th>
-                            <th colspan="3"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="oferta in ofertas">
-                            <td width="10px"> @{{oferta.id}} </td>
-                            <td> @{{oferta.titulo}} </td>
-                            <td width="10px">
-                                <a href="#" class="btn btn-info btn-sm">Ver Oferta</a>
-                            </td>
-                            <td width="10px">
-                                <a href="#" class="btn btn-warning btn-sm">Editar</a>
-                            </td>
-                            <td width="10px">
-                                <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div id="ofertas">
+            <h1>Ofertas</h1>
+            <form @submit.prevent="addOferta">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Título" v-model="oferta.titulo">
+                </div>
+                <div class="form-group">
+                        <textarea class="form-control" placeholder="Descripción" v-model="oferta.descripcion"></textarea>
+                </div>
+                <div class="form-group">
+                    <select class="custom-select" name="selectProvincia" v-model="oferta.provincia_id">
+                        <option v-for="provincia in provincias" v-bind:value="provincia.id">@{{ provincia.nombre }}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                        <input type="number" class="form-control" placeholder="Vacantes" v-model="oferta.vacantes">
+                </div>
+                <button type="submit" class="btn btn-dark btn-block mb-4">Guardar</button>
+            </form>
+            <div class="card card-body mb-2" v-for="oferta in ofertas">
+                <h3 class="card-title">@{{ oferta.titulo }}</h3>
+                <p class="card-text">@{{ oferta.descripcion }}</p>
+                <button class="btn btn-block btn-primary">Ver</button>                
+                <button class="btn btn-block btn-alert">Editar</button>                
+                <button class="btn btn-block btn-danger" v-on:click="deleteOferta(oferta)">Eliminar</button>                
             </div>
             <div class="col-sm-5">
                 <pre>@{{ $data }}</pre>
             </div>
         </div>
     </div>
-    @include('ofertas.create')
     @include('includes.scripts')
 </body>

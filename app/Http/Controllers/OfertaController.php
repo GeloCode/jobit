@@ -14,7 +14,7 @@ class OfertaController extends Controller
      */
     public function index()
     {
-        return Oferta::get();
+        return Oferta::orderBy('created_at', 'DESC')->get();
     }
 
     /**
@@ -36,6 +36,7 @@ class OfertaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'provincia_id' => 'required',
             'titulo' => 'required',
             'descripcion' => 'required',
         ]);
@@ -53,7 +54,7 @@ class OfertaController extends Controller
      */
     public function show($id)
     {
-        //
+        return Oferta::find($id);
     }
 
     /**
@@ -77,6 +78,41 @@ class OfertaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $oferta = Oferta::find($id);
+        $oferta->delete();
+    }
+
+    /**
+     * Devuelve las ofertas que sean de X usuario
+     */
+    public function getOfertaByUser($id)
+    {
+        return Oferta::where('user_id', $id)->get();
+    }
+
+    /**
+     * Devuelve las ofertas que esten en la província X
+     */
+    public function getOfertaByProvincia($id)
+    {
+        return Oferta::where('provincia_id', $id)->get();
+    }
+
+    /**
+     * Devuelve las ofertas que coincidan con la palabra clave en el titulo o en la descripcion
+     */
+    public function searchOferta($word)
+    {
+        return Oferta::where('titulo', 'like', '%'.$word.'%')
+        ->orWhere('descripcion', 'like', '%'.$word.'%');
+    }
+
+    /**
+     * Devuelve las ofertas que coincidan con la palabra clave y una provincia
+     */
+    public function searchOfertaByProvinciaAndWord($id, $word)
+    {
+        return Oferta::where([['provincia_id', $id], ['titulo', 'like', '%'.$word.'%']])
+        ->orWhere([['provincia_id', $id], ['descripcion', 'like', '%'.$word.'%']])->get();
     }
 }
