@@ -13892,6 +13892,38 @@ var app = new Vue({
     el: '#app'
 });
 
+var ofertas = new Vue({
+    el: '#ofertas',
+    created: function created() {
+        this.getOfertas();
+        this.isEmpresa();
+    },
+    data: {
+        ofertas: [],
+        esEmpresa: '',
+        errors: []
+    },
+    methods: {
+        getOfertas: function getOfertas() {
+            var _this = this;
+
+            var url = 'ofertas';
+            axios.get(url).then(function (response) {
+                _this.ofertas = response.data;
+            });
+        },
+        isEmpresa: function isEmpresa($id) {
+            var _this2 = this;
+
+            var url = 'isEmpleado/' + 2;
+            axios.get(url).then(function (response) {
+                var role = response.data;
+                _this2.esEmpresa = role == 'Empresa' ? true : false;
+            });
+        }
+    }
+});
+
 /***/ }),
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
