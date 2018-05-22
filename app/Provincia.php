@@ -17,7 +17,7 @@ class Provincia extends Model
     /**
      * Hacemos la relación de una provincia le pertenece a una oferta.
      */
-    public function ofertas()
+    public function oferta()
     {
         return $this->belongsTo(Oferta::class);
     }

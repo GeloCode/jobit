@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Oferta extends Model
 {
     /**
+     * Campos que podremos modificar/inserta el usuario
+     */
+    protected $fillable = [
+        'user_id', 'provincia_id', 'titulo', 'descripcion', 'vacantes'
+    ];
+    /**
      * Hacemos la relación de que una oferta tiene muchas inscripciones.
      */
     public function inscripciones()
