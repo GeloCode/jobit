@@ -19,6 +19,7 @@
                 </div>
                 <div class="form-group">
                     <select class="custom-select" name="selectProvincia" v-model="oferta.provincia_id">
+                        <option value="0" disabled>Elige tu Provincia</option>
                         <option v-for="provincia in provincias" v-bind:value="provincia.id">@{{ provincia.nombre }}</option>
                     </select>
                 </div>

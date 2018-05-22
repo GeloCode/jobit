@@ -22,7 +22,7 @@ const ofertas = new Vue({
         ofertas : [],
         oferta: {
             id: '',
-            provincia_id: '',
+            provincia_id: 0,
             titulo: '',
             descripcion: '',
             vacantes: ''
