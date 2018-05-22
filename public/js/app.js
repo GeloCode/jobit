@@ -13921,49 +13921,75 @@ var ofertas = new Vue({
                 _this.ofertas = response.data;
             });
         },
-        deleteOferta: function deleteOferta(oferta) {
+        getOferta: function getOferta(id) {
             var _this2 = this;
+
+            var url = 'oferta/' + id;
+            axios.get(url).then(function (response) {
+                _this2.oferta = response.data;
+            });
+        },
+        deleteOferta: function deleteOferta(oferta) {
+            var _this3 = this;
 
             if (confirm('Estas Seguro?')) {
                 var url = 'ofertas/' + oferta.id;
                 axios.delete(url).then(function (response) {
-                    _this2.getOfertas();
+                    _this3.getOfertas();
                 });
             }
         },
         addOferta: function addOferta(oferta) {
-            var _this3 = this;
+            var _this4 = this;
 
             var url = 'oferta';
             axios.post(url, {
                 user_id: 2, //TODO Cambiarlo por el id de usuario real
                 provincia_id: this.oferta.provincia_id,
                 titulo: this.oferta.titulo,
-                descripcion: this.oferta.titulo,
+                descripcion: this.oferta.descripcion,
                 vacantes: this.oferta.vacantes
             }).then(function (response) {
-                _this3.getOfertas();
-                _this3.oferta = {};
+                _this4.getOfertas();
+                _this4.oferta = {};
                 toastr.success('Nueva oferta insertada correctamente!');
             }).catch(function (error) {
-                _this3.errors = error.response.data;
+                _this4.errors = error.response.data;
+            });
+        },
+        editOferta: function editOferta(id) {
+            var _this5 = this;
+
+            var url = 'oferta/' + id;
+            axios.put(url, {
+                provincia_id: this.oferta.provincia_id,
+                titulo: this.oferta.titulo,
+                descripcion: this.oferta.descripcion,
+                vacantes: this.oferta.vacantes
+            }).then(function (response) {
+                _this5.getOfertas();
+                _this5.oferta = {};
+                _this5.errors = [];
+                toastr.success('Oferta actualizada correctamente!');
+            }).catch(function (error) {
+                _this5.errors = error.response.data;
             });
         },
         isEmpresa: function isEmpresa(id) {
-            var _this4 = this;
+            var _this6 = this;
 
             var url = 'isEmpleado/' + 2; //TODO Cambairlo por el id del usuario
             axios.get(url).then(function (response) {
                 var role = response.data;
-                _this4.esEmpresa = role == 'Empresa' ? true : false;
+                _this6.esEmpresa = role == 'Empresa' ? true : false;
             });
         },
         getProvincias: function getProvincias() {
-            var _this5 = this;
+            var _this7 = this;
 
             var url = 'provincias';
             axios.get(url).then(function (response) {
-                _this5.provincias = response.data;
+                _this7.provincias = response.data;
             });
         }
     }

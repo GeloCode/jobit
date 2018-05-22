@@ -20,7 +20,7 @@
                 <div class="form-group">
                     <select class="custom-select" name="selectProvincia" v-model="oferta.provincia_id">
                         <option value="0" disabled>Elige tu Provincia</option>
-                        <option v-for="provincia in provincias" v-bind:value="provincia.id">@{{ provincia.nombre }}</option>
+                        <option v-for="provincia in provincias" v-bind:value="provincia.id" v-text="provincia.nombre"></option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -29,8 +29,8 @@
                 <button type="submit" class="btn btn-dark btn-block mb-4">Guardar</button>
             </form>
             <div class="card card-body mb-2" v-for="oferta in ofertas">
-                <h3 class="card-title">@{{ oferta.titulo }}</h3>
-                <p class="card-text">@{{ oferta.descripcion }}</p>
+                <h3 class="card-title" v-text="oferta.titulo"></h3>
+                <p class="card-text" v-text="oferta.descripcion"></p>
                 <button class="btn btn-block btn-primary">Ver</button>                
                 <button class="btn btn-block btn-alert">Editar</button>                
                 <button class="btn btn-block btn-danger" v-on:click="deleteOferta(oferta)">Eliminar</button>                

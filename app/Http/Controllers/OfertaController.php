@@ -66,6 +66,11 @@ class OfertaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'provincia_id' => 'required',
+            'titulo' => 'required',
+            'descripcion' => 'required',
+        ]);
         Oferta::findOrFail($id)->update($request->all());
         return;
     }

@@ -36,6 +36,11 @@ Route::get('/vofertas', function () {
 Route::get('ofertas', 'OfertaController@index');
 
 /**
+ * Nos devuelve la oferta con X id
+ */
+Route::get('oferta/{id}', 'OfertaController@getOfertaById');
+
+/**
  * Nos devuelve todas las ofertas filtradas para X usuario (Para ver nuestras ofertas si somos empresa)
  */
 Route::get('ofertas/usuario/{idUser}', 'OfertaController@getOfertaByUser');
@@ -64,6 +69,11 @@ Route::delete('ofertas/{id}', 'OfertaController@destroy');
  * Para crear una oferta (Para las empresas)
  */
 Route::post('oferta', 'OfertaController@store');
+
+/**
+ * Para editar una oferta (Para las empresas)
+ */
+Route::put('oferta/{id}', 'OfertaController@update');
 
 
 /*************** ROUTINGS PROVINCIAS ***************** */

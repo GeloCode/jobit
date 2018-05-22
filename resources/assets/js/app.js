@@ -37,7 +37,13 @@ const ofertas = new Vue({
             axios.get(url).then(response => {
                 this.ofertas = response.data;
             });
-        },        
+        },
+        getOferta: function(id){
+            var url = 'oferta/' + id;
+            axios.get(url).then(response => {
+                this.oferta = response.data;
+            });
+        }, 
         deleteOferta: function(oferta){
             if(confirm('Estas Seguro?')){
                 var url = 'ofertas/' + oferta.id;
@@ -52,12 +58,28 @@ const ofertas = new Vue({
                 user_id: 2,  //TODO Cambiarlo por el id de usuario real
                 provincia_id: this.oferta.provincia_id,            
                 titulo: this.oferta.titulo,
-                descripcion: this.oferta.titulo,
-                vacantes: this.oferta.vacantes,
+                descripcion: this.oferta.descripcion,
+                vacantes: this.oferta.vacantes
             }).then(response => {
                 this.getOfertas();
                 this.oferta = {};
                 toastr.success('Nueva oferta insertada correctamente!');
+            }).catch(error => {
+                this.errors = error.response.data;
+            });
+        },
+        editOferta: function(id){
+            var url= 'oferta/' + id;
+            axios.put(url, {
+                provincia_id: this.oferta.provincia_id,            
+                titulo: this.oferta.titulo,
+                descripcion: this.oferta.descripcion,
+                vacantes: this.oferta.vacantes
+            }).then(response => {
+                this.getOfertas();
+                this.oferta = {};
+                this.errors = [];
+                toastr.success('Oferta actualizada correctamente!');
             }).catch(error => {
                 this.errors = error.response.data;
             });
