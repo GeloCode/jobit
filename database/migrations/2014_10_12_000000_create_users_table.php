@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('codigo_postal');
             $table->integer('rango_desde')->unsigned();
             $table->integer('rango_hasta')->unsigned();
+            $table->boolean('condicion')->default(1);//habilitado por defecto
             $table->rememberToken();
             $table->timestamps();
         });

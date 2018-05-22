@@ -10,9 +10,8 @@
     </head>
     <body>            
         <div class="container" id="app">
-            <example></example>
+            @include('home')
         </div>
-
     <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

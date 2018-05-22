@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('app');
 });
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/rol', 'RoleController@index');
+Route::get('/rol/selectRol', 'RoleController@selectRol');
