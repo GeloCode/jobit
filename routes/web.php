@@ -18,5 +18,6 @@ Route::get('/', function () {
 Route::resource('portfolios', 'PortfolioController', ['except' => 'create']);
 Route::get('portfolios', 'PortfolioController@getPortfolios');
 Route::post('crearPortfolio', 'PortfolioController@store');
+Route::post('selectName', 'PortfoloController@getNameUser');
 
 

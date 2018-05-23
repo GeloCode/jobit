@@ -1,6 +1,7 @@
 
 <template>
 <div>
+    <router-view></router-view>
 <div id="detalle">
            </div>
            <div class="col-sm-7">

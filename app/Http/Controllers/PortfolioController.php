@@ -16,7 +16,16 @@ class PortfolioController extends Controller
     {
         return Portfolio::orderBy('id', 'DESC')->get();
     }
-
+     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getNameUser($id)
+    {
+        $names =  Portfolio::findOrFail($id)->user;
+        return $names;
+    }
     /**
      * Show the form for creating a new resource.
      *
