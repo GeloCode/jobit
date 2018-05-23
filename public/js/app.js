@@ -64199,6 +64199,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -64240,10 +64243,10 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.lang('es');
                 portfolios = { 'id': 1 };
             });
         },
-        getNames: function getNames(user) {
+        getNames: function getNames() {
             var _this2 = this;
 
-            var url = 'selectName' + user.id;
+            var url = 'selectName';
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (response) {
                 _this2.nameUser = response.data;
             }).catch(function (error) {
@@ -64670,77 +64673,89 @@ var render = function() {
       _c(
         "div",
         { staticClass: "row justify-content-between" },
-        [
-          _vm._l(_vm.nameUser, function(nombre) {
-            return _c("div", { key: nombre.id, staticClass: "card-header" }, [
-              _vm._v("asdasdasdasd")
-            ])
-          }),
-          _vm._v(" "),
-          _vm._l(_vm.portfolios, function(portfolio) {
-            return _c(
-              "div",
-              { key: portfolio.id, staticClass: "card col-md-4" },
-              [
-                _c("div", { staticClass: "card-body" }, [
-                  _c("h5", {
-                    staticClass: "card-title",
-                    domProps: { textContent: _vm._s(portfolio.titulo) }
-                  }),
-                  _vm._v(" "),
-                  _c("p", {
-                    staticClass: "card-text",
-                    domProps: { textContent: _vm._s(portfolio.descripcion) }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-danger btn-sm",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          _vm.deletePortfolio(portfolio)
-                        }
-                      }
-                    },
-                    [_vm._v("Borrar")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-warning btn-sm",
-                      attrs: { href: "#" }
-                    },
-                    [_vm._v("Editar")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-success btn-sm",
-                      attrs: { href: "#" }
-                    },
-                    [_vm._v("Ver")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-5 offset-md-7" }, [
-                    _c("small", [
-                      _c("b", [
-                        _vm._v(_vm._s(_vm.since(portfolio.created_at)) + " ")
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("hr")
+        _vm._l(_vm.portfolios, function(portfolio) {
+          return _c(
+            "div",
+            { key: portfolio.id, staticClass: "card col-md-4" },
+            [
+              _vm._l(_vm.nameUser, function(nombre) {
+                return _c("div", { key: nombre.id }, [
+                  _c("small", [
+                    portfolio.user_id === nombre.id
+                      ? _c("p", [
+                          _vm._v("Por: "),
+                          _c("b", [_vm._v(_vm._s(nombre.name))])
+                        ])
+                      : _vm._e()
+                  ])
                 ])
-              ]
-            )
-          })
-        ],
-        2
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.nameUser.name) +
+                    "\n                    "
+                ),
+                _c("h5", {
+                  staticClass: "card-title",
+                  domProps: { textContent: _vm._s(portfolio.titulo) }
+                }),
+                _vm._v(" "),
+                _c("p", {
+                  staticClass: "card-text",
+                  domProps: { textContent: _vm._s(portfolio.descripcion) }
+                }),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-danger btn-sm",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.deletePortfolio(portfolio)
+                      }
+                    }
+                  },
+                  [_vm._v("Borrar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-warning btn-sm",
+                    attrs: { href: "#" }
+                  },
+                  [_vm._v("Editar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-success btn-sm",
+                    attrs: { href: "#" }
+                  },
+                  [_vm._v("Ver")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-5 offset-md-7" }, [
+                  _c("small", [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.since(portfolio.created_at)) +
+                        "\n                        "
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("hr")
+              ])
+            ],
+            2
+          )
+        })
       )
     ],
     1

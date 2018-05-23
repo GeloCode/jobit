@@ -17,11 +17,13 @@
                 </form>
                 </div>
             </div>
-
             <div class="row justify-content-between">
-            <div v-for="nombre in nameUser" :key="nombre.id" class="card-header">asdasdasdasd</div>
                 <div v-for="portfolio in portfolios" :key="portfolio.id" class="card col-md-4">
+                     <div v-for="nombre in nameUser" :key="nombre.id">
+                                        <small><p v-if="portfolio.user_id === nombre.id">Por: <b>{{nombre.name}}</b></p></small> 
+                        </div>
                     <div class="card-body">
+                        {{nameUser.name}}
                         <h5 class="card-title" v-text="portfolio.titulo"> </h5>
                         <p class="card-text" v-text="portfolio.descripcion"> </p>
                         <a href="#" class="btn btn-danger btn-sm" v-on:click.prevent="deletePortfolio(portfolio)">Borrar</a>
@@ -29,11 +31,12 @@
                         <a href="#" class="btn btn-success btn-sm">Ver</a>
                         <div class="col-md-5 offset-md-7">
                             <small>
-                                <b>{{ since(portfolio.created_at)}} </b>
+                                {{ since(portfolio.created_at)}}
                             </small>
                         </div>
                         <hr>
                     </div>
+                    
                 </div>
         </div>
     </div>
@@ -79,8 +82,8 @@
                     portfolios = { 'id': 1 };
                 });
             },
-            getNames: function(user){
-                var url = 'selectName' +user. id;
+            getNames: function(){
+                var url = 'selectName';
                 axios.get(url).then(response =>{
                     this.nameUser = response.data;
                 }).catch(error => {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Portfolio;
-//use App\User;
+use App\User;
 class PortfolioController extends Controller
 {
     /**
@@ -21,10 +21,9 @@ class PortfolioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getNameUser($id)
+    public function getNameUser()
     {
-        $names =  Portfolio::findOrFail($id)->user;
-        return $names;
+        return User::orderBy('id', 'DESC')->get();
     }
     /**
      * Show the form for creating a new resource.
