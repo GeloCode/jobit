@@ -33,7 +33,7 @@ class RoleController extends Controller
         ];
     }
 
-    public function selectRole(Request $request)
+    public function selectRol(Request $request)
     {
         //if (!$request->ajax()) return redirect('/');
         $roles = Role::where('condicion', '=', '1')->select('id','nombre')->orderBy('nombre', 'asc')->get();
