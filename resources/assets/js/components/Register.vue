@@ -55,15 +55,12 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="email-input">Role</label>
-                                    <div class="col-md-9">
-                                        <select v-model="idrol" class="form-control">
-                                            <option value="0" disabled>Seleccione</option>
-                                            <option v-for="role in arrayRol" :key="role.id" :value="role.id" v-text="role.nombre"></option>
-                                        </select>
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <select class="custom-select" name="selectProvincia" v-model="registerData.role_id">
+                                    <option value="0" disabled>Elige tu Role</option>
+                                    <option v-for="role in roles" :key="role.id" :value="role.id" v-text="role.nombre"></option>
+                                </select>
+                            </div>
                                 
                             <div class="form-group">
                                 <select class="custom-select" name="selectProvincia" v-model="registerData.provincia_id">
@@ -93,6 +90,7 @@ export default {
     return {
       registerData: {
         provincia_id: 0, 
+        role_id: 0, 
         name: "",
         email: "",
         password: "",
@@ -155,15 +153,15 @@ export default {
         this.provincias = response.data;
       });
     },
-    selectRol: function() {
-      var url = "/rol/selectRol";
+    getRoles: function() {
+      var url = "/rol/getRoles";
       axios
         .get(url)
-        .then(function(response) {
+        .then(response => {
           console.log(response.data);
           this.roles = response.data;
         })
-        .catch(function(error) {
+        .catch(error => {
           console.log(error);
         });
     }
@@ -179,6 +177,7 @@ export default {
   },
   created() {
       this.getProvincias();
+      this.getRoles();
   }
 };
 </script>

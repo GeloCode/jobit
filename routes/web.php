@@ -19,7 +19,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/isEmpleado/{id}', 'UsersController@getRoleUserById');
 
 Route::get('/rol', 'RoleController@index');
-Route::get('/rol/selectRol', 'RoleController@selectRol');
+Route::get('/rol/getRoles', 'RoleController@getRoles');
 Auth::routes();
 
 /**
