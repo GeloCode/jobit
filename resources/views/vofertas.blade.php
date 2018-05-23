@@ -1,23 +1,7 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
+@extends('app')
 
-<head>
-    @include('includes.head')
-    <title>Job IT</title>
-</head>
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
+@section('content')
 
-<head>
-    @include('includes.head')
-    <title>Job IT</title>
-</head>
+<oferta></oferta>
 
-<body>
-    <div class="container" id="app">
-        <oferta></oferta>
-    </div>
-    @include('includes.scripts')
-</body>
-
-</html>
+@endsection

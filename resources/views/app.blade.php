@@ -4,8 +4,10 @@
         @include('includes.head')
         <title>Job IT</title>
     </head>
-    <body>            
-        
+    <body>
+        <div id="app" class="container">
+            @yield('content')
+        </div>
         @include('includes.scripts')
     </body>
 </html>
