@@ -15,13 +15,14 @@ Route::get('/', function () {
     return view('app');
 });
 
-/**
- * Con esta ruta conseguiremos saber el rol del usuario siempre que lo necesitemos
- */
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/isEmpleado/{id}', 'UsersController@getRoleUserById');
 
-/*************** ROUTINGS OFERTAS ***************** */
-/************************************************* */
+Route::get('/rol', 'RoleController@index');
+Route::get('/rol/selectRol', 'RoleController@selectRol');
+Auth::routes();
 
 /**
  *  Temporal para hacer pruebas con las ofertas 
@@ -64,12 +65,3 @@ Route::delete('ofertas/{id}', 'OfertaController@destroy');
  * Para crear una oferta (Para las empresas)
  */
 Route::post('oferta', 'OfertaController@store');
-
-
-/*************** ROUTINGS PROVINCIAS ***************** */
-/************************************************* */
-
-/**
- * Nos devuelve todas las provincias sin filtar por nada
- */
-Route::get('provincias', 'ProvinciasController@index');
