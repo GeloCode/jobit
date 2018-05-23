@@ -12,5 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('app');
+    return view('portfolio');
 });
+
+Route::resource('portfolios', 'PortfolioController', ['except' => 'create']);
+Route::get('portfolios', 'PortfolioController@getPortfolios');
+Route::post('crearPortfolio', 'PortfolioController@store');
+
+

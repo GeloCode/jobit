@@ -1,11 +1,13 @@
 require('./bootstrap');
 
-window.axios = require('axios');
-
 window.Vue = require('vue');
 
-Vue.component('example', require('./components/ExampleComponent.vue'));
+//window.axios = require('axios');
+
+Vue.component('portf', require('./components/Portfolio.vue'));
+Vue.component('detalle', require('./components/Detalleportf.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    //el: '#det'
 });
