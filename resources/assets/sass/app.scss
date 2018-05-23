@@ -8,8 +8,155 @@
 
 // Toastr
 @import '~toastr/toastr.scss';
+// Swiper
+@import '~swiper/dist/css/swiper.css';
 
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.primary {
+  color: $primary !important;
+  background-color: $bgP !important;
+}
+
+.primaryC {
+  color: $primary !important;
+}
+
+.dropdown-item:hover {
+  background-color:$bgP;
+  
+}
+.dropdown-item:hover a {
+color:white!important;
+}
+.dropdown-divider{
+  border-color: $primary;
+}
+
+.secondary {
+  color: $secondary !important;
+  background-color: $bgS !important;
+}
+
+.navbar ul li a {
+  color:$primary!important; 
+}
+.navbar ul li a:hover {
+  color:white!important;
+}
+.navbar-brand {
+  color:$primary!important;
+}
+.navbar-brand a{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navbar-brand .logo{
+  /* Firefox */
+-moz-transition: all 1s ease;
+/* WebKit */
+-webkit-transition: all 1s ease;
+/* Opera */
+-o-transition: all 1s ease;
+/* Standard */
+transition: all 1s ease;
+
+}
+
+.navbar-brand:hover .logo{
+  /* Firefox */
+-moz-transform:  rotate(360deg);
+/* WebKit */
+-webkit-transform: rotate(360deg);
+/* Opera */
+-o-transform:  rotate(360deg);
+/* Standard */
+transform:  rotate(360deg);
+}
+
+.swiper-container {
+  width: 100%;
+  height: 600px;
+  position: absolute;
+  top: 50%;
+  margin-left: -150px;
+  margin-top: -150px;
+}
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+}
+
+.navbar-brand a {
+  font-weight: bold;
+}
+.navbar-brand a:hover{
+  text-decoration: none;
+  -webkit-animation: neon 1s ease-in-out infinite alternate;
+  -moz-animation: neon 1s ease-in-out infinite alternate;
+  animation: neon 1s ease-in-out infinite alternate;
+}
+.navbar-brand a:hover .fade {
+  animation: fade 3s infinite;
+}
+
+
+.navbar-brand a svg g path, circle{
+  stroke: $primary;
+  fill:$primary;
+}
+
+@-webkit-keyframes neon {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #28a745, 0 0 40px #28a745, 0 0 70px #28a745, 0 0 80px #28a745, 0 0 100px #28a745, 0 0 150px #28a745;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #28a745, 0 0 20px #28a745, 0 0 35px #28a745, 0 0 40px #28a745, 0 0 50px #28a745, 0 0 75px #28a745;
+  }
+}
+
+// Color Variables
+$black: #000;
+$pink: #ff00ff;
+$teal: #28a745;
+
+// Resets
+
+// SVG Styles
+#OTM-Logo {
+  filter: url(#glow);
+}
+
+// OutSide Color
+
+// The and March Color
+.logo-the,
+.logo-march {
+  fill: $teal;
+}
+.fade:not(.show){
+  opacity: 1!important;
+}
+// Animation Classes
+.fade .random3 path {
+stroke:$primary;
+fill:$primary;
+}
+
+
+// Animations
+@keyframes fade {
+  0%, 100% {
+    opacity: 0.7;
+    filter: url(#glow);
+  }
+  50% {
+    opacity: 1;
+    filter: url(#glow);
+  }
 }
