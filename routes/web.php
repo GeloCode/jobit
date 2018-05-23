@@ -35,6 +35,11 @@ Route::get('/vofertas', function () {
 Route::get('ofertas', 'OfertaController@index');
 
 /**
+ * Nos devuelve la oferta con X id
+ */
+Route::get('oferta/{id}', 'OfertaController@getOfertaById');
+
+/**
  * Nos devuelve todas las ofertas filtradas para X usuario (Para ver nuestras ofertas si somos empresa)
  */
 Route::get('ofertas/usuario/{idUser}', 'OfertaController@getOfertaByUser');
@@ -62,4 +67,33 @@ Route::delete('ofertas/{id}', 'OfertaController@destroy');
 /**
  * Para crear una oferta (Para las empresas)
  */
+
 Route::post('oferta', 'OfertaController@store');
+
+/**
+ * Para editar una oferta (Para las empresas)
+ */
+Route::put('oferta/{id}', 'OfertaController@update');
+
+
+/*************** ROUTINGS PROVINCIAS ***************** */
+/**************************************************** */
+
+/**
+ * Nos devuelve todas las provincias sin filtar por nada
+ */
+Route::get('provincias', 'ProvinciasController@index');
+
+/*************** ROUTINGS INSCRIPCIONES ************** */
+/**************************************************** */
+
+/**
+ * Nos devuelve todas las inscripciones sin filtar por nada
+ */
+Route::get('inscripciones', 'InscripcionesController@index');
+
+/**
+ * Para crear una inscripcion (Para los Solicitantes)
+ */
+Route::post('inscripcion', 'InscripcionesController@store');
+
