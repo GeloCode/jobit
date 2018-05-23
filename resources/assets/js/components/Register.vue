@@ -56,14 +56,21 @@
                             </div>
 
                             <div class="form-group row">
-                                    <label class="col-md-4 control-label" for="email-input">Role</label>
-                                    <div class="col-md-6">
+                                    <label class="col-md-3 form-control-label" for="email-input">Role</label>
+                                    <div class="col-md-9">
                                         <select v-model="idrol" class="form-control">
                                             <option value="0" disabled>Seleccione</option>
                                             <option v-for="role in arrayRol" :key="role.id" :value="role.id" v-text="role.nombre"></option>
                                         </select>
                                     </div>
                                 </div>
+                                
+                            <div class="form-group">
+                                <select class="custom-select" name="selectProvincia" v-model="registerData.provincia_id">
+                                    <option value="0" disabled>Elige tu Provincia</option>
+                                    <option v-for="provincia in provincias" :key="provincia.id" :value="provincia.id" v-text="provincia.nombre"></option>
+                                </select>
+                            </div>
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
@@ -85,18 +92,19 @@ export default {
   data() {
     return {
       registerData: {
-        idrol: "",
-        arrayRol: [],
+        provincia_id: 0, 
         name: "",
         email: "",
         password: "",
         password_confirmation: ""
       },
+      roles: [],
       hasErrors: {
         name: false,
         email: false,
         password: false
       },
+     provincias: [],
       errorMessage: {
         name: null,
         email: null,
@@ -141,15 +149,19 @@ export default {
           }
         });
     },
-    selectRol() {
-      let me = this;
+    getProvincias: function() {
+      var url = "provincias";
+      axios.get(url).then(response => {
+        this.provincias = response.data;
+      });
+    },
+    selectRol: function() {
       var url = "/rol/selectRol";
       axios
         .get(url)
         .then(function(response) {
-          //console.log(response);
-          var respuesta = response.data;
-          me.arrayRol = respuesta.roles;
+          console.log(response.data);
+          this.roles = response.data;
         })
         .catch(function(error) {
           console.log(error);
@@ -165,10 +177,8 @@ export default {
         : (_this.passwordMatch = null);
     }
   },
-  mounted() {
-      this.registerData.arrayRol=[];
-      this.registerData.idrol=0;
-      this.selectRol();
+  created() {
+      this.getProvincias();
   }
 };
 </script>
