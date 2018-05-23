@@ -77,9 +77,22 @@ Route::put('oferta/{id}', 'OfertaController@update');
 
 
 /*************** ROUTINGS PROVINCIAS ***************** */
-/************************************************* */
+/**************************************************** */
 
 /**
  * Nos devuelve todas las provincias sin filtar por nada
  */
 Route::get('provincias', 'ProvinciasController@index');
+
+/*************** ROUTINGS INSCRIPCIONES ************** */
+/**************************************************** */
+
+/**
+ * Nos devuelve todas las inscripciones sin filtar por nada
+ */
+Route::get('inscripciones', 'InscripcionesController@index');
+
+/**
+ * Para crear una inscripcion (Para los Solicitantes)
+ */
+Route::post('inscripcion', 'InscripcionesController@store');
