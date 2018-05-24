@@ -1,5 +1,4 @@
 require('./bootstrap');
-window.Swiper = require('swiper');
 
 window.axios = require('axios');
 
