@@ -48365,6 +48365,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var url = "rol/getRoles";
       axios.get(url).then(function (response) {
         _this3.roles = response.data;
+        console.log(response.data);
       }).catch(function (error) {
         console.log(error);
       });
