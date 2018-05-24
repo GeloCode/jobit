@@ -25,8 +25,6 @@ class CreateUsersTable extends Migration
             $table->string('telefono');
             $table->string('direccion');
             $table->string('codigo_postal');
-            $table->integer('rango_desde')->unsigned();
-            $table->integer('rango_hasta')->unsigned();
             $table->rememberToken();
             $table->timestamps();
         });
