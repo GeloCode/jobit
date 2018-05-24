@@ -160,8 +160,7 @@ export default {
       var url = "rol/getRoles";
       axios.get(url)
         .then(response => {
-          this.roles = response.data.roles;
-          console.log(response.data.roles);
+          this.roles = response.data;
         }).catch(function(error) {
           console.log(error);
         });
