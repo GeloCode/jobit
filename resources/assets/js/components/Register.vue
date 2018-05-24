@@ -94,7 +94,7 @@
                             <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="email-input">Role</label>
                                     <div class="col-md-9">
-                                        <select v-model="registerData.rol_id" class="form-control" name="selectRole">
+                                        <select v-model="registerData.rol_id" class="form-control" name="selectRol">
                                             <option value="0" disabled>Seleccione</option>
                                             <option v-for="role in roles" :key="role.id" :value="role.id" v-text="role.nombre"></option>
                                         </select>
@@ -167,7 +167,8 @@ export default {
       axios
         .post("register", _this.registerData)
         .then(function(response) {
-          console.log(response);
+            var redirect =  window.location.href = '/home';
+          axios.get(redirect);
         })
         .catch(function(error) {
           var errors = error.response;

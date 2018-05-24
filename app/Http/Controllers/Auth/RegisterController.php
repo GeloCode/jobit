@@ -76,9 +76,7 @@ class RegisterController extends Controller
             'provincia_id'   =>     $data['provincia_id'],
             'telefono'       =>     $data['telefono'],
             'direccion'      =>     $data['direccion'],
-            'codigo_postal'  =>     $data['codigo_postal'],
-            'rango_desde'    =>     0,
-            'rango_hasta'    =>     1000000
+            'codigo_postal'  =>     $data['codigo_postal']
         ]);
     }
 }

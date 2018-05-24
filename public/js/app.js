@@ -47864,43 +47864,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            loginDetails: {
-                email: '',
-                password: '',
-                remember: true
-            },
-            errorsEmail: false,
-            errorsPassword: false,
-            emailError: null,
-            passwordError: null
-        };
-    },
+  data: function data() {
+    return {
+      loginDetails: {
+        email: "",
+        password: "",
+        remember: true
+      },
+      errorsEmail: false,
+      errorsPassword: false,
+      emailError: null,
+      passwordError: null
+    };
+  },
 
-    methods: {
-        loginPost: function loginPost() {
-            var vm = this;
-            axios.post('/login', vm.loginDetails).then(function (response) {
-                console.log(response);
-            }).catch(function (error) {
-                var errors = error.response;
-                if (errors.statusText === 'Unprocessable Entity') {
-                    if (errors.data) {
-                        if (errors.data.email) {
-                            vm.errorsEmail = true;
-                            vm.emailError = _.isArray(errors.data.email) ? errors.data.email[0] : errors.data.email;
-                        }
-                        if (errors.data.password) {
-                            vm.errorsPassword = true;
-                            vm.passwordError = _.isArray(errors.data.password) ? errors.data.password[0] : errors.data.password;
-                        }
-                    }
-                }
-            });
+  methods: {
+    loginPost: function loginPost() {
+      var vm = this;
+      axios.post("/login", vm.loginDetails).then(function (response) {
+        var redirect = window.location.href = "/home";
+        axios.get(redirect);
+      }).catch(function (error) {
+        var errors = error.response;
+        if (errors.statusText === "Unprocessable Entity") {
+          if (errors.data) {
+            if (errors.data.email) {
+              vm.errorsEmail = true;
+              vm.emailError = _.isArray(errors.data.email) ? errors.data.email[0] : errors.data.email;
+            }
+            if (errors.data.password) {
+              vm.errorsPassword = true;
+              vm.passwordError = _.isArray(errors.data.password) ? errors.data.password[0] : errors.data.password;
+            }
+          }
         }
-    },
-    mounted: function mounted() {}
+      });
+    }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -48329,7 +48330,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var vm = this.hasErrors;
       var _vm = this.errorMessage;
       axios.post("register", _this.registerData).then(function (response) {
-        console.log(response);
+        var redirect = window.location.href = '/home';
+        axios.get(redirect);
       }).catch(function (error) {
         var errors = error.response;
         if (errors.statusText === "Unprocessable Entity") {
@@ -48365,7 +48367,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var url = "rol/getRoles";
       axios.get(url).then(function (response) {
         _this3.roles = response.data;
-        console.log(response.data);
       }).catch(function (error) {
         console.log(error);
       });
@@ -48830,7 +48831,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { name: "selectRole" },
+                        attrs: { name: "selectRol" },
                         on: {
                           change: function($event) {
                             var $$selectedVal = Array.prototype.filter
