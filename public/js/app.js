@@ -48251,11 +48251,50 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       registerData: {
+        direccion: "",
+        telefono: "",
+        codigo_postal: "",
         provincia_id: 0,
         rol_id: 0,
         name: "",
@@ -48266,14 +48305,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       hasErrors: {
         name: false,
         email: false,
-        password: false
+        password: false,
+        direccion: false,
+        telefono: false,
+        codigo_postal: false
       },
       roles: [],
       provincias: [],
       errorMessage: {
         name: null,
         email: null,
-        password: null
+        password: null,
+        direccion: null,
+        telefono: null,
+        codigo_postal: null
         //passwordMatch:null
       } };
   },
@@ -48319,8 +48364,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var url = "rol/getRoles";
       axios.get(url).then(function (response) {
-        _this3.roles = response.data.roles;
-        console.log(response.data.roles);
+        _this3.roles = response.data;
       }).catch(function (error) {
         console.log(error);
       });
@@ -48581,6 +48625,186 @@ var render = function() {
                     })
                   ])
                 ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "form-group",
+                    class: { "has-error": _vm.hasErrors.telefono }
+                  },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-md-4 control-label",
+                        attrs: { for: "telefono" }
+                      },
+                      [_vm._v("telefono")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.registerData.telefono,
+                            expression: "registerData.telefono"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "telefono",
+                          type: "text",
+                          name: "telefono",
+                          required: "",
+                          autofocus: ""
+                        },
+                        domProps: { value: _vm.registerData.telefono },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.registerData,
+                              "telefono",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.hasErrors.telefono
+                        ? _c("span", { staticClass: "help-block" }, [
+                            _c("strong", [
+                              _vm._v(_vm._s(_vm.errorMessage.telefono))
+                            ])
+                          ])
+                        : _vm._e()
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "form-group",
+                    class: { "has-error": _vm.hasErrors.codigo_postal }
+                  },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-md-4 control-label",
+                        attrs: { for: "codigo_postal" }
+                      },
+                      [_vm._v("Código postal")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.registerData.codigo_postal,
+                            expression: "registerData.codigo_postal"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "codigo_postal",
+                          type: "text",
+                          name: "codigo_postal",
+                          required: "",
+                          autofocus: ""
+                        },
+                        domProps: { value: _vm.registerData.codigo_postal },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.registerData,
+                              "codigo_postal",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.hasErrors.codigo_postal
+                        ? _c("span", { staticClass: "help-block" }, [
+                            _c("strong", [
+                              _vm._v(_vm._s(_vm.errorMessage.codigo_postal))
+                            ])
+                          ])
+                        : _vm._e()
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "form-group",
+                    class: { "has-error": _vm.hasErrors.direccion }
+                  },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-md-4 control-label",
+                        attrs: { for: "direccion" }
+                      },
+                      [_vm._v("direccion")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.registerData.direccion,
+                            expression: "registerData.direccion"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "direccion",
+                          type: "text",
+                          name: "direccion",
+                          required: "",
+                          autofocus: ""
+                        },
+                        domProps: { value: _vm.registerData.direccion },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.registerData,
+                              "direccion",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.hasErrors.direccion
+                        ? _c("span", { staticClass: "help-block" }, [
+                            _c("strong", [
+                              _vm._v(_vm._s(_vm.errorMessage.direccion))
+                            ])
+                          ])
+                        : _vm._e()
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group row" }, [
                   _c(
