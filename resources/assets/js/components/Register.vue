@@ -15,7 +15,6 @@
                                     <span v-if="hasErrors.name" class="help-block">
                                         <strong>{{errorMessage.name}}</strong>
                                     </span>
-
                                 </div>
                             </div>
 
@@ -55,6 +54,43 @@
                                 </div>
                             </div>
 
+                            <div class="form-group" :class="{'has-error' : hasErrors.telefono}">
+                                <label for="telefono" class="col-md-4 control-label">telefono</label>
+
+                                <div class="col-md-6">
+                                    <input id="telefono" type="text" class="form-control" name="telefono"
+                                           v-model="registerData.telefono" required autofocus>
+                                    <span v-if="hasErrors.telefono" class="help-block">
+                                        <strong>{{errorMessage.telefono}}</strong>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" :class="{'has-error' : hasErrors.codigo_postal}">
+                                <label for="codigo_postal" class="col-md-4 control-label">Código postal</label>
+
+                                <div class="col-md-6">
+                                    <input id="codigo_postal" type="text" class="form-control" name="codigo_postal"
+                                           v-model="registerData.codigo_postal" required autofocus>
+                                    <span v-if="hasErrors.codigo_postal" class="help-block">
+                                        <strong>{{errorMessage.codigo_postal}}</strong>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" :class="{'has-error' : hasErrors.direccion}">
+                                <label for="direccion" class="col-md-4 control-label">direccion</label>
+
+                                <div class="col-md-6">
+                                    <input id="direccion" type="text" class="form-control" name="direccion"
+                                           v-model="registerData.direccion" required autofocus>
+                                    <span v-if="hasErrors.direccion" class="help-block">
+                                        <strong>{{errorMessage.direccion}}</strong>
+                                    </span>
+                                </div>
+                            </div>
+
+
                             <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="email-input">Role</label>
                                     <div class="col-md-9">
@@ -92,6 +128,9 @@ export default {
   data() {
     return {
       registerData: {
+        direccion:"",
+        telefono:"",
+        codigo_postal:"",
         provincia_id: 0,
         rol_id: 0,
         name: "",
@@ -102,14 +141,20 @@ export default {
       hasErrors: {
         name: false,
         email: false,
-        password: false
+        password: false,
+        direccion:false,
+        telefono:false,
+        codigo_postal:false
       },
       roles: [],
       provincias: [],
       errorMessage: {
-        name: null,
-        email: null,
-        password: null
+        name:null,
+        email:null,
+        password:null,
+        direccion:null,
+        telefono:null,
+        codigo_postal:null
       }
       //passwordMatch:null
     };
@@ -160,8 +205,7 @@ export default {
       var url = "rol/getRoles";
       axios.get(url)
         .then(response => {
-          this.roles = response.data.roles;
-          console.log(response.data.roles);
+          this.roles = response.data;
         }).catch(function(error) {
           console.log(error);
         });
