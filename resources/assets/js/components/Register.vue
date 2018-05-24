@@ -58,9 +58,9 @@
                             <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="email-input">Role</label>
                                     <div class="col-md-9">
-                                        <select v-model="idrol" class="form-control">
+                                        <select v-model="registerData.rol_id" class="form-control" name="selectRole">
                                             <option value="0" disabled>Seleccione</option>
-                                            <option v-for="role in arrayRol" :key="role.id" :value="role.id" v-text="role.nombre"></option>
+                                            <option v-for="role in roles" :key="role.id" :value="role.id" v-text="role.nombre"></option>
                                         </select>
                                     </div>
                                 </div>
@@ -92,19 +92,20 @@ export default {
   data() {
     return {
       registerData: {
-        provincia_id: 0, 
+        provincia_id: 0,
+        rol_id: 0,
         name: "",
         email: "",
         password: "",
         password_confirmation: ""
       },
-      roles: [],
       hasErrors: {
         name: false,
         email: false,
         password: false
       },
-     provincias: [],
+      roles: [],
+      provincias: [],
       errorMessage: {
         name: null,
         email: null,
@@ -155,15 +156,13 @@ export default {
         this.provincias = response.data;
       });
     },
-    selectRol: function() {
-      var url = "/rol/selectRol";
-      axios
-        .get(url)
-        .then(function(response) {
-          console.log(response.data);
-          this.roles = response.data;
-        })
-        .catch(function(error) {
+    getRoles: function() {
+      var url = "rol/getRoles";
+      axios.get(url)
+        .then(response => {
+          this.roles = response.data.roles;
+          console.log(response.data.roles);
+        }).catch(function(error) {
           console.log(error);
         });
     }
@@ -178,7 +177,8 @@ export default {
     }
   },
   created() {
-      this.getProvincias();
+    this.getProvincias();
+    this.getRoles();
   }
 };
 </script>
