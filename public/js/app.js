@@ -48258,17 +48258,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       registerData: {
         provincia_id: 0,
+        rol_id: 0,
         name: "",
         email: "",
         password: "",
         password_confirmation: ""
       },
-      roles: [],
       hasErrors: {
         name: false,
         email: false,
         password: false
       },
+      roles: [],
       provincias: [],
       errorMessage: {
         name: null,
@@ -48314,11 +48315,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this2.provincias = response.data;
       });
     },
-    selectRol: function selectRol() {
-      var url = "/rol/selectRol";
+    getRoles: function getRoles() {
+      var _this3 = this;
+
+      var url = "rol/getRoles";
       axios.get(url).then(function (response) {
-        console.log(response.data);
-        this.roles = response.data;
+        _this3.roles = response.data.roles;
+        console.log(response.data.roles);
       }).catch(function (error) {
         console.log(error);
       });
@@ -48333,6 +48336,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   created: function created() {
     this.getProvincias();
+    this.getRoles();
   }
 });
 
@@ -48597,11 +48601,12 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.idrol,
-                            expression: "idrol"
+                            value: _vm.registerData.rol_id,
+                            expression: "registerData.rol_id"
                           }
                         ],
                         staticClass: "form-control",
+                        attrs: { name: "selectRole" },
                         on: {
                           change: function($event) {
                             var $$selectedVal = Array.prototype.filter
@@ -48612,9 +48617,13 @@ var render = function() {
                                 var val = "_value" in o ? o._value : o.value
                                 return val
                               })
-                            _vm.idrol = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
+                            _vm.$set(
+                              _vm.registerData,
+                              "rol_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
                           }
                         }
                       },
@@ -48623,7 +48632,7 @@ var render = function() {
                           _vm._v("Seleccione")
                         ]),
                         _vm._v(" "),
-                        _vm._l(_vm.arrayRol, function(role) {
+                        _vm._l(_vm.roles, function(role) {
                           return _c("option", {
                             key: role.id,
                             domProps: {
