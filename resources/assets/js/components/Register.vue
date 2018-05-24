@@ -55,12 +55,15 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <select class="custom-select" name="selectProvincia" v-model="registerData.role_id">
-                                    <option value="0" disabled>Elige tu Role</option>
-                                    <option v-for="role in roles" :key="role.id" :value="role.id" v-text="role.nombre"></option>
-                                </select>
-                            </div>
+                            <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="email-input">Role</label>
+                                    <div class="col-md-9">
+                                        <select v-model="registerData.rol_id" class="form-control" name="selectRole">
+                                            <option value="0" disabled>Seleccione</option>
+                                            <option v-for="role in roles" :key="role.id" :value="role.id" v-text="role.nombre"></option>
+                                        </select>
+                                    </div>
+                                </div>
                                 
                             <div class="form-group">
                                 <select class="custom-select" name="selectProvincia" v-model="registerData.provincia_id">
@@ -89,20 +92,20 @@ export default {
   data() {
     return {
       registerData: {
-        provincia_id: 0, 
-        role_id: 0, 
+        provincia_id: 0,
+        rol_id: 0,
         name: "",
         email: "",
         password: "",
         password_confirmation: ""
       },
-      roles: [],
       hasErrors: {
         name: false,
         email: false,
         password: false
       },
-     provincias: [],
+      roles: [],
+      provincias: [],
       errorMessage: {
         name: null,
         email: null,
@@ -154,14 +157,12 @@ export default {
       });
     },
     getRoles: function() {
-      var url = "/rol/getRoles";
-      axios
-        .get(url)
+      var url = "rol/getRoles";
+      axios.get(url)
         .then(response => {
-          console.log(response.data);
-          this.roles = response.data;
-        })
-        .catch(error => {
+          this.roles = response.data.roles;
+          console.log(response.data.roles);
+        }).catch(function(error) {
           console.log(error);
         });
     }
@@ -176,8 +177,8 @@ export default {
     }
   },
   created() {
-      this.getProvincias();
-      this.getRoles();
+    this.getProvincias();
+    this.getRoles();
   }
 };
 </script>
