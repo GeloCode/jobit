@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOfertasTable extends Migration
+class CreatePerfilsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,20 @@ class CreateOfertasTable extends Migration
      */
     public function up()
     {
-        Schema::create('ofertas', function (Blueprint $table) {
+        Schema::create('perfils', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
-            $table->integer('provincia_id')->unsigned();
-            $table->foreign('provincia_id')->references('id')->on('provincias')->onUpdate('cascade');
-            $table->string('titulo');
+            $table->integer('portfolio_id')->unsigned();
+            $table->foreign('portfolio_id')->references('id')->on('portfolios')->onUpdate('cascade');
+            $table->string('name');            
+            $table->string('telefono');
+            $table->string('direccion');
+            $table->string('codigo_postal');
+            $table->string('lenguajes');            
+            $table->string('frameworks');            
             $table->text('descripcion');
-            $table->integer('vacantes')->unsigned();
-            $table->integer('sueldo_desde')->unsigned();
-            $table->integer('sueldo_hasta')->unsigned();
+            $table->binary('imagen');
             $table->timestamps();
         });
     }
@@ -35,6 +38,6 @@ class CreateOfertasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ofertas');
+        Schema::dropIfExists('perfils');
     }
 }

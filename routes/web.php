@@ -97,3 +97,20 @@ Route::get('inscripciones', 'InscripcionesController@index');
  */
 Route::post('inscripcion', 'InscripcionesController@store');
 
+/*************** ROUTINGS PERFILES ************** */
+/**************************************************** */
+
+/**
+ * Nos devuelve nuestro perfil (Por el id de usuario)
+ */
+Route::get('perfil/usuario/{idUser}', 'PerfilController@getPerfilByUserId');
+
+/**
+ * Para crear un perfil
+ */
+Route::post('perfil', 'PerfilController@store');
+
+/**
+ * Para actualizar un perfil
+ */
+Route::put('perfil/{id}', 'PerfilController@update');

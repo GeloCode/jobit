@@ -13,7 +13,7 @@ class User extends Authenticatable
      * Campos que podremos modificar/inserta el usuario
      */
     protected $fillable = [
-        'name', 'email', 'password', 'telefono', 'direccion', 'codigo_postal', 'rango_desde', 'rango_hasta'
+        'email', 'password'
     ];
 
     /**
@@ -31,6 +31,14 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class, 'id');
+    }
+
+    /**
+     * Hacemos la relación de que un role le pertenece a muchos usuarios .
+     */
+    public function perfil()
+    {
+        return $this->belongsTo(Perfil::class, 'id');
     }
 
     /**

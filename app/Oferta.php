@@ -10,7 +10,7 @@ class Oferta extends Model
      * Campos que podremos modificar/inserta el usuario
      */
     protected $fillable = [
-        'user_id', 'provincia_id', 'titulo', 'descripcion', 'vacantes'
+        'user_id', 'provincia_id', 'titulo', 'descripcion', 'vacantes', 'sueldo_desde', 'sueldo_hasta'
     ];
     /**
      * Hacemos la relación de que una oferta tiene muchas inscripciones.

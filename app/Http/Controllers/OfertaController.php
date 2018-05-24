@@ -39,6 +39,8 @@ class OfertaController extends Controller
             'provincia_id' => 'required',
             'titulo' => 'required',
             'descripcion' => 'required',
+            'sueldo_desde' => 'required',
+            'sueldo_hasta' => 'required',
         ]);
 
         Oferta::create($request->all());
@@ -70,7 +72,10 @@ class OfertaController extends Controller
             'provincia_id' => 'required',
             'titulo' => 'required',
             'descripcion' => 'required',
+            'sueldo_desde' => 'required',
+            'sueldo_hasta' => 'required',
         ]);
+
         Oferta::findOrFail($id)->update($request->all());
         return;
     }
@@ -120,4 +125,6 @@ class OfertaController extends Controller
         return Oferta::where([['provincia_id', $id], ['titulo', 'like', '%'.$word.'%']])
         ->orWhere([['provincia_id', $id], ['descripcion', 'like', '%'.$word.'%']])->get();
     }
+
+    // TODO Filtrar por sueldos
 }
