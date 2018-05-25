@@ -68,46 +68,50 @@
 </template>
 
 <script>
-    export default {
-        data(){
-            return{
-            loginDetails:{
-                email:'',
-                password:'',
-                remember:true
-            },
-            errorsEmail: false,
-            errorsPassword: false,
-            emailError:null,
-            passwordError:null
+export default {
+  data() {
+    return {
+      loginDetails: {
+        email: "",
+        password: "",
+        remember: true
+      },
+      errorsEmail: false,
+      errorsPassword: false,
+      emailError: null,
+      passwordError: null
+    };
+  },
+  methods: {
+    loginPost() {
+      let vm = this;
+      axios
+        .post("/login", vm.loginDetails)
+        .then(function(response) {
+          var redirect = (window.location.href = "/home");
+          axios.get(redirect);
+        })
+        .catch(function(error) {
+          var errors = error.response;
+          if (errors.statusText === "Unprocessable Entity") {
+            if (errors.data) {
+              if (errors.data.email) {
+                vm.errorsEmail = true;
+                vm.emailError = _.isArray(errors.data.email)
+                  ? errors.data.email[0]
+                  : errors.data.email;
+              }
+              if (errors.data.password) {
+                vm.errorsPassword = true;
+                vm.passwordError = _.isArray(errors.data.password)
+                  ? errors.data.password[0]
+                  : errors.data.password;
+              }
             }
-        },
-        methods:{
-        loginPost(){
-            let vm = this;
-            axios.post('/login', vm.loginDetails)
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                var errors = error.response
-                if(errors.statusText === 'Unprocessable Entity'){
-                    if(errors.data){
-                        if(errors.data.email){
-                           vm.errorsEmail = true
-                           vm.emailError = _.isArray(errors.data.email) ? errors.data.email[0]: errors.data.email
-                        }
-                        if(errors.data.password){
-                           vm.errorsPassword = true
-                           vm.passwordError = _.isArray(errors.data.password) ? errors.data.password[0] : errors.data.password
-                        }
-                    }
-                }
-            });
-            
-        }
-        },
-        mounted() {
-        }
+          }
+        });
     }
+  },
+  mounted() {}
+};
 </script>
