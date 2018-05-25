@@ -17,6 +17,10 @@
             <div class="form-group">
                 <input type="number" class="form-control" placeholder="Vacantes" v-model="oferta.vacantes">
             </div>
+            <div class="form-group">
+                <input type="number" class="form-control" placeholder="Sueldo Desde" v-model="oferta.sueldo_desde">
+                <input type="number" class="form-control" placeholder="Sueldo Hasta" v-model="oferta.sueldo_hasta">
+            </div>
             <button type="submit" class="btn btn-dark btn-block mb-4">Guardar</button>
         </form>
         <div class="card card-body mb-2" v-bind:key="oferta.id" v-for="oferta in ofertas">
@@ -37,6 +41,9 @@ export default {
     this.isEmpresa();
     this.getProvincias();
   },
+  props: {
+    userId: String
+  },
   data: function() {
       return {
             ofertas: [],
@@ -45,10 +52,11 @@ export default {
             provincia_id: 0,
             titulo: "",
             descripcion: "",
-            vacantes: ""
+            vacantes: "",
+            sueldo_desde: "",
+            sueldo_hasta: ""
             },
             inscripcion: {
-                user_id: '',
                 oferta_id:'',
             },
             provincias: [],
@@ -82,11 +90,13 @@ export default {
       var url = "oferta";
       axios
         .post(url, {
-          user_id: 2, //TODO Cambiarlo por el id de usuario real
+          user_id: this.userId,
           provincia_id: this.oferta.provincia_id,
           titulo: this.oferta.titulo,
           descripcion: this.oferta.descripcion,
-          vacantes: this.oferta.vacantes
+          vacantes: this.oferta.vacantes,
+          sueldo_desde: this.oferta.sueldo_desde,
+          sueldo_hasta: this.oferta.sueldo_hasta
         })
         .then(response => {
           this.getOfertas();
@@ -131,7 +141,7 @@ export default {
     inscribirse: function(oferta) {
         var url = "inscripcion";
         axios.post(url, {
-            user_id: 1,
+            user_id: this.userId,
             oferta_id: oferta.id,            
         });
     }

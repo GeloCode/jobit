@@ -17,8 +17,8 @@ class CreatePerfilsTable extends Migration
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
-            $table->integer('portfolio_id')->unsigned();
-            $table->foreign('portfolio_id')->references('id')->on('portfolios')->onUpdate('cascade');
+            $table->integer('provincia_id')->unsigned();
+            $table->foreign('provincia_id')->references('id')->on('provincias')->onUpdate('cascade');   
             $table->string('name');            
             $table->string('telefono');
             $table->string('direccion');
@@ -26,7 +26,7 @@ class CreatePerfilsTable extends Migration
             $table->string('lenguajes');            
             $table->string('frameworks');            
             $table->text('descripcion');
-            $table->binary('imagen');
+            $table->binary('imagen');            
             $table->timestamps();
         });
     }

@@ -1,15 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('app');
@@ -18,12 +8,23 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/isEmpleado/{id}', 'UsersController@getRoleUserById');
 
+/**
+ * Nos devuelve los roles con la paginacion buscando por un criterio y una palabra
+ */
 Route::get('/rol', 'RoleController@index');
+
+/**
+ * Devuelve todos los roles que estén activos ordenados por el nombre
+ */
 Route::get('rol/getRoles', 'RoleController@getRoles');
+
+/**
+ * Routings del login/register
+ */
 Auth::routes();
 
 /**
- *  Temporal para hacer pruebas con las ofertas 
+ * Temporal para hacer pruebas con las ofertas 
  */
 Route::get('/vofertas', function () {
     return view('vofertas');

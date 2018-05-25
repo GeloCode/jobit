@@ -9,9 +9,9 @@ class Portfolio extends Model
     /**
      * Hacemos la relación de que un portfolio le pertenece a un usuario con el rol de "solicitante".
      */
-    public function user()
+    public function perfil()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Perfil::class);
     }
 
     /**

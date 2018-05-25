@@ -27,6 +27,7 @@ class PerfilController extends Controller
         $this->validate($request, [
             'user_id' => 'required',
             'portfolio_id' => 'required',
+            'provincia_id' => 'required',
             'name' => 'required',
             'telefono' => 'required',
             'direccion' => 'required',

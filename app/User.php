@@ -13,7 +13,7 @@ class User extends Authenticatable
      * Campos que podremos modificar/inserta el usuario
      */
     protected $fillable = [
-        'email', 'password'
+        'rol_id', 'email', 'password'
     ];
 
     /**

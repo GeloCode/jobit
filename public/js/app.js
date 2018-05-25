@@ -48232,73 +48232,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       registerData: {
-        direccion: "",
-        telefono: "",
-        codigo_postal: "",
-        provincia_id: 0,
         rol_id: 0,
-        name: "",
         email: "",
         password: "",
         password_confirmation: ""
@@ -48314,12 +48253,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       roles: [],
       provincias: [],
       errorMessage: {
-        name: null,
         email: null,
-        password: null,
-        direccion: null,
-        telefono: null,
-        codigo_postal: null
+        password: null
         //passwordMatch:null
       } };
   },
@@ -48336,10 +48271,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var errors = error.response;
         if (errors.statusText === "Unprocessable Entity") {
           if (errors.data) {
-            if (errors.data.name) {
-              vm.name = true;
-              _vm.name = _.isArray(errors.data.name) ? errors.data.name[0] : errors.data.name;
-            }
             if (errors.data.email) {
               vm.email = true;
               _vm.email = _.isArray(errors.data.email) ? errors.data.email[0] : errors.data.email;
@@ -48353,20 +48284,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
 
-    getProvincias: function getProvincias() {
-      var _this2 = this;
-
-      var url = "provincias";
-      axios.get(url).then(function (response) {
-        _this2.provincias = response.data;
-      });
-    },
     getRoles: function getRoles() {
-      var _this3 = this;
+      var _this2 = this;
 
       var url = "rol/getRoles";
       axios.get(url).then(function (response) {
-        _this3.roles = response.data;
+        _this2.roles = response.data;
       }).catch(function (error) {
         console.log(error);
       });
@@ -48380,7 +48303,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   created: function created() {
-    this.getProvincias();
     this.getRoles();
   }
 });
@@ -48404,66 +48326,6 @@ var render = function() {
               "form",
               { staticClass: "form-horizontal", attrs: { role: "form" } },
               [
-                _c(
-                  "div",
-                  {
-                    staticClass: "form-group",
-                    class: { "has-error": _vm.hasErrors.name }
-                  },
-                  [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-md-4 control-label",
-                        attrs: { for: "name" }
-                      },
-                      [_vm._v("Name")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.registerData.name,
-                            expression: "registerData.name"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          id: "name",
-                          type: "text",
-                          name: "name",
-                          required: "",
-                          autofocus: ""
-                        },
-                        domProps: { value: _vm.registerData.name },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.registerData,
-                              "name",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.hasErrors.name
-                        ? _c("span", { staticClass: "help-block" }, [
-                            _c("strong", [
-                              _vm._v(_vm._s(_vm.errorMessage.name))
-                            ])
-                          ])
-                        : _vm._e()
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
                 _c(
                   "div",
                   {
@@ -48628,186 +48490,6 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "form-group",
-                    class: { "has-error": _vm.hasErrors.telefono }
-                  },
-                  [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-md-4 control-label",
-                        attrs: { for: "telefono" }
-                      },
-                      [_vm._v("telefono")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.registerData.telefono,
-                            expression: "registerData.telefono"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          id: "telefono",
-                          type: "text",
-                          name: "telefono",
-                          required: "",
-                          autofocus: ""
-                        },
-                        domProps: { value: _vm.registerData.telefono },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.registerData,
-                              "telefono",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.hasErrors.telefono
-                        ? _c("span", { staticClass: "help-block" }, [
-                            _c("strong", [
-                              _vm._v(_vm._s(_vm.errorMessage.telefono))
-                            ])
-                          ])
-                        : _vm._e()
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "form-group",
-                    class: { "has-error": _vm.hasErrors.codigo_postal }
-                  },
-                  [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-md-4 control-label",
-                        attrs: { for: "codigo_postal" }
-                      },
-                      [_vm._v("Código postal")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.registerData.codigo_postal,
-                            expression: "registerData.codigo_postal"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          id: "codigo_postal",
-                          type: "text",
-                          name: "codigo_postal",
-                          required: "",
-                          autofocus: ""
-                        },
-                        domProps: { value: _vm.registerData.codigo_postal },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.registerData,
-                              "codigo_postal",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.hasErrors.codigo_postal
-                        ? _c("span", { staticClass: "help-block" }, [
-                            _c("strong", [
-                              _vm._v(_vm._s(_vm.errorMessage.codigo_postal))
-                            ])
-                          ])
-                        : _vm._e()
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "form-group",
-                    class: { "has-error": _vm.hasErrors.direccion }
-                  },
-                  [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-md-4 control-label",
-                        attrs: { for: "direccion" }
-                      },
-                      [_vm._v("direccion")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.registerData.direccion,
-                            expression: "registerData.direccion"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          id: "direccion",
-                          type: "text",
-                          name: "direccion",
-                          required: "",
-                          autofocus: ""
-                        },
-                        domProps: { value: _vm.registerData.direccion },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.registerData,
-                              "direccion",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.hasErrors.direccion
-                        ? _c("span", { staticClass: "help-block" }, [
-                            _c("strong", [
-                              _vm._v(_vm._s(_vm.errorMessage.direccion))
-                            ])
-                          ])
-                        : _vm._e()
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
                 _c("div", { staticClass: "form-group row" }, [
                   _c(
                     "label",
@@ -48870,59 +48552,6 @@ var render = function() {
                       2
                     )
                   ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.registerData.provincia_id,
-                          expression: "registerData.provincia_id"
-                        }
-                      ],
-                      staticClass: "custom-select",
-                      attrs: { name: "selectProvincia" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.registerData,
-                            "provincia_id",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "0", disabled: "" } }, [
-                        _vm._v("Elige tu Provincia")
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.provincias, function(provincia) {
-                        return _c("option", {
-                          key: provincia.id,
-                          domProps: {
-                            value: provincia.id,
-                            textContent: _vm._s(provincia.nombre)
-                          }
-                        })
-                      })
-                    ],
-                    2
-                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
@@ -49050,12 +48679,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.getOfertas();
     this.isEmpresa();
     this.getProvincias();
+  },
+  props: {
+    userId: String
   },
   data: function data() {
     return {
@@ -49065,10 +48701,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         provincia_id: 0,
         titulo: "",
         descripcion: "",
-        vacantes: ""
+        vacantes: "",
+        sueldo_desde: "",
+        sueldo_hasta: ""
       },
       inscripcion: {
-        user_id: '',
         oferta_id: ''
       },
       provincias: [],
@@ -49109,11 +48746,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var url = "oferta";
       axios.post(url, {
-        user_id: 2, //TODO Cambiarlo por el id de usuario real
+        user_id: this.userId,
         provincia_id: this.oferta.provincia_id,
         titulo: this.oferta.titulo,
         descripcion: this.oferta.descripcion,
-        vacantes: this.oferta.vacantes
+        vacantes: this.oferta.vacantes,
+        sueldo_desde: this.oferta.sueldo_desde,
+        sueldo_hasta: this.oferta.sueldo_hasta
       }).then(function (response) {
         _this4.getOfertas();
         _this4.oferta = {};
@@ -49159,7 +48798,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     inscribirse: function inscribirse(oferta) {
       var url = "inscripcion";
       axios.post(url, {
-        user_id: 1,
+        user_id: this.userId,
         oferta_id: oferta.id
       });
     }
@@ -49308,6 +48947,52 @@ var render = function() {
                     return
                   }
                   _vm.$set(_vm.oferta, "vacantes", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.oferta.sueldo_desde,
+                  expression: "oferta.sueldo_desde"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", placeholder: "Sueldo Desde" },
+              domProps: { value: _vm.oferta.sueldo_desde },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.oferta, "sueldo_desde", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.oferta.sueldo_hasta,
+                  expression: "oferta.sueldo_hasta"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", placeholder: "Sueldo Hasta" },
+              domProps: { value: _vm.oferta.sueldo_hasta },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.oferta, "sueldo_hasta", $event.target.value)
                 }
               }
             })

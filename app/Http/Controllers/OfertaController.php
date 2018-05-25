@@ -126,5 +126,11 @@ class OfertaController extends Controller
         ->orWhere([['provincia_id', $id], ['descripcion', 'like', '%'.$word.'%']])->get();
     }
 
-    // TODO Filtrar por sueldos
+    /**
+     * Devuelve las ofertas filtradas por sueldo
+     */
+    public function getOfertasPorSueldo($desde, $hasta)
+    {
+        return Oferta::where('sueldo_desde', '>=', $desde)->where('sueldo_hasta', '<=', $hasta)->get();
+    }
 }

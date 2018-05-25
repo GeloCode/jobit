@@ -16,9 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('rol_id')->unsigned();
-            $table->foreign('rol_id')->references('id')->on('roles')->onUpdate('cascade');
-            $table->integer('provincia_id')->unsigned();
-            $table->foreign('provincia_id')->references('id')->on('provincias')->onUpdate('cascade');            
+            $table->foreign('rol_id')->references('id')->on('roles')->onUpdate('cascade');         
             $table->string('email')->unique();
             $table->string('password');            
             $table->rememberToken();

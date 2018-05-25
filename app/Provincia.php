@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Provincia extends Model
 {
     /**
-     * Hacemos la relación de que una provincia tiene muchos usuarios.
+     * Hacemos la relación de que una provincia tiene muchos perfiles.
      */
-    public function users()
+    public function perfils()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Perfil::class);
     }
 
     /**
