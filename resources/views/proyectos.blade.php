@@ -13,7 +13,7 @@
         <div class="container">
 
             <div id="app">
-                <portf></portf>
+                <detail></detail>
                 
             </div>
             

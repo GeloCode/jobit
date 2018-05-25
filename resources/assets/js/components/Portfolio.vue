@@ -1,10 +1,13 @@
 <template>
+
     <div class="container">
-            <center><h2>Los proyectos</h2></center>
+         <child-component v-bind:myProp="idPortfolio">holasdasdasdsaa</child-component>
+            <center><h2>Los proyectos asdasd</h2></center>
 
             <div class="row">
                
                 <div class="card-body col-md-6 offset-md-3">
+                    <span> ..... </span>
                 <form v-on:submit.prevent="createPortfolio()">
                     <label for="titulo">Titulo</label>
                     <input type="text" v-model="newPortfolioTitulo" class="form-control" name="titulo">
@@ -27,8 +30,7 @@
                         <h5 class="card-title" v-text="portfolio.titulo"> </h5>
                         <p class="card-text" v-text="portfolio.descripcion"> </p>
                         <a href="#" class="btn btn-danger btn-sm" v-on:click.prevent="deletePortfolio(portfolio)">Borrar</a>
-                        <a href="#" class="btn btn-warning btn-sm">Editar</a>
-                        <a href="#" class="btn btn-success btn-sm">Ver</a>
+                        <a href="#" class="btn btn-success btn-sm" v-on:click.prevent="getPortfolioById(portfolio)">Ver</a>
                         <div class="col-md-5 offset-md-7">
                             <small>
                                 {{ since(portfolio.created_at)}}
@@ -47,8 +49,8 @@
     import axios from 'axios'
     import moment from 'moment'
     import toastr from 'toastr'
-
-    moment.lang('es');
+    import Proyectos from './Proyectos.vue';
+    moment.locale('es');
     export default {
         //llamada a la funcion
         //en cuanto se cree! (created), que se haga la funcion
@@ -60,6 +62,7 @@
         //aqui almacenamos datos
         data: function () {
             return {
+                idPortfolio: 'con props',
                 portfolios: [],
                 newUser_id: '',
                 newPortfolioTitulo: '',
@@ -80,6 +83,14 @@
                     this.portfolios = response.data;
                 }).catch(error => {
                     portfolios = { 'id': 1 };
+                });
+            },
+            showPortfolio: function(portfolio) {
+                var urlPortfolio = 'portfolio'+portfolio.id;
+                axios.get(urlPortfolio).then(response =>{
+                    this.portfolio = response.data;
+                }).catch(error => {
+                     portfolios = { 'id': 1 };
                 });
             },
             getNames: function(){
@@ -112,6 +123,10 @@
                     this.getPortfolios();
                     toastr.error('Borrado Correctamente');
                 });
+            },
+            getPortfolioById: function(portfolio){
+                let url=window.location.href="/portfolio/"+portfolio.id;
+                axios.get(url);
             }
         }
 

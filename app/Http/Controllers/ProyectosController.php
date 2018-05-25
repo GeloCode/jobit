@@ -3,33 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Proyecto;
 use App\Portfolio;
-use App\User;
-class PortfolioController extends Controller
+class ProyectosController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getPortfolios()
+    public function index()
     {
-        return Portfolio::orderBy('id', 'DESC')->get();
+        //
     }
-     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getNameUser()
-    {
-        return User::get();
-        // find($id_portfolio)
-        /*// find a specific user and see their attributes
-            App\User::where('username', 'samuel')->first();
-            */
 
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -37,13 +24,11 @@ class PortfolioController extends Controller
      */
     public function create()
     {
-        
+        //
     }
-
-    public function getPortfolioById($id){
-        return Portfolio::find($id);
+    public function getProyectosById(){
+        return Proyecto::get();
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -52,13 +37,7 @@ class PortfolioController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'titulo' => 'required',
-            'user_id' => 'required',
-            'descripcion' => 'required'
-        ]);
-        Portfolio::create($request->all());
-        return;
+        //
     }
 
     /**
@@ -103,7 +82,6 @@ class PortfolioController extends Controller
      */
     public function destroy($id)
     {
-        $portfolio = Portfolio::findOrFail($id);
-        $portfolio -> delete();
+        //
     }
 }
