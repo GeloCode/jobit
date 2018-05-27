@@ -2,7 +2,10 @@
 
 
 Route::get('/', function () {
-    return view('app');
+    return view('portfolio');
+}); 
+Route::get('projects', function () {
+    return view('proyectos');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -115,3 +118,17 @@ Route::post('perfil', 'PerfilController@store');
  * Para actualizar un perfil
  */
 Route::put('perfil/{id}', 'PerfilController@update');
+
+//RUTAS PORTFOLIOS
+Route::resource('portfolios', 'PortfolioController', ['except' => 'create']); //todas las rutas portfolios
+Route::get('portfolios', 'PortfolioController@getPortfolios'); //obtener todos los portfolios
+Route::get('selectName', 'PortfolioController@getNameUser'); //obtener todos los usuarios para poder printarlos es portfolios
+Route::post('crearPortfolio', 'PortfolioController@store'); //crear el portfolio
+Route::get('info/{id}', 'PortfolioController@getInfoPortfolio');
+
+//RUTAS PROYECTOS
+Route::resource('proyectos', 'ProyectosController', ['except' => 'create']); //todas las rutas de proyectos
+Route::get('projct/{id}', 'ProyectosController@getProyectosById'); //obtener los proyectos
+
+
+
