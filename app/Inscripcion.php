@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Inscripcion extends Model
 {
     /**
+     * Campos que podremos modificar/inserta el usuario
+     */
+    protected $fillable = [
+        'user_id', 'oferta_id'
+    ];
+
+    /**
      * Hacemos la relación de que una inscripcion le pertenece a un usuario.
      */
     public function user()

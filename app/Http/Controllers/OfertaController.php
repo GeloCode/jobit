@@ -12,9 +12,42 @@ class OfertaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Oferta::orderBy('created_at', 'DESC')->get();
+        $buscar       = $request->buscar      == '' ? '' : $request->buscar;
+        $provincia    = $request->provincia   == '0' ? '' : $request->provincia;
+        $sueldoDesde  = $request->sueldoDesde == '' ?  0  : $request->sueldoDesde;
+        $sueldoHasta  = $request->sueldoHasta == '' ? Oferta::max('sueldo_hasta') : $request->sueldoHasta;
+        $id = $request->id;
+        
+        if($provincia == ''){
+            $ofertas = Oferta::orderBy('created_at', 'DESC')->where(function ($query) use ($buscar){
+                $query->where('titulo', 'like', '%'.$buscar.'%')
+                ->orWhere('descripcion', 'like', '%'.$buscar.'%');})
+            ->where('sueldo_desde', '>=', $sueldoDesde)->where('sueldo_hasta', '<=', $sueldoHasta)
+            ->whereNotIn('id', function ($query) use ($id){
+                $query->select('oferta_id')->from('inscripcions')->where('user_id', "=", $id);
+            })->paginate(2); 
+        } else {
+            $ofertas = Oferta::orderBy('created_at', 'DESC')->where('provincia_id', '=', $provincia)
+            ->where(function ($query) use ($buscar){
+                $query->where('titulo', 'like', '%'.$buscar.'%')
+                ->orWhere('descripcion', 'like', '%'.$buscar.'%');})
+            ->where('sueldo_desde', '>=', $sueldoDesde)->where('sueldo_hasta', '<=', $sueldoHasta)->paginate(2); 
+        }
+              
+        
+        return [
+            'pagination' => [
+                'total'        => $ofertas->total(),
+                'current_page' => $ofertas->currentPage(),
+                'per_page'     => $ofertas->perPage(),
+                'last_page'    => $ofertas->lastPage(),
+                'from'         => $ofertas->firstItem(),
+                'to'           => $ofertas->lastItem(),
+            ],
+            'ofertas' => $ofertas
+        ];
     }
 
     /**
@@ -70,8 +103,8 @@ class OfertaController extends Controller
     {
         $this->validate($request, [
             'provincia_id' => 'required',
-            'titulo' => 'required',
-            'descripcion' => 'required',
+            'titulo'       => 'required',
+            'descripcion'  => 'required',
             'sueldo_desde' => 'required',
             'sueldo_hasta' => 'required',
         ]);
@@ -95,42 +128,43 @@ class OfertaController extends Controller
     /**
      * Devuelve las ofertas que sean de X usuario
      */
-    public function getOfertaByUser($id)
+    public function getOfertaByUser(Request $request)
     {
-        return Oferta::where('user_id', $id)->get();
+        $buscar       = $request->buscar      == ''  ? '' : $request->buscar;
+        $provincia    = $request->provincia   == '0' ? '' : $request->provincia;
+        $id = $request->id;
+
+        if($provincia == ''){
+            $ofertas = Oferta::orderBy('created_at', 'DESC')->where(function ($query) use ($buscar){
+                $query->where('titulo', 'like', '%'.$buscar.'%')
+                ->orWhere('descripcion', 'like', '%'.$buscar.'%');})
+                ->where('user_id', $id)->paginate(1); 
+        } else {
+            $ofertas = Oferta::orderBy('created_at', 'DESC')->where('provincia_id', '=', $provincia)
+            ->where(function ($query) use ($buscar){
+                $query->where('titulo', 'like', '%'.$buscar.'%')
+                ->orWhere('descripcion', 'like', '%'.$buscar.'%');})
+                ->where('user_id', $id)->paginate(1); 
+        }
+        return [
+            'pagination' => [
+                'total'        => $ofertas->total(),
+                'current_page' => $ofertas->currentPage(),
+                'per_page'     => $ofertas->perPage(),
+                'last_page'    => $ofertas->lastPage(),
+                'from'         => $ofertas->firstItem(),
+                'to'           => $ofertas->lastItem(),
+            ],
+            'ofertas' => $ofertas,
+            'buscar' => $buscar,
+            'provincia' => $provincia,
+        ];
     }
 
-    /**
-     * Devuelve las ofertas que esten en la província X
-     */
-    public function getOfertaByProvincia($id)
-    {
-        return Oferta::where('provincia_id', $id)->get();
-    }
-
-    /**
-     * Devuelve las ofertas que coincidan con la palabra clave en el titulo o en la descripcion
-     */
-    public function searchOferta($word)
-    {
-        return Oferta::where('titulo', 'like', '%'.$word.'%')
-        ->orWhere('descripcion', 'like', '%'.$word.'%');
-    }
-
-    /**
-     * Devuelve las ofertas que coincidan con la palabra clave y una provincia
-     */
-    public function searchOfertaByProvinciaAndWord($id, $word)
-    {
-        return Oferta::where([['provincia_id', $id], ['titulo', 'like', '%'.$word.'%']])
-        ->orWhere([['provincia_id', $id], ['descripcion', 'like', '%'.$word.'%']])->get();
-    }
-
-    /**
-     * Devuelve las ofertas filtradas por sueldo
-     */
-    public function getOfertasPorSueldo($desde, $hasta)
-    {
-        return Oferta::where('sueldo_desde', '>=', $desde)->where('sueldo_hasta', '<=', $hasta)->get();
+    public function getOfertasByInscripcionUser($id){
+        return Oferta::whereIn('id', function ($query) use ($id){
+            $query->select('oferta_id')->from('inscripcions')->where('user_id', '=', $id)
+            ->orderBy('created_at', 'DESC');
+        });
     }
 }
