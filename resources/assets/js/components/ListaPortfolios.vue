@@ -1,13 +1,10 @@
 <template>
 
     <div class="container">
-         <child-component v-bind:myProp="idPortfolio">holasdasdasdsaa</child-component>
-            <center><h2>Los proyectos asdasd</h2></center>
-
+            <center><h2>Los portfolios</h2></center>
             <div class="row">
                
                 <div class="card-body col-md-6 offset-md-3">
-                    <span> ..... </span>
                 <form v-on:submit.prevent="createPortfolio()">
                     <label for="titulo">Titulo</label>
                     <input type="text" v-model="newPortfolioTitulo" class="form-control" name="titulo">
@@ -20,6 +17,8 @@
                 </form>
                 </div>
             </div>
+
+
             <div class="row justify-content-between">
                 <div v-for="portfolio in portfolios" :key="portfolio.id" class="card col-md-4">
                      <div v-for="nombre in nameUser" :key="nombre.id">
@@ -30,7 +29,7 @@
                         <h5 class="card-title" v-text="portfolio.titulo"> </h5>
                         <p class="card-text" v-text="portfolio.descripcion"> </p>
                         <a href="#" class="btn btn-danger btn-sm" v-on:click.prevent="deletePortfolio(portfolio)">Borrar</a>
-                        <a href="#" class="btn btn-success btn-sm" v-on:click.prevent="getPortfolioById(portfolio)">Ver</a>
+                        <a class="btn btn-success btn-sm" v-bind:href="'/projects?id=' +portfolio.id">Ver</a>
                         <div class="col-md-5 offset-md-7">
                             <small>
                                 {{ since(portfolio.created_at)}}
@@ -49,7 +48,6 @@
     import axios from 'axios'
     import moment from 'moment'
     import toastr from 'toastr'
-    import Proyectos from './Proyectos.vue';
     moment.locale('es');
     export default {
         //llamada a la funcion
@@ -62,7 +60,6 @@
         //aqui almacenamos datos
         data: function () {
             return {
-                idPortfolio: 'con props',
                 portfolios: [],
                 newUser_id: '',
                 newPortfolioTitulo: '',
@@ -70,6 +67,9 @@
                 nameUser: []
 
             }
+        },
+        components: {
+            //'proyectos' :Proyectos
         },
         //end
         //funcionalidad. aqui se llama a laravel y que te pase datos.

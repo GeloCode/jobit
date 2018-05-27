@@ -43,7 +43,9 @@ class PortfolioController extends Controller
     public function getPortfolioById($id){
         return Portfolio::find($id);
     }
-
+    public function getInfoPortfolio($id_seleccionado){
+        return Portfolio::where('id', $id_seleccionado)->get();
+    }
     /**
      * Store a newly created resource in storage.
      *

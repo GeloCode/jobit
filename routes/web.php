@@ -14,13 +14,21 @@
 Route::get('/', function () {
     return view('portfolio');
 }); 
-Route::get('/proyectos', function () {
+Route::get('projects', function () {
     return view('proyectos');
 });
 
-Route::resource('portfolios', 'PortfolioController', ['except' => 'create']);
-Route::get('portfolios', 'PortfolioController@getPortfolios');
-Route::get('selectName', 'PortfolioController@getNameUser');
-Route::post('crearPortfolio', 'PortfolioController@store');
-Route::get('proyectos/1', 'ProyectosController@getProyectosById');
+
+//RUTAS PORTFOLIOS
+Route::resource('portfolios', 'PortfolioController', ['except' => 'create']); //todas las rutas portfolios
+Route::get('portfolios', 'PortfolioController@getPortfolios'); //obtener todos los portfolios
+Route::get('selectName', 'PortfolioController@getNameUser'); //obtener todos los usuarios para poder printarlos es portfolios
+Route::post('crearPortfolio', 'PortfolioController@store'); //crear el portfolio
+Route::get('info/{id}', 'PortfolioController@getInfoPortfolio');
+
+//RUTAS PROYECTOS
+Route::resource('proyectos', 'ProyectosController', ['except' => 'create']); //todas las rutas de proyectos
+Route::get('projct/{id}', 'ProyectosController@getProyectosById'); //obtener los proyectos
+
+
 

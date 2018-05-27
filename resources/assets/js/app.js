@@ -1,6 +1,11 @@
 require('./bootstrap');
 window.Vue = require('vue');
 
+//HTTP REQUESTS
+import VueResource from 'vue-resource'
+Vue.use(VueResource);
+
+/////////////////////////
 //los imports del ROUTING
 //import VueResource from 'vue-resource' 
 //import VueRouter from 'vue-router' 
@@ -11,8 +16,8 @@ window.Vue = require('vue');
 //fin
 //window.axios = require('axios');
 
-Vue.component('portf', require('./components/Portfolio.vue'));
-Vue.component('detail', require('./components/Proyectos.vue'));
+Vue.component('portfolios', require('./components/ListaPortfolios.vue'));
+Vue.component('detail', require('./components/RootComponent.vue'));
 //Vue.component('detalle', require('./components/Detalleportf.vue'));
 
 
