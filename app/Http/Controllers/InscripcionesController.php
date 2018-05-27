@@ -26,11 +26,19 @@ class InscripcionesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'oferta_id' => 'required',
+            'user_id' => 'required',
+            'oferta_id' => 'required'
         ]);
-
+        
         Inscripcion::create($request->all());
 
         return;
+    }
+
+    /**
+     * Devuelve las Inscripciones que tiene un usuario
+     */
+    public function getInscripcionesByUser($id){
+        return Inscripcion::where('user_id', $id)->get();
     }
 }

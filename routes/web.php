@@ -29,6 +29,19 @@ Auth::routes();
 Route::get('/vofertas', function () {
     return view('vofertas');
 });
+/**
+ * Temporal para hacer pruebas con las ofertas empresa
+ */
+Route::get('/vofertasempresa', function () {
+    return view('vofertasempresa');
+});
+
+/**
+ * Temporal para hacer pruebas con las inscrtipciones 
+ */
+Route::get('/vinscripcionesempresa', function () {
+    return view('vinscripcionesempresa');
+});
 
 /**
  * Nos devuelve todas las ofertas sin filtar por nada
@@ -43,22 +56,7 @@ Route::get('oferta/{id}', 'OfertaController@getOfertaById');
 /**
  * Nos devuelve todas las ofertas filtradas para X usuario (Para ver nuestras ofertas si somos empresa)
  */
-Route::get('ofertas/usuario/{idUser}', 'OfertaController@getOfertaByUser');
-
-/**
- * Nos devuelve todas las ofertas filtradas por la provincia que buscamos
- */
-Route::get('ofertas/provincia/{idProvincia}', 'OfertaController@getOfertaByProvincia');
-
-/**
- * Nos devuelve todas las ofertas filtradas por la palabra que buscamos
- */
-Route::get('ofertas/palabra/{word}', 'OfertaController@searchOferta');
-
-/**
- * Nos devuelve todas las ofertas filtradas por la palabra que buscamos y su provincia
- */
-Route::get('ofertas/provincia/{idProvincia}/palabra/{word}', 'OfertaController@searchOfertaByProvinciaAndWord');
+Route::get('ofertas/usuario/', 'OfertaController@getOfertaByUser');
 
 /**
  * Para eliminar ofertas (Para las empresas)
@@ -97,6 +95,12 @@ Route::get('inscripciones', 'InscripcionesController@index');
  * Para crear una inscripcion (Para los Solicitantes)
  */
 Route::post('inscripcion', 'InscripcionesController@store');
+
+/**
+ * Nos devuelve todas las inscripciones para X usuario (Para ver nuestras inscripciones si somos empresa)
+ */
+Route::get('inscripciones/usuario/{idUser}', 'InscripcionesController@getInscripcionesByUser');
+
 
 /*************** ROUTINGS PERFILES ************** */
 /**************************************************** */
