@@ -4890,6 +4890,33 @@ module.exports = {
 /* 2 */
 /***/ (function(module, exports) {
 
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
 /* globals __VUE_SSR_CONTEXT__ */
 
 // IMPORTANT: Do NOT use ES2015 features in this file.
@@ -4993,33 +5020,6 @@ module.exports = function normalizeComponent (
     options: options
   }
 }
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
 
 
 /***/ }),
@@ -18535,7 +18535,7 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
 /* 10 */
@@ -30845,7 +30845,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(140);
-module.exports = __webpack_require__(187);
+module.exports = __webpack_require__(184);
 
 
 /***/ }),
@@ -30867,7 +30867,7 @@ Vue.component('detail', __webpack_require__(172));
 //Vue.component('detalle', require('./components/Detalleportf.vue'));
 Vue.component('login', __webpack_require__(178));
 Vue.component('register', __webpack_require__(181));
-Vue.component('oferta', __webpack_require__(184));
+//Vue.component('oferta', require('./components/OfertaComponent.vue'));
 var app = new Vue({
     el: '#app'
 });
@@ -48049,7 +48049,7 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(8)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(8)(module)))
 
 /***/ }),
 /* 143 */
@@ -63839,7 +63839,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(164).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(164).setImmediate))
 
 /***/ }),
 /* 164 */
@@ -63909,7 +63909,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
 /* 165 */
@@ -64102,7 +64102,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(11)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(11)))
 
 /***/ }),
 /* 166 */
@@ -65681,7 +65681,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 var __vue_script__ = __webpack_require__(169)
 /* template */
@@ -66161,110 +66161,6 @@ var render = function() {
     [
       _c("center", [_c("h2", [_vm._v("Los portfolios")])]),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "card-body col-md-6 offset-md-3" }, [
-          _c(
-            "form",
-            {
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  _vm.createPortfolio()
-                }
-              }
-            },
-            [
-              _c("label", { attrs: { for: "titulo" } }, [_vm._v("Titulo")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.newPortfolioTitulo,
-                    expression: "newPortfolioTitulo"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", name: "titulo" },
-                domProps: { value: _vm.newPortfolioTitulo },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.newPortfolioTitulo = $event.target.value
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "descripcion" } }, [
-                _vm._v("Id usuario")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.newUser_id,
-                    expression: "newUser_id"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", name: "user_id" },
-                domProps: { value: _vm.newUser_id },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.newUser_id = $event.target.value
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "descripcion" } }, [
-                _vm._v("Descripcion")
-              ]),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.newPortfolioDescripcion,
-                    expression: "newPortfolioDescripcion"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { rows: "5", name: "descripcion" },
-                domProps: { value: _vm.newPortfolioDescripcion },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.newPortfolioDescripcion = $event.target.value
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success btn-sm col-md-2 offset-md-5",
-                  attrs: { type: "submit" }
-                },
-                [_vm._v("Crear")]
-              )
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
       _c(
         "div",
         { staticClass: "row justify-content-between" },
@@ -66362,7 +66258,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 var __vue_script__ = __webpack_require__(173)
 /* template */
@@ -66383,7 +66279,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\RootComponent.vue"
+Component.options.__file = "resources\\assets\\js\\components\\RenderProyectos.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -66392,9 +66288,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6e89d6d4", Component.options)
+    hotAPI.createRecord("data-v-1b4cce1e", Component.options)
   } else {
-    hotAPI.reload("data-v-6e89d6d4", Component.options)
+    hotAPI.reload("data-v-1b4cce1e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -66464,7 +66360,7 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 var __vue_script__ = __webpack_require__(175)
 /* template */
@@ -66697,7 +66593,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6e89d6d4", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-1b4cce1e", module.exports)
   }
 }
 
@@ -66706,7 +66602,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 var __vue_script__ = __webpack_require__(179)
 /* template */
@@ -67076,7 +66972,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 var __vue_script__ = __webpack_require__(182)
 /* template */
@@ -67557,482 +67453,6 @@ if (false) {
 
 /***/ }),
 /* 184 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(185)
-/* template */
-var __vue_template__ = __webpack_require__(186)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\OfertaComponent.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4428e5a5", Component.options)
-  } else {
-    hotAPI.reload("data-v-4428e5a5", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 185 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  created: function created() {
-    this.getOfertas();
-    this.isEmpresa();
-    this.getProvincias();
-  },
-  props: {
-    userId: String
-  },
-  data: function data() {
-    return {
-      ofertas: [],
-      oferta: {
-        id: "",
-        provincia_id: 0,
-        titulo: "",
-        descripcion: "",
-        vacantes: "",
-        sueldo_desde: "",
-        sueldo_hasta: ""
-      },
-      inscripcion: {
-        oferta_id: ''
-      },
-      provincias: [],
-      esEmpresa: "",
-      errors: []
-    };
-  },
-  methods: {
-    getOfertas: function getOfertas() {
-      var _this = this;
-
-      var url = "ofertas";
-      axios.get(url).then(function (response) {
-        _this.ofertas = response.data;
-      });
-    },
-    getOferta: function getOferta(id) {
-      var _this2 = this;
-
-      var url = "oferta/" + id;
-      axios.get(url).then(function (response) {
-        _this2.oferta = response.data;
-      });
-    },
-    deleteOferta: function deleteOferta(oferta) {
-      var _this3 = this;
-
-      if (confirm("Estas Seguro?")) {
-        var url = "ofertas/" + oferta.id;
-        axios.delete(url).then(function (response) {
-          _this3.getOfertas();
-          toastr.success("Oferta eliminada correctamente!");
-        });
-      }
-    },
-    addOferta: function addOferta(oferta) {
-      var _this4 = this;
-
-      var url = "oferta";
-      axios.post(url, {
-        user_id: this.userId,
-        provincia_id: this.oferta.provincia_id,
-        titulo: this.oferta.titulo,
-        descripcion: this.oferta.descripcion,
-        vacantes: this.oferta.vacantes,
-        sueldo_desde: this.oferta.sueldo_desde,
-        sueldo_hasta: this.oferta.sueldo_hasta
-      }).then(function (response) {
-        _this4.getOfertas();
-        _this4.oferta = {};
-      }).catch(function (error) {
-        _this4.errors = error.response.data;
-      });
-    },
-    editOferta: function editOferta(id) {
-      var _this5 = this;
-
-      var url = "oferta/" + id;
-      axios.put(url, {
-        provincia_id: this.oferta.provincia_id,
-        titulo: this.oferta.titulo,
-        descripcion: this.oferta.descripcion,
-        vacantes: this.oferta.vacantes
-      }).then(function (response) {
-        _this5.getOfertas();
-        _this5.oferta = {};
-        _this5.errors = [];
-        toastr.success("Oferta actualizada correctamente!");
-      }).catch(function (error) {
-        _this5.errors = error.response.data;
-      });
-    },
-    isEmpresa: function isEmpresa(id) {
-      var _this6 = this;
-
-      var url = "isEmpleado/" + 2; //TODO Cambairlo por el id del usuario
-      axios.get(url).then(function (response) {
-        var role = response.data;
-        _this6.esEmpresa = role == "Empresa" ? true : false;
-      });
-    },
-    getProvincias: function getProvincias() {
-      var _this7 = this;
-
-      var url = "provincias";
-      axios.get(url).then(function (response) {
-        _this7.provincias = response.data;
-      });
-    },
-    inscribirse: function inscribirse(oferta) {
-      var url = "inscripcion";
-      axios.post(url, {
-        user_id: this.userId,
-        oferta_id: oferta.id
-      });
-    }
-  }
-});
-
-/***/ }),
-/* 186 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h1", [_vm._v("Ofertas")]),
-      _vm._v(" "),
-      _c(
-        "form",
-        {
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              return _vm.addOferta($event)
-            }
-          }
-        },
-        [
-          _c("div", { staticClass: "form-group" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.oferta.titulo,
-                  expression: "oferta.titulo"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", placeholder: "Título" },
-              domProps: { value: _vm.oferta.titulo },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.oferta, "titulo", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.oferta.descripcion,
-                  expression: "oferta.descripcion"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { placeholder: "Descripción" },
-              domProps: { value: _vm.oferta.descripcion },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.oferta, "descripcion", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.oferta.provincia_id,
-                    expression: "oferta.provincia_id"
-                  }
-                ],
-                staticClass: "custom-select",
-                attrs: { name: "selectProvincia" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.oferta,
-                      "provincia_id",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "0", disabled: "" } }, [
-                  _vm._v("Elige tu Provincia")
-                ]),
-                _vm._v(" "),
-                _vm._l(_vm.provincias, function(provincia) {
-                  return _c("option", {
-                    key: provincia.id,
-                    domProps: {
-                      value: provincia.id,
-                      textContent: _vm._s(provincia.nombre)
-                    }
-                  })
-                })
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.oferta.vacantes,
-                  expression: "oferta.vacantes"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number", placeholder: "Vacantes" },
-              domProps: { value: _vm.oferta.vacantes },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.oferta, "vacantes", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.oferta.sueldo_desde,
-                  expression: "oferta.sueldo_desde"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number", placeholder: "Sueldo Desde" },
-              domProps: { value: _vm.oferta.sueldo_desde },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.oferta, "sueldo_desde", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.oferta.sueldo_hasta,
-                  expression: "oferta.sueldo_hasta"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number", placeholder: "Sueldo Hasta" },
-              domProps: { value: _vm.oferta.sueldo_hasta },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.oferta, "sueldo_hasta", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-dark btn-block mb-4",
-              attrs: { type: "submit" }
-            },
-            [_vm._v("Guardar")]
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.ofertas, function(oferta) {
-        return _c(
-          "div",
-          { key: oferta.id, staticClass: "card card-body mb-2" },
-          [
-            _c("h3", {
-              staticClass: "card-title",
-              domProps: { textContent: _vm._s(oferta.titulo) }
-            }),
-            _vm._v(" "),
-            _c("p", {
-              staticClass: "card-text",
-              domProps: { textContent: _vm._s(oferta.descripcion) }
-            }),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-block btn-primary",
-                on: {
-                  click: function($event) {
-                    _vm.inscribirse(oferta)
-                  }
-                }
-              },
-              [_vm._v("Inscribirse")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-block btn-danger",
-                on: {
-                  click: function($event) {
-                    _vm.deleteOferta(oferta)
-                  }
-                }
-              },
-              [_vm._v("Eliminar")]
-            )
-          ]
-        )
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-5" }, [
-        _c("pre", [_vm._v("@" + _vm._s(_vm.$data))])
-      ])
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-4428e5a5", module.exports)
-  }
-}
-
-/***/ }),
-/* 187 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

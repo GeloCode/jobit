@@ -1,7 +1,7 @@
 <?php
 
 
-Route::get('/', function () {
+Route::get('/portf', function () {
     return view('portfolio');
 }); 
 Route::get('projects', function () {
