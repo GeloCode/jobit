@@ -106,23 +106,7 @@ export default {
           axios.get(redirect);
         })
         .catch(function(error) {
-          var errors = error.response;
-          if (errors.statusText === "Unprocessable Entity") {
-            if (errors.data) {
-              if (errors.data.email) {
-                vm.email = true;
-                _vm.email = _.isArray(errors.data.email)
-                  ? errors.data.email[0]
-                  : errors.data.email;
-              }
-              if (errors.data.password) {
-                vm.password = true;
-                _vm.password = _.isArray(errors.data.password)
-                  ? errors.data.password[0]
-                  : errors.data.password;
-              }
-            }
-          }
+            toastr.error("Los credenciales no son correctos.");
         });
     },
     getRoles: function() {
@@ -140,7 +124,7 @@ export default {
       var vm = this.registerData;
       var _this = this;
       return vm.password_confirmation !== vm.password
-        ? (_this.passwordMatch = "The password confirmation does not match.")
+        ? (toastr.error("Las contraseñas no coinciden"))
         : (_this.passwordMatch = null);
     }
   },
