@@ -6,11 +6,11 @@
                                 
                                         <div class="card-body">
                                             <center><h4>{{portfolio.titulo}}</h4></center>
-                                            <center><p>{{portfolio.descripcion}}</p></center>
+                                            <center><p>{{portfolio.text}}</p></center>
                                         </div>
                             </div>
                     </div>
-            <center><h2>Proyectos</h2></center>
+            <center><h2>Proyectosss</h2></center>
                 <div class="row justify-content-between">
                         
                             <div v-for="proyecto in proyectos" :key="proyecto.id" class="card col-md-4">
@@ -18,12 +18,11 @@
                                <!-- <p v-if="proyecto.portfolio_id == '3'">-->
                                         <div class="card-body">
                                             <h4>{{proyecto.titulo}}</h4>
-                                            <center><p>{{proyecto.descripcion}}</p></center>
+                                            <a class="btn btn-success btn-sm" v-bind:href="'/detailProject?id=' + proyecto.id">Ver</a>
                                         </div>
                                 </div>
                             </div>
                     </div>
-        
 
     </div>
 </template>
@@ -69,6 +68,13 @@
                     this.infoPortfolio = response.data;
                 }).catch(error => {
                     proyectos = { 'id': 1 };
+                });
+            },
+              deleteProyecto: function (proyecto) {
+                var url = 'proyectos/' + proyecto.id;
+                axios.delete(url).then(response => {
+                    this.getProyectos();
+                    toastr.error('Borrado Correctamente');
                 });
             },
         }

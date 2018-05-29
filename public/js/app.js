@@ -4890,33 +4890,6 @@ module.exports = {
 /* 2 */
 /***/ (function(module, exports) {
 
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
 /* globals __VUE_SSR_CONTEXT__ */
 
 // IMPORTANT: Do NOT use ES2015 features in this file.
@@ -5023,7 +4996,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -5500,10 +5473,37 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(145);
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
 
 /***/ }),
 /* 6 */
@@ -18535,7 +18535,7 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(5)))
 
 /***/ }),
 /* 10 */
@@ -30845,7 +30845,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(140);
-module.exports = __webpack_require__(184);
+module.exports = __webpack_require__(190);
 
 
 /***/ }),
@@ -30862,12 +30862,15 @@ window.Vue = __webpack_require__(163);
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_resource__["a" /* default */]);
 
-Vue.component('portfolios', __webpack_require__(168));
-Vue.component('detail', __webpack_require__(172));
+Vue.component('project', __webpack_require__(168));
+Vue.component('portfolios', __webpack_require__(172));
+Vue.component('detail', __webpack_require__(175));
 //Vue.component('detalle', require('./components/Detalleportf.vue'));
-Vue.component('login', __webpack_require__(178));
-Vue.component('register', __webpack_require__(181));
+Vue.component('login', __webpack_require__(181));
+Vue.component('register', __webpack_require__(184));
 //Vue.component('oferta', require('./components/OfertaComponent.vue'));
+Vue.component('dashboardUser', __webpack_require__(187));
+
 var app = new Vue({
     el: '#app'
 });
@@ -30896,14 +30899,14 @@ try {
  * We'll add Toastr 
  */
 
-window.toastr = __webpack_require__(4);
+window.toastr = __webpack_require__(3);
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(5);
+window.axios = __webpack_require__(4);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -48049,7 +48052,7 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(8)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(8)(module)))
 
 /***/ }),
 /* 143 */
@@ -63839,7 +63842,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(164).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(164).setImmediate))
 
 /***/ }),
 /* 164 */
@@ -63909,7 +63912,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
 /* 165 */
@@ -64102,7 +64105,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(11)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(11)))
 
 /***/ }),
 /* 166 */
@@ -65681,7 +65684,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(169)
 /* template */
@@ -65702,7 +65705,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\ListaPortfolios.vue"
+Component.options.__file = "resources\\assets\\js\\components\\ProjectDetailComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -65711,9 +65714,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4cc3dae7", Component.options)
+    hotAPI.createRecord("data-v-12c33a0a", Component.options)
   } else {
-    hotAPI.reload("data-v-4cc3dae7", Component.options)
+    hotAPI.reload("data-v-12c33a0a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65729,40 +65732,12 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_toastr__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_toastr__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_toastr__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -65787,94 +65762,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['idproyecto'],
     //llamada a la funcion
     //en cuanto se cree! (created), que se haga la funcion
     created: function created() {
-        this.getPortfolios();
-        this.getNames();
+        this.getProyecto(this.idproyecto);
     },
     //end
     //aqui almacenamos datos
     data: function data() {
         return {
-            portfolios: [],
-            newUser_id: '',
-            newPortfolioTitulo: '',
-            newPortfolioDescripcion: '',
-            nameUser: []
-
+            proyecto: []
         };
     },
-    components: {
-        //'proyectos' :Proyectos
-    },
-    //end
-    //funcionalidad. aqui se llama a laravel y que te pase datos.
     methods: {
         since: function since(d) {
             return __WEBPACK_IMPORTED_MODULE_1_moment___default()(d).fromNow();
         },
-        getPortfolios: function getPortfolios() {
+        getProyecto: function getProyecto(detailId) {
             var _this = this;
 
-            var urlPortfolios = 'portfolios';
+            var urlPortfolios = 'detail/' + detailId;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(urlPortfolios).then(function (response) {
-                _this.portfolios = response.data;
+                _this.proyecto = response.data;
             }).catch(function (error) {
                 portfolios = { 'id': 1 };
             });
-        },
-        showPortfolio: function showPortfolio(portfolio) {
-            var _this2 = this;
-
-            var urlPortfolio = 'portfolio' + portfolio.id;
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(urlPortfolio).then(function (response) {
-                _this2.portfolio = response.data;
-            }).catch(function (error) {
-                portfolios = { 'id': 1 };
-            });
-        },
-        getNames: function getNames() {
-            var _this3 = this;
-
-            var url = 'selectName';
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (response) {
-                _this3.nameUser = response.data;
-            }).catch(function (error) {
-                portfolios = { 'id': 1 };
-            });
-        },
-        createPortfolio: function createPortfolio() {
-            var _this4 = this;
-
-            var urlportf = 'crearPortfolio';
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(urlportf, {
-                user_id: this.newUser_id,
-                titulo: this.newPortfolioTitulo,
-                descripcion: this.newPortfolioDescripcion
-            }).then(function (response) {
-                _this4.getPortfolios();
-                _this4.newUser_id = '';
-                _this4.newPortfolioTitulo = '';
-                _this4.newPortfolioDescripcion = '';
-                __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.success('Portfolio creado con exito');
-            }).catch(function (error) {
-                __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.error('Error al crear el portfolio');
-            });
-        },
-        deletePortfolio: function deletePortfolio(portfolio) {
-            var _this5 = this;
-
-            var url = 'portfolios/' + portfolio.id;
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(url).then(function (response) {
-                _this5.getPortfolios();
-                __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.error('Borrado Correctamente');
-            });
-        },
-        getPortfolioById: function getPortfolioById(portfolio) {
-            var url = window.location.href = "/portfolio/" + portfolio.id;
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url);
         }
+
     }
 
 });
@@ -66159,6 +66074,235 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
+      _c("center", [_c("h2", [_vm._v("Proyecto Vista")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "card-body col-md-6 offset-md-3" },
+          _vm._l(_vm.proyecto, function(detalle) {
+            return _c("div", { key: detalle.id }, [
+              _c("p", [_vm._v(_vm._s(detalle.titulo))]),
+              _vm._v(" "),
+              _c("p", [_vm._v("IMAGEN: ----" + _vm._s(detalle.imagen))]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(detalle.descripcion))])
+            ])
+          })
+        )
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-12c33a0a", module.exports)
+  }
+}
+
+/***/ }),
+/* 172 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(173)
+/* template */
+var __vue_template__ = __webpack_require__(174)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\ListaPortfolios.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4cc3dae7", Component.options)
+  } else {
+    hotAPI.reload("data-v-4cc3dae7", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 173 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_toastr__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_toastr__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
+/* harmony default export */ __webpack_exports__["default"] = ({
+    //llamada a la funcion
+    //en cuanto se cree! (created), que se haga la funcion
+    created: function created() {
+        this.getPortfolios();
+        this.getNames();
+    },
+    //end
+    //aqui almacenamos datos
+    data: function data() {
+        return {
+            portfolios: [],
+            newUser_id: '',
+            newPortfolioTitulo: '',
+            newPortfolioDescripcion: '',
+            nameUser: []
+
+        };
+    },
+    components: {
+        //'proyectos' :Proyectos
+    },
+    //end
+    //funcionalidad. aqui se llama a laravel y que te pase datos.
+    methods: {
+        since: function since(d) {
+            return __WEBPACK_IMPORTED_MODULE_1_moment___default()(d).fromNow();
+        },
+        getPortfolios: function getPortfolios() {
+            var _this = this;
+
+            var urlPortfolios = 'portfolios';
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(urlPortfolios).then(function (response) {
+                _this.portfolios = response.data;
+            }).catch(function (error) {
+                portfolios = { 'id': 1 };
+            });
+        },
+        showPortfolio: function showPortfolio(portfolio) {
+            var _this2 = this;
+
+            var urlPortfolio = 'portfolio' + portfolio.id;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(urlPortfolio).then(function (response) {
+                _this2.portfolio = response.data;
+            }).catch(function (error) {
+                portfolios = { 'id': 1 };
+            });
+        },
+        getNames: function getNames() {
+            var _this3 = this;
+
+            var url = 'selectName';
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (response) {
+                _this3.nameUser = response.data;
+            }).catch(function (error) {
+                portfolios = { 'id': 1 };
+            });
+        },
+        createPortfolio: function createPortfolio() {
+            var _this4 = this;
+
+            var urlportf = 'crearPortfolio';
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(urlportf, {
+                user_id: this.newUser_id,
+                titulo: this.newPortfolioTitulo,
+                descripcion: this.newPortfolioDescripcion
+            }).then(function (response) {
+                _this4.getPortfolios();
+                _this4.newUser_id = '';
+                _this4.newPortfolioTitulo = '';
+                _this4.newPortfolioDescripcion = '';
+                __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.success('Portfolio creado con exito');
+            }).catch(function (error) {
+                __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.error('Error al crear el portfolio');
+            });
+        },
+        deletePortfolio: function deletePortfolio(portfolio) {
+            var _this5 = this;
+
+            var url = 'portfolios/' + portfolio.id;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(url).then(function (response) {
+                _this5.getPortfolios();
+                __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.error('Borrado Correctamente');
+            });
+        },
+        getPortfolioById: function getPortfolioById(portfolio) {
+            var url = window.location.href = "/portfolio/" + portfolio.id;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url);
+        }
+    }
+
+});
+
+/***/ }),
+/* 174 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
       _c("center", [_c("h2", [_vm._v("Los portfolios")])]),
       _vm._v(" "),
       _c(
@@ -66254,15 +66398,15 @@ if (false) {
 }
 
 /***/ }),
-/* 172 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(173)
+var __vue_script__ = __webpack_require__(176)
 /* template */
-var __vue_template__ = __webpack_require__(177)
+var __vue_template__ = __webpack_require__(180)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -66301,18 +66445,18 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 173 */
+/* 176 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_toastr__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_toastr__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_toastr__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Proyectos_vue__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Proyectos_vue__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Proyectos_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Proyectos_vue__);
 //
 //
@@ -66328,43 +66472,37 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['hashid'], //hashid es el id del porfolio poviniente del proyectos.blade
     data: function data() {
-        return {
-            portfolios: []
-        };
+        return {};
     },
-    created: function created() {
-        this.getPortfolios();
-    },
+    created: function created() {},
     components: {
         proyectos: __WEBPACK_IMPORTED_MODULE_3__Proyectos_vue___default.a
     },
     //end
     //funcionalidad. aqui se llama a laravel y que te pase datos.
     methods: {
-        getPortfolios: function getPortfolios() {
-            var _this = this;
-
+        /* getPortfolios: function () {
             var urlPortfolios = 'portfolios';
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(urlPortfolios).then(function (response) {
-                _this.portfolios = response.data;
-            }).catch(function (error) {
+            axios.get(urlPortfolios).then(response => {
+                this.portfolios = response.data;
+            }).catch(error => {
                 portfolios = { 'id': 1 };
             });
-        },
+        },*/
         getProyectos: function getProyectos() {}
     }
 });
 
 /***/ }),
-/* 174 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(175)
+var __vue_script__ = __webpack_require__(178)
 /* template */
-var __vue_template__ = __webpack_require__(176)
+var __vue_template__ = __webpack_require__(179)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -66403,18 +66541,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 175 */
+/* 178 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_toastr__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_toastr__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_toastr__);
-//
 //
 //
 //
@@ -66490,13 +66627,22 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
             }).catch(function (error) {
                 proyectos = { 'id': 1 };
             });
+        },
+        deleteProyecto: function deleteProyecto(proyecto) {
+            var _this3 = this;
+
+            var url = 'proyectos/' + proyecto.id;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(url).then(function (response) {
+                _this3.getProyectos();
+                __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.error('Borrado Correctamente');
+            });
         }
     }
 
 });
 
 /***/ }),
-/* 176 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -66521,9 +66667,7 @@ var render = function() {
                 [
                   _c("center", [_c("h4", [_vm._v(_vm._s(portfolio.titulo))])]),
                   _vm._v(" "),
-                  _c("center", [
-                    _c("p", [_vm._v(_vm._s(portfolio.descripcion))])
-                  ])
+                  _c("center", [_c("p", [_vm._v(_vm._s(portfolio.text))])])
                 ],
                 1
               )
@@ -66532,7 +66676,7 @@ var render = function() {
         })
       ),
       _vm._v(" "),
-      _c("center", [_c("h2", [_vm._v("Proyectos")])]),
+      _c("center", [_c("h2", [_vm._v("Proyectosss")])]),
       _vm._v(" "),
       _c(
         "div",
@@ -66541,18 +66685,18 @@ var render = function() {
           return _c("div", { key: proyecto.id, staticClass: "card col-md-4" }, [
             proyecto.portfolio_id == _vm.portfid
               ? _c("div", [
-                  _c(
-                    "div",
-                    { staticClass: "card-body" },
-                    [
-                      _c("h4", [_vm._v(_vm._s(proyecto.titulo))]),
-                      _vm._v(" "),
-                      _c("center", [
-                        _c("p", [_vm._v(_vm._s(proyecto.descripcion))])
-                      ])
-                    ],
-                    1
-                  )
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h4", [_vm._v(_vm._s(proyecto.titulo))]),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-success btn-sm",
+                        attrs: { href: "/detailProject?id=" + proyecto.id }
+                      },
+                      [_vm._v("Ver")]
+                    )
+                  ])
                 ])
               : _vm._e()
           ])
@@ -66573,7 +66717,7 @@ if (false) {
 }
 
 /***/ }),
-/* 177 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -66598,15 +66742,15 @@ if (false) {
 }
 
 /***/ }),
-/* 178 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(179)
+var __vue_script__ = __webpack_require__(182)
 /* template */
-var __vue_template__ = __webpack_require__(180)
+var __vue_template__ = __webpack_require__(183)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -66645,7 +66789,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 179 */
+/* 182 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66762,7 +66906,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 180 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -66968,15 +67112,15 @@ if (false) {
 }
 
 /***/ }),
-/* 181 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(182)
+var __vue_script__ = __webpack_require__(185)
 /* template */
-var __vue_template__ = __webpack_require__(183)
+var __vue_template__ = __webpack_require__(186)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -67015,7 +67159,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 182 */
+/* 185 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67165,7 +67309,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 183 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -67452,7 +67596,318 @@ if (false) {
 }
 
 /***/ }),
-/* 184 */
+/* 187 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(188)
+/* template */
+var __vue_template__ = __webpack_require__(189)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\userDashboardCRUD.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ba025000", Component.options)
+  } else {
+    hotAPI.reload("data-v-ba025000", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 188 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_toastr__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_toastr__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
+/* harmony default export */ __webpack_exports__["default"] = ({
+    //llamada a la funcion
+    //en cuanto se cree! (created), que se haga la funcion
+    created: function created() {
+        this.getPortfolios();
+        this.getNames();
+    },
+    //end
+    //aqui almacenamos datos
+    data: function data() {
+        return {
+            portfolios: [],
+            newUser_id: '',
+            newPortfolioTitulo: '',
+            newPortfolioDescripcion: '',
+            nameUser: []
+
+        };
+    },
+    components: {
+        //'proyectos' :Proyectos
+    },
+    //end
+    //funcionalidad. aqui se llama a laravel y que te pase datos.
+    methods: {
+        since: function since(d) {
+            return __WEBPACK_IMPORTED_MODULE_1_moment___default()(d).fromNow();
+        },
+        getPortfolios: function getPortfolios() {
+            var _this = this;
+
+            var urlPortfolios = 'portfolios';
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(urlPortfolios).then(function (response) {
+                _this.portfolios = response.data;
+            }).catch(function (error) {
+                portfolios = { 'id': 1 };
+            });
+        },
+        showPortfolio: function showPortfolio(portfolio) {
+            var _this2 = this;
+
+            var urlPortfolio = 'portfolio' + portfolio.id;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(urlPortfolio).then(function (response) {
+                _this2.portfolio = response.data;
+            }).catch(function (error) {
+                portfolios = { 'id': 1 };
+            });
+        },
+        getNames: function getNames() {
+            var _this3 = this;
+
+            var url = 'selectName';
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (response) {
+                _this3.nameUser = response.data;
+            }).catch(function (error) {
+                portfolios = { 'id': 1 };
+            });
+        },
+        createPortfolio: function createPortfolio() {
+            var _this4 = this;
+
+            var urlportf = 'crearPortfolio';
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(urlportf, {
+                user_id: this.newUser_id,
+                titulo: this.newPortfolioTitulo,
+                descripcion: this.newPortfolioDescripcion
+            }).then(function (response) {
+                _this4.getPortfolios();
+                _this4.newUser_id = '';
+                _this4.newPortfolioTitulo = '';
+                _this4.newPortfolioDescripcion = '';
+                __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.success('Portfolio creado con exito');
+            }).catch(function (error) {
+                __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.error('Error al crear el portfolio');
+            });
+        },
+        deletePortfolio: function deletePortfolio(portfolio) {
+            var _this5 = this;
+
+            var url = 'portfolios/' + portfolio.id;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(url).then(function (response) {
+                _this5.getPortfolios();
+                __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.error('Borrado Correctamente');
+            });
+        },
+        getPortfolioById: function getPortfolioById(portfolio) {
+            var url = window.location.href = "/portfolio/" + portfolio.id;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url);
+        }
+    }
+
+});
+
+/***/ }),
+/* 189 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c("center", [_c("h2", [_vm._v("Dashboard User")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "card-body col-md-6 offset-md-3" }, [
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  _vm.createPortfolio()
+                }
+              }
+            },
+            [
+              _c("label", { attrs: { for: "titulo" } }, [_vm._v("Titulo")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newPortfolioTitulo,
+                    expression: "newPortfolioTitulo"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", name: "titulo" },
+                domProps: { value: _vm.newPortfolioTitulo },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.newPortfolioTitulo = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "descripcion" } }, [
+                _vm._v("Id usuario")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newUser_id,
+                    expression: "newUser_id"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", name: "user_id" },
+                domProps: { value: _vm.newUser_id },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.newUser_id = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "descripcion" } }, [
+                _vm._v("Descripcion")
+              ]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newPortfolioDescripcion,
+                    expression: "newPortfolioDescripcion"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { rows: "5", name: "descripcion" },
+                domProps: { value: _vm.newPortfolioDescripcion },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.newPortfolioDescripcion = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success btn-sm col-md-2 offset-md-5",
+                  attrs: { type: "submit" }
+                },
+                [_vm._v("Crear")]
+              )
+            ]
+          )
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-ba025000", module.exports)
+  }
+}
+
+/***/ }),
+/* 190 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

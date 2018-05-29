@@ -1,12 +1,11 @@
 <?php
-
+Route::get('/', function(){
+    return view('app');
+});
 
 Route::get('/portf', function () {
     return view('portfolio');
 }); 
-Route::get('projects', function () {
-    return view('proyectos');
-});
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/isEmpleado/{id}', 'UsersController@getRoleUserById');
@@ -123,6 +122,16 @@ Route::post('perfil', 'PerfilController@store');
  */
 Route::put('perfil/{id}', 'PerfilController@update');
 
+
+//PROYECTOS 
+Route::get('projects', function () {
+    return view('proyectos');
+});
+//DETALLE DEL PROYECTO
+Route::get('detailProject', function(){
+    return view('detalleProyecto');
+});
+
 //RUTAS PORTFOLIOS
 Route::resource('portfolios', 'PortfolioController', ['except' => 'create']); //todas las rutas portfolios
 Route::get('portfolios', 'PortfolioController@getPortfolios'); //obtener todos los portfolios
@@ -132,7 +141,7 @@ Route::get('info/{id}', 'PortfolioController@getInfoPortfolio');
 
 //RUTAS PROYECTOS
 Route::resource('proyectos', 'ProyectosController', ['except' => 'create']); //todas las rutas de proyectos
-Route::get('projct/{id}', 'ProyectosController@getProyectosById'); //obtener los proyectos
-
+Route::get('projct/{id}', 'ProyectosController@getProyectosById'); //obtener los proyectos por el id de portfolio
+Route::get('detail/{id}', 'ProyectosController@getDetalleProyectoById'); //obtener los datos de un proyecto con el id de proyecto
 
 
