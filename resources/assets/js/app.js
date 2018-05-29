@@ -11,7 +11,7 @@ Vue.component('detail', require('./components/RenderProyectos.vue'));
 Vue.component('login', require('./components/Login.vue'));
 Vue.component('register', require('./components/Register.vue'));
 //Vue.component('oferta', require('./components/OfertaComponent.vue'));
-Vue.component('dashboardUser', require('./components/userDashboard.vue'))
+//Vue.component('dashboardUser', require('./components/userDashboard.vue'))
 
 const app = new Vue({
     el: '#app',
