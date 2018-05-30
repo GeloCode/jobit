@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     getPerfilByUser: function() {
-      var url = "perfil/" + this.userId;
+      var url = "perfil/usuario/" + this.userId;
       axios.get(url).then(response => {
         this.perfil = response.data;
       });
