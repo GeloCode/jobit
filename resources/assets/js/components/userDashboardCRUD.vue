@@ -1,28 +1,22 @@
 <template>
 
     <div class="container">
-            <center><h2>Los portfolios</h2></center>
-            <div class="row justify-content-between">
-                <div v-for="portfolio in portfolios" :key="portfolio.id" class="card col-md-4">
-                     <div v-for="nombre in nameUser" :key="nombre.id">
-                                        <small><p v-if="portfolio.user_id === nombre.id">Por: <b>{{nombre.name}}</b></p></small> 
-                        </div>
-                    <div class="card-body">
-                        {{nameUser.name}}
-                        <h5 class="card-title" v-text="portfolio.titulo"> </h5>
-                        <p class="card-text" v-text="portfolio.descripcion"> </p>
-                        <a href="#" class="btn btn-danger btn-sm" v-on:click.prevent="deletePortfolio(portfolio)">Borrar</a>
-                        <a class="btn btn-success btn-sm" v-bind:href="'/projects?id=' +portfolio.id">Ver</a>
-                        <div class="col-md-5 offset-md-7">
-                            <small>
-                                {{ since(portfolio.created_at)}}
-                            </small>
-                        </div>
-                        <hr>
-                    </div>
-                    
+            <center><h2>Dashboard User</h2></center>
+             <div class="row">
+                <div class="card-body col-md-6 offset-md-3">
+                        <form v-on:submit.prevent="createPortfolio()">
+                            <label for="titulo">Titulo</label>
+                            <input type="text" v-model="newPortfolioTitulo" class="form-control" name="titulo">
+                            <label for="descripcion">Id usuario</label>
+                            <input type="text" v-model="newUser_id" class="form-control" name="user_id">
+                            <label for="descripcion">Descripcion</label>
+                            <textarea v-model="newPortfolioDescripcion" class="form-control" rows="5" name="descripcion"></textarea>
+                            <hr>
+                            <button type="submit" class="btn btn-success btn-sm col-md-2 offset-md-5">Crear</button>
+                        </form>
                 </div>
-        </div>
+            </div> 
+
     </div>
 
 </template>
