@@ -10,14 +10,16 @@
                                         </div>
                             </div>
                     </div>
-            <center><h2>Proyectosss</h2></center>
+            <center><h2>Proyectosss</h2></center> 
                 <div class="row justify-content-between">
                         
                             <div v-for="proyecto in proyectos" :key="proyecto.id" class="card col-md-4">
                                 <div v-if="proyecto.portfolio_id == portfid">
                                <!-- <p v-if="proyecto.portfolio_id == '3'">-->
                                         <div class="card-body">
-                                            <h4>{{proyecto.titulo}}</h4>
+                                            <h5>{{proyecto.titulo}}</h5>
+                                             <p>{{proyecto.imagen}}</p>
+                                            <p>{{proyecto.descripcion}}</p>
                                             <a class="btn btn-success btn-sm" v-bind:href="'/detailProject?id=' + proyecto.id">Ver</a>
                                         </div>
                                 </div>
