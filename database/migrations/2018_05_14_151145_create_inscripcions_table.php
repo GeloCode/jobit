@@ -19,6 +19,7 @@ class CreateInscripcionsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
             $table->integer('oferta_id')->unsigned();
             $table->foreign('oferta_id')->references('id')->on('ofertas')->onUpdate('cascade');
+            $table->char('estado', 1);
             $table->timestamps();
         });
     }

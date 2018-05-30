@@ -162,9 +162,11 @@ class OfertaController extends Controller
     }
 
     public function getOfertasByInscripcionUser($id){
-        return Oferta::whereIn('id', function ($query) use ($id){
-            $query->select('oferta_id')->from('inscripcions')->where('user_id', '=', $id)
+        return Oferta::whereIn('ofertas.id', function ($query) use ($id){
+            $query->select('oferta_id')
+            ->from('inscripcions')
+            ->where('user_id', '=', $id)
             ->orderBy('created_at', 'DESC');
-        });
+        })->leftJoin('inscripcions', 'ofertas.id', '=', 'inscripcions.oferta_id')->get();
     }
 }

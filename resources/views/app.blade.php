@@ -6,8 +6,9 @@
     </head>
     <body>
         <ul>
-            <li><a href="/vofertas">Ofertas</a></li>
+            <li><a href="/vofertas">Ofertas Solicitante</a></li>
             <li><a href="/vofertasempresa">Ofertas Empresa (Entrar solo con usuario empresa)</a></li>
+            <li><a href="/vinscripcionesolicitante">Inscripciones Solicitante</a></li>
             <li><a href="/vinscripcionesempresa">Inscripciones Empresa (Entrar solo con un usuario de empresa)</a></li>
             <li><a href="/portf">Portfolios usuarios</a></li>
             <li><a href="/dash">User Dashboard (proyectos CRUD)</a></li>
