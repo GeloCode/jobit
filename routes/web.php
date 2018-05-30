@@ -1,6 +1,10 @@
 <?php
 
 
+Route::get('/', function(){
+    return view('app');
+});
+
 Route::get('/portf', function () {
     return view('portfolio');
 }); 
@@ -47,6 +51,13 @@ Route::get('/vinscripcionesempresa', function () {
 });
 
 /**
+ * Temporal para hacer pruebas con las inscrtipciones 
+ */
+Route::get('/vinscripcionesolicitante', function () {
+    return view('vinscripcionesolicitante');
+});
+
+/**
  * Nos devuelve todas las ofertas sin filtar por nada
  */
 Route::get('ofertas', 'OfertaController@index');
@@ -77,6 +88,10 @@ Route::post('oferta', 'OfertaController@store');
  */
 Route::put('oferta/{id}', 'OfertaController@update');
 
+/**
+ * Método que nos devolvera todas las ofertas a las que se ha inscrito un usuario
+ */
+Route::get('ofertas/inscripcion/user/{id}', 'OfertaController@getOfertasByInscripcionUser');
 
 /*************** ROUTINGS PROVINCIAS ***************** */
 /**************************************************** */
@@ -103,6 +118,26 @@ Route::post('inscripcion', 'InscripcionesController@store');
  * Nos devuelve todas las inscripciones para X usuario (Para ver nuestras inscripciones si somos empresa)
  */
 Route::get('inscripciones/usuario/{idUser}', 'InscripcionesController@getInscripcionesByUser');
+
+/**
+ * Borrar la inscripcion de un usuario y esta oferta
+ */
+Route::delete('inscripcion/{id}', 'InscripcionesController@deleteInscripcion');
+
+/**
+ * Borrar la inscripcion de un usuario y esta oferta
+ */
+Route::get('inscripcion/aceptar/{id}', 'InscripcionesController@aceptarInscripcion');
+
+/**
+ * Borrar la inscripcion de un usuario y esta oferta
+ */
+Route::get('inscripcion/rechazar/{id}', 'InscripcionesController@rechazarInscripcion');
+
+/**
+ * Borrar la inscripcion de un usuario y esta oferta
+ */
+Route::get('inscripcion/empresas/{id}', 'InscripcionesController@getInscripcionesEmpresa');
 
 
 /*************** ROUTINGS PERFILES ************** */

@@ -2,6 +2,6 @@
 
 @section('content')
 
-<inscripcion user-id="{{Auth::id()}}"></inscripcion>
+<inscripcion-empresa user-id="{{Auth::id()}}"></inscripcion-empresa>
 
 @endsection

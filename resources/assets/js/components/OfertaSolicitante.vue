@@ -20,7 +20,7 @@
         <div class="input-group mb-3">
             <button class="btn btn-danger" @click.prevent="filtrar()">Filter</button>
         </div>
-        <div class="alert alert-info" role="alert" v-if="ofertas.length == 0">
+        <div class="alert alert-info" role="alert" v-if="ofertas.length == 0 && search">
             <strong>Lo siento!</strong> Ninguna oferta coincide con los valores de búsqueda.
         </div>
         <div class="accordion">
@@ -47,7 +47,7 @@
               <li class="page-item" v-if="pagination.current_page > 1">
                   <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)">Ant</a>
               </li>
-              <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+              <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived && 'active']">
                   <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page"></a>
               </li>
               <li class="page-item" v-if="pagination.current_page < pagination.last_page">
@@ -148,7 +148,8 @@ export default {
       var url = "inscripcion";
       axios.post(url, {
         user_id: this.userId,
-        oferta_id: oferta.id
+        oferta_id: oferta.id,
+        estado: 'D'
       }).
         then(response => {
           this.getOfertas();

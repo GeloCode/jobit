@@ -10,7 +10,7 @@ class Inscripcion extends Model
      * Campos que podremos modificar/inserta el usuario
      */
     protected $fillable = [
-        'user_id', 'oferta_id'
+        'user_id', 'oferta_id', 'estado'
     ];
 
     /**
