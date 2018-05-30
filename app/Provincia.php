@@ -9,7 +9,7 @@ class Provincia extends Model
     /**
      * Hacemos la relación de que una provincia tiene muchos perfiles.
      */
-    public function perfils()
+    public function perfiles()
     {
         return $this->hasMany(Perfil::class);
     }
