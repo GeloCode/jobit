@@ -156,6 +156,7 @@ Route::get('inscripcion/empresas/{id}', 'InscripcionesController@getInscripcione
  * Nos devuelve nuestro perfil (Por el id de usuario)
  */
 Route::get('perfil/usuario/{idUser}', 'PerfilController@getPerfilByUserId');
+Route::get('perfil/lenguajes/{idUser}', 'PerfilController@getLenguajes');
 
 
 /**

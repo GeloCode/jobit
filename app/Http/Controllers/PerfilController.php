@@ -20,9 +20,9 @@ class PerfilController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function getUserName($id)
+    public function getLenguajes($id)
     {
-        return Perfil::where('user_id', $id)->get();
+        return Perfil::where('user_id', $id)->value('lenguajes');
     }
 
     /**
