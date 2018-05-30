@@ -4,7 +4,7 @@
 		<div class="col-md-4">
 			<div class="row">
 				<div class="col-md-12">
-					<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded-circle">
+					<img alt="Bootstrap Image Preview" v-bind:src="profile.imagen" class="rounded-circle">
 				</div>
 			</div>
 			 <a id="perfilForm" href="#perfilForm" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
@@ -42,8 +42,8 @@
 		<div class="col-md-8">
 			<div class="row">
 				<div class="col-md-12">
-					<h2 v-text="perfil.name"></h2>
-					<p v-text="perfil.descripcion"></p>
+					<h2 v-text="profile[0].name"></h2>
+					<p v-text="profile[0].descripcion"></p>
 				</div>
 			</div>
 			<div class="row">
@@ -53,6 +53,7 @@
 			</div>
 		</div>
 	</div>
+	{{profile}}
 </div>
 </template>
 <script>
@@ -62,7 +63,7 @@ export default {
   },
   data: function() {
     return {
-      perfil: {}
+      profile: []
     };
   },
   props: {
@@ -72,7 +73,7 @@ export default {
     getPerfilByUser: function() {
       var url = "perfil/usuario/" + this.userId;
       axios.get(url).then(response => {
-        this.perfil = response.data;
+				this.profile = response.data;
       });
     }
   },

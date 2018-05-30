@@ -13,6 +13,9 @@ Route::get('/dash', function () {
 Route::get('/formulario', function () {
     return view('formularioPortfolio');
 }); 
+Route::get('/perfil', function () {
+    return view('perfil');
+}); 
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/isEmpleado/{id}', 'UsersController@getRoleUserById');
@@ -118,6 +121,7 @@ Route::get('inscripciones/usuario/{idUser}', 'InscripcionesController@getInscrip
  * Nos devuelve nuestro perfil (Por el id de usuario)
  */
 Route::get('perfil/usuario/{idUser}', 'PerfilController@getPerfilByUserId');
+
 
 /**
  * Para crear un perfil

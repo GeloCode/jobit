@@ -15,6 +15,15 @@ class PerfilController extends Controller
     {
         return Perfil::where('user_id', $id)->get();
     }
+      /**
+     * Nos devuelve el nombre del usuario
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getUserName($id)
+    {
+        return Perfil::where('user_id', $id)->get();
+    }
 
     /**
      * Store a newly created resource in storage.
