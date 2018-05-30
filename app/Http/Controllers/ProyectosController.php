@@ -29,6 +29,9 @@ class ProyectosController extends Controller
     public function getProyectosById($id){
         return Proyecto::where('portfolio_id', $id)->get();
     }
+    public function getDetalleProyectoById($id){
+        return Proyecto::where('id', $id)->get();
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -82,6 +85,7 @@ class ProyectosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $proyecto = Proyecto::findOrFail($id);
+        $proyecto -> delete();
     }
 }

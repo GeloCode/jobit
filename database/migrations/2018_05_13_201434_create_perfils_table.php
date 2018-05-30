@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePerfilesTable extends Migration
+class CreatePerfilsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePerfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('perfiles', function (Blueprint $table) {
+        Schema::create('perfils', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
@@ -38,6 +38,6 @@ class CreatePerfilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perfiles');
+        Schema::dropIfExists('perfils');
     }
 }

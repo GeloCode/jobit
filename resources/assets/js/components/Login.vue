@@ -52,9 +52,7 @@
                                 <button type="submit" @click.prevent="loginPost" class="btn btn-primary">
                                     Login
                                 </button>
-
-                                <a class="btn btn-link" href="#">
-                                    
+                                    <a class="btn btn-link" href="#">
                                 </a>
                             </div>
                         </div>
@@ -92,23 +90,7 @@ export default {
           axios.get(redirect);
         })
         .catch(function(error) {
-          var errors = error.response;
-          if (errors.statusText === "Unprocessable Entity") {
-            if (errors.data) {
-              if (errors.data.email) {
-                vm.errorsEmail = true;
-                vm.emailError = _.isArray(errors.data.email)
-                  ? errors.data.email[0]
-                  : errors.data.email;
-              }
-              if (errors.data.password) {
-                vm.errorsPassword = true;
-                vm.passwordError = _.isArray(errors.data.password)
-                  ? errors.data.password[0]
-                  : errors.data.password;
-              }
-            }
-          }
+         toastr.error("Los credenciales no son correctos");
         });
     }
   },

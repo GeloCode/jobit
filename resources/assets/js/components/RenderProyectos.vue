@@ -16,7 +16,7 @@
                }
         },
         created: function () {
-            this.getPortfolios();
+            
         },
         components: {
             proyectos: Proyectos

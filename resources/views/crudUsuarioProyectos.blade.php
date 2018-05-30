@@ -6,9 +6,9 @@
     </head>
     <body>
         <div class="container">
-        <h1>portfolio.blade!!!</h1>
+        <h1>crudUsuarioProyectos.blade!!!</h1>
             <div id="app">
-                <dashboardUser></dashboardUser>
+                <dash hashid="{{ $id=app('request')->input('id') }}"></dash>
             </div>
         </div>
         @include('includes.scripts')
