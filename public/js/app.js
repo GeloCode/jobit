@@ -68664,7 +68664,11 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+<<<<<<< Updated upstream
 Component.options.__file = "resources\\assets\\js\\components\\OfertaSolicitante.vue"
+=======
+Component.options.__file = "resources/assets/js/components/Login.vue"
+>>>>>>> Stashed changes
 
 /* hot reload */
 if (false) {(function () {
@@ -68673,9 +68677,15 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
+<<<<<<< Updated upstream
     hotAPI.createRecord("data-v-39481bdb", Component.options)
   } else {
     hotAPI.reload("data-v-39481bdb", Component.options)
+=======
+    hotAPI.createRecord("data-v-3e2ac97c", Component.options)
+  } else {
+    hotAPI.reload("data-v-3e2ac97c", Component.options)
+>>>>>>> Stashed changes
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -68750,6 +68760,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+<<<<<<< Updated upstream
+=======
+//
+//
+//
+//
+//
+//
+//
+//
+>>>>>>> Stashed changes
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -68902,7 +68923,6 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
     _c("h1", [_vm._v("Ofertas")]),
     _vm._v(" "),
     _c("h1", [_vm._v("Filtros")]),
@@ -69123,45 +69143,6 @@ var render = function() {
                       click: function($event) {
                         _vm.inscribirse(oferta)
                       }
-                    }
-                  },
-                  [_vm._v("Inscribirse")]
-                )
-              ])
-            ]
-          )
-        ])
-      })
-    ),
-    _vm._v(" "),
-    _c("nav", [
-      _c(
-        "ul",
-        { staticClass: "pagination" },
-        [
-          _vm.pagination.current_page > 1
-            ? _c("li", { staticClass: "page-item" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "page-link",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.cambiarPagina(_vm.pagination.current_page - 1)
-                      }
-                    }
-                  },
-                  [_vm._v("Ant")]
-                )
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm._l(_vm.pagesNumber, function(page) {
-            return _c(
-              "li",
-              {
                 key: page,
                 staticClass: "page-item",
                 class: [page == _vm.isActived && "active"]
@@ -69194,36 +69175,6 @@ var render = function() {
                         $event.preventDefault()
                         _vm.cambiarPagina(_vm.pagination.current_page + 1)
                       }
-                    }
-                  },
-                  [_vm._v("Sig")]
-                )
-              ])
-            : _vm._e()
-        ],
-        2
-      )
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-39481bdb", module.exports)
-  }
-}
-
-/***/ }),
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 197 */,
@@ -69404,30 +69355,8 @@ var render = function() {
         })
       )
     ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Titulo")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Estado")]),
-        _vm._v(" "),
-        _c("th", [_vm._v(" ")])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-319cf821", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-3e2ac97c", module.exports)
+>>>>>>> Stashed changes
   }
 }
 
@@ -69466,15 +69395,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-17323677", Component.options)
   } else {
     hotAPI.reload("data-v-17323677", Component.options)
   }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
 module.exports = Component.exports
 
 
@@ -70097,11 +70020,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-38c6b1ea", module.exports)
   }
-}
-
-/***/ }),
 /* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -70127,24 +70046,13 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Perfil.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-144b3603", Component.options)
   } else {
     hotAPI.reload("data-v-144b3603", Component.options)
   }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
 module.exports = Component.exports
 
 
@@ -70383,9 +70291,5 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-144b3603", module.exports)
   }
-}
-
-/***/ })
 /******/ ]);
