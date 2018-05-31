@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light primary">
 <div class="navbar-brand">
-    <a href="#">
+    <a href="{{ url('/') }}">
     <svg version="1.1" id="OTM-Logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" viewBox="-25 -25 -50 -30" enable-background="new -25 -25 0 0" xml:space="preserve">
 	 <!-- Filters -->
    <defs>
