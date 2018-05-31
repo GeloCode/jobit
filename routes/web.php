@@ -3,10 +3,6 @@ Route::get('/', function(){
     return view('app');
 });
 
-Route::get('/', function(){
-    return view('app');
-});
-
 Route::get('/portf', function () {
     return view('portfolio');
 }); 
