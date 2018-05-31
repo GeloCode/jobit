@@ -157,7 +157,6 @@ Route::get('inscripcion/empresas/{id}', 'InscripcionesController@getInscripcione
  */
 Route::get('perfil/usuario/{idUser}', 'PerfilController@getPerfilByUserId');
 Route::get('perfil/lenguajes/{idUser}', 'PerfilController@getLenguajes');
-Route::get('perfil/frameworks/{idUser}', 'PerfilController@getFrameworks');
 
 
 /**
