@@ -23,32 +23,51 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form method="POST">
-									<label for="name">Name</label>
-									<input type="text" name="name">
-									<label for="descripcion">Descripcion</label>
-									<textarea name="descripcion" cols="30" rows="10"></textarea>
-									<label for="provincia">Provincia</label>
-									<select name="provincia" id="">
-										<option value="0"></option>
-									</select>
-									<label for="telefono">Telefono</label>
-									<input type="text" name="telefono">
-									<label for="direccion">Direccion</label>
-									<input type="text" name="direccion">
-									<label for="codigo_postal">Codigo postal</label>
-									<input type="text" name="codigo_postal">
-									<label for="lenguajes">Lenguajes</label>
-									<input type="text" name="lenguajes">
-									<label for="frameworks">Frameworks</label>
-									<input type="text" name="frameworks">
-									<label for="imagen">Imagen</label>
-									<input type="file" name="imagen">
+								<form method="POST" v-on:submit.prevent="createProfile()">
+									<div class="form-group">
+										<input type="text" class="form-control" id="nameInput" aria-describedby="name" placeholder="Nombre">
+										<small id="name" class="form-text text-muted">Ej. Antonio</small>
+									</div>
+									<div class="form-group">
+										<textarea name="descripcion" rows="40"></textarea>
+										<small id="name" class="form-text text-muted">Pequeña descripción del usuario</small>
+									</div>
+									<div class="form-group">
+										<label for="provincia">Example select</label>
+										<select class="form-control" id="provincia" name="provincia">
+											<option>1</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="telefono">Telefono</label>
+										<input type="text" name="telefono">
+									</div>
+									<div class="form-group">
+										<label for="direccion">Direccion</label>
+										<input type="text" name="direccion">
+									</div>
+									<div class="form-group">
+										<label for="codigo_postal">Codigo postal</label>
+										<input type="text" name="codigo_postal">
+									</div>
+									<div class="form-group">
+										<label for="lenguajes">Lenguajes</label>
+										<input type="text" name="lenguajes">
+									</div>
+									<div class="form-group">
+										<label for="frameworks">Frameworks</label>
+										<input type="text" name="frameworks">
+									</div>
+									<div class="form-group">
+										<label for="imagen">Imagen</label>
+										<input type="file" name="imagen">
+									</div>
+									<button type="submit" class="btn btn-primary">Submit</button>
 								</form>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary" v-on:submit.prevent="createProfile()">Save changes</button>
+								<button type="button" class="btn btn-primary">Save changes</button>
 							</div>
 						</div>
 					</div>
