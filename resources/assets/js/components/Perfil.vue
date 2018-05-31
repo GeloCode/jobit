@@ -42,9 +42,12 @@
 		<div class="col-md-8">
 			<div class="row">
 				<div class="col-md-12">
-					<h2 v-text="profile[0].name"></h2>
-					<p v-text="profile[0].descripcion"></p>
-					<span v-for="lenguaje in lenguajesArray" :key="lenguaje" class="badge badge-pill badge-dark" v-text="lenguaje"></span>
+					<!--<h2 v-text="profile[0].name"></h2>
+					<p v-text="profile[0].descripcion"></p> -->
+					<span v-for="lenguaje in lenguajesArray" :key="lenguaje" class="badge badge-pill badge-dark" v-text="lenguaje"></span>					
+				</div>
+				<div class="col-md-12">
+					<span v-for="framework in frameworksArray" :key="framework" class="badge badge-pill badge-dark" v-text="framework"></span>
 				</div>
 			</div>
 			<div class="row">
@@ -59,14 +62,16 @@
 </template>
 <script>
 export default {
-    created: function() {
-		this.getPerfilByUser();
-		this.splitLenguajes();
+  created: function() {
+    this.getPerfilByUser();
   },
   data: function() {
     return {
-			profile: [],
-			lenguajesArray: []
+      profile: {},
+      lenguajesArray: [],
+      lenguajes: "",
+      frameworksArray: [],
+      frameworks: "",
     };
   },
   props: {
@@ -76,20 +81,11 @@ export default {
     getPerfilByUser: function() {
       var url = "perfil/usuario/" + this.userId;
       axios.get(url).then(response => {
-				this.profile = response.data;
+		this.profile = response.data;
+		this.lenguajesArray = this.profile.lenguajes.split(",");
+        this.frameworksArray = this.profile.frameworks.split(",");
       });
-		},
-		splitLenguajes: function(){
-			var url = "perfil/lenguajes/" + this.userId;
-			console.log("aaaaaaaaaaaaaaaaaaaaaaaaa "+this.lenguajesArray);
-			this.lenguajesArray = axios.get(url).then(response => {
-				this.lenguajesArray = response.data;
-				console.log(lenguajesArray);
-			});
-			console.log(typeof this.lenguajesArray);
-			this.lenguajesArray = this.lenguajesArray.split(" ");
-		}
-  },
-  
+    },
+  }
 };
 </script>
