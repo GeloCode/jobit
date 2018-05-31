@@ -29,7 +29,7 @@
 										<small id="name" class="form-text text-muted">Ej. Antonio</small>
 									</div>
 									<div class="form-group">
-										<textarea name="descripcion" rows="40"></textarea>
+										<textarea name="descripcion" rows="4" cols="60"></textarea>
 										<small id="name" class="form-text text-muted">Pequeña descripción del usuario</small>
 									</div>
 									<div class="form-group">
@@ -80,9 +80,12 @@
 			<div class="col-md-8">
 				<div class="row">
 					<div class="col-md-12">
-						<h2 v-text="profile[0].name"></h2>
-						<p v-text="profile[0].descripcion"></p>
+						<h2 v-text="profile.name"></h2>
+						<p v-text="profile.descripcion"></p>
 						<span v-for="lenguaje in lenguajesArray" :key="lenguaje" class="badge badge-pill badge-dark" v-text="lenguaje"></span>
+					</div>
+					<div class="col-md-12">
+						<span v-for="framework in frameworksArray" :key="framework" class="badge badge-pill badge-dark" v-text="framework"></span>
 					</div>
 				</div>
 				<div class="row">
@@ -92,20 +95,24 @@
 				</div>
 			</div>
 		</div>
+		{{profile}}
 	</div>
 </template>
 <script>
 	export default {
 		created: function () {
 			this.getPerfilByUser();
-			this.splitLenguajes();
 		},
 		data: function () {
 			return {
-				profile: [],
-				lenguajesArray: []
-			};
-		},
+				profile: {
+				},
+				lenguajesArray: [],
+				lenguajes: "",
+				frameworksArray: [],
+				frameworks: ""
+				};
+			},
 		props: {
 			userId: String
 		},
@@ -114,17 +121,9 @@
 				var url = "perfil/usuario/" + this.userId;
 				axios.get(url).then(response => {
 					this.profile = response.data;
+					this.lenguajesArray = this.profile.lenguajes.split(",");
+					this.frameworksArray = this.profile.frameworks.split(",");
 				});
-			},
-			splitLenguajes: function () {
-				var url = "perfil/lenguajes/" + this.userId;
-				console.log("aaaaaaaaaaaaaaaaaaaaaaaaa " + this.lenguajesArray);
-				this.lenguajesArray = axios.get(url).then(response => {
-					this.lenguajesArray = response.data;
-					console.log(lenguajesArray);
-				});
-				console.log(typeof this.lenguajesArray);
-				this.lenguajesArray = this.lenguajesArray.split(" ");
 			}
 		}
 	};
