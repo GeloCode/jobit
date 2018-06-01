@@ -33,9 +33,9 @@
 										<small id="name" class="form-text text-muted">Pequeña descripción del usuario</small>
 									</div>
 									<div class="form-group">
-										<label for="provincia">Example select</label>
-										<select class="form-control" id="provincia" name="provincia">
-											<option>1</option>
+										<select class="custom-select mb-1" name="selectProvincia" v-model="provinciaId">
+											<option value="0">Elige tu Provincia</option>
+											<option v-for="provincia in provincias" :key="provincia.id" :value="provincia.id" v-text="provincia.nombre"></option>
 										</select>
 									</div>
 									<div class="form-group">
@@ -102,17 +102,30 @@
 	export default {
 		created: function () {
 			this.getPerfilByUser();
+			this.getProvincias();
 		},
 		data: function () {
 			return {
-				profile: {
+				provincias:[],
+				profile: {},
+				profileData: {
+					name: "",
+					descripcion: "",
+					telefono: "",
+					direccion: "",
+					codigo_postal: "",
+					lenguajes: "",
+					frameworks: "",
+					imagen: "",
+					user_id: this.userId
 				},
 				lenguajesArray: [],
 				lenguajes: "",
 				frameworksArray: [],
-				frameworks: ""
-				};
-			},
+				frameworks: "",
+				provinciaId: 0,
+			};
+		},
 		props: {
 			userId: String
 		},
@@ -123,6 +136,18 @@
 					this.profile = response.data;
 					this.lenguajesArray = this.profile.lenguajes.split(",");
 					this.frameworksArray = this.profile.frameworks.split(",");
+				});
+			},
+			createProfile: function () {
+				axios.post("perfil/store", this.profileData).then(function (response) {
+				}).catch(function (error) {
+						toastr.error(error);
+					});
+			},
+			getProvincias: function () {
+				var url = "provincias";
+				axios.get(url).then(response => {
+					this.provincias = response.data;
 				});
 			}
 		}
