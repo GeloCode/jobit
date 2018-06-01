@@ -1,33 +1,27 @@
 <template>
-    <div class="container">
-            <div class="row justify-content-between">
-                        
-                            <div v-for="portfolio in infoPortfolio" :key="portfolio.id" class="card col-md-12">
-                                
-                                        <div class="card-body">
-                                            <center><h4>{{portfolio.titulo}}</h4></center>
-                                            <center><p>{{portfolio.text}}</p></center>
-                                        </div>
-                            </div>
-                    </div>
-            <center><h2>Dashboard User</h2></center> 
-                <div class="row justify-content-between">
-                        
-                            <div v-for="proyecto in proyectos" :key="proyecto.id" class="card col-md-4">
-                                <div v-if="proyecto.portfolio_id == portfid">
-                               <!-- <p v-if="proyecto.portfolio_id == '3'">-->
-                                        <div class="card-body">
-                                            <h5>{{proyecto.titulo}}</h5>
-                                             <p>{{proyecto.imagen}}</p>
-                                            <p>{{proyecto.descripcion}}</p>
-                                            <a class="btn btn-success btn-sm" v-bind:href="'/detailProject?id=' + proyecto.id">Ver</a>
-                                        </div>
-                                </div>
-                            </div>
-                    </div>
+<div>
+<div v-if="authid">
+    <div>
+        <form method="POST" v-on:submit.prevent="createPortfolio()">
 
+                <label for="number">Id Perfil</label>
+                <input type="text" name="number" maxlength="3" class="form-control" v-model="newPerfilId" disabled>
+                <label for="number">Titulo</label>
+                <input type="text" name="text" maxlength="45" class="form-control" v-model="newTitle">
+                <!-- <input type="text" name="text" maxlength="9" class="form-control" v-model="newDescription">
+                <input type="submit" class="btn btn-primary" value="Crear Portfolio"> -->
+                <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Descripcion Portfolio</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="newDescription"></textarea>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Crear Portfolio">
+        </form>
     </div>
+</div>
+<div v-else><h2>Inicia Sesion Primero!  <a class="btn btn-warning btn-sm" v-bind:href="'/login'">Log In</a></h2></div>
+</div>
 </template>
+
 
 
 

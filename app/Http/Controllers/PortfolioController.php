@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Portfolio;
 use App\User;
+use App\Perfil;
 class PortfolioController extends Controller
 {
     /**
@@ -46,6 +47,12 @@ class PortfolioController extends Controller
     public function getInfoPortfolio($id_seleccionado){
         return Portfolio::where('id', $id_seleccionado)->get();
     }
+    public function getPortfIdJoint($id_perfil){
+       return Portfolio::where('perfil_id', function ($query) use ($id_perfil) {
+            $query->select('perfil_id')->from('perfils')->where('user_id', '=', $id_perfil);
+       })->select('id')->first();
+    }
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -55,9 +62,9 @@ class PortfolioController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'perfil_id' => 'required',
             'titulo' => 'required',
-            'user_id' => 'required',
-            'descripcion' => 'required'
+            'text' => 'required'
         ]);
         Portfolio::create($request->all());
         return;
