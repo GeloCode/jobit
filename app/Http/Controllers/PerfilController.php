@@ -13,7 +13,7 @@ class PerfilController extends Controller
      */
     public function getPerfilByUserId($id)
     {
-        return Perfil::where('user_id', $id)->get();
+        return Perfil::where('user_id', $id)->first();
     }
       /**
      * Nos devuelve el nombre del usuario
@@ -23,6 +23,15 @@ class PerfilController extends Controller
     public function getLenguajes($id)
     {
         return Perfil::where('user_id', $id)->value('lenguajes');
+    }
+      /**
+     * Nos devuelve el nombre del usuario
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getFrameworks($id)
+    {
+        return Perfil::where('user_id', $id)->value('frameworks');
     }
 
     /**
