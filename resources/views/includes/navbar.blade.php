@@ -53,28 +53,29 @@
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      @if (Auth::check() || !Auth::user()->isEmpresa())
+      @if (!Auth::check() || !Auth::user()->isEmpresa())
       <li class="nav-item">
         <a class="nav-link" href="/vofertas">Ofertas</a>
       </li>
+      @endif
+
+      @if (!Auth::user()->isEmpresa())
       <li class="nav-item">
-        <a class="nav-link" href="/vinscripcionesolicitante">Inscripciones Solicitante</a>
+        <a class="nav-link" href="/vinscripcionesolicitante">Tus inscripciones</a>
       </li>
       @endif
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu primary" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+
+      @if (Auth::user()->isEmpresa())
+      <li class="nav-item">
+        <a class="nav-link" href="/vofertasempresa">Tus Ofertas (Ofertas Empresa)</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a class="nav-link" href="/vinscripcionesempresa">Solicitantes</a>
+      </li>  
+      @endif
+      
+      <li class="nav-item">
+        <a class="nav-link" href="/portf">Portfolios usuarios</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">

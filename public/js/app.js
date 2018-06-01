@@ -68018,11 +68018,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "container" },
     [
       _vm.mensajeNingunaOferta
         ? _c(
             "div",
-            { staticClass: "alert alert-info", attrs: { role: "alert" } },
+            { staticClass: "alert alert-info mt-2", attrs: { role: "alert" } },
             [
               _c("strong", [_vm._v("Vigila! " + _vm._s(_vm.userId))]),
               _vm._v(
@@ -68032,7 +68033,7 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "input-group" }, [
+      _c("div", { staticClass: "input-group mt-4" }, [
         _c("input", {
           directives: [
             {

@@ -11,13 +11,6 @@ Route::get('/dash', function () {
     return view('crudUsuarioProyectos');
 }); 
 
-/**
- * Temporal para hacer pruebas con las ofertas 
- */
-Route::get('/vofertas', function () {
-    return view('vofertas');
-});
-
 
 /**
  * Temporal para hacer pruebas con las inscrtipciones 
@@ -35,7 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Formulario para hacer un protfolio
     Route::get('/formulario', function () {
         return view('formularioPortfolio');
-    });  
+    });
 });
 
 Route::group(['middleware' => 'isEmpresa'], function () {

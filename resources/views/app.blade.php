@@ -18,12 +18,6 @@
 
      <ul>
         <li>
-            <a href="/vofertasempresa">Ofertas Empresa (Entrar solo con usuario empresa)</a>
-        </li>
-        <li>
-            <a href="/vinscripcionesempresa">Inscripciones Empresa (Entrar solo con un usuario de empresa)</a>
-        </li>
-        <li>
             <a href="/portf">Portfolios usuarios</a>
         </li>
         <li>
