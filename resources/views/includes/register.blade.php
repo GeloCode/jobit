@@ -10,7 +10,7 @@
                <div class="input-group mb-3">
                   <div class="input-group-prepend">
                      <span class="input-group-text">
-                     <i class="fas fa-user"></i>
+                     <i class="fa fa-user"></i>
                      </span>
                   </div>
                   <input class="form-control" placeholder="Username" name="usuario" type="text">
@@ -18,7 +18,7 @@
                <div class="input-group mb-3">
                   <div class="input-group-prepend">
                      <span class="input-group-text">
-                     <i class="fas fa-at"></i>
+                     <i class="fa fa-at"></i>
                      </span>
                   </div>
                   <input class="form-control" placeholder="Email" name="correo" type="text">
@@ -26,7 +26,7 @@
                <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                    <i class="fas fa-map-marker"></i>
+                    <i class="fa fa-map-marker"></i>
                     </span>
                   </div>
                     <select class="custom-select" id="inputGroupSelect01">
@@ -39,7 +39,7 @@
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                        <i class="fas fa-user-tag"></i>
+                        <i class="fa fa-user-tag"></i>
                     </span>
                   </div>
                     <select class="custom-select" id="inputGroupSelect01">
@@ -51,7 +51,7 @@
                <div class="input-group mb-3">
                   <div class="input-group-prepend">
                      <span class="input-group-text">
-                     <i class="fas fa-lock"></i>
+                     <i class="fa fa-lock"></i>
                      </span>
                   </div>
                   <input class="form-control" placeholder="Password" type="password">
@@ -59,7 +59,7 @@
                <div class="input-group mb-4">
                   <div class="input-group-prepend">
                      <span class="input-group-text">
-                     <i class="fas fa-lock"></i>
+                     <i class="fa fa-lock"></i>
                      </span>
                   </div>
                   <input class="form-control" placeholder="Repeat password" type="password">

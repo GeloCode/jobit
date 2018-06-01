@@ -67385,6 +67385,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var url = "rol/getRoles";
       axios.get(url).then(function (response) {
         _this2.roles = response.data;
+        console.log(_this2.roles);
       }).catch(function (error) {
         console.log(error);
       });
@@ -68017,11 +68018,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "container" },
     [
       _vm.mensajeNingunaOferta
         ? _c(
             "div",
-            { staticClass: "alert alert-info", attrs: { role: "alert" } },
+            { staticClass: "alert alert-info mt-2", attrs: { role: "alert" } },
             [
               _c("strong", [_vm._v("Vigila! " + _vm._s(_vm.userId))]),
               _vm._v(
@@ -68031,7 +68033,7 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "input-group" }, [
+      _c("div", { staticClass: "input-group mt-4" }, [
         _c("input", {
           directives: [
             {
@@ -68920,7 +68922,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "container" }, [
     _c("h1", [_vm._v("Ofertas")]),
     _vm._v(" "),
     _c("h1", [_vm._v("Filtros")]),
@@ -69133,18 +69135,20 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-block btn-primary",
-                    on: {
-                      click: function($event) {
-                        _vm.inscribirse(oferta)
-                      }
-                    }
-                  },
-                  [_vm._v("Inscribirse")]
-                )
+                _vm.userId
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-block btn-primary",
+                        on: {
+                          click: function($event) {
+                            _vm.inscribirse(oferta)
+                          }
+                        }
+                      },
+                      [_vm._v("Inscribirse")]
+                    )
+                  : _vm._e()
               ])
             ]
           )
@@ -69332,6 +69336,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var url = "ofertas/inscripcion/user/" + this.userId;
       axios.get(url).then(function (response) {
         _this.ofertas = response.data;
+        console.log(_this.ofertas);
       });
     },
     eliminarInscripcion: function eliminarInscripcion(id) {
@@ -69489,6 +69494,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -69699,6 +69705,15 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { href: "/projects?id=" + inscOferta.user_id }
+                  },
+                  [_vm._v("Ver Portfolio")]
+                ),
+                _vm._v(" "),
                 inscOferta.estado != "A"
                   ? _c(
                       "button",
@@ -70183,8 +70198,10 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
+//
+//
+//
+//
 //
 //
 //
@@ -70285,12 +70302,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* harmony default export */ __webpack_exports__["default"] = ({
 	created: function created() {
 		this.getPerfilByUser();
-		this.splitLenguajes();
 	},
 	data: function data() {
 		return {
-			profile: [],
-			lenguajesArray: []
+			profile: {},
+			lenguajesArray: [],
+			lenguajes: "",
+			frameworksArray: [],
+			frameworks: ""
 		};
 	},
 	props: {
@@ -70303,19 +70322,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 			var url = "perfil/usuario/" + this.userId;
 			axios.get(url).then(function (response) {
 				_this.profile = response.data;
+				_this.lenguajesArray = _this.profile.lenguajes.split(",");
+				_this.frameworksArray = _this.profile.frameworks.split(",");
 			});
-		},
-		splitLenguajes: function splitLenguajes() {
-			var _this2 = this;
-
-			var url = "perfil/lenguajes/" + this.userId;
-			console.log("aaaaaaaaaaaaaaaaaaaaaaaaa " + this.lenguajesArray);
-			this.lenguajesArray = axios.get(url).then(function (response) {
-				_this2.lenguajesArray = response.data;
-				console.log(lenguajesArray);
-			});
-			console.log(_typeof(this.lenguajesArray));
-			this.lenguajesArray = this.lenguajesArray.split(" ");
 		}
 	}
 });
@@ -70432,12 +70441,10 @@ var render = function() {
             "div",
             { staticClass: "col-md-12" },
             [
-              _c("h2", {
-                domProps: { textContent: _vm._s(_vm.profile[0].name) }
-              }),
+              _c("h2", { domProps: { textContent: _vm._s(_vm.profile.name) } }),
               _vm._v(" "),
               _c("p", {
-                domProps: { textContent: _vm._s(_vm.profile[0].descripcion) }
+                domProps: { textContent: _vm._s(_vm.profile.descripcion) }
               }),
               _vm._v(" "),
               _vm._l(_vm.lenguajesArray, function(lenguaje) {
@@ -70449,12 +70456,25 @@ var render = function() {
               })
             ],
             2
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-md-12" },
+            _vm._l(_vm.frameworksArray, function(framework) {
+              return _c("span", {
+                key: framework,
+                staticClass: "badge badge-pill badge-dark",
+                domProps: { textContent: _vm._s(framework) }
+              })
+            })
           )
         ]),
         _vm._v(" "),
         _vm._m(12)
       ])
-    ])
+    ]),
+    _vm._v("\n\t" + _vm._s(_vm.profile) + "\n")
   ])
 }
 var staticRenderFns = [
@@ -70510,7 +70530,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
-      _c("textarea", { attrs: { name: "descripcion", rows: "40" } }),
+      _c("textarea", { attrs: { name: "descripcion", rows: "4", cols: "60" } }),
       _vm._v(" "),
       _c(
         "small",

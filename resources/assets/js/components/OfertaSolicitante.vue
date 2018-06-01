@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1>Ofertas</h1>
         <h1>Filtros</h1>
         <div class="input-group">
@@ -37,7 +37,7 @@
                 <p class="card-text" v-text="oferta.descripcion"></p>
                 <p class="card-text" v-text="'Sueldo '+ oferta.sueldo_desde + '€ - ' + oferta.sueldo_hasta + '€ Bruto/año'"></p>
                 <p class="card-text" v-text="'Vacantes ' + oferta.vacantes"></p>
-                <button class="btn btn-block btn-primary" v-on:click="inscribirse(oferta)">Inscribirse</button>
+                <button class="btn btn-block btn-primary" v-on:click="inscribirse(oferta)" v-if="userId">Inscribirse</button>
               </div>
             </div>
           </div>   

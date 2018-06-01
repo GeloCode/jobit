@@ -15,24 +15,6 @@ class PerfilController extends Controller
     {
         return Perfil::where('user_id', $id)->first();
     }
-      /**
-     * Nos devuelve el nombre del usuario
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getLenguajes($id)
-    {
-        return Perfil::where('user_id', $id)->value('lenguajes');
-    }
-      /**
-     * Nos devuelve el nombre del usuario
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getFrameworks($id)
-    {
-        return Perfil::where('user_id', $id)->value('frameworks');
-    }
 
     /**
      * Store a newly created resource in storage.

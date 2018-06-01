@@ -9,7 +9,7 @@
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
-                                    <i class="fas fa-user"></i>
+                                    <i class="fa fa-user"></i>
                                 </span>
                             </div>
                             
@@ -21,7 +21,7 @@
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
-                                    <i class="fas fa-lock"></i>
+                                    <i class="fa fa-lock"></i>
                                 </span>
                             </div>
                             <input id="password" type="password" class="form-control" v-model="loginDetails.password" name="password" required>

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -79,5 +80,10 @@ class User extends Authenticatable
     public function portfolios()
     {
         return $this->hasMany(Portfolio::class);
+    }
+
+    /** An user who is authenticated but it is not an admin  */
+    public function isEmpresa(){
+        return (User::find(Auth::id())->rol_id == 1);
     }
 }
