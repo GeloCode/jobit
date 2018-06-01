@@ -68831,27 +68831,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this2.oferta = response.data;
       });
     },
-    addOferta: function addOferta(oferta) {
-      var _this3 = this;
-
-      var url = "oferta";
-      axios.post(url, {
-        user_id: this.userId,
-        provincia_id: this.oferta.provincia_id,
-        titulo: this.oferta.titulo,
-        descripcion: this.oferta.descripcion,
-        vacantes: this.oferta.vacantes,
-        sueldo_desde: this.oferta.sueldo_desde,
-        sueldo_hasta: this.oferta.sueldo_hasta
-      }).then(function (response) {
-        _this3.getOfertas();
-        _this3.oferta = {};
-      }).catch(function (error) {
-        _this3.errors = error.response.data;
-      });
-    },
     inscribirse: function inscribirse(oferta) {
-      var _this4 = this;
+      var _this3 = this;
 
       var url = "inscripcion";
       axios.post(url, {
@@ -68859,16 +68840,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         oferta_id: oferta.id,
         estado: 'D'
       }).then(function (response) {
-        _this4.getOfertas();
+        _this3.getOfertas();
         toastr.success("Te has inscrito a esta oferta con éxito!");
       });
     },
     getProvincias: function getProvincias() {
-      var _this5 = this;
+      var _this4 = this;
 
       var url = "provincias";
       axios.get(url).then(function (response) {
-        _this5.provincias = response.data;
+        _this4.provincias = response.data;
       });
     },
     cambiarPagina: function cambiarPagina(page) {

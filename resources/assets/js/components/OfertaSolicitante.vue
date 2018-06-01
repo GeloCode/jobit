@@ -124,26 +124,6 @@ export default {
         this.oferta = response.data;
       });
     },
-    addOferta: function(oferta) {
-      var url = "oferta";
-      axios
-        .post(url, {
-          user_id: this.userId,
-          provincia_id: this.oferta.provincia_id,
-          titulo: this.oferta.titulo,
-          descripcion: this.oferta.descripcion,
-          vacantes: this.oferta.vacantes,
-          sueldo_desde: this.oferta.sueldo_desde,
-          sueldo_hasta: this.oferta.sueldo_hasta
-        })
-        .then(response => {
-          this.getOfertas();
-          this.oferta = {};
-        })
-        .catch(error => {
-          this.errors = error.response.data;
-        });
-    },
     inscribirse: function(oferta) {
       var url = "inscripcion";
       axios.post(url, {

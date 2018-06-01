@@ -49,31 +49,30 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/home">Home
-          <span class="sr-only">(current)</span>
-        </a>
+        <a class="nav-link" href="/home">Home</a>
       </li>
+
       @if (!Auth::check() || !Auth::user()->isEmpresa())
       <li class="nav-item">
         <a class="nav-link" href="/vofertas">Ofertas</a>
       </li>
       @endif
-
-      @if (!Auth::user()->isEmpresa())
-      <li class="nav-item">
-        <a class="nav-link" href="/vinscripcionesolicitante">Tus inscripciones</a>
-      </li>
+      @if (Auth::check())
+        @if (!Auth::user()->isEmpresa())
+        
+        <li class="nav-item">
+          <a class="nav-link" href="/vinscripcionesolicitante">Tus inscripciones</a>
+        </li>
+        @endif
+        @if (Auth::user()->isEmpresa())
+        <li class="nav-item">
+          <a class="nav-link" href="/vofertasempresa">Tus Ofertas (Ofertas Empresa)</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/vinscripcionesempresa">Solicitantes</a>
+        </li>  
+        @endif
       @endif
-
-      @if (Auth::user()->isEmpresa())
-      <li class="nav-item">
-        <a class="nav-link" href="/vofertasempresa">Tus Ofertas (Ofertas Empresa)</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/vinscripcionesempresa">Solicitantes</a>
-      </li>  
-      @endif
-      
       <li class="nav-item">
         <a class="nav-link" href="/portf">Portfolios usuarios</a>
       </li>
