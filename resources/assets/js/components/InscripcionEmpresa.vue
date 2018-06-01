@@ -21,6 +21,7 @@
                     <td v-text="inscOferta.estado == 'D' ? 'Pendiente por Gestionar' 
                     : inscOferta.estado == 'A' ? 'Aceptado' : 'Rechazado'"></td>
                     <td>
+                        <a  class="btn btn-primary" v-bind:href="'/projects?id=' + inscOferta.user_id">Ver Portfolio</a>
                         <button class="btn btn-primary" @click.prevent="aceptarInscripcion(inscOferta.id)" 
                         v-if="inscOferta.estado != 'A'">Aceptar</button>
                         <button class="btn btn-danger" @click.prevent="rechazarInscripcion(inscOferta.id)"

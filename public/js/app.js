@@ -69331,6 +69331,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var url = "ofertas/inscripcion/user/" + this.userId;
       axios.get(url).then(function (response) {
         _this.ofertas = response.data;
+        console.log(_this.ofertas);
       });
     },
     eliminarInscripcion: function eliminarInscripcion(id) {
@@ -69488,6 +69489,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -69698,6 +69700,15 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { href: "/projects?id=" + inscOferta.user_id }
+                  },
+                  [_vm._v("Ver Portfolio")]
+                ),
+                _vm._v(" "),
                 inscOferta.estado != "A"
                   ? _c(
                       "button",

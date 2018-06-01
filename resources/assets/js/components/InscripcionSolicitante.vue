@@ -41,6 +41,7 @@ export default {
       var url = "ofertas/inscripcion/user/" + this.userId;
       axios.get(url).then(response => {
         this.ofertas = response.data;
+        console.log(this.ofertas);
       });
     },
     eliminarInscripcion: function(id){
