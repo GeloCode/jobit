@@ -66939,34 +66939,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      loginDetails: {
-        email: "",
-        password: "",
-        remember: true
-      },
-      errorsEmail: false,
-      errorsPassword: false,
-      emailError: null,
-      passwordError: null
-    };
-  },
+    data: function data() {
+        return {
+            loginDetails: {
+                email: "",
+                password: "",
+                remember: true
+            },
+            errorsEmail: false,
+            errorsPassword: false,
+            emailError: null,
+            passwordError: null
+        };
+    },
 
-  methods: {
-    loginPost: function loginPost() {
-      var vm = this;
-      axios.post("/login", vm.loginDetails).then(function (response) {
-        var redirect = window.location.href = "/home";
-        axios.get(redirect);
-      }).catch(function (error) {
-        toastr.error("Los credenciales no son correctos");
-      });
-    }
-  },
-  mounted: function mounted() {}
+    methods: {
+        loginPost: function loginPost() {
+            var vm = this;
+            axios.post("/login", vm.loginDetails).then(function (response) {
+                var redirect = window.location.href = "/home";
+                axios.get(redirect);
+            }).catch(function (error) {
+                toastr.error("Los credenciales no son correctos");
+            });
+        }
+    },
+    mounted: function mounted() {}
 });
 
 /***/ }),
@@ -67111,7 +67112,7 @@ var render = function() {
                         }
                       }
                     }),
-                    _vm._v(" Remember Me\n                                    ")
+                    _vm._v(" Remember Me\n                                ")
                   ])
                 ])
               ]),
@@ -67187,7 +67188,7 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("p", [
               _vm._v(
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut\n                                labore et dolore magna aliqua."
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt\n                                ut labore et dolore magna aliqua."
               )
             ]),
             _vm._v(" "),
@@ -67384,6 +67385,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var url = "rol/getRoles";
       axios.get(url).then(function (response) {
         _this2.roles = response.data;
+        console.log(_this2.roles);
       }).catch(function (error) {
         console.log(error);
       });
@@ -68919,7 +68921,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "container" }, [
     _c("h1", [_vm._v("Ofertas")]),
     _vm._v(" "),
     _c("h1", [_vm._v("Filtros")]),
@@ -69132,18 +69134,20 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-block btn-primary",
-                    on: {
-                      click: function($event) {
-                        _vm.inscribirse(oferta)
-                      }
-                    }
-                  },
-                  [_vm._v("Inscribirse")]
-                )
+                _vm.userId
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-block btn-primary",
+                        on: {
+                          click: function($event) {
+                            _vm.inscribirse(oferta)
+                          }
+                        }
+                      },
+                      [_vm._v("Inscribirse")]
+                    )
+                  : _vm._e()
               ])
             ]
           )
@@ -70255,35 +70259,73 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  created: function created() {
-    this.getPerfilByUser();
-  },
-  data: function data() {
-    return {
-      profile: {},
-      lenguajesArray: [],
-      lenguajes: "",
-      frameworksArray: [],
-      frameworks: ""
-    };
-  },
-  props: {
-    userId: String
-  },
-  methods: {
-    getPerfilByUser: function getPerfilByUser() {
-      var _this = this;
+	created: function created() {
+		this.getPerfilByUser();
+	},
+	data: function data() {
+		return {
+			profile: {},
+			lenguajesArray: [],
+			lenguajes: "",
+			frameworksArray: [],
+			frameworks: ""
+		};
+	},
+	props: {
+		userId: String
+	},
+	methods: {
+		getPerfilByUser: function getPerfilByUser() {
+			var _this = this;
 
-      var url = "perfil/usuario/" + this.userId;
-      axios.get(url).then(function (response) {
-        _this.profile = response.data;
-        _this.lenguajesArray = _this.profile.lenguajes.split(",");
-        _this.frameworksArray = _this.profile.frameworks.split(",");
-      });
-    }
-  }
+			var url = "perfil/usuario/" + this.userId;
+			axios.get(url).then(function (response) {
+				_this.profile = response.data;
+				_this.lenguajesArray = _this.profile.lenguajes.split(",");
+				_this.frameworksArray = _this.profile.frameworks.split(",");
+			});
+		}
+	}
 });
 
 /***/ }),
@@ -70307,22 +70349,89 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c(
-          "a",
+          "button",
           {
-            staticClass: "btn",
+            staticClass: "btn btn-primary",
             attrs: {
-              id: "perfilForm",
-              href: "#perfilForm",
-              role: "button",
-              "data-toggle": "modal"
+              type: "button",
+              "data-toggle": "modal",
+              "data-target": "#exampleModal"
             }
           },
-          [_vm._v("Launch demo modal")]
+          [_vm._v("\n\t\t\t\tLaunch demo modal\n\t\t\t")]
         ),
         _vm._v(" "),
-        _vm._m(0),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "exampleModal",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "modal-dialog", attrs: { role: "document" } },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "form",
+                      {
+                        attrs: { method: "POST" },
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            _vm.createProfile()
+                          }
+                        }
+                      },
+                      [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _vm._m(3),
+                        _vm._v(" "),
+                        _vm._m(4),
+                        _vm._v(" "),
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _vm._m(6),
+                        _vm._v(" "),
+                        _vm._m(7),
+                        _vm._v(" "),
+                        _vm._m(8),
+                        _vm._v(" "),
+                        _vm._m(9),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Submit")]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(10)
+                ])
+              ]
+            )
+          ]
+        ),
         _vm._v(" "),
-        _vm._m(1)
+        _vm._m(11)
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-8" }, [
@@ -70330,13 +70439,22 @@ var render = function() {
           _c(
             "div",
             { staticClass: "col-md-12" },
-            _vm._l(_vm.lenguajesArray, function(lenguaje) {
-              return _c("span", {
-                key: lenguaje,
-                staticClass: "badge badge-pill badge-dark",
-                domProps: { textContent: _vm._s(lenguaje) }
+            [
+              _c("h2", { domProps: { textContent: _vm._s(_vm.profile.name) } }),
+              _vm._v(" "),
+              _c("p", {
+                domProps: { textContent: _vm._s(_vm.profile.descripcion) }
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.lenguajesArray, function(lenguaje) {
+                return _c("span", {
+                  key: lenguaje,
+                  staticClass: "badge badge-pill badge-dark",
+                  domProps: { textContent: _vm._s(lenguaje) }
+                })
               })
-            })
+            ],
+            2
           ),
           _vm._v(" "),
           _c(
@@ -70352,7 +70470,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm._m(2)
+        _vm._m(12)
       ])
     ]),
     _vm._v("\n\t" + _vm._s(_vm.profile) + "\n")
@@ -70363,69 +70481,162 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Modal title")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("input", {
+        staticClass: "form-control",
         attrs: {
-          id: "perfilForm",
-          role: "dialog",
-          "aria-labelledby": "modalForm",
-          "aria-hidden": "true"
+          type: "text",
+          id: "nameInput",
+          "aria-describedby": "name",
+          placeholder: "Nombre"
         }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h5",
-                  { staticClass: "modal-title", attrs: { id: "modalForm" } },
-                  [_vm._v("\n\t\t\t\t\t\t\t\tModal title\n\t\t\t\t\t\t\t")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _vm._v("\n\t\t\t\t\t\t\t...\n\t\t\t\t\t\t")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  { staticClass: "btn btn-primary", attrs: { type: "button" } },
-                  [_vm._v("\n\t\t\t\t\t\t\t\tSave changes\n\t\t\t\t\t\t\t")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("\n\t\t\t\t\t\t\t\tClose\n\t\t\t\t\t\t\t")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+      }),
+      _vm._v(" "),
+      _c(
+        "small",
+        { staticClass: "form-text text-muted", attrs: { id: "name" } },
+        [_vm._v("Ej. Antonio")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("textarea", { attrs: { name: "descripcion", rows: "4", cols: "60" } }),
+      _vm._v(" "),
+      _c(
+        "small",
+        { staticClass: "form-text text-muted", attrs: { id: "name" } },
+        [_vm._v("Pequeña descripción del usuario")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "provincia" } }, [_vm._v("Example select")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass: "form-control",
+          attrs: { id: "provincia", name: "provincia" }
+        },
+        [_c("option", [_vm._v("1")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "telefono" } }, [_vm._v("Telefono")]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "text", name: "telefono" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "direccion" } }, [_vm._v("Direccion")]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "text", name: "direccion" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "codigo_postal" } }, [
+        _vm._v("Codigo postal")
+      ]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "text", name: "codigo_postal" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "lenguajes" } }, [_vm._v("Lenguajes")]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "text", name: "lenguajes" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "frameworks" } }, [_vm._v("Frameworks")]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "text", name: "frameworks" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "imagen" } }, [_vm._v("Imagen")]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "file", name: "imagen" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        [_vm._v("Save changes")]
+      )
+    ])
   },
   function() {
     var _vm = this
