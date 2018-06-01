@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1>Ofertas</h1>
         <h1>Filtros</h1>
         <div class="input-group">
@@ -37,7 +37,7 @@
                 <p class="card-text" v-text="oferta.descripcion"></p>
                 <p class="card-text" v-text="'Sueldo '+ oferta.sueldo_desde + '€ - ' + oferta.sueldo_hasta + '€ Bruto/año'"></p>
                 <p class="card-text" v-text="'Vacantes ' + oferta.vacantes"></p>
-                <button class="btn btn-block btn-primary" v-on:click="inscribirse(oferta)">Inscribirse</button>
+                <button class="btn btn-block btn-primary" v-on:click="inscribirse(oferta)" v-if="userId">Inscribirse</button>
               </div>
             </div>
           </div>   
@@ -123,26 +123,6 @@ export default {
       axios.get(url).then(response => {
         this.oferta = response.data;
       });
-    },
-    addOferta: function(oferta) {
-      var url = "oferta";
-      axios
-        .post(url, {
-          user_id: this.userId,
-          provincia_id: this.oferta.provincia_id,
-          titulo: this.oferta.titulo,
-          descripcion: this.oferta.descripcion,
-          vacantes: this.oferta.vacantes,
-          sueldo_desde: this.oferta.sueldo_desde,
-          sueldo_hasta: this.oferta.sueldo_hasta
-        })
-        .then(response => {
-          this.getOfertas();
-          this.oferta = {};
-        })
-        .catch(error => {
-          this.errors = error.response.data;
-        });
     },
     inscribirse: function(oferta) {
       var url = "inscripcion";

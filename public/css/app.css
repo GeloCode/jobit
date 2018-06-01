@@ -10648,6 +10648,40 @@ button.toast-close-button {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+.home-form > div {
+  height: 50px;
+}
+
+.home-form button {
+  height: 50px;
+}
+
+.rounded-0 {
+  height: 100%;
+}
+
+.header {
+  height: 600px;
+  width: 100%;
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.8)), color-stop(rgba(0, 0, 0, 0.4)), to(rgba(0, 0, 0, 0.8))), url(/images/pic_1.jpg?db3e2b0a99125d2265f2fe6f9b209b0d);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), url(/images/pic_1.jpg?db3e2b0a99125d2265f2fe6f9b209b0d);
+  background-size: cover;
+}
+
+.header .header-img {
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .primary {
   color: #28a745 !important;
   background-color: #1E1E1E !important;
@@ -10699,24 +10733,6 @@ button.toast-close-button {
           align-items: center;
 }
 
-.navbar-brand .logo {
-  /* Firefox */
-  /* WebKit */
-  -webkit-transition: all 1s ease;
-  /* Opera */
-  /* Standard */
-  transition: all 1s ease;
-}
-
-.navbar-brand:hover .logo {
-  /* Firefox */
-  /* WebKit */
-  -webkit-transform: rotate(360deg);
-  /* Opera */
-  /* Standard */
-  transform: rotate(360deg);
-}
-
 .swiper-container {
   width: 100%;
   height: 600px;
@@ -10760,6 +10776,10 @@ circle {
   to {
     text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #28a745, 0 0 20px #28a745, 0 0 35px #28a745, 0 0 40px #28a745, 0 0 50px #28a745, 0 0 75px #28a745;
   }
+}
+
+body i {
+  font-family: 'FontAwesome';
 }
 
 #OTM-Logo {

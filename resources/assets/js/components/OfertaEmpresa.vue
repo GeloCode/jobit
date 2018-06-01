@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <div class="alert alert-info" role="alert" v-if="mensajeNingunaOferta">
+    <div class="container">
+        <div class="alert alert-info mt-2" role="alert" v-if="mensajeNingunaOferta">
             <strong>Vigila! {{userId}}</strong> Aún no tienes ningúna oferta, añade una para que te aparezcan.
         </div>
-        <div class="input-group">
+        <div class="input-group mt-4">
             <input type="search" class="form-control mb-3" v-model="search" placeholder="Busca por palabra clave..." name="buscar"/>
         </div>
         <div class="input-group">

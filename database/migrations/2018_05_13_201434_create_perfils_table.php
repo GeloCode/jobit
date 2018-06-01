@@ -26,7 +26,7 @@ class CreatePerfilsTable extends Migration
             $table->string('lenguajes');            
             $table->string('frameworks');            
             $table->text('descripcion');
-            $table->binary('imagen');            
+            $table->binary('imagen')->nullable();            
             $table->timestamps();
         });
     }

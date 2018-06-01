@@ -44,6 +44,11 @@ class PortfolioController extends Controller
     public function getPortfolioById($id){
         return Portfolio::find($id);
     }
+
+    public function getPortfolioByUserId($id){
+        return Portfolio::where('user_id', $id)->first();
+    }
+
     public function getInfoPortfolio($id_seleccionado){
         return Portfolio::where('id', $id_seleccionado)->get();
     }

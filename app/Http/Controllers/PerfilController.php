@@ -13,16 +13,7 @@ class PerfilController extends Controller
      */
     public function getPerfilByUserId($id)
     {
-        return Perfil::where('user_id', $id)->get();
-    }
-      /**
-     * Nos devuelve el nombre del usuario
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getLenguajes($id)
-    {
-        return Perfil::where('user_id', $id)->value('lenguajes');
+        return Perfil::where('user_id', $id)->first();
     }
 
     /**
@@ -35,7 +26,6 @@ class PerfilController extends Controller
     {
         $this->validate($request, [
             'user_id' => 'required',
-            'portfolio_id' => 'required',
             'provincia_id' => 'required',
             'name' => 'required',
             'telefono' => 'required',
@@ -44,7 +34,6 @@ class PerfilController extends Controller
             'lenguajes' => 'required',
             'frameworks' => 'required',
             'descripcion' => 'required',
-            'imagen' => 'required',
         ]);
 
         Perfil::create($request->all());
@@ -63,7 +52,6 @@ class PerfilController extends Controller
     {
         $this->validate($request, [
             'user_id' => 'required',
-            'portfolio_id' => 'required',
             'name' => 'required',
             'telefono' => 'required',
             'direccion' => 'required',

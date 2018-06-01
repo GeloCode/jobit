@@ -3,10 +3,6 @@ Route::get('/', function(){
     return view('app');
 });
 
-Route::get('/', function(){
-    return view('app');
-});
-
 Route::get('/portf', function () {
     return view('portfolio');
 }); 
@@ -14,12 +10,43 @@ Route::get('/portf', function () {
 Route::get('/dash', function () {
     return view('crudUsuarioProyectos');
 }); 
-Route::get('/formulario', function () {
-    return view('formularioPortfolio');
-}); 
-Route::get('/perfil', function () {
-    return view('perfil');
-}); 
+
+
+/**
+ * Temporal para hacer pruebas con las inscrtipciones 
+ */
+Route::get('/vinscripcionesolicitante', function () {
+    return view('vinscripcionesolicitante');
+});
+
+
+Route::group(['middleware' => 'auth'], function () {
+    // Nos devuelve a nuestro Perfil
+    Route::get('/perfil', function () {
+        return view('perfil');
+    });
+    // Formulario para hacer un protfolio
+    Route::get('/formulario', function () {
+        return view('formularioPortfolio');
+    });
+});
+
+Route::group(['middleware' => 'isEmpresa'], function () {
+    /**
+     * Temporal para hacer pruebas con las ofertas empresa
+     */
+    Route::get('/vofertasempresa', function () {
+        return view('vofertasempresa');
+    });
+
+    /**
+     * Temporal para hacer pruebas con las inscrtipciones 
+     */
+    Route::get('/vinscripcionesempresa', function () {
+        return view('vinscripcionesempresa');
+    });
+
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/isEmpleado/{id}', 'UsersController@getRoleUserById');
@@ -38,33 +65,6 @@ Route::get('rol/getRoles', 'RoleController@getRoles');
  * Routings del login/register
  */
 Auth::routes();
-
-/**
- * Temporal para hacer pruebas con las ofertas 
- */
-Route::get('/vofertas', function () {
-    return view('vofertas');
-});
-/**
- * Temporal para hacer pruebas con las ofertas empresa
- */
-Route::get('/vofertasempresa', function () {
-    return view('vofertasempresa');
-});
-
-/**
- * Temporal para hacer pruebas con las inscrtipciones 
- */
-Route::get('/vinscripcionesempresa', function () {
-    return view('vinscripcionesempresa');
-});
-
-/**
- * Temporal para hacer pruebas con las inscrtipciones 
- */
-Route::get('/vinscripcionesolicitante', function () {
-    return view('vinscripcionesolicitante');
-});
 
 /**
  * Nos devuelve todas las ofertas sin filtar por nada
@@ -156,7 +156,6 @@ Route::get('inscripcion/empresas/{id}', 'InscripcionesController@getInscripcione
  * Nos devuelve nuestro perfil (Por el id de usuario)
  */
 Route::get('perfil/usuario/{idUser}', 'PerfilController@getPerfilByUserId');
-Route::get('perfil/lenguajes/{idUser}', 'PerfilController@getLenguajes');
 
 
 /**
