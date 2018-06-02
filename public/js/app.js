@@ -67829,6 +67829,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -67968,6 +67969,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     filtrar: function filtrar() {
       this.getOfertasByUserId();
       toastr.success("Filtrado Con Éxito!");
+    },
+    buscarInscripciones: function buscarInscripciones(id) {
+      var url = "/vinscripcionesempresa?ofertaId=" + id;
+      window.location.href = url;
     }
   },
   computed: {
@@ -68564,6 +68569,19 @@ var render = function() {
                 }
               },
               [_vm._v("Eliminar")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-block btn-danger habilitadoSiempre",
+                on: {
+                  click: function($event) {
+                    _vm.buscarInscripciones(oferta.id)
+                  }
+                }
+              },
+              [_vm._v("Ver Inscripciones")]
             )
           ]
         )
@@ -69512,7 +69530,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     this.getOfertasInscripcion();
   },
   props: {
-    userId: String
+    userId: String,
+    ofertaId: String
   },
   data: function data() {
     return {
@@ -69526,7 +69545,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getOfertasInscripcion: function getOfertasInscripcion(page) {
       var _this = this;
 
-      var url = "inscripcion/empresas/" + this.userId;
+      var url = "inscripcion/empresas?userId" + this.userId + "ofertaId" + this.ofertaId;
       axios.get(url).then(function (response) {
         _this.inscripcionofertas = response.data;
         _this.filtrarInscripcionDependiendoFiltro();

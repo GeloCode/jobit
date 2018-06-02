@@ -38,7 +38,8 @@ export default {
     this.getOfertasInscripcion();
   },
   props: {
-    userId: String
+    userId: String,
+    ofertaId: String,
   },
   data: function() {
     return {
@@ -50,7 +51,7 @@ export default {
   },
   methods: {
     getOfertasInscripcion: function(page) {
-      var url = "inscripcion/empresas/" + this.userId;
+      var url = "inscripcion/empresas?userId" + this.userId + "ofertaId" + this.ofertaId;
       axios.get(url).then(response => {
         this.inscripcionofertas = response.data;
         this.filtrarInscripcionDependiendoFiltro();

@@ -78,6 +78,7 @@
             <button class="btn btn-block btn-primary habilitadoSiempre" name="editar" v-on:click="habilitarCampos(oferta.id)">Editar</button>
             <button class="btn btn-block btn-secondary habilitadoSiempre" name="guardar" v-on:click="editOferta(oferta)" style="display:none;">Guardar</button>
             <button class="btn btn-block btn-danger habilitadoSiempre" v-on:click="deleteOferta(oferta)">Eliminar</button>
+            <button class="btn btn-block btn-danger habilitadoSiempre" v-on:click="buscarInscripciones(oferta.id)">Ver Inscripciones</button>
         </div>
         <nav>
           <ul class="pagination">
@@ -239,6 +240,10 @@ export default {
     filtrar: function() {
       this.getOfertasByUserId();
       toastr.success("Filtrado Con Éxito!");
+    },
+    buscarInscripciones: function(id) {
+      var url = "/vinscripcionesempresa?ofertaId=" + id;
+      window.location.href = url;
     }
   },
   computed: {
