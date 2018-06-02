@@ -171,12 +171,12 @@ Route::get('perfil/usuario/{idUser}', 'PerfilController@getPerfilByUserId');
 /**
  * Para crear un perfil
  */
-Route::post('perfil', 'PerfilController@store');
+Route::post('iperfil', 'PerfilController@store');
 
 /**
  * Para actualizar un perfil
  */
-Route::put('perfil/{id}', 'PerfilController@store');
+Route::put('iperfil/{id}', 'PerfilController@store');
 
 
 //PROYECTOS 

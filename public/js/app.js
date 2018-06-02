@@ -70480,19 +70480,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var url = "perfil/usuario/" + this.userId;
       axios.get(url).then(function (response) {
-        _this.profile = response.data;
-        _this.lenguajesArray = _this.profile.lenguajes.split(",");
-        _this.frameworksArray = _this.profile.frameworks.split(",");
+        if (response.data) {
+          _this.profile = response.data;
+          _this.lenguajesArray = _this.profile.lenguajes.split(",");
+          _this.frameworksArray = _this.profile.frameworks.split(",");
+        }
       });
     },
     createProfile: function createProfile() {
+      var _this2 = this;
+
       var myMethod = "post";
+      var url = "iperfil";
       if (this.profile.id) {
         myMethod = "put";
+        url += "/" + this.userId;
       }
       axios({
         method: myMethod,
-        url: "perfil/store",
+        url: url,
         data: {
           user_id: this.userId,
           provincia_id: this.profile.provincia_id,
@@ -70506,16 +70512,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       }).then(function (response) {
         $("#exampleModal").modal('toggle');
+        _this2.getPerfilByUser();
       }).catch(function (error) {
         toastr.error(error);
       });
     },
     getProvincias: function getProvincias() {
-      var _this2 = this;
+      var _this3 = this;
 
       var url = "provincias";
       axios.get(url).then(function (response) {
-        _this2.provincias = response.data;
+        _this3.provincias = response.data;
       });
     }
   }
@@ -70575,7 +70582,6 @@ var render = function() {
                     _c(
                       "form",
                       {
-                        attrs: { method: "POST" },
                         on: {
                           submit: function($event) {
                             $event.preventDefault()

@@ -25,7 +25,7 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form method="POST" v-on:submit.prevent="createProfile()">
+								<form v-on:submit.prevent="createProfile()">
 									<div class="form-group">
 										<input type="text" class="form-control" id="nameInput" aria-describedby="name"
 										v-model="profile.name">
@@ -132,19 +132,23 @@ export default {
     getPerfilByUser: function() {
       var url = "perfil/usuario/" + this.userId;
       axios.get(url).then(response => {
-        this.profile = response.data;
-        this.lenguajesArray = this.profile.lenguajes.split(",");
-        this.frameworksArray = this.profile.frameworks.split(",");
+				if(response.data){
+					this.profile = response.data;
+					this.lenguajesArray = this.profile.lenguajes.split(",");
+					this.frameworksArray = this.profile.frameworks.split(",");
+				}
       });
     },
     createProfile: function() {
-      var myMethod = "post";
+			var myMethod = "post";
+			var url = "iperfil";
       if (this.profile.id) {
-        myMethod = "put";
-      }
+				myMethod = "put";
+				url += "/" + this.userId;
+			}
       axios({
         method: myMethod,
-        url: "perfil/store",
+        url: url,
         data: {
           user_id: this.userId,
           provincia_id: this.profile.provincia_id,
@@ -156,10 +160,10 @@ export default {
           lenguajes: this.profile.lenguajes,
           frameworks: this.profile.frameworks
         }
-      })
-        .then(function(response) {
-			$("#exampleModal").modal('toggle');
-		})
+      }).then(response => {
+				$("#exampleModal").modal('toggle');
+				this.getPerfilByUser();
+			})
         .catch(function(error) {
           toastr.error(error);
         });
