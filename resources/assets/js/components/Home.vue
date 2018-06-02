@@ -1,5 +1,5 @@
 !<template>
-    <div>
+    <div id="home">
         <header class="header container-fluid">
         <div class="header-img row">
             <form>
@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="col-auto home-form">
-                        <button class="btn btn-primary mb-2" type="submit" tabindex="3">
+                        <button class="btn btn-primary mb-2" type="submit" tabindex="3" @click.prevent="searchJob()">
                             Buscar Trabajo </button>
                     </div>
                 </div>
@@ -99,11 +99,15 @@ export default {
     },
     methods: {
         getProvincias: function() {
-        var url = "provincias";
-        axios.get(url).then(response => {
-            this.provincias = response.data;
-        });
+            var url = "provincias";
+            axios.get(url).then(response => {
+                this.provincias = response.data;
+            });
         },
+        searchJob: function(){
+            var url = "/vofertas?word=" +this.search.word + "&provinciaId=" + this.search.provincia_id;
+            window.location.href = url;
+        }
     }
 }
 </script>

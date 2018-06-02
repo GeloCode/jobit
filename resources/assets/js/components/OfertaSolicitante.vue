@@ -64,7 +64,9 @@ export default {
     this.getProvincias();
   },
   props: {
-    userId: String
+    userId: String,
+    word: String,
+    provinciaId: String,
   },
   data: function() {
     return {
@@ -85,8 +87,8 @@ export default {
       esEmpresa: "",
       errors: [],
       search: {
-        searchWord: "",
-        searchProvincia: 0,
+        searchWord: this.word,
+        searchProvincia: this.provinciaId,
         searchSueldoDesde: "",
         searchSueldoHasta: ""
       },
