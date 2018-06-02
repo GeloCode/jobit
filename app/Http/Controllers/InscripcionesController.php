@@ -51,10 +51,17 @@ class InscripcionesController extends Controller
     {
         $id = $request->userId;
         $ofertaId = $request->ofertaId;
-        return Inscripcion::with('user:id,email')->with('oferta:id,titulo')
-        ->whereHas('oferta', function($query) use($id){
-            $query->where('user_id', '=', $id);
-        })->get();
+        if($ofertaId){
+            return Inscripcion::with('user:id,email')->with('oferta:id,titulo')
+            ->whereHas('oferta', function($query) use($id, $ofertaId){
+                $query->where('user_id', '=', $id)->where('id', '=', $ofertaId);
+            })->get();
+        } else {
+            return Inscripcion::with('user:id,email')->with('oferta:id,titulo')
+            ->whereHas('oferta', function($query) use($id, $ofertaId){
+                $query->where('user_id', '=', $id);
+            })->get();
+        }
     }
 
     /**

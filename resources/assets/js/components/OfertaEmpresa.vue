@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="col-auto home-form">
-                        <button class="btn btn-danger mb-2" @click.prevent="filtrar()"tabindex="3">
+                        <button class="btn btn-danger mb-2" @click.prevent="filtrar()" tabindex="3">
                             Filter </button>
                     </div>
                 </div>
@@ -118,10 +118,10 @@
                     <option v-for="provincia in provincias" :key="provincia.id" :value="provincia.id" v-text="provincia.nombre"></option>
                 </select>
             </div>
+            <button class="btn btn-block btn-secondary habilitadoSiempre" v-on:click="buscarInscripciones(oferta.id)">Ver Inscripciones</button>
             <button class="btn btn-block btn-primary habilitadoSiempre" name="editar" v-on:click="habilitarCampos(oferta.id)">Editar</button>
             <button class="btn btn-block btn-secondary habilitadoSiempre" name="guardar" v-on:click="editOferta(oferta)" style="display:none;">Guardar</button>
             <button class="btn btn-block btn-danger habilitadoSiempre" v-on:click="deleteOferta(oferta)">Eliminar</button>
-            <button class="btn btn-block btn-danger habilitadoSiempre" v-on:click="buscarInscripciones(oferta.id)">Ver Inscripciones</button>
         </div>
         <nav>
           <ul class="pagination">

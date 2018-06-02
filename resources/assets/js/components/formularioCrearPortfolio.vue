@@ -73,7 +73,7 @@
                     this.errors = [];
                     //$('#create').modal('hide');
                     toastr.success('Success');
-                    window.location.href = "/projects?id=" +this.idPortfolio
+                    window.location.href = "/projects?id=" +this.idPortfolio;
                 }).catch(error => {
                     this.errors = error.response.data
                     //toastr.danger('Hay algun error');
