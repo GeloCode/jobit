@@ -171,12 +171,12 @@ Route::get('perfil/usuario/{idUser}', 'PerfilController@getPerfilByUserId');
 /**
  * Para crear un perfil
  */
-Route::post('perfil', 'PerfilController@store');
+Route::post('iperfil', 'PerfilController@store');
 
 /**
  * Para actualizar un perfil
  */
-Route::put('perfil/{id}', 'PerfilController@store');
+Route::put('iperfil/{id}', 'PerfilController@store');
 
 
 //PROYECTOS 
@@ -202,4 +202,6 @@ Route::resource('proyectos', 'ProyectosController', ['except' => 'create']); //t
 Route::get('projct/{id}', 'ProyectosController@getProyectosById'); //obtener los proyectos por el id de portfolio
 Route::get('detail/{id}', 'ProyectosController@getDetalleProyectoById'); //obtener los datos de un proyecto con el id de proyecto
 
+//RUTAS ENLACES
+Route::get('enlaces/{id}', 'EnlacesController@getEnlacesByUserId'); //obtener los enlaces por el id del usuario
 

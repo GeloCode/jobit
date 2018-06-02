@@ -228,6 +228,7 @@ export default {
     habilitarCampos: function(id) {
       jQuery("#oferta_" + id + " :input").prop("disabled", false);
       jQuery("#oferta_" + id).addClass("editandoOferta"); // Aqui le añadimos la clase de editar oferta
+      jQuery("#oferta_" + id).removeClass("oferta"); // Aqui le añadimos la clase de editar oferta
       //window.scrollTo(jQuery("#oferta_" + id).position());
       jQuery("#oferta_" + id + " [name=editar]").hide();
       jQuery("#oferta_" + id + " [name=guardar]").show();
@@ -254,6 +255,8 @@ export default {
           );
           jQuery("#oferta_" + oferta.id + " [name=guardar]").hide();
           jQuery("#oferta_" + oferta.id + " [name=editar]").show();
+          jQuery("#oferta_" + id).addClass("oferta"); // Aqui le añadimos la clase de editar oferta
+          jQuery("#oferta_" + id).removeClass("editandoOferta"); // Aqui le añadimos la clase de editar oferta
           toastr.success("Oferta actualizada correctamente!");
         })
         .catch(error => {
