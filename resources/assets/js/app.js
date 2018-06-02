@@ -20,6 +20,7 @@ Vue.component('dash', require('./components/userDashboardCRUD.vue'));
 Vue.component('formul', require('./components/formularioCrearPortfolio.vue'));
 Vue.component('perfil', require('./components/Perfil.vue'));
 Vue.component('dashboardUser', require('./components/userDashboardCRUD.vue'));
+Vue.component('enlaces', require('./components/Enlaces.vue'));
 
 const app = new Vue({
     el: '#app',
