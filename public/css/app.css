@@ -10657,14 +10657,14 @@ button.toast-close-button {
 }
 
 .rounded-0 {
-  height: 100%;
+  height: 99%;
 }
 
 .header {
   height: 600px;
   width: 100%;
-  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.8)), color-stop(rgba(0, 0, 0, 0.4)), to(rgba(0, 0, 0, 0.8))), url(/images/pic_1.jpg?8776fe9e0119050807cb0cc9c5bcdf65);
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), url(/images/pic_1.jpg?8776fe9e0119050807cb0cc9c5bcdf65);
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.8)), color-stop(rgba(0, 0, 0, 0.4)), to(rgba(0, 0, 0, 0.8))), url(/images/pic_1.jpg?db3e2b0a99125d2265f2fe6f9b209b0d);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), url(/images/pic_1.jpg?db3e2b0a99125d2265f2fe6f9b209b0d);
   background-size: cover;
 }
 
@@ -10766,6 +10766,107 @@ button.toast-close-button {
 circle {
   stroke: #28a745;
   fill: #28a745;
+}
+
+.rol-information-section {
+  padding: 120px 15px;
+}
+
+.rol-information-section .rol-container .bs-example {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.rol-information-section .rol-container .bs-example h2 {
+  padding: 0 0 50px 0;
+  text-align: center;
+}
+
+.rol-information-section .rol-container .bs-example .row {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.rol-information-section .rol-container .bs-example .row .col-sm-6 {
+  -webkit-transition: all .6s;
+  transition: all .6s;
+  -webkit-box-shadow: 5px 5px 30px 2px #4d4f53;
+          box-shadow: 5px 5px 30px 2px #4d4f53;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.rol-information-section .rol-container .bs-example .row .col-sm-6 .thumbnail {
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.rol-information-section .rol-container .bs-example .row .col-sm-6 .thumbnail i {
+  -webkit-transition: -webkit-box-shadow 2s;
+  transition: -webkit-box-shadow 2s;
+  transition: box-shadow 2s;
+  transition: box-shadow 2s, -webkit-box-shadow 2s;
+  -webkit-box-shadow: 0 0 0;
+          box-shadow: 0 0 0;
+  border: 1px solid white;
+  -webkit-transition: all .6s;
+  transition: all .6s;
+  background: black;
+  color: white;
+  padding: 35px 42px 35px 42px;
+  font-size: 45px;
+  border-radius: 50%;
+}
+
+.rol-information-section .rol-container .bs-example .row .col-sm-6 .caption {
+  padding-top: 20px;
+}
+
+.rol-information-section .rol-container .bs-example .row .col-sm-6 .caption > * {
+  -webkit-transition: all .6s;
+  transition: all .6s;
+  text-align: center;
+}
+
+.rol-information-section .rol-container .bs-example .row .col-sm-6:nth-child(2) .thumbnail i {
+  padding: 35px;
+}
+
+.rol-information-section .rol-container .bs-example .row .col-sm-6:hover {
+  -webkit-box-shadow: 1px 1px 30px 2px #28a745;
+          box-shadow: 1px 1px 30px 2px #28a745;
+  background-color: #1E1E1E;
+}
+
+.rol-information-section .rol-container .bs-example .row .col-sm-6:hover i {
+  border: 1px solid #4d4f53;
+  color: #1E1E1E;
+  background-color: #28a745;
+}
+
+.rol-information-section .rol-container .bs-example .row .col-sm-6:hover .caption {
+  color: white;
+}
+
+.rol-information-section .rol-container .bs-example .row .col-sm-6:hover .caption > * {
+  text-shadow: 1px 1px 2px #28a745;
 }
 
 @-webkit-keyframes neon {
