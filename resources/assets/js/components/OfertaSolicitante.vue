@@ -105,14 +105,10 @@ export default {
       var url =
         "ofertas?id="+ this.userId +
         "&page=" + page +
-        "&buscar=" +
-        this.search.searchWord +
-        "&provincia=" +
-        this.search.searchProvincia +
-        "&sueldoDesde=" +
-        this.search.searchSueldoDesde +
-        "&sueldoHasta=" +
-        this.search.searchSueldoHasta;
+        "&buscar=" + this.search.searchWord +
+        "&provincia=" + this.search.searchProvincia +
+        "&sueldoDesde=" + this.search.searchSueldoDesde +
+        "&sueldoHasta=" + this.search.searchSueldoHasta;
       axios.get(url).then(response => {
         this.ofertas = response.data.ofertas.data;
         this.pagination = response.data.pagination;

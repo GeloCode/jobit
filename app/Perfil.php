@@ -10,7 +10,7 @@ class Perfil extends Model
      * Campos que podremos modificar/inserta el usuario
      */
     protected $fillable = [
-        'user_id', 'portfolio_id', 'provincia_id', 'name', 'telefono', 'direccion', 'codigo_postal', 'lenguajes',
+        'user_id', 'provincia_id', 'name', 'telefono', 'direccion', 'codigo_postal', 'lenguajes',
         'frameworks', 'descripcion', 'imagen'
     ];
 

@@ -11,14 +11,12 @@ Route::get('/dash', function () {
     return view('crudUsuarioProyectos');
 }); 
 
-
 /**
- * Temporal para hacer pruebas con las inscrtipciones 
+ * Temporal para hacer pruebas con las ofertas empresa
  */
-Route::get('/vinscripcionesolicitante', function () {
-    return view('vinscripcionesolicitante');
+Route::get('/vofertas', function () {
+    return view('vofertas');
 });
-
 
 Route::group(['middleware' => 'auth'], function () {
     // Nos devuelve a nuestro Perfil
@@ -44,6 +42,18 @@ Route::group(['middleware' => 'isEmpresa'], function () {
      */
     Route::get('/vinscripcionesempresa', function () {
         return view('vinscripcionesempresa');
+    });
+
+});
+
+Route::group(['middleware' => 'isSolicitante'], function () {
+    
+
+    /**
+     * Temporal para hacer pruebas con las inscrtipciones 
+     */
+    Route::get('/vinscripcionesolicitante', function () {
+        return view('vinscripcionesolicitante');
     });
 
 });
@@ -166,7 +176,7 @@ Route::post('perfil', 'PerfilController@store');
 /**
  * Para actualizar un perfil
  */
-Route::put('perfil/{id}', 'PerfilController@update');
+Route::put('perfil/{id}', 'PerfilController@store');
 
 
 //PROYECTOS 
