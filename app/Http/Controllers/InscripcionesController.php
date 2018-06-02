@@ -55,12 +55,12 @@ class InscripcionesController extends Controller
             return Inscripcion::with('user:id,email')->with('oferta:id,titulo')
             ->whereHas('oferta', function($query) use($id, $ofertaId){
                 $query->where('user_id', '=', $id)->where('id', '=', $ofertaId);
-            })->get();
+            })->orderBy('estado')->get();
         } else {
             return Inscripcion::with('user:id,email')->with('oferta:id,titulo')
             ->whereHas('oferta', function($query) use($id, $ofertaId){
                 $query->where('user_id', '=', $id);
-            })->get();
+            })->orderBy('estado')->get();
         }
     }
 

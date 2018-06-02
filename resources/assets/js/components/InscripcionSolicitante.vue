@@ -13,7 +13,7 @@
                 <tr :key="oferta.id" v-for="oferta in ofertas" 
                 :class="oferta.estado == 'A' ? 'bg-success' : oferta.estado == 'R' && 'bg-danger'">
                     <td v-text="oferta.titulo"></td>
-                    <td v-text="oferta.estado == 'D' ? 'Aún no la han visto' 
+                    <td v-text="oferta.estado == '-' ? 'Aún no la han visto' 
                     : oferta.estado == 'A' ? 'Aceptado' : 'Rechazado'"></td>
                     <td>
                         <button class="btn btn-secondary" @click.prevent="eliminarInscripcion(oferta.id)">Eliminar</button>
