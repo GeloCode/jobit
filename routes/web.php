@@ -11,14 +11,12 @@ Route::get('/dash', function () {
     return view('crudUsuarioProyectos');
 }); 
 
-
 /**
- * Temporal para hacer pruebas con las inscrtipciones 
+ * Temporal para hacer pruebas con las ofertas empresa
  */
-Route::get('/vinscripcionesolicitante', function () {
-    return view('vinscripcionesolicitante');
+Route::get('/vofertas', function () {
+    return view('vofertas');
 });
-
 
 Route::group(['middleware' => 'auth'], function () {
     // Nos devuelve a nuestro Perfil
@@ -44,6 +42,18 @@ Route::group(['middleware' => 'isEmpresa'], function () {
      */
     Route::get('/vinscripcionesempresa', function () {
         return view('vinscripcionesempresa');
+    });
+
+});
+
+Route::group(['middleware' => 'isSolicitante'], function () {
+    
+
+    /**
+     * Temporal para hacer pruebas con las inscrtipciones 
+     */
+    Route::get('/vinscripcionesolicitante', function () {
+        return view('vinscripcionesolicitante');
     });
 
 });
@@ -178,12 +188,14 @@ Route::get('detailProject', function(){
     return view('detalleProyecto');
 });
 
+
 //RUTAS PORTFOLIOS
 Route::resource('portfolios', 'PortfolioController', ['except' => 'create']); //todas las rutas portfolios
 Route::get('portfolios', 'PortfolioController@getPortfolios'); //obtener todos los portfolios
 Route::get('selectName', 'PortfolioController@getNameUser'); //obtener todos los usuarios para poder printarlos es portfolios
 Route::post('crearPortfolio', 'PortfolioController@store'); //crear el portfolio
 Route::get('info/{id}', 'PortfolioController@getInfoPortfolio');
+Route::get('pillaridportf/{id}', 'PortfolioController@getPortfIdJoint'); //esto es para obtener el id del portfolio a traves del id de perfil (para redirigir al user para crear proyectos)
 
 //RUTAS PROYECTOS
 Route::resource('proyectos', 'ProyectosController', ['except' => 'create']); //todas las rutas de proyectos

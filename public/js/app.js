@@ -70283,14 +70283,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
 	created: function created() {
 		this.getPerfilByUser();
+		this.getProvincias();
 	},
 	data: function data() {
 		return {
+			provincias: [],
 			profile: {},
+			profileData: {
+				name: "",
+				descripcion: "",
+				telefono: "",
+				direccion: "",
+				codigo_postal: "",
+				lenguajes: "",
+				frameworks: "",
+				imagen: "",
+				user_id: this.userId
+			},
 			lenguajesArray: [],
 			lenguajes: "",
 			frameworksArray: [],
-			frameworks: ""
+			frameworks: "",
+			provinciaId: 0
 		};
 	},
 	props: {
@@ -70305,6 +70319,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				_this.profile = response.data;
 				_this.lenguajesArray = _this.profile.lenguajes.split(",");
 				_this.frameworksArray = _this.profile.frameworks.split(",");
+			});
+		},
+		createProfile: function createProfile() {
+			axios.post("perfil/store", this.profileData).then(function (response) {}).catch(function (error) {
+				toastr.error(error);
+			});
+		},
+		getProvincias: function getProvincias() {
+			var _this2 = this;
+
+			var url = "provincias";
+			axios.get(url).then(function (response) {
+				_this2.provincias = response.data;
 			});
 		}
 	}
@@ -70380,6 +70407,56 @@ var render = function() {
                         _vm._v(" "),
                         _vm._m(2),
                         _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.provinciaId,
+                                  expression: "provinciaId"
+                                }
+                              ],
+                              staticClass: "custom-select mb-1",
+                              attrs: { name: "selectProvincia" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.provinciaId = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "0" } }, [
+                                _vm._v("Elige tu Provincia")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.provincias, function(provincia) {
+                                return _c("option", {
+                                  key: provincia.id,
+                                  domProps: {
+                                    value: provincia.id,
+                                    textContent: _vm._s(provincia.nombre)
+                                  }
+                                })
+                              })
+                            ],
+                            2
+                          )
+                        ]),
+                        _vm._v(" "),
                         _vm._m(3),
                         _vm._v(" "),
                         _vm._m(4),
@@ -70391,8 +70468,6 @@ var render = function() {
                         _vm._m(7),
                         _vm._v(" "),
                         _vm._m(8),
-                        _vm._v(" "),
-                        _vm._m(9),
                         _vm._v(" "),
                         _c(
                           "button",
@@ -70406,14 +70481,14 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(10)
+                  _vm._m(9)
                 ])
               ]
             )
           ]
         ),
         _vm._v(" "),
-        _vm._m(11)
+        _vm._m(10)
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-8" }, [
@@ -70452,7 +70527,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm._m(12)
+        _vm._m(11)
       ])
     ]),
     _vm._v("\n\t" + _vm._s(_vm.profile) + "\n")
@@ -70517,23 +70592,6 @@ var staticRenderFns = [
         "small",
         { staticClass: "form-text text-muted", attrs: { id: "name" } },
         [_vm._v("Pequeña descripción del usuario")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "provincia" } }, [_vm._v("Example select")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          staticClass: "form-control",
-          attrs: { id: "provincia", name: "provincia" }
-        },
-        [_c("option", [_vm._v("1")])]
       )
     ])
   },

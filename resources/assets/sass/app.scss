@@ -25,7 +25,7 @@
  }
 
  .rounded-0 {
-   height: 100%;
+   height: 99%;
  }
 
 .header {
@@ -54,12 +54,11 @@
 
 .dropdown-item:hover {
   background-color:$bgP;
-  
 }
 .dropdown-item:hover a {
 color:white!important;
 }
-.dropdown-divider{
+.dropdown-divider {
   border-color: $primary;
 }
 
@@ -77,15 +76,11 @@ color:white!important;
 .navbar-brand {
   color:$primary!important;
 }
-.navbar-brand a{
+.navbar-brand a {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-
-
-
-
 
 .swiper-container {
   width: 100%;
@@ -103,7 +98,7 @@ color:white!important;
 .navbar-brand a {
   font-weight: bold;
 }
-.navbar-brand a:hover{
+.navbar-brand a:hover {
   text-decoration: none;
   -webkit-animation: neon 1s ease-in-out infinite alternate;
   -moz-animation: neon 1s ease-in-out infinite alternate;
@@ -114,9 +109,79 @@ color:white!important;
 }
 
 
-.navbar-brand a svg g path, circle{
+.navbar-brand a svg g path, circle {
   stroke: $primary;
   fill:$primary;
+}
+
+.rol-information-section {
+  padding: 120px 15px;
+  .rol-container {
+    .bs-example {
+      justify-content: space-between;
+      h2 {
+        padding: 0 0 50px 0;
+        text-align: center;
+      }
+      .row {
+        justify-content: space-between; 
+        .col-sm-6 {
+          transition: all .6s;
+          box-shadow: 5px 5px 30px 2px $secondary;
+          border-radius:10px;
+          border:1px solid lightgray;
+          justify-content: center;
+          .thumbnail {
+            padding:20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            i {
+              transition: box-shadow 2s;
+              box-shadow: 0 0 0;
+              border: 1px solid white;
+              transition: all .6s;
+              background: black;
+              color:white;
+              padding: 35px 42px 35px 42px;
+              font-size: 45px;
+              border-radius: 50%;
+            }
+          }
+          .caption {
+            padding-top: 20px;
+            &>*{
+              transition: all .6s;
+              text-align: center;
+            }
+          }
+          &:nth-child(2) {
+              .thumbnail i{
+              padding:35px;
+              } 
+          }
+
+          &:hover {
+            box-shadow: 1px 1px 30px 2px $primary;
+            background-color: $bgP;
+            i {
+              
+              border: 1px solid $secondary;
+              color:$bgP;
+              background-color:$primary;
+            }
+            .caption{
+              color: white;
+              &>* {
+                text-shadow: 1px 1px 2px $primary;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 @-webkit-keyframes neon {
