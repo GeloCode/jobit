@@ -15,7 +15,7 @@ class EnlacesController extends Controller
      */
     public function getEnlacesByUserId($id)
     {
-        return Enlace::where('user_id', $id)->first();
+        return Enlace::where('user_id', $id)->get();
     }
 
     /**
