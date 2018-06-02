@@ -3,13 +3,8 @@
 <div v-if="authid">
     <div>
         <form method="POST" v-on:submit.prevent="createPortfolio()">
-
-                <label for="number">Id Perfil</label>
-                <input type="text" name="number" maxlength="3" class="form-control" v-model="newPerfilId" disabled>
                 <label for="number">Titulo</label>
                 <input type="text" name="text" maxlength="45" class="form-control" v-model="newTitle">
-                <!-- <input type="text" name="text" maxlength="9" class="form-control" v-model="newDescription">
-                <input type="submit" class="btn btn-primary" value="Crear Portfolio"> -->
                 <div class="form-group">
                             <label for="exampleFormControlTextarea1">Descripcion Portfolio</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="newDescription"></textarea>
@@ -73,10 +68,9 @@
                     this.errors = [];
                     //$('#create').modal('hide');
                     toastr.success('Success');
-                    window.location.href = "/projects?id=" +this.idPortfolio;
                 }).catch(error => {
                     this.errors = error.response.data
-                    //toastr.danger('Hay algun error');
+                    toastr.danger('Hay algun error');
                 });
             }
         }
