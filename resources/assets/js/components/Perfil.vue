@@ -13,7 +13,7 @@
 				<button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#exampleModal">
 					Editar perfil
 				</button>
-
+				<enlaces :user-id="userId"></enlaces>
 				<!-- Modal -->
 				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
@@ -99,6 +99,7 @@
 	</div>
 </template>
 <script>
+import Enlaces from './Enlaces.vue';
 export default {
   created: function() {
     this.getPerfilByUser();
@@ -127,7 +128,10 @@ export default {
   },
   props: {
     userId: String
-  },
+	},
+	components:{
+    'enlaces' : Enlaces
+	},
   methods: {
     getPerfilByUser: function() {
       var url = "perfil/usuario/" + this.userId;
