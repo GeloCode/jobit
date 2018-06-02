@@ -11,7 +11,7 @@
                         {{nameUser.name}}
                         <h5 class="card-title" v-text="portfolio.titulo"> </h5>
                         <p class="card-text" v-text="portfolio.descripcion"> </p>
-                        <a href="#" class="btn btn-danger btn-sm" v-on:click.prevent="deletePortfolio(portfolio)">Borrar</a>
+                        <!--a href="#" class="btn btn-danger btn-sm" v-on:click.prevent="deletePortfolio(portfolio)">Borrar</a>-->
                         <a class="btn btn-success btn-sm" v-bind:href="'/projects?id=' +portfolio.id">Ver</a>
                         <div class="col-md-5 offset-md-7">
                             <small>

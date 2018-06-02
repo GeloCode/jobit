@@ -46,7 +46,8 @@
             </div>
             <button type="submit" class="btn btn-dark btn-block mb-4">Guardar</button>
         </form>
-        <div class="card card-body mb-2" v-bind:key="oferta.id" v-for="oferta in ofertas" v-bind:id="'oferta_' + oferta.id">
+        <div class="card card-body mb-2" v-bind:key="oferta.id" v-for="oferta in ofertas" 
+        v-bind:id="'oferta_' + oferta.id">
             <div class="form-group inline">
                 <label for="Titulo">Título:</label>
                 <input type="text" class="form-control" v-model="oferta.titulo" disabled>
@@ -181,6 +182,7 @@ export default {
     },
     habilitarCampos: function(id) {
       jQuery("#oferta_" + id + " :input").prop("disabled", false);
+      jQuery("#oferta_" + id).addClass("editandoOferta"); // Aqui le añadimos la clase de editar oferta
       //window.scrollTo(jQuery("#oferta_" + id).position());
       jQuery("#oferta_" + id + " [name=editar]").hide();
       jQuery("#oferta_" + id + " [name=guardar]").show();

@@ -138,13 +138,13 @@ class OfertaController extends Controller
             $ofertas = Oferta::orderBy('created_at', 'DESC')->where(function ($query) use ($buscar){
                 $query->where('titulo', 'like', '%'.$buscar.'%')
                 ->orWhere('descripcion', 'like', '%'.$buscar.'%');})
-                ->where('user_id', $id)->paginate(1); 
+                ->where('user_id', $id)->paginate(6); 
         } else {
             $ofertas = Oferta::orderBy('created_at', 'DESC')->where('provincia_id', '=', $provincia)
             ->where(function ($query) use ($buscar){
                 $query->where('titulo', 'like', '%'.$buscar.'%')
                 ->orWhere('descripcion', 'like', '%'.$buscar.'%');})
-                ->where('user_id', $id)->paginate(1); 
+                ->where('user_id', $id)->paginate(6); 
         }
         return [
             'pagination' => [
