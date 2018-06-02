@@ -1,5 +1,5 @@
 !<template>
-    <div>
+    <div id="home">
         <header class="header container-fluid">
         <div class="header-img row">
             <form>

@@ -1,22 +1,58 @@
 <template>
-    <div class="container">
+  <div id="ofertaempresa">
+    <header class="header container-fluid">
+      <div class="header-img row">
+        <h2>Publishes offers<br>contracts professionals</h2>
+        </div>
+    </header>
+        <div class="container">
+          <div class="row">
         <div class="alert alert-info mt-2" role="alert" v-if="mensajeNingunaOferta">
             <strong>Vigila! {{userId}}</strong> Aún no tienes ningúna oferta, añade una para que te aparezcan.
         </div>
-        <div class="input-group mt-4">
-            <input type="search" class="form-control mb-3" v-model="search" placeholder="Busca por palabra clave..." name="buscar"/>
+        
+        
+        <form class="col-lg-8">
+                <div class="form-row align-items-center">
+                    <div class="col-auto home-form">
+                      <button class="btn btn-primary mb-2" @click.prevent="addOtraOferta()">Añadir Oferta</button>
+                    </div>  
+                    <div class="col-auto home-form">
+
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="fa fa-code"></i>
+                                </div>
+                                <input class="form-control g-font-size-16 border-0 g-height-60 rounded-0" name="buscar" id="te" maxlength="45" placeholder="Busca por palabra clave..."
+                                    aria-label="Buscar por Tecnología" tabindex="1" autocomplete="off" type="search" v-model="search">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto home-form">
+
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="fa fa-map-marker"></i>
+                                </div>
+                                <select name="pr" id="pr" class="custom-select g-font-size-16 rounded-0 g-height-60 g-min-width-100x border-0" style="" tabindex="2" v-model="search.provincia_id">
+                                    <option value="0" disabled>Elige tu Provincia</option>
+                                    <option v-for="provincia in provincias" :key="provincia.id" :value="provincia.id" v-text="provincia.nombre"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-auto home-form">
+                        <button class="btn btn-danger mb-2" @click.prevent="filtrar()"tabindex="3">
+                            Filter </button>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="input-group">
-            <select class="custom-select mb-1" name="searchProvincia" v-model="searchProvincia">
-                    <option value="0">Elige tu Provincia</option>
-                    <option v-for="provincia in provincias" :key="provincia.id" :value="provincia.id" v-text="provincia.nombre"></option>
-                </select>
-        </div>
-        <div class="input-group mb-3">
-            <button class="btn btn-danger" @click.prevent="filtrar()">Filter</button>
-        </div>
-        <button class="btn btn-primary mb-2" @click.prevent="addOtraOferta()">Añadir Oferta</button>
-        <form @submit.prevent="addOferta" v-if="clickAddOferta">
+        <div class="row">
+        <form class="card card-body  mb-2 col-lg-8" @submit.prevent="addOferta" v-if="clickAddOferta">
             <div class="form-group">
                 <label for="titulo">Título</label>
                 <input type="text" class="form-control" placeholder="Título" v-model="oferta.titulo">
@@ -46,25 +82,32 @@
             </div>
             <button type="submit" class="btn btn-dark btn-block mb-4">Guardar</button>
         </form>
-        <div class="card card-body mb-2" v-bind:key="oferta.id" v-for="oferta in ofertas" 
+        </div>
+        </div>
+        <hr/>
+        <div class="container">
+          <div class="row">
+        <div class="card card-body oferta mb-2 col-lg-8" v-bind:key="oferta.id" v-for="oferta in ofertas" 
         v-bind:id="'oferta_' + oferta.id">
-            <div class="form-group inline">
+            <div class="form-group ">
                 <label for="Titulo">Título:</label>
                 <input type="text" class="form-control" v-model="oferta.titulo" disabled>
             </div>
-            <div class="form-group inline">
+            <div class="form-group ">
                 <label for="Descripcion">Descripción</label>      
                 <textarea class="form-control" v-model="oferta.descripcion" disabled></textarea>
             </div>
-            <div class="form-group inline">
-                <label for="Sueldo Desde">Sueldo Desde</label>
-                <input type="number" class="form-control" v-bind:value="oferta.sueldo_desde" disabled>
+            <div class="form-content">
+              <div class="form-group ">
+                  <label for="Sueldo Desde">Sueldo Desde</label>
+                  <input type="number" class="form-control" v-bind:value="oferta.sueldo_desde" disabled>
+              </div>
+              <div class="form-group ">
+                  <label for="Sueldo Hasta">Sueldo hasta</label>
+                  <input type="number" class="form-control" v-bind:value="oferta.sueldo_hasta" disabled>
+              </div>
             </div>
-            <div class="form-group inline">
-                <label for="Sueldo Hasta">Sueldo hasta</label>
-                <input type="number" class="form-control" v-bind:value="oferta.sueldo_hasta" disabled>
-            </div>
-            <div class="form-group inline">
+            <div class="form-group ">
                 <label for="Vacantes">Vacantes</label>
                 <input type="number" class="form-control" v-model="oferta.vacantes" disabled>
             </div>
@@ -91,7 +134,9 @@
                   <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)">Sig</a>
               </li>
           </ul>
-      </nav>          
+      </nav>
+      </div>
+      </div>          
     </div>
 </template>
 <script>
