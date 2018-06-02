@@ -30866,7 +30866,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\userDashboardCRUD.vue"
+Component.options.__file = "resources/assets/js/components/userDashboardCRUD.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -30875,9 +30875,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-ba025000", Component.options)
+    hotAPI.createRecord("data-v-22f39d40", Component.options)
   } else {
-    hotAPI.reload("data-v-ba025000", Component.options)
+    hotAPI.reload("data-v-22f39d40", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65762,7 +65762,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\ProjectDetailComponent.vue"
+Component.options.__file = "resources/assets/js/components/ProjectDetailComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -65771,9 +65771,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-12c33a0a", Component.options)
+    hotAPI.createRecord("data-v-0337bcca", Component.options)
   } else {
-    hotAPI.reload("data-v-12c33a0a", Component.options)
+    hotAPI.reload("data-v-0337bcca", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -66158,7 +66158,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-12c33a0a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0337bcca", module.exports)
   }
 }
 
@@ -66188,7 +66188,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\ListaPortfolios.vue"
+Component.options.__file = "resources/assets/js/components/ListaPortfolios.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -66197,9 +66197,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4cc3dae7", Component.options)
+    hotAPI.createRecord("data-v-71a8f027", Component.options)
   } else {
-    hotAPI.reload("data-v-4cc3dae7", Component.options)
+    hotAPI.reload("data-v-71a8f027", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -66468,7 +66468,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-4cc3dae7", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-71a8f027", module.exports)
   }
 }
 
@@ -66498,7 +66498,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\RenderProyectos.vue"
+Component.options.__file = "resources/assets/js/components/RenderProyectos.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -66507,9 +66507,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1b4cce1e", Component.options)
+    hotAPI.createRecord("data-v-173eae31", Component.options)
   } else {
-    hotAPI.reload("data-v-1b4cce1e", Component.options)
+    hotAPI.reload("data-v-173eae31", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -66594,7 +66594,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Proyectos.vue"
+Component.options.__file = "resources/assets/js/components/Proyectos.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -66603,9 +66603,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5400a8b2", Component.options)
+    hotAPI.createRecord("data-v-7cadb0e7", Component.options)
   } else {
-    hotAPI.reload("data-v-5400a8b2", Component.options)
+    hotAPI.reload("data-v-7cadb0e7", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -66793,7 +66793,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5400a8b2", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-7cadb0e7", module.exports)
   }
 }
 
@@ -66818,7 +66818,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1b4cce1e", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-173eae31", module.exports)
   }
 }
 
@@ -66848,7 +66848,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Login.vue"
+Component.options.__file = "resources/assets/js/components/Login.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -66857,9 +66857,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-01e7f602", Component.options)
+    hotAPI.createRecord("data-v-3e2ac97c", Component.options)
   } else {
-    hotAPI.reload("data-v-01e7f602", Component.options)
+    hotAPI.reload("data-v-3e2ac97c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -67216,7 +67216,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-01e7f602", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-3e2ac97c", module.exports)
   }
 }
 
@@ -67246,7 +67246,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Register.vue"
+Component.options.__file = "resources/assets/js/components/Register.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -67255,9 +67255,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e24368cc", Component.options)
+    hotAPI.createRecord("data-v-f88ac34c", Component.options)
   } else {
-    hotAPI.reload("data-v-e24368cc", Component.options)
+    hotAPI.reload("data-v-f88ac34c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -67689,7 +67689,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-e24368cc", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-f88ac34c", module.exports)
   }
 }
 
@@ -67719,7 +67719,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\OfertaEmpresa.vue"
+Component.options.__file = "resources/assets/js/components/OfertaEmpresa.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -67728,9 +67728,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c3af719e", Component.options)
+    hotAPI.createRecord("data-v-f05ca71e", Component.options)
   } else {
-    hotAPI.reload("data-v-c3af719e", Component.options)
+    hotAPI.reload("data-v-f05ca71e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -68659,7 +68659,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-c3af719e", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-f05ca71e", module.exports)
   }
 }
 
@@ -68689,7 +68689,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\OfertaSolicitante.vue"
+Component.options.__file = "resources/assets/js/components/OfertaSolicitante.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -68698,9 +68698,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-39481bdb", Component.options)
+    hotAPI.createRecord("data-v-8d863dca", Component.options)
   } else {
-    hotAPI.reload("data-v-39481bdb", Component.options)
+    hotAPI.reload("data-v-8d863dca", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -69220,7 +69220,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-39481bdb", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-8d863dca", module.exports)
   }
 }
 
@@ -69250,7 +69250,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\InscripcionSolicitante.vue"
+Component.options.__file = "resources/assets/js/components/InscripcionSolicitante.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -69259,9 +69259,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-319cf821", Component.options)
+    hotAPI.createRecord("data-v-22117ae1", Component.options)
   } else {
-    hotAPI.reload("data-v-319cf821", Component.options)
+    hotAPI.reload("data-v-22117ae1", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -69423,7 +69423,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-319cf821", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-22117ae1", module.exports)
   }
 }
 
@@ -69453,7 +69453,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\InscripcionEmpresa.vue"
+Component.options.__file = "resources/assets/js/components/InscripcionEmpresa.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -69462,9 +69462,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-17323677", Component.options)
+    hotAPI.createRecord("data-v-d453cd92", Component.options)
   } else {
-    hotAPI.reload("data-v-17323677", Component.options)
+    hotAPI.reload("data-v-d453cd92", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -69762,7 +69762,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-17323677", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-d453cd92", module.exports)
   }
 }
 
@@ -70001,7 +70001,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-ba025000", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-22f39d40", module.exports)
   }
 }
 
@@ -70031,7 +70031,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\formularioCrearPortfolio.vue"
+Component.options.__file = "resources/assets/js/components/formularioCrearPortfolio.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -70040,9 +70040,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-38c6b1ea", Component.options)
+    hotAPI.createRecord("data-v-43b4f6ac", Component.options)
   } else {
-    hotAPI.reload("data-v-38c6b1ea", Component.options)
+    hotAPI.reload("data-v-43b4f6ac", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -70287,7 +70287,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-38c6b1ea", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-43b4f6ac", module.exports)
   }
 }
 
@@ -70317,7 +70317,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Perfil.vue"
+Component.options.__file = "resources/assets/js/components/Perfil.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -70326,9 +70326,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-144b3603", Component.options)
+    hotAPI.createRecord("data-v-159d38c3", Component.options)
   } else {
-    hotAPI.reload("data-v-144b3603", Component.options)
+    hotAPI.reload("data-v-159d38c3", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -71423,7 +71423,11 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
+<<<<<<< Updated upstream
     require("vue-hot-reload-api")      .rerender("data-v-85ef4954", module.exports)
+=======
+    require("vue-hot-reload-api")      .rerender("data-v-159d38c3", module.exports)
+>>>>>>> Stashed changes
   }
 }
 
