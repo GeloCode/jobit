@@ -54,7 +54,7 @@ class PortfolioController extends Controller
     }
     public function getPortfIdJoint($id_perfil){
        return Portfolio::where('perfil_id', function ($query) use ($id_perfil) {
-            $query->select('perfil_id')->from('perfils')->where('user_id', '=', $id_perfil);
+            $query->select('id')->from('perfils')->where('user_id', '=', $id_perfil);
        })->select('id')->first();
     }
     

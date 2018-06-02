@@ -34,7 +34,7 @@
     export default {
         props: ['authid'],
         created: function () {
-             //getIdPortfolio(this.authid);
+            this.getIdPortfolio(this.authid);
         },
         //end
         //aqui almacenamos datos
@@ -42,6 +42,7 @@
             return {
                 proyectos: [],
                 infoPortfolio: [],
+                idPortfolio: '',
                 newPerfilId: this.authid,
                 newTitle: '',
                 newDescription: ''
@@ -53,6 +54,11 @@
             },
             getIdPortfolio: function (id_perfil){
                 var url = 'pillaridportf/' + id_perfil;
+                    axios.get(url).then(response =>{
+                    this.idPortfolio = response.data.id;
+                }).catch(error => {
+                    portfolios = {'id':1};
+                })
             },
             createPortfolio: function () {
                 var url = 'portfolios';
@@ -67,14 +73,11 @@
                     this.errors = [];
                     //$('#create').modal('hide');
                     toastr.success('Success');
-                    window.location.href = "/projects?id=4"
+                    window.location.href = "/projects?id=" +this.idPortfolio
                 }).catch(error => {
                     this.errors = error.response.data
                     //toastr.danger('Hay algun error');
                 });
-            },
-            getIdPortfolio: function() {
-                 var url = 'portfolios';
             }
         }
 
