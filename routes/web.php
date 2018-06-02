@@ -176,7 +176,7 @@ Route::post('perfil', 'PerfilController@store');
 /**
  * Para actualizar un perfil
  */
-Route::put('perfil/{id}', 'PerfilController@update');
+Route::put('perfil/{id}', 'PerfilController@store');
 
 
 //PROYECTOS 

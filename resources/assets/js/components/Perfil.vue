@@ -1,15 +1,17 @@
 <template>
-	<div class="container-fluid">
+	<div class="container">
+		<br>
 		<div class="row">
 			<div class="col-md-4">
 				<div class="row">
 					<div class="col-md-12">
-						<img alt="Bootstrap Image Preview" v-bind:src="profile.imagen" class="rounded-circle">
+						<img alt="Image Preview" src="../../img/avatar.png" style="width:200px;" class="rounded-circle">
 					</div>
 				</div>
+				<br>
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-					Launch demo modal
+				<button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#exampleModal">
+					Editar perfil
 				</button>
 
 				<!-- Modal -->
@@ -25,49 +27,48 @@
 							<div class="modal-body">
 								<form method="POST" v-on:submit.prevent="createProfile()">
 									<div class="form-group">
-										<input type="text" class="form-control" id="nameInput" aria-describedby="name" placeholder="Nombre">
+										<input type="text" class="form-control" id="nameInput" aria-describedby="name"
+										v-model="profile.name">
 										<small id="name" class="form-text text-muted">Ej. Antonio</small>
 									</div>
 									<div class="form-group">
-										<textarea name="descripcion" rows="4" cols="60"></textarea>
+										<textarea name="descripcion" rows="4" cols="60" v-model="profile.descripcion"></textarea>
 										<small id="name" class="form-text text-muted">Pequeña descripción del usuario</small>
 									</div>
 									<div class="form-group">
-										<select class="custom-select mb-1" name="selectProvincia" v-model="provinciaId">
+										<select class="custom-select mb-1" name="selectProvincia" v-model="profile.provincia_id">
 											<option value="0">Elige tu Provincia</option>
 											<option v-for="provincia in provincias" :key="provincia.id" :value="provincia.id" v-text="provincia.nombre"></option>
 										</select>
 									</div>
 									<div class="form-group">
 										<label for="telefono">Telefono</label>
-										<input type="text" name="telefono">
+										<input type="text" name="telefono" v-model="profile.telefono">
 									</div>
 									<div class="form-group">
 										<label for="direccion">Direccion</label>
-										<input type="text" name="direccion">
+										<input type="text" name="direccion" v-model="profile.direccion">
 									</div>
 									<div class="form-group">
 										<label for="codigo_postal">Codigo postal</label>
-										<input type="text" name="codigo_postal">
+										<input type="text" name="codigo_postal" v-model="profile.codigo_postal">
 									</div>
 									<div class="form-group">
 										<label for="lenguajes">Lenguajes</label>
-										<input type="text" name="lenguajes">
+										<input type="text" name="lenguajes" v-model="profile.lenguajes">
 									</div>
 									<div class="form-group">
 										<label for="frameworks">Frameworks</label>
-										<input type="text" name="frameworks">
+										<input type="text" name="frameworks" v-model="profile.frameworks">
 									</div>
 									<div class="form-group">
 										<label for="imagen">Imagen</label>
 										<input type="file" name="imagen">
 									</div>
 									<button type="submit" class="btn btn-primary">Submit</button>
-								</form>
-							</div>
-							<div class="modal-footer">
+									
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary">Save changes</button>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -95,61 +96,80 @@
 				</div>
 			</div>
 		</div>
-		{{profile}}
 	</div>
 </template>
 <script>
-	export default {
-		created: function () {
-			this.getPerfilByUser();
-			this.getProvincias();
-		},
-		data: function () {
-			return {
-				provincias:[],
-				profile: {},
-				profileData: {
-					name: "",
-					descripcion: "",
-					telefono: "",
-					direccion: "",
-					codigo_postal: "",
-					lenguajes: "",
-					frameworks: "",
-					imagen: "",
-					user_id: this.userId
-				},
-				lenguajesArray: [],
-				lenguajes: "",
-				frameworksArray: [],
-				frameworks: "",
-				provinciaId: 0,
-			};
-		},
-		props: {
-			userId: String
-		},
-		methods: {
-			getPerfilByUser: function () {
-				var url = "perfil/usuario/" + this.userId;
-				axios.get(url).then(response => {
-					this.profile = response.data;
-					this.lenguajesArray = this.profile.lenguajes.split(",");
-					this.frameworksArray = this.profile.frameworks.split(",");
-				});
-			},
-			createProfile: function () {
-				axios.post("perfil/store", this.profileData).then(function (response) {
-				}).catch(function (error) {
-						toastr.error(error);
-					});
-			},
-			getProvincias: function () {
-				var url = "provincias";
-				axios.get(url).then(response => {
-					this.provincias = response.data;
-				});
-			}
-		}
-	};
+export default {
+  created: function() {
+    this.getPerfilByUser();
+    this.getProvincias();
+  },
+  data: function() {
+    return {
+      provincias: [],
+      profile: {
+        name: "",
+        descripcion: "",
+        telefono: "",
+        direccion: "",
+        codigo_postal: "",
+        lenguajes: "",
+        frameworks: "",
+        imagen: "",
+        provincia_id: 0
+      },
+      lenguajesArray: [],
+      lenguajes: "",
+      frameworksArray: [],
+      frameworks: "",
+      provinciaId: 0
+    };
+  },
+  props: {
+    userId: String
+  },
+  methods: {
+    getPerfilByUser: function() {
+      var url = "perfil/usuario/" + this.userId;
+      axios.get(url).then(response => {
+        this.profile = response.data;
+        this.lenguajesArray = this.profile.lenguajes.split(",");
+        this.frameworksArray = this.profile.frameworks.split(",");
+      });
+    },
+    createProfile: function() {
+      var myMethod = "post";
+      if (this.profile.id) {
+        myMethod = "put";
+      }
+      axios({
+        method: myMethod,
+        url: "perfil/store",
+        data: {
+          user_id: this.userId,
+          provincia_id: this.profile.provincia_id,
+          name: this.profile.name,
+          telefono: this.profile.telefono,
+          direccion: this.profile.direccion,
+          descripcion: this.profile.descripcion,
+          codigo_postal: this.profile.codigo_postal,
+          lenguajes: this.profile.lenguajes,
+          frameworks: this.profile.frameworks
+        }
+      })
+        .then(function(response) {
+			$("#exampleModal").modal('toggle');
+		})
+        .catch(function(error) {
+          toastr.error(error);
+        });
+    },
+    getProvincias: function() {
+      var url = "provincias";
+      axios.get(url).then(response => {
+        this.provincias = response.data;
+      });
+    }
+  }
+};
 </script>
