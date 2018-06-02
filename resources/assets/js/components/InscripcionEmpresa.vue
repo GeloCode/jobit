@@ -21,7 +21,7 @@
                     <td v-text="inscOferta.estado == 'D' ? 'Pendiente por Gestionar' 
                     : inscOferta.estado == 'A' ? 'Aceptado' : 'Rechazado'"></td>
                     <td>
-                        <a  class="btn btn-primary" v-bind:href="'/projects?id=' + inscOferta.user_id">Ver Portfolio</a>
+                        <button  class="btn btn-primary" @click.prevent="verPortfolio(inscOferta.user.id)">Ver Portfolio</button>
                         <button class="btn btn-primary" @click.prevent="aceptarInscripcion(inscOferta.id)" 
                         v-if="inscOferta.estado != 'A'">Aceptar</button>
                         <button class="btn btn-danger" @click.prevent="rechazarInscripcion(inscOferta.id)"
@@ -38,19 +38,25 @@ export default {
     this.getOfertasInscripcion();
   },
   props: {
-    userId: String
+    userId: String,
+    ofertaId: String
   },
   data: function() {
     return {
       inscripcionofertas: [],
       inscripcionOfertasFiltradas: [],
       filtrarAceptado: false,
-      filtrarRechazado: false
+      filtrarRechazado: false,
+      portfolioId: "",
     };
   },
   methods: {
     getOfertasInscripcion: function(page) {
-      var url = "inscripcion/empresas/" + this.userId;
+      var url =
+        "inscripcion/empresas?userId=" +
+        this.userId +
+        "&ofertaId=" +
+        this.ofertaId;
       axios.get(url).then(response => {
         this.inscripcionofertas = response.data;
         this.filtrarInscripcionDependiendoFiltro();
@@ -114,6 +120,21 @@ export default {
           }
         );
       }
+    },
+    getIdPortfolio: function(userId) {
+      var url = "pillaridportf/" + userId;
+      axios
+        .get(url)
+        .then(response => {
+          this.portfolioId = response.data.id;
+        })
+        .catch(error => {
+          portfolios = { id: 1 };
+        });
+    },
+    verPortfolio: function(userId){
+      this.getIdPortfolio(userId);
+      window.location.href = "/projects?id=" + this.idPortfolio;
     }
   }
 };

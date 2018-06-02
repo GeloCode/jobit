@@ -47,12 +47,21 @@ class InscripcionesController extends Controller
     /**
      * Devuelve las Inscripciones de una empresa
      */
-    public function getInscripcionesEmpresa($id)
+    public function getInscripcionesEmpresa(Request $request)
     {
-        return Inscripcion::with('user:id,email')->with('oferta:id,titulo')
-        ->whereHas('oferta', function($query) use($id){
-            $query->where('user_id', '=', $id);
-        })->get();
+        $id = $request->userId;
+        $ofertaId = $request->ofertaId;
+        if($ofertaId){
+            return Inscripcion::with('user:id,email')->with('oferta:id,titulo')
+            ->whereHas('oferta', function($query) use($id, $ofertaId){
+                $query->where('user_id', '=', $id)->where('id', '=', $ofertaId);
+            })->get();
+        } else {
+            return Inscripcion::with('user:id,email')->with('oferta:id,titulo')
+            ->whereHas('oferta', function($query) use($id, $ofertaId){
+                $query->where('user_id', '=', $id);
+            })->get();
+        }
     }
 
     /**

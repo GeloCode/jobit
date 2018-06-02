@@ -25,23 +25,91 @@
  }
 
  .rounded-0 {
-   height: 99%;
+   height: 100%;
  }
 
-.header {
-  height:600px;
-  width:100%;
-  background-image:linear-gradient(to right, rgba(0, 0, 0, .8), rgba(0, 0, 0, .4),rgba(0, 0, 0, .8)), url('../img/pic_1.jpg');
-  background-size: cover;
-
-  .header-img {
-    height:100%;
+#home {
+  .header {
+    height:600px;
     width:100%;
-    display:flex;
-    justify-content:center;
-    align-items: center;
+    background-image:linear-gradient(to right, rgba(0, 0, 0, .8), rgba(0, 0, 0, .4),rgba(0, 0, 0, .8)), url('../img/pic_1.jpg');
+    background-size: cover;
+    .header-img {
+      height:100%;
+      width:100%;
+      display:flex;
+      justify-content:center;
+      align-items: center;
+    }
   }
 }
+#ofertaempresa{
+  .header {
+    height:600px;
+    width:100%;
+    background-image:linear-gradient(to right, rgba(0, 0, 0, .8), rgba(0, 0, 0, .4),rgba(0, 0, 0, .8)), url('../img/offer.jpg');
+    background-size: cover;
+
+    .header-img {
+      height:100%;
+      width:100%;
+      display:flex;
+      justify-content:center;
+      align-items: center;
+      h2 {
+        text-align: center;
+        color:white;
+        text-shadow: 1px 2px 3px $primary;
+        text-transform: uppercase;
+      }
+    }
+  }
+  form:first-child {
+    display: flex;
+    justify-content: center;
+  }
+  .oferta {
+    display: flex;
+    .form-group {
+      .form-control:disabled, .form-control[readonly] {
+        background-color: white;
+        opacity: 1;
+        border: none;
+      }
+      textarea {
+        resize: none;
+      }
+      label {
+        display:block;
+      }
+      input[type=number]::-webkit-inner-spin-button, 
+      input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=number] {
+  -moz-appearance: textfield;
+ }
+      &:first-child {
+        label {
+          display:none;
+        }
+      }
+    }
+    .form-content {
+      display: flex;
+      flex-direction: row;
+      .form-group {
+        &:first-child {
+          label {
+            display:block;
+          }
+        }
+      }
+    }
+  }
+}
+
 
 .primary {
   color: $primary !important;
@@ -236,4 +304,8 @@ fill:$primary;
     opacity: 1;
     filter: url(#glow);
   }
+}
+
+.clear {
+  clear:both;
 }

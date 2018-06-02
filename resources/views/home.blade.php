@@ -1,3 +1,4 @@
-@extends('app') @section('content')
+@extends('app') 
+@section('content')
     <home></home>
 @endsection

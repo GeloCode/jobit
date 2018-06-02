@@ -36,7 +36,7 @@ class PerfilController extends Controller
             'descripcion' => 'required',
         ]);
         
-        if(Perfil::where('user_id', '=', $request->user_id))
+        if(Perfil::where('user_id', '=', $request->user_id)->count() > 0)
         {
             Perfil::where('user_id', '=', $request->user_id)->update($request->all());
         } else {
