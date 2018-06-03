@@ -13,7 +13,7 @@
 				<button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#exampleModal">
 					Editar perfil
 				</button>
-				<div v-if="profile.id"  class="mostrarEnlaces">
+				<div  class="mostrarEnlaces">
 					<enlaces :user-id="userId"></enlaces>
 				</div>
 				<!-- Modal -->
@@ -104,8 +104,9 @@
 import Enlaces from "./Enlaces.vue";
 export default {
   created: function() {
-    this.getPerfilByUser();
-    this.getProvincias();
+      this.getPerfilByUser();
+      this.getProvincias();
+      $("#exampleModal").modal("show");
   },
   data: function() {
     return {
@@ -170,6 +171,7 @@ export default {
         .then(response => {
           $("#exampleModal").modal("toggle");
           this.getPerfilByUser();
+					toastr.success("Perfil actualizado correctamente");
         })
         .catch(function(error) {
           toastr.error(error);

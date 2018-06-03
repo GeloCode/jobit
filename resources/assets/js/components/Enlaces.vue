@@ -2,8 +2,9 @@
 <div>
 	<div v-for="enlace in enlaces" :key="enlace.id"  class="list-group">
         <div class="list-group-item">
-            <a   v-text="enlace.web" v-bind:href="enlace.enlace"></a>
+            <a   v-text="enlace.web" :href="enlace.enlace"></a>
             <a class="btn btn-danger btn-sm float-right" @click="deleteEnlace(enlace.id)">Borrar</a>
+            <a class="btn btn-warning btn-sm float-right" @click="createLink(enlace.id)">Editar</a>
         </div>
     </div>
         <button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#enlacesModal">Añadir Enlace</button>
@@ -27,7 +28,7 @@
                              <input type="text" class="form-control" id="urlInput" aria-describedby="web" v-model="enlace.enlace">
                             <small id="name" class="form-text text-muted">www.noTenemosDNS.tampocoDominio</small>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </form>
                 </div>
@@ -65,7 +66,9 @@ export default {
         .then(response => {
           this.enlaces = response.data;
         })
-        .catch(error => {});
+        .catch(error => {
+          toastr.error(error);
+        });
     },
     createLink: function() {
       var myMethod = "post";
@@ -74,6 +77,7 @@ export default {
         myMethod = "put";
         url += "/" + this.userId;
       }
+      toastr.info(myMethod);
       axios({
         method: myMethod,
         url: url,
@@ -85,19 +89,25 @@ export default {
       })
         .then(response => {
           $("#enlaceModal").modal("toggle");
+          toastr.success("Enlaces actualizados correctamente");
           this.getLinks();
         })
         .catch(function(error) {
           toastr.error(error);
         });
     },
-    deleteEnlace: function(enlace) {
+    deleteEnlace: function(id) {
       if (confirm("¿Estas Seguro?")) {
-        var url = "enlaces/" + enlace.id;
-        axios.delete(url).then(response => {
-          this.getLinks();
-          toastr.success("Enlace eliminado correctamente!");
-        });
+        var url = "deleteEnlace/" + id;
+        axios
+          .delete(url)
+          .then(response => {
+            toastr.success("Enlace eliminado correctamente!");
+            this.getLinks();
+          })
+          .catch(error => {
+            toastr.error(error);
+          });
       }
     }
   }

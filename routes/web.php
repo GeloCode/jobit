@@ -203,7 +203,10 @@ Route::get('projct/{id}', 'ProyectosController@getProyectosById'); //obtener los
 Route::get('detail/{id}', 'ProyectosController@getDetalleProyectoById'); //obtener los datos de un proyecto con el id de proyecto
 
 //RUTAS ENLACES
-Route::get('enlaces/{id}', 'EnlacesController@getEnlacesByUserId'); //obtener los enlaces por el id del usuario
+/**
+ * obtener los enlaces por el id del usuario
+ */
+Route::get('enlaces/{id}', 'EnlacesController@getEnlacesByUserId');
 
 /**
  * Para crear un enlace
@@ -213,9 +216,9 @@ Route::post('ienlace', 'EnlacesController@store');
 /**
  * Para actualizar un enlace
  */
-Route::put('ienlace/{id}', 'EnlacesController@store');
+Route::put('ienlace/{id}', 'EnlacesController@update');
 
 /**
  * Borrar la inscripcion de un usuario y esta oferta
  */
-Route::get('enlaces/{id}', 'EnlacesController@deleteEnlace');
+Route::delete('deleteEnlace/{id}', 'EnlacesController@destroy');

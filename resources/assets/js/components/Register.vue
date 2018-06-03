@@ -96,7 +96,7 @@
                 axios
                     .post("register", _this.registerData)
                     .then(function (response) {
-                        var redirect = (window.location.href = "/home");
+                        var redirect = (window.location.href = "/perfil");
                         axios.get(redirect);
                     })
                     .catch(function (error) {
