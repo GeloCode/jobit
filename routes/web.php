@@ -210,6 +210,7 @@ Route::get('detail/{id}', 'ProyectosController@getDetalleProyectoById'); //obten
  * obtener los enlaces por el id del usuario
  */
 Route::get('enlaces/{id}', 'EnlacesController@getEnlacesByUserId');
+Route::get('enlace/{id}', 'EnlacesController@getEnlaceById');
 
 /**
  * Para crear un enlace
