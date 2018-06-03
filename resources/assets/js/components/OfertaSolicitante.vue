@@ -1,12 +1,13 @@
 <template>
-    <div class="container">
+    <div class="container" id="ofertasolicitante">
+        
         <h1>Ofertas</h1>
-        <h1>Filtros</h1>
+        <h2>Filtros</h2>
         <div class="input-group">
             <input type="search" class="form-control mb-1" v-model="search.searchWord" placeholder="Busca por palabra clave.."/>
         </div>
         <div class="input-group">
-            <select class="custom-select mb-1" name="searchProvincia" v-model="search.searchProvincia">
+                <select class="custom-select mb-1" name="searchProvincia" v-model="search.searchProvincia">
                     <option value="0">Elige tu Provincia</option>
                     <option v-for="provincia in provincias" :key="provincia.id" :value="provincia.id" v-text="provincia.nombre"></option>
                 </select>
@@ -23,7 +24,8 @@
         <div class="alert alert-info" role="alert" v-if="ofertas.length == 0 && search">
             <strong>Lo siento!</strong> Ninguna oferta coincide con los valores de búsqueda.
         </div>
-        <div class="accordion">
+
+        <div class="accordion col-lg-8">
           <div class="card" :key="oferta.id" v-for="oferta in ofertas">
             <div class="card-header">
               <h4 class="mb-0">
@@ -34,10 +36,16 @@
             </div>
             <div class="collapse show" :id="'#collapse' + oferta.id" data-parent="#accordion">
               <div class="card-body">
-                <p class="card-text" v-text="oferta.descripcion"></p>
-                <p class="card-text" v-text="'Sueldo '+ oferta.sueldo_desde + '€ - ' + oferta.sueldo_hasta + '€ Bruto/año'"></p>
-                <p class="card-text" v-text="'Vacantes ' + oferta.vacantes"></p>
-                <button class="btn btn-block btn-primary" v-on:click="inscribirse(oferta)" v-if="userId">Inscribirse</button>
+                <p class="card-text label">Descripción</p>
+                <p class="card-text input" v-text="oferta.descripcion"></p>
+                <p class="card-text label">Vacantes</p>
+                <p class="card-text input" v-text="oferta.vacantes"></p>
+                <p class="card-text label">Sueldo</p>
+                <p class="card-text input" v-text="oferta.sueldo_desde + '€ - ' + oferta.sueldo_hasta + '€ Bruto/año'"></p>
+                <hr/>
+                <div class="button-box">
+                  <button class="btn btn-block btn-primary" v-on:click="inscribirse(oferta)" v-if="userId">Inscribirse</button>
+                </div>
               </div>
             </div>
           </div>   
@@ -54,7 +62,7 @@
                   <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)">Sig</a>
               </li>
           </ul>
-      </nav>
+        </nav>
     </div>
 </template>
 <script>
