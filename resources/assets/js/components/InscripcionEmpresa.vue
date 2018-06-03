@@ -18,7 +18,7 @@
                 :class="inscOferta.estado == 'A' ? 'bg-success' : inscOferta.estado == 'R' ? 'bg-danger' : 'bg-warning'">
                     <td v-text="inscOferta.oferta.titulo"></td>
                     <td v-text="inscOferta.user.email"></td>
-                    <td v-text="inscOferta.estado == 'D' ? 'Pendiente por Gestionar' 
+                    <td v-text="inscOferta.estado == '-' ? 'Pendiente por Gestionar' 
                     : inscOferta.estado == 'A' ? 'Aceptado' : 'Rechazado'"></td>
                     <td>
                         <button  class="btn btn-primary" @click.prevent="verPortfolio(inscOferta.user.id)">Ver Portfolio</button>
@@ -47,6 +47,7 @@ export default {
       inscripcionOfertasFiltradas: [],
       filtrarAceptado: false,
       filtrarRechazado: false,
+      filtrarPendienteGestion: false,
       portfolioId: "",
     };
   },
@@ -88,16 +89,19 @@ export default {
     filtrarPendientePorGestionar: function() {
       this.filtrarRechazado = false;
       this.filtrarAceptado = false;
+      this.filtrarPendienteGestion = !this.filtrarPendienteGestion;
       this.getOfertasInscripcion();
     },
     filtrarAceptados: function() {
       this.filtrarAceptado = !this.filtrarAceptado;
       this.filtrarRechazado = false;
+      this.filtrarPendienteGestion = false;
       this.getOfertasInscripcion();
     },
     filtrarRechazados: function() {
       this.filtrarRechazado = !this.filtrarRechazado;
       this.filtrarAceptado = false;
+      this.filtrarPendienteGestion = false;
       this.getOfertasInscripcion();
     },
     filtrarInscripcionDependiendoFiltro() {
@@ -113,12 +117,14 @@ export default {
             return inscripcionOferta.estado == "R";
           }
         );
-      } else {
+      } else if (this.filtrarPendienteGestion){
         this.inscripcionOfertasFiltradas = this.inscripcionofertas.filter(
           inscripcionOferta => {
             return inscripcionOferta.estado == "D";
           }
         );
+      } else {
+        this.inscripcionOfertasFiltradas = this.inscripcionofertas;
       }
     },
     getIdPortfolio: function(userId) {

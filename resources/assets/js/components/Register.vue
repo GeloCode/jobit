@@ -13,7 +13,7 @@
                                         <i class="fa fa-at"></i>
                                     </span>
                                 </div>
-                                <input id="email" type="email" class="form-control" name="email" v-model="registerData.email" required>
+                                <input id="email" type="email" class="form-control" name="email" placeholder="Email" v-model="registerData.email" required>
                                 <span v-if="hasErrors.email" class="help-block">
                                     <strong>{{errorMessage.email}}</strong>
                                 </span>
@@ -21,7 +21,7 @@
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="fa fa-user-tag"></i>
+                                        <i class="fa fa-user"></i>
                                     </span>
                                 </div>
                                 <select v-model="registerData.rol_id" class="form-control" name="selectRol">
@@ -35,7 +35,7 @@
                                         <i class="fa fa-lock"></i>
                                     </span>
                                 </div>
-                                <input id="password" type="password" class="form-control" name="password" v-model="registerData.password" required>
+                                <input id="password" type="password"  placeholder="Password" class="form-control" name="password" v-model="registerData.password" required>
                                 <span v-if="hasErrors.password" class="help-block">
                                     <strong>{{errorMessage.password}}</strong>
                                 </span>
@@ -46,15 +46,12 @@
                                         <i class="fa fa-lock"></i>
                                     </span>
                                 </div>
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" v-model="registerData.password_confirmation"
+                                <input id="password-confirm" type="password"  placeholder="Password confirmation" class="form-control" name="password_confirmation" v-model="registerData.password_confirmation"
                                     required>
                             </div>
                             <button type="submit" class="btn btn-primary" @click.prevent="registerPost()">Create Account</button>
                         </form>
                     </div>
-                </div>
-                <div class="card-footer p-4">
-                    <div class="row"></div>
                 </div>
             </div>
         </div>
@@ -96,7 +93,7 @@
                 axios
                     .post("register", _this.registerData)
                     .then(function (response) {
-                        var redirect = (window.location.href = "/home");
+                        var redirect = (window.location.href = "/perfil");
                         axios.get(redirect);
                     })
                     .catch(function (error) {

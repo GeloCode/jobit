@@ -36,7 +36,7 @@
                                 <div class="input-group-text">
                                     <i class="fa fa-map-marker"></i>
                                 </div>
-                                <select name="pr" id="pr" class="custom-select g-font-size-16 rounded-0 g-height-60 g-min-width-100x border-0" style="" tabindex="2" v-model="search.provincia_id">
+                                <select name="pr" id="pr" class="custom-select g-font-size-16 rounded-0 g-height-60 g-min-width-100x border-0" style="" tabindex="2" v-model="searchProvincia">
                                     <option value="0" disabled>Elige tu Provincia</option>
                                     <option v-for="provincia in provincias" :key="provincia.id" :value="provincia.id" v-text="provincia.nombre"></option>
                                 </select>
@@ -154,7 +154,7 @@ export default {
       ofertas: [],
       oferta: {
         id: "",
-        provincia_id: "",
+        provincia_id: 0,
         titulo: "",
         descripcion: "",
         vacantes: "",
@@ -256,8 +256,8 @@ export default {
           );
           jQuery("#oferta_" + oferta.id + " [name=guardar]").hide();
           jQuery("#oferta_" + oferta.id + " [name=editar]").show();
-          jQuery("#oferta_" + id).addClass("oferta"); // Aqui le añadimos la clase de editar oferta
-          jQuery("#oferta_" + id).removeClass("editandoOferta"); // Aqui le añadimos la clase de editar oferta
+          jQuery("#oferta_" + oferta.id).addClass("oferta"); // Aqui le añadimos la clase de editar oferta
+          jQuery("#oferta_" + oferta.id).removeClass("editandoOferta"); // Aqui le añadimos la clase de editar oferta
           toastr.success("Oferta actualizada correctamente!");
         })
         .catch(error => {
@@ -284,7 +284,9 @@ export default {
     },
     filtrar: function() {
       this.getOfertasByUserId();
-      toastr.success("Filtrado Con Éxito!");
+      if(this.search != '' || this.searchProvincia != 0){
+        toastr.success("Filtrado Con Éxito!");
+      }
     },
     buscarInscripciones: function(id) {
       var url = "/vinscripcionesempresa?ofertaId=" + id;

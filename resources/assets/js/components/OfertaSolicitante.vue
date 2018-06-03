@@ -88,7 +88,7 @@ export default {
       errors: [],
       search: {
         searchWord: this.word,
-        searchProvincia: this.provinciaId,
+        searchProvincia: this.provinciaId ? this.provinciaId : 0,
         searchSueldoDesde: "",
         searchSueldoHasta: ""
       },
@@ -127,7 +127,7 @@ export default {
       axios.post(url, {
         user_id: this.userId,
         oferta_id: oferta.id,
-        estado: 'D'
+        estado: '-'
       }).
         then(response => {
           this.getOfertas();
