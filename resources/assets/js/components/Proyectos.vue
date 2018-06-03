@@ -10,7 +10,7 @@
                                         </div>
                             </div>
                     </div>
-            <center><h2>Proyectos</h2></center> 
+            <center><h2>Proyectosssss   {{idperfil}} - {{useridProyecto}}  </h2></center> 
                <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Crear Proyecto
@@ -93,9 +93,13 @@
                                             <p>{{proyecto.descripcion}}</p>
                                             <a class="btn btn-success btn-sm" v-bind:href="'/detailProject?id=' + proyecto.id">Ver</a>
                                             <div>
-                                           <a href="#" class="btn btn-warning btn-sm" v-on:click.prevent="editProyecto(proyecto)">Editar Proyecto</a>
-                                            <a class="btn btn-danger btn-sm" v-on:click="deleteProyecto(proyecto)">Borrar</a>
-                                            </div>
+                                                <!-- CONTROL DE USUARIO !!! -->
+                                                <div v-if="idperfil == useridProyecto">
+                                                <a href="#" class="btn btn-warning btn-sm" v-on:click.prevent="editProyecto(proyecto)">Editar Proyecto</a>
+                                                    <a class="btn btn-danger btn-sm" v-on:click="deleteProyecto(proyecto)">Borrar</a>
+                                                    </div>
+                                                </div>
+                                                <!-- FIN CONTROL DE USUARIO !!! -->
                                         </div>
                                 </div>
                             </div>
@@ -132,12 +136,12 @@
 
     moment.locale('es');
     export default {
-        props: ['portfid', 'auth'],
+        props: ['portfid', 'auth', 'idperfil'],
         created: function () {
             this.getProyectos(this.portfid);
             this.getInfoPortfolio(this.portfid);
-            this.getUserIdProyecto(this.auth);
-            this.getUserIdPerfils(this.auth);
+            this.getUserIdProyecto(this.portfid);
+            this.getUserIdPerfils(this.idperfil);
         },
         //end
         //aqui almacenamos datos
@@ -202,8 +206,8 @@
                     proyectos = { 'id': 1 };
                 });
             },
-            getUserIdProyecto: function (auth){
-                var url = "useridProyecto/" + auth;
+            getUserIdProyecto: function (idportf){
+                var url = "useridProyecto/" + idportf;
                  axios.get(url).then(response => {
                     this.useridProyecto = response.data;
                 });

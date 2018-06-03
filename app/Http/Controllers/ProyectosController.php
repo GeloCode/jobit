@@ -43,8 +43,8 @@ class ProyectosController extends Controller
     public function getDetalleProyectoById($id){
         return Proyecto::where('id', $id)->get();
     }
-    public function getidproyecto($authid){
-        return Proyecto::where('user_id', $authid)->value('user_id');
+    public function getidproyecto($id){
+        return Proyecto::where('portfolio_id', $id)->value('user_id');
     }
     /**
      * Store a newly created resource in storage.

@@ -15,8 +15,8 @@ class PerfilController extends Controller
     {
         return Perfil::where('user_id', $id)->first();
     }
-    public function getidperfils($authid){
-        return Perfil::where('user_id', $authid)->value('user_id');
+    public function getidperfils($id){
+        return Perfil::where('portfolio_id', $id)->value('user_id');
     }
 
     /**
