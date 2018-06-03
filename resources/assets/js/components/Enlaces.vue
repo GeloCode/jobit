@@ -4,7 +4,7 @@
         <div class="list-group-item">
             <a   v-text="enlace.web" :href="enlace.enlace"></a>
             <a class="btn btn-danger btn-sm float-right" @click="deleteEnlace(enlace.id)">Borrar</a>
-            <a class="btn btn-warning btn-sm float-right" @click="createLink(enlace.id)">Editar</a>
+            <a class="btn btn-warning btn-sm float-right" @click="updateEnlace(enlace.id)">Editar</a>
         </div>
     </div>
         <button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#enlacesModal">Añadir Enlace</button>
@@ -73,11 +73,7 @@ export default {
     createLink: function() {
       var myMethod = "post";
       var url = "ienlace";
-      if (this.enlace.id) {
-        myMethod = "put";
-        url += "/" + this.userId;
-      }
-      toastr.info(myMethod);
+      alert('entraaaaaaaaaaa');
       axios({
         method: myMethod,
         url: url,
@@ -109,6 +105,28 @@ export default {
             toastr.error(error);
           });
       }
+    },
+    updateEnlace: function(id) {
+      var myMethod = "put";
+      var url = "ienlace/" + id;
+      toastr.info(myMethod);
+      axios({
+        method: myMethod,
+        url: url,
+        data: {
+          user_id: this.userId,
+          web: this.enlace.web,
+          enlace: this.enlace.enlace
+        }
+      })
+        .then(response => {
+          $("#enlaceModal").modal("toggle");
+          toastr.success("Enlaces actualizados correctamente");
+          this.getLinks();
+        })
+        .catch(function(error) {
+          toastr.error(error);
+        });
     }
   }
 };

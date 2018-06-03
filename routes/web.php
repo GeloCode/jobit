@@ -10,6 +10,9 @@ Route::get('/portf', function () {
 Route::get('/dash', function () {
     return view('crudUsuarioProyectos');
 }); 
+Route::get('/pruebaRegistro', function () {
+    return view('includes.register');
+}); 
 
 /**
  * Temporal para hacer pruebas con las ofertas empresa
