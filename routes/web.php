@@ -156,7 +156,7 @@ Route::get('inscripcion/rechazar/{id}', 'InscripcionesController@rechazarInscrip
 /**
  * Borrar la inscripcion de un usuario y esta oferta
  */
-Route::get('inscripcion/empresas/{id}', 'InscripcionesController@getInscripcionesEmpresa');
+Route::get('inscripcion/empresas', 'InscripcionesController@getInscripcionesEmpresa');
 
 
 /*************** ROUTINGS PERFILES ************** */

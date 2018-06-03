@@ -10657,10 +10657,10 @@ button.toast-close-button {
 }
 
 .rounded-0 {
-  height: 99%;
+  height: 100%;
 }
 
-.header {
+#home .header {
   height: 600px;
   width: 100%;
   background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.8)), color-stop(rgba(0, 0, 0, 0.4)), to(rgba(0, 0, 0, 0.8))), url(/images/pic_1.jpg?db3e2b0a99125d2265f2fe6f9b209b0d);
@@ -10668,7 +10668,7 @@ button.toast-close-button {
   background-size: cover;
 }
 
-.header .header-img {
+#home .header .header-img {
   height: 100%;
   width: 100%;
   display: -webkit-box;
@@ -10680,6 +10680,93 @@ button.toast-close-button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+#ofertaempresa .header {
+  height: 600px;
+  width: 100%;
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.8)), color-stop(rgba(0, 0, 0, 0.4)), to(rgba(0, 0, 0, 0.8))), url(/images/offer.jpg?c022c311632c1540c6b4a3bc3fb53c8b);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), url(/images/offer.jpg?c022c311632c1540c6b4a3bc3fb53c8b);
+  background-size: cover;
+}
+
+#ofertaempresa .header .header-img {
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#ofertaempresa .header .header-img h2 {
+  text-align: center;
+  color: white;
+  text-shadow: 1px 2px 3px #28a745;
+  text-transform: uppercase;
+}
+
+#ofertaempresa form:first-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#ofertaempresa .oferta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#ofertaempresa .oferta .form-group .form-control:disabled,
+#ofertaempresa .oferta .form-group .form-control[readonly] {
+  background-color: white;
+  opacity: 1;
+  border: none;
+}
+
+#ofertaempresa .oferta .form-group textarea {
+  resize: none;
+}
+
+#ofertaempresa .oferta .form-group label {
+  display: block;
+}
+
+#ofertaempresa .oferta .form-group input[type=number]::-webkit-inner-spin-button,
+#ofertaempresa .oferta .form-group input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#ofertaempresa .oferta .form-group input[type=number] {
+  -moz-appearance: textfield;
+}
+
+#ofertaempresa .oferta .form-group:first-child label {
+  display: none;
+}
+
+#ofertaempresa .oferta .form-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+#ofertaempresa .oferta .form-content .form-group:first-child label {
+  display: block;
 }
 
 .primary {
@@ -10928,5 +11015,9 @@ body i {
     -webkit-filter: url(#glow);
             filter: url(#glow);
   }
+}
+
+.clear {
+  clear: both;
 }
 
