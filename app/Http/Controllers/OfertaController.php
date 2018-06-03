@@ -167,6 +167,7 @@ class OfertaController extends Controller
             ->from('inscripcions')
             ->where('user_id', '=', $id)
             ->orderBy('created_at', 'DESC');
-        })->leftJoin('inscripcions', 'ofertas.id', '=', 'inscripcions.oferta_id')->get();
+        })->leftJoin('inscripcions', 'ofertas.id', '=', 'inscripcions.oferta_id')
+        ->select('titulo', 'estado', 'oferta_id')->orderByRAW('inscripcions.created_at DESC')->get();
     }
 }
