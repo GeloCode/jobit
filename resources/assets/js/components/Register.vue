@@ -13,15 +13,21 @@
                                         <i class="fa fa-at"></i>
                                     </span>
                                 </div>
+<<<<<<< HEAD
                                 <input id="email" type="email" class="form-control" name="email" v-model="registerData.email" required>
                                 <span v-if="msg.email">
                                     <strong>{{msg.email}}</strong>
+=======
+                                <input id="email" type="email" class="form-control" name="email" placeholder="Email" v-model="registerData.email" required>
+                                <span v-if="hasErrors.email" class="help-block">
+                                    <strong>{{errorMessage.email}}</strong>
+>>>>>>> daff28805a6ac04986591df0d6d092e4474998e3
                                 </span>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="fa fa-user-tag"></i>
+                                        <i class="fa fa-user"></i>
                                     </span>
                                 </div>
                                 <select v-model="registerData.rol_id" class="form-control" name="selectRol">
@@ -38,9 +44,15 @@
                                         <i class="fa fa-lock"></i>
                                     </span>
                                 </div>
+<<<<<<< HEAD
                                 <input id="password" type="password" class="form-control" name="password" v-model="registerData.password" required>
                                 <span v-if="msg.password">
                                     <strong>{{msg.password}}</strong>
+=======
+                                <input id="password" type="password"  placeholder="Password" class="form-control" name="password" v-model="registerData.password" required>
+                                <span v-if="hasErrors.password" class="help-block">
+                                    <strong>{{errorMessage.password}}</strong>
+>>>>>>> daff28805a6ac04986591df0d6d092e4474998e3
                                 </span>
                             </div>
                             <div class="input-group mb-4">
@@ -49,7 +61,7 @@
                                         <i class="fa fa-lock"></i>
                                     </span>
                                 </div>
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" v-model="registerData.password_confirmation"
+                                <input id="password-confirm" type="password"  placeholder="Password confirmation" class="form-control" name="password_confirmation" v-model="registerData.password_confirmation"
                                     required>
                                 <span v-if="msg.password_confirmation">
                                     <strong>{{msg.password_confirmation}}</strong>
@@ -58,9 +70,6 @@
                             <button type="submit" class="btn btn-primary" @click.prevent="registerPost()" :disabled="disableSubmitButton">Create Account</button>
                         </form>
                     </div>
-                </div>
-                <div class="card-footer p-4">
-                    <div class="row"></div>
                 </div>
             </div>
         </div>

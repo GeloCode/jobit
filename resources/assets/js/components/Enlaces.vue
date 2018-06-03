@@ -4,7 +4,7 @@
         <div class="list-group-item">
             <a   v-text="enlace.web" :href="enlace.enlace"></a>
             <a class="btn btn-danger btn-sm float-right" @click="deleteEnlace(enlace.id)">Borrar</a>
-            <a class="btn btn-warning btn-sm float-right" @click="createLink(enlace.id)">Editar</a>
+            <a class="btn btn-warning btn-sm float-right" data-toggle="modal" data-target="#updateEnlace" @click="getEnlaceById(enlace.id)">Editar</a>
         </div>
     </div>
         <button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#enlacesModal">Añadir Enlace</button>
@@ -12,7 +12,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="enlacesModalLabel">Enlace</h5>
+                    <h5 class="modal-title" id="enlacesModalLabel">Añadir enlace</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -28,7 +28,34 @@
                              <input type="text" class="form-control" id="urlInput" aria-describedby="web" v-model="enlace.enlace">
                             <small id="name" class="form-text text-muted">www.noTenemosDNS.tampocoDominio</small>
                         </div>
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="updateEnlace" tabindex="-1" role="dialog" aria-labelledby="updateEnlaceLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateEnlaceLabel">Editar enlace</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form v-on:submit.prevent="updateEnlace()">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="webInput" aria-describedby="web"
+                            v-model="enlace.web">
+                            <small id="web" class="form-text text-muted">JobIT</small>
+                        </div>
+                        <div class="form-group">
+                             <input type="text" class="form-control" id="urlInput" aria-describedby="web" v-model="enlace.enlace">
+                            <small id="name" class="form-text text-muted">www.noTenemosDNS.tampocoDominio</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </form>
                 </div>
@@ -73,11 +100,6 @@ export default {
     createLink: function() {
       var myMethod = "post";
       var url = "ienlace";
-      if (this.enlace.id) {
-        myMethod = "put";
-        url += "/" + this.userId;
-      }
-      toastr.info(myMethod);
       axios({
         method: myMethod,
         url: url,
@@ -109,6 +131,32 @@ export default {
             toastr.error(error);
           });
       }
+    },
+    updateEnlace: function() {
+     console.log(this.enlace.id);
+      var url = "ienlace/" + this.enlace.id;
+      axios.put(url, {
+        user_id : this.userId,
+        web : this.enlace.web,
+        enlace : this.enlace.enlace
+      })
+        .then(response => {
+          this.enlace = {};
+          // $("#updateEnlace").modal("toggle");
+          toastr.success("Enlaces actualizados correctamente");
+          this.getLinks();
+        })
+        .catch(function(error) {
+          toastr.error(error);
+        });
+    },
+    getEnlaceById: function(id){
+      var url = "enlace/" + id;
+      axios.get(url).then(response => {
+        this.enlace = response.data;
+        console.log(this.enlace);
+        $("#updateEnlace").modal("toggle");
+      });
     }
   }
 };

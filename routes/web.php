@@ -10,6 +10,9 @@ Route::get('/portf', function () {
 Route::get('/dash', function () {
     return view('crudUsuarioProyectos');
 }); 
+Route::get('/pruebaRegistro', function () {
+    return view('includes.register');
+}); 
 
 /**
  * Temporal para hacer pruebas con las ofertas empresa
@@ -196,6 +199,8 @@ Route::get('selectName', 'PortfolioController@getNameUser'); //obtener todos los
 Route::post('crearPortfolio', 'PortfolioController@store'); //crear el portfolio
 Route::get('info/{id}', 'PortfolioController@getInfoPortfolio');
 Route::get('pillaridportf/{id}', 'PortfolioController@getPortfIdJoint'); //esto es para obtener el id del portfolio a traves del id de perfil (para redirigir al user para crear proyectos)
+Route::get('useridProyecto/{id}', 'ProyectosController@getidproyecto');
+Route::get('useridPerfils/{id}', 'PerfilController@getidperfils');
 
 //RUTAS PROYECTOS
 Route::resource('proyectos', 'ProyectosController', ['except' => 'create']); //todas las rutas de proyectos
@@ -207,6 +212,7 @@ Route::get('detail/{id}', 'ProyectosController@getDetalleProyectoById'); //obten
  * obtener los enlaces por el id del usuario
  */
 Route::get('enlaces/{id}', 'EnlacesController@getEnlacesByUserId');
+Route::get('enlace/{id}', 'EnlacesController@getEnlaceById');
 
 /**
  * Para crear un enlace

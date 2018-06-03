@@ -17,6 +17,16 @@ class EnlacesController extends Controller
     {
         return Enlace::where('user_id', $id)->get();
     }
+    
+    /**
+     * Nos devuelve el enlace que pedimos
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getEnlaceById($id)
+    {
+        return Enlace::findOrFail($id)->first();
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -41,7 +51,10 @@ class EnlacesController extends Controller
             'web' => 'required',
             'enlace' => 'required',
         ]);
-        Enlace::where('user_id', '=', $request -> user_id ) -> update( $request -> all() );
+        $enlace = Enlace::findOrFail($request->id);
+        $enlace->web = $request->web;
+        $enlace->enlace = $request->enlace;
+        $enlace->save();
         return;
     }
     /**
