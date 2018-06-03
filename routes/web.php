@@ -214,3 +214,8 @@ Route::post('ienlace', 'EnlacesController@store');
  * Para actualizar un enlace
  */
 Route::put('ienlace/{id}', 'EnlacesController@store');
+
+/**
+ * Borrar la inscripcion de un usuario y esta oferta
+ */
+Route::get('enlaces/{id}', 'EnlacesController@deleteEnlace');

@@ -1,16 +1,17 @@
 <template>
 <div>
-	<div class="list-group">
-        <div v-for="enlace in enlaces" :key="enlace.id"  class="list-group-item" v-text="enlace.web" @click.prevent="openLink(enlace.enlace)">
-            <a class="btn btn-danger btn-sm" v-bind:href="'/borrarEnlace?id=' + enlace.id">Borrar</a>
+	<div v-for="enlace in enlaces" :key="enlace.id"  class="list-group">
+        <div class="list-group-item">
+            <a   v-text="enlace.web" v-bind:href="enlace.enlace"></a>
+            <a class="btn btn-danger btn-sm float-right" @click="deleteEnlace(enlace.id)">Borrar</a>
         </div>
     </div>
-        <button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#exampleModal">Añadir Enlace</button>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#enlacesModal">Añadir Enlace</button>
+    <div class="modal fade" id="enlacesModal" tabindex="-1" role="dialog" aria-labelledby="enlacesModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Enlace</h5>
+                    <h5 class="modal-title" id="enlacesModalLabel">Enlace</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -23,7 +24,7 @@
                             <small id="web" class="form-text text-muted">JobIT</small>
                         </div>
                         <div class="form-group">
-                             <input type="text" class="form-control" id="urlInput" aria-describedby="web" v-model="enlace.url">
+                             <input type="text" class="form-control" id="urlInput" aria-describedby="web" v-model="enlace.enlace">
                             <small id="name" class="form-text text-muted">www.noTenemosDNS.tampocoDominio</small>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -44,8 +45,9 @@ export default {
     return {
       enlaces: [],
       enlace: {
+        user_id: this.userId,
         web: "",
-        url: ""
+        enlace: ""
       }
     };
   },
@@ -63,9 +65,7 @@ export default {
         .then(response => {
           this.enlaces = response.data;
         })
-        .catch(error => {
-          toastr.error(error);
-        });
+        .catch(error => {});
     },
     createLink: function() {
       var myMethod = "post";
@@ -80,7 +80,7 @@ export default {
         data: {
           user_id: this.userId,
           web: this.enlace.web,
-          url: this.enlace.url
+          enlace: this.enlace.enlace
         }
       })
         .then(response => {
@@ -90,6 +90,15 @@ export default {
         .catch(function(error) {
           toastr.error(error);
         });
+    },
+    deleteEnlace: function(enlace) {
+      if (confirm("¿Estas Seguro?")) {
+        var url = "enlaces/" + enlace.id;
+        axios.delete(url).then(response => {
+          this.getLinks();
+          toastr.success("Enlace eliminado correctamente!");
+        });
+      }
     }
   }
 };
