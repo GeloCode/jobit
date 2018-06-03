@@ -66297,25 +66297,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -66451,9 +66432,9 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _vm._v(
-                  "\n                        " +
+                  "\n                    " +
                     _vm._s(_vm.nameUser.name) +
-                    "\n                        "
+                    "\n                    "
                 ),
                 _c("h5", {
                   staticClass: "card-title",
@@ -66477,9 +66458,9 @@ var render = function() {
                 _c("div", { staticClass: "col-md-5 offset-md-7" }, [
                   _c("small", [
                     _vm._v(
-                      "\n                                " +
+                      "\n                            " +
                         _vm._s(_vm.since(portfolio.created_at)) +
-                        "\n                            "
+                        "\n                        "
                     )
                   ])
                 ]),
@@ -66578,7 +66559,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['hashid'], //hashid es el id del porfolio poviniente del proyectos.blade
+    props: ['hashid', 'userid'], //hashid es el id del porfolio poviniente del proyectos.blade
     data: function data() {
         return {};
     },
@@ -66588,17 +66569,7 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
     },
     //end
     //funcionalidad. aqui se llama a laravel y que te pase datos.
-    methods: {
-        /* getPortfolios: function () {
-            var urlPortfolios = 'portfolios';
-            axios.get(urlPortfolios).then(response => {
-                this.portfolios = response.data;
-            }).catch(error => {
-                portfolios = { 'id': 1 };
-            });
-        },*/
-        getProyectos: function getProyectos() {}
-    }
+    methods: {}
 });
 
 /***/ }),
@@ -66694,6 +66665,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -66701,17 +66713,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['portfolios', 'portfid'],
+    props: ['portfid', 'auth'],
     created: function created() {
         this.getProyectos(this.portfid);
         this.getInfoPortfolio(this.portfid);
+        this.getUserIdProyecto(this.auth);
+        this.getUserIdPerfils(this.auth);
     },
     //end
     //aqui almacenamos datos
     data: function data() {
         return {
             proyectos: [],
-            infoPortfolio: []
+            useridProyecto: '',
+            useridPerfils: '',
+            infoPortfolio: [],
+            newUserid: this.auth,
+            newPortfolioid: this.portfid,
+            newTitle: '',
+            newDescription: '',
+            fillProject: { 'titulo': '', 'descripcion': '' }
         };
     },
     methods: {
@@ -66728,23 +66749,79 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
                 proyectos = { 'id': 1 };
             });
         },
-        getInfoPortfolio: function getInfoPortfolio(portf_id) {
+        getUserIdProyecto: function getUserIdProyecto(auth) {
             var _this2 = this;
+
+            var url = "useridProyecto/" + auth;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (response) {
+                _this2.useridProyecto = response.data;
+            });
+        },
+        getUserIdPerfils: function getUserIdPerfils(auth) {
+            var _this3 = this;
+
+            var url = "useridPerfils/" + auth;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (response) {
+                _this3.useridPerfils = response.data;
+            });
+        },
+        getInfoPortfolio: function getInfoPortfolio(portf_id) {
+            var _this4 = this;
 
             var urlPortfolio = 'info/' + portf_id;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(urlPortfolio).then(function (response) {
-                _this2.infoPortfolio = response.data;
+                _this4.infoPortfolio = response.data;
             }).catch(function (error) {
                 proyectos = { 'id': 1 };
             });
         },
+        createProyecto: function createProyecto() {
+            var _this5 = this;
+
+            var url = 'proyectos';
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(url, {
+                user_id: this.newUserid,
+                portfolio_id: this.newPortfolioid,
+                titulo: this.newTitle,
+                descripcion: this.newDescription
+            }).then(function (response) {
+                _this5.getProyectos(_this5.newPortfolioid);
+                _this5.newUserid = '';
+                _this5.newPortfolioid = '';
+                _this5.newTitle = '';
+                _this5.newDescription = '';
+                _this5.errors = [];
+                __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.success('Success');
+            }).catch(function (error) {
+                _this5.errors = error.response.data;
+            });
+        },
         deleteProyecto: function deleteProyecto(proyecto) {
-            var _this3 = this;
+            var _this6 = this;
 
             var url = 'proyectos/' + proyecto.id;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(url).then(function (response) {
-                _this3.getProyectos();
+                _this6.getProyectos();
                 __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.error('Borrado Correctamente');
+            });
+        },
+        editProyecto: function editProyecto(proyecto) {
+            this.fillProject.titulo = proyecto.titulo;
+            this.fillProject.descripcion = proyecto.descripcion;
+        },
+
+        updateProyecto: function updateProyecto(id) {
+            var _this7 = this;
+
+            var url = 'mobiles/' + id;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.put(url, this.fillMobile).then(function (response) {
+                _this7.getMobiles();
+                _this7.fillMobile = { 'id': '', 'user_id': '', 'number': '' };
+                _this7.errors = [];
+                $('#edit').modal('hide');
+                __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.success('Actualizado correctamente');
+            }).catch(function (error) {
+                _this7.errors = error.response.data;
             });
         }
     }
@@ -66786,7 +66863,120 @@ var render = function() {
         })
       ),
       _vm._v(" "),
-      _c("center", [_c("h2", [_vm._v("Proyectosss")])]),
+      _c("center", [_c("h2", [_vm._v("Proyectos   " + _vm._s(_vm.auth))])]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#exampleModal"
+          }
+        },
+        [_vm._v("\n        Crear Proyecto\n        ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "exampleModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    attrs: { method: "POST" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.createProyecto()
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("label", { attrs: { for: "number" } }, [
+                        _vm._v("Titulo Proyecto")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newTitle,
+                            expression: "newTitle"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "text", maxlength: "45" },
+                        domProps: { value: _vm.newTitle },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.newTitle = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "text" } }, [
+                          _vm._v("Descripcion Proyecto")
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.newDescription,
+                              expression: "newDescription"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            id: "exampleFormControlTextarea1",
+                            rows: "3"
+                          },
+                          domProps: { value: _vm.newDescription },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.newDescription = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1)
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      ),
       _vm._v(" "),
       _c(
         "div",
@@ -66809,7 +66999,35 @@ var render = function() {
                         attrs: { href: "/detailProject?id=" + proyecto.id }
                       },
                       [_vm._v("Ver")]
-                    )
+                    ),
+                    _vm._v(" "),
+                    _vm.useridPerfils == _vm.auth
+                      ? _c("div", [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-warning btn-sm",
+                              attrs: {
+                                href: "/detailProject?id=" + proyecto.id
+                              }
+                            },
+                            [_vm._v("Editar")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-danger btn-sm",
+                              on: {
+                                click: function($event) {
+                                  _vm.deleteProyecto(proyecto)
+                                }
+                              }
+                            },
+                            [_vm._v("Borrar")]
+                          )
+                        ])
+                      : _vm._e()
                   ])
                 ])
               : _vm._e()
@@ -66820,7 +67038,53 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Nuevo Proyecto")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c("input", {
+        staticClass: "btn btn-primary",
+        attrs: { type: "submit", value: "Crear Proyecto" }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -66841,7 +67105,7 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "container" },
-    [_c("proyectos", { attrs: { portfid: _vm.hashid } })],
+    [_c("proyectos", { attrs: { auth: _vm.userid, portfid: _vm.hashid } })],
     1
   )
 }
@@ -67419,9 +67683,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -67742,6 +68003,7 @@ var render = function() {
                     attrs: {
                       id: "password-confirm",
                       type: "password",
+                      placeholder: "Password confirmation",
                       name: "password_confirmation",
                       required: ""
                     },
@@ -67789,9 +68051,7 @@ var render = function() {
               ]
             )
           ])
-        ]),
-        _vm._v(" "),
-        _vm._m(4)
+        ])
       ])
     ])
   ])
@@ -67813,7 +68073,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-prepend" }, [
       _c("span", { staticClass: "input-group-text" }, [
-        _c("i", { staticClass: "fa fa-user-tag" })
+        _c("i", { staticClass: "fa fa-user" })
       ])
     ])
   },
@@ -67835,14 +68095,6 @@ var staticRenderFns = [
       _c("span", { staticClass: "input-group-text" }, [
         _c("i", { staticClass: "fa fa-lock" })
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer p-4" }, [
-      _c("div", { staticClass: "row" })
     ])
   }
 ]
@@ -68251,7 +68503,7 @@ var render = function() {
                 attrs: { role: "alert" }
               },
               [
-                _c("strong", [_vm._v("Vigila! " + _vm._s(_vm.userId))]),
+                _c("strong", [_vm._v("Vigila!")]),
                 _vm._v(
                   " Aún no tienes ningúna oferta, añade una para que te aparezcan.\n      "
                 )
@@ -69190,7 +69442,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     filtrar: function filtrar() {
       this.getOfertas();
-      toastr.success("Filtrado Con Éxito!");
+      if (this.search.searchWord != '' || this.search.searchProvincia != 0) {
+        toastr.success("Filtrado Con Éxito!");
+      }
     }
   },
   computed: {
@@ -70607,6 +70861,7 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
                 _this2.errors = [];
                 //$('#create').modal('hide');
                 __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.success('Success');
+                window.location.href = '/perfil';
             }).catch(function (error) {
                 _this2.errors = error.response.data;
                 __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.danger('Hay algun error');
@@ -70640,7 +70895,7 @@ var render = function() {
                 }
               },
               [
-                _c("label", { attrs: { for: "number" } }, [_vm._v("Titulo")]),
+                _c("label", { attrs: { for: "text" } }, [_vm._v("Titulo")]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -71019,6 +71274,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -71056,11 +71338,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var myMethod = "post";
       var url = "ienlace";
-      if (this.enlace.id) {
-        myMethod = "put";
-        url += "/" + this.userId;
-      }
-      toastr.info(myMethod);
       axios({
         method: myMethod,
         url: url,
@@ -71089,6 +71366,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           toastr.error(error);
         });
       }
+    },
+    updateEnlace: function updateEnlace() {
+      var _this4 = this;
+
+      console.log(this.enlace.id);
+      var url = "ienlace/" + this.enlace.id;
+      axios.put(url, {
+        user_id: this.userId,
+        web: this.enlace.web,
+        enlace: this.enlace.enlace
+      }).then(function (response) {
+        _this4.enlace = {};
+        // $("#updateEnlace").modal("toggle");
+        toastr.success("Enlaces actualizados correctamente");
+        _this4.getLinks();
+      }).catch(function (error) {
+        toastr.error(error);
+      });
+    },
+    getEnlaceById: function getEnlaceById(id) {
+      var _this5 = this;
+
+      var url = "enlace/" + id;
+      axios.get(url).then(function (response) {
+        _this5.enlace = response.data;
+        console.log(_this5.enlace);
+        $("#updateEnlace").modal("toggle");
+      });
     }
   }
 });
@@ -71129,9 +71434,13 @@ var render = function() {
               "a",
               {
                 staticClass: "btn btn-warning btn-sm float-right",
+                attrs: {
+                  "data-toggle": "modal",
+                  "data-target": "#updateEnlace"
+                },
                 on: {
                   click: function($event) {
-                    _vm.createLink(enlace.id)
+                    _vm.getEnlaceById(enlace.id)
                   }
                 }
               },
@@ -71268,7 +71577,143 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-primary",
-                          attrs: { type: "submit", "data-dismiss": "modal" }
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Submit")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary",
+                          attrs: { type: "button", "data-dismiss": "modal" }
+                        },
+                        [_vm._v("Close")]
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "updateEnlace",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "updateEnlaceLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          _vm.updateEnlace()
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.enlace.web,
+                              expression: "enlace.web"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            id: "webInput",
+                            "aria-describedby": "web"
+                          },
+                          domProps: { value: _vm.enlace.web },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.enlace, "web", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "small",
+                          {
+                            staticClass: "form-text text-muted",
+                            attrs: { id: "web" }
+                          },
+                          [_vm._v("JobIT")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.enlace.enlace,
+                              expression: "enlace.enlace"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            id: "urlInput",
+                            "aria-describedby": "web"
+                          },
+                          domProps: { value: _vm.enlace.enlace },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.enlace,
+                                "enlace",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "small",
+                          {
+                            staticClass: "form-text text-muted",
+                            attrs: { id: "name" }
+                          },
+                          [_vm._v("www.noTenemosDNS.tampocoDominio")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" }
                         },
                         [_vm._v("Submit")]
                       ),
@@ -71302,7 +71747,32 @@ var staticRenderFns = [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "enlacesModalLabel" } },
-        [_vm._v("Enlace")]
+        [_vm._v("Añadir enlace")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "updateEnlaceLabel" } },
+        [_vm._v("Editar enlace")]
       ),
       _vm._v(" "),
       _c(

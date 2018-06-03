@@ -149,7 +149,9 @@ export default {
     },
     filtrar: function() {
       this.getOfertas();
-      toastr.success("Filtrado Con Éxito!");
+      if(this.search.searchWord != '' || this.search.searchProvincia != 0){
+        toastr.success("Filtrado Con Éxito!");
+      }
     }
   },
   computed: {

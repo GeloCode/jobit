@@ -8,7 +8,7 @@
         <div class="container">
           <div class="row">
         <div class="alert alert-info mt-2" role="alert" v-if="mensajeNingunaOferta">
-            <strong>Vigila! {{userId}}</strong> Aún no tienes ningúna oferta, añade una para que te aparezcan.
+            <strong>Vigila!</strong> Aún no tienes ningúna oferta, añade una para que te aparezcan.
         </div>
         
         
