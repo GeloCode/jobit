@@ -10,7 +10,7 @@
                     <div class="card-body">
                         {{nameUser.name}}
                         <h5 class="card-title" v-text="portfolio.titulo"> </h5>
-                        <p class="card-text" v-text="portfolio.descripcion"> </p>
+                        <p class="card-text" v-text="portfolio.text"> </p>
                         <!--a href="#" class="btn btn-danger btn-sm" v-on:click.prevent="deletePortfolio(portfolio)">Borrar</a>-->
                         <a class="btn btn-success btn-sm" v-bind:href="'/projects?id=' +portfolio.id">Ver</a>
                         <div class="col-md-5 offset-md-7">
@@ -23,6 +23,24 @@
                     
                 </div>
         </div>
+          <nav>
+          <ul class="pagination">
+              <li class="page-item" v-if="pagination.current_page > 1">
+                <a class="page-link" href="#" @click.prevent="changePage(pagination.current_page - 1)">
+                     <span> Atras</span>
+                </a>
+              </li>
+
+              <li class="page-item" v-for="page in pagesNumber" :key="page" v-bind:class="[ page == isActived ? 'active' : '']"> 
+                  <a class="page-link" href="#" @click.prevent="changePage(page)">
+                      {{page}}
+                  </a>
+              </li>
+              <li class="page-item" v-if="pagination.current_page < pagination.last_page">
+                  <a class="page-link" href="#" @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
+              </li>
+          </ul>
+      </nav>
     </div>
 </template>
 
@@ -46,8 +64,44 @@
                 newUser_id: '',
                 newPortfolioTitulo: '',
                 newPortfolioDescripcion: '',
-                nameUser: []
+                nameUser: [],
+                pagination: {
+                    total: 0,
+                    current_page: 0,
+                    per_page: 0,
+                    last_page: 0,
+                    from: 0,
+                    to: 0
+                },
+                offset: 2, //esta variable decide cuantos numeros habrán despues y antes de la pagina actual
+    
+                
+            }
+        },
+        computed: {
+            isActived: function (){
+                return this.pagination.current_page;
+            },
+            pagesNumber: function(){
+                if(!this.pagination.to){
+                    return [];
+                }
+                var from =  this.pagination.current_page - this.offset; 
+                if (from < 1){
+                    from = 1;
+                }
 
+                var to = from + (this.offset * 2); 
+                if (to >= this.pagination.last_page){
+                    to = this.pagination.last_page;
+                }
+                
+                 var pagesArray = [];
+                 while  (from <= to){
+                     pagesArray.push(from);
+                     from++;
+                 }
+                 return pagesArray;
             }
         },
         components: {
@@ -59,10 +113,15 @@
             since: function (d) {
                 return moment(d).fromNow();
             },
-            getPortfolios: function () {
-                var urlPortfolios = 'portfolios';
+                changePage: function (page){
+                this.pagination.current_page = page;
+                this.getPortfolios(page);
+            },
+            getPortfolios: function (page) {
+                var urlPortfolios = 'portfolios?page=' + page;
                 axios.get(urlPortfolios).then(response => {
-                    this.portfolios = response.data;
+                    this.portfolios = response.data.portfolios.data,
+                    this.pagination = response.data.pagination
                 }).catch(error => {
                     portfolios = { 'id': 1 };
                 });

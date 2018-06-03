@@ -13,9 +13,20 @@ class PortfolioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getPortfolios()
+    public function getPortfolios(Request $request)
     {
-        return Portfolio::orderBy('id', 'DESC')->get();
+        $portfolios = Portfolio::orderBy('id', 'ASC')->paginate(2);
+        return [
+            'pagination' => [
+                'total' => $portfolios->total(),
+                'current_page'  => $portfolios->currentPage(),
+                'per_page'      => $portfolios->perPage(),
+                'last_page'     => $portfolios->lastPage(),
+                'from'          => $portfolios->firstItem(),
+                'to'            => $portfolios->lastPage(),
+            ],
+            'portfolios' => $portfolios 
+        ];
     }
      /**
      * Show the form for creating a new resource.
