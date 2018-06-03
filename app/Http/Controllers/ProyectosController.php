@@ -32,6 +32,9 @@ class ProyectosController extends Controller
     public function getDetalleProyectoById($id){
         return Proyecto::where('id', $id)->get();
     }
+    public function getidproyecto($authid){
+        return Proyecto::where('user_id', $authid)->value('user_id');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -40,7 +43,14 @@ class ProyectosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'user_id' => 'required',
+            'portfolio_id' => 'required',
+            'titulo' => 'required',
+            'descripcion' => 'required'
+        ]);
+        Proyecto::create($request->all());
+        return;
     }
 
     /**
@@ -74,7 +84,13 @@ class ProyectosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'titulo' => 'required',
+            'descripcion' => 'required'
+        ]);
+
+        Proyecto::find($id)->update($request->all());
+        return;
     }
 
     /**

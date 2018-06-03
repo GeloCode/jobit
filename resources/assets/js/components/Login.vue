@@ -14,8 +14,8 @@
                                     </span>
                                 </div>
                                 <input id="email" type="email" class="form-control" name="email" v-model="loginDetails.email" required autofocus>
-                                <span class="invalid-feedback">
-                                    <strong>{{emailError}}</strong>
+                                <span v-if="msg.email">
+                                    <strong v-text="msg.email"></strong>
                                 </span>
                             </div>
                             <div class="input-group mb-3">
@@ -25,8 +25,8 @@
                                     </span>
                                 </div>
                                 <input id="password" type="password" class="form-control" v-model="loginDetails.password" name="password" required>
-                                <span class="invalid-feedback">
-                                    <strong>{{passwordError}}</strong>
+                                <span v-if="msg.password">
+                                    <strong v-text="msg.password"></strong>
                                 </span>
                             </div>
                             <div class="row">
@@ -75,26 +75,68 @@
                     password: "",
                     remember: true
                 },
-                errorsEmail: false,
-                errorsPassword: false,
-                emailError: null,
-                passwordError: null
+                msg: {
+                    email: "",
+                    password: "",
+                }
             };
+        },
+         watch: {
+            "loginDetails.email": function(value) {
+            this.loginDetails.email = value;
+            this.check_email(value);
+            },
+            "loginDetails.password": function(value) {
+            this.loginDetails.password = value;
+            this.checkPassword(value);
+            },
         },
         methods: {
             loginPost() {
-                let vm = this;
-                axios
-                    .post("/login", vm.loginDetails)
-                    .then(function (response) {
-                        var redirect = (window.location.href = "/home");
-                        axios.get(redirect);
-                    })
-                    .catch(function (error) {
-                        toastr.error("Los credenciales no son correctos");
-                    });
+                var notDo = true;
+                if (this.msg.email != ""){
+                    toastr.error("Tu email es incorrecto.");
+                    notDo = false;
+                }
+                if (this.msg.password != ""){
+                    toastr.error("Tu password es incorrecta.");
+                    notDo = false;
+                }
+                if(notDo){
+                    let vm = this;
+                    axios
+                        .post("/login", vm.loginDetails)
+                        .then(function (response) {
+                            var redirect = (window.location.href = "/home");
+                            axios.get(redirect);
+                        })
+                        .catch(function (error) {
+                            toastr.error("Los credenciales no son correctos");
+                        });
+                }
+            },
+            check_email(value) {
+                if (/^\w+([\.-]?\ w+)*@\w+([\.-]?\ w+)*(\.\w{2,3})+$/.test(value)) {
+                    this.msg.email = "";
+                } else {
+                    this.msg.email = "Keep Typing... We are waiting for correct Email";
+                }
+            },
+            checkPassword(value) {
+                this.passwordLengthCheck(value);
+            },
+            passwordLengthCheck(passwordToCheck) {
+                var remainingChars = 6 - passwordToCheck.length;
+                if (passwordToCheck.length < 6) {
+                    this.msg.password =
+                        "Password must contain 6 characters. " +
+                        remainingChars +
+                        " more to go...";
+                } else {
+                    this.msg.password = "";
+                    return true;
+                }
             }
         },
-        mounted() { }
     };
 </script>

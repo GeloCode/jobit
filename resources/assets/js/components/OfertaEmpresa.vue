@@ -107,8 +107,8 @@
           <div class="form-group">
             <label for="Provincia">Provincia</label>
             <select class="custom-select" name="selectProvincia" v-model="oferta.provincia_id" disabled>
-              <option value="0" disabled>Elige tu Provincia</option>
-              <option v-for="provincia in provincias" :key="provincia.id" :value="provincia.id" v-text="provincia.nombre"></option>
+                <option value="0" disabled>Elige tu Provincia</option>
+                <option v-for="provincia in provincias" :key="provincia.id" :value="provincia.id" v-text="provincia.nombre"></option>
             </select>
           </div>
           <div class="form-group ">
@@ -126,11 +126,10 @@
             </div>
           </div>
           <hr/>
-          <div class="buttons-container">
-            <button class="btn  btn-primary habilitadoSiempre" name="editar" v-on:click="habilitarCampos(oferta.id)">Editar</button>
-            <button class="btn btn-secondary habilitadoSiempre" name="guardar" v-on:click="editOferta(oferta)" style="display:none;">Guardar</button>
-            <button class="btn  btn-danger habilitadoSiempre" v-on:click="deleteOferta(oferta)">Eliminar</button>
-          </div>
+            <button class="btn btn-block btn-secondary habilitadoSiempre" v-on:click="buscarInscripciones(oferta.id)">Ver Inscripciones</button>
+            <button class="btn btn-block btn-primary habilitadoSiempre" name="editar" v-on:click="habilitarCampos(oferta.id)">Editar</button>
+            <button class="btn btn-block btn-secondary habilitadoSiempre" name="guardar" v-on:click="editOferta(oferta)" style="display:none;">Guardar</button>
+            <button class="btn btn-block btn-danger habilitadoSiempre" v-on:click="deleteOferta(oferta)">Eliminar</button>
         </div>
         <div class="col-lg-4">
           <p>Gelo aquí hazme las estadisticas de los inscritos lo gestionados lo que faltan por gestionar etc</p>
@@ -166,10 +165,84 @@
   </div>
 </template>
 <script>
-  export default {
-    created: function () {
-      this.getOfertasByUserId();
-      this.getProvincias();
+export default {
+  created: function() {
+    this.getOfertasByUserId();
+    this.getProvincias();
+  },
+  props: {
+    userId: String
+  },
+  data: function() {
+    return {
+      ofertas: [],
+      oferta: {
+        id: "",
+        provincia_id: 0,
+        titulo: "",
+        descripcion: "",
+        vacantes: "",
+        sueldo_desde: "",
+        sueldo_hasta: ""
+      },
+      inscripcion: {
+        oferta_id: ""
+      },
+      provincias: [],
+      esEmpresa: "",
+      errors: [],
+      clickAddOferta: false,
+      search: "",
+      searchProvincia: 0,
+      pagination: {
+        total: 0,
+        current_page: 0,
+        per_page: 0,
+        last_page: 0,
+        from: 0,
+        to: 0
+      }
+    };
+  },
+  methods: {
+    getOfertasByUserId: function(page) {
+      var url =
+        "ofertas/usuario/?id=" +
+        this.userId +
+        "&page=" +
+        page +
+        "&buscar=" +
+        this.search +
+        "&provincia=" +
+        this.searchProvincia;
+      axios.get(url).then(response => {
+        this.ofertas = response.data.ofertas.data;
+        this.pagination = response.data.pagination;
+      });
+    },
+    addOtraOferta: function() {
+      this.clickAddOferta = true;
+    },
+    addOferta: function(oferta) {
+      var url = "oferta";
+      axios
+        .post(url, {
+          user_id: this.userId,
+          provincia_id: this.oferta.provincia_id,
+          titulo: this.oferta.titulo,
+          descripcion: this.oferta.descripcion,
+          vacantes: this.oferta.vacantes,
+          sueldo_desde: this.oferta.sueldo_desde,
+          sueldo_hasta: this.oferta.sueldo_hasta
+        })
+        .then(response => {
+          this.getOfertasByUserId();
+          this.oferta = {};
+          this.clickAddOferta = false;
+        })
+        .catch(error => {
+          this.errors = error.response.data;
+        });
     },
     props: {
       userId: String
@@ -205,20 +278,36 @@
         }
       };
     },
-    methods: {
-      getOfertasByUserId: function (page) {
-        var url =
-          "ofertas/usuario/?id=" +
-          this.userId +
-          "&page=" +
-          page +
-          "&buscar=" +
-          this.search +
-          "&provincia=" +
-          this.searchProvincia;
-        axios.get(url).then(response => {
-          this.ofertas = response.data.ofertas.data;
-          this.pagination = response.data.pagination;
+    editOferta: function(oferta) {
+      var url = "oferta/" + oferta.id;
+      axios
+        .put(url, {
+          provincia_id: oferta.provincia_id,
+          titulo: oferta.titulo,
+          descripcion: oferta.descripcion,
+          vacantes: oferta.vacantes,
+          sueldo_desde: oferta.sueldo_desde,
+          sueldo_hasta: oferta.sueldo_hasta
+        })
+        .then(response => {
+          this.getOfertasByUserId();
+          this.oferta = {};
+          this.errors = [];
+          jQuery("#oferta_" + oferta.id + " :input").prop("disabled", true);
+          jQuery("#oferta_" + oferta.id + " .habilitadoSiempre").prop(
+            "disabled",
+            false
+          );
+          jQuery("#oferta_" + oferta.id + " [name=guardar]").hide();
+          jQuery("#oferta_" + oferta.id + " [name=editar]").show();
+          jQuery("#oferta_" + oferta.id).addClass("oferta"); // Aqui le añadimos la clase de editar oferta
+          jQuery("#oferta_" + oferta.id).removeClass("editandoOferta"); // Aqui le añadimos la clase de editar oferta
+          toastr.success("Oferta actualizada correctamente!");
+        })
+        .catch(error => {
+          jQuery("#oferta_" + oferta.id + " [name=guardar]").hide();
+          jQuery("#oferta_" + oferta.id + " [name=editar]").show();
+          this.errors = error.response.data;
         });
       },
       addOtraOferta: function () {
@@ -312,18 +401,36 @@
         toastr.success("Filtrado Con Éxito!");
       }
     },
-    computed: {
-      mensajeNingunaOferta: function () {
-        return this.ofertas.length == 0 && !this.clickAddOferta;
-      },
-      isActived: function () {
-        return this.pagination.current_page;
-      },
-      //Calcula los elementos de la paginación
-      pagesNumber: function () {
-        if (!this.pagination.to) {
-          return [];
-        }
+    cambiarPagina(page) {
+      let me = this;
+      //Actualiza la página actual
+      me.pagination.current_page = page;
+      //Envia la petición para visualizar la data de esa página
+      me.getOfertasByUserId(page);
+    },
+    filtrar: function() {
+      this.getOfertasByUserId();
+      if(this.search != '' || this.searchProvincia != 0){
+        toastr.success("Filtrado Con Éxito!");
+      }
+    },
+    buscarInscripciones: function(id) {
+      var url = "/vinscripcionesempresa?ofertaId=" + id;
+      window.location.href = url;
+    }
+  },
+  computed: {
+    mensajeNingunaOferta: function() {
+      return this.ofertas.length == 0 && !this.clickAddOferta;
+    },
+    isActived: function() {
+      return this.pagination.current_page;
+    },
+    //Calcula los elementos de la paginación
+    pagesNumber: function() {
+      if (!this.pagination.to) {
+        return [];
+      }
 
         var from = this.pagination.current_page - this.offset;
         if (from < 1) {

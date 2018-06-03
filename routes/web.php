@@ -10,6 +10,9 @@ Route::get('/portf', function () {
 Route::get('/dash', function () {
     return view('crudUsuarioProyectos');
 }); 
+Route::get('/pruebaRegistro', function () {
+    return view('includes.register');
+}); 
 
 /**
  * Temporal para hacer pruebas con las ofertas empresa
@@ -156,7 +159,7 @@ Route::get('inscripcion/rechazar/{id}', 'InscripcionesController@rechazarInscrip
 /**
  * Borrar la inscripcion de un usuario y esta oferta
  */
-Route::get('inscripcion/empresas/{id}', 'InscripcionesController@getInscripcionesEmpresa');
+Route::get('inscripcion/empresas', 'InscripcionesController@getInscripcionesEmpresa');
 
 
 /*************** ROUTINGS PERFILES ************** */
@@ -196,6 +199,8 @@ Route::get('selectName', 'PortfolioController@getNameUser'); //obtener todos los
 Route::post('crearPortfolio', 'PortfolioController@store'); //crear el portfolio
 Route::get('info/{id}', 'PortfolioController@getInfoPortfolio');
 Route::get('pillaridportf/{id}', 'PortfolioController@getPortfIdJoint'); //esto es para obtener el id del portfolio a traves del id de perfil (para redirigir al user para crear proyectos)
+Route::get('useridProyecto/{id}', 'ProyectosController@getidproyecto');
+Route::get('useridPerfils/{id}', 'PerfilController@getidperfils');
 
 //RUTAS PROYECTOS
 Route::resource('proyectos', 'ProyectosController', ['except' => 'create']); //todas las rutas de proyectos
@@ -203,5 +208,23 @@ Route::get('projct/{id}', 'ProyectosController@getProyectosById'); //obtener los
 Route::get('detail/{id}', 'ProyectosController@getDetalleProyectoById'); //obtener los datos de un proyecto con el id de proyecto
 
 //RUTAS ENLACES
-Route::get('enlaces/{id}', 'EnlacesController@getEnlacesByUserId'); //obtener los enlaces por el id del usuario
+/**
+ * obtener los enlaces por el id del usuario
+ */
+Route::get('enlaces/{id}', 'EnlacesController@getEnlacesByUserId');
+Route::get('enlace/{id}', 'EnlacesController@getEnlaceById');
 
+/**
+ * Para crear un enlace
+ */
+Route::post('ienlace', 'EnlacesController@store');
+
+/**
+ * Para actualizar un enlace
+ */
+Route::put('ienlace/{id}', 'EnlacesController@update');
+
+/**
+ * Borrar la inscripcion de un usuario y esta oferta
+ */
+Route::delete('deleteEnlace/{id}', 'EnlacesController@destroy');

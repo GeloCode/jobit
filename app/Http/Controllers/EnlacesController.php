@@ -15,7 +15,17 @@ class EnlacesController extends Controller
      */
     public function getEnlacesByUserId($id)
     {
-        return Enlace::where('user_id', $id)->first();
+        return Enlace::where('user_id', $id)->get();
+    }
+    
+    /**
+     * Nos devuelve el enlace que pedimos
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getEnlaceById($id)
+    {
+        return Enlace::findOrFail($id)->first();
     }
 
     /**
@@ -29,15 +39,30 @@ class EnlacesController extends Controller
         $this->validate($request, [
             'user_id' => 'required',
             'web' => 'required',
-            'url' => 'required',
+            'enlace' => 'required',
         ]);
         
-        if(Perfil::where('user_id', '=', $request->user_id))
-        {
-            Enlace::where('user_id', '=', $request->user_id)->update($request->all());
-        } else {
-            Enlace::create($request->all());
-        }
+        Enlace::create($request->all());
         return;
+    }
+    public function update(Request $request){
+        $this->validate($request, [
+            'user_id' => 'required',
+            'web' => 'required',
+            'enlace' => 'required',
+        ]);
+        $enlace = Enlace::findOrFail($request->id);
+        $enlace->web = $request->web;
+        $enlace->enlace = $request->enlace;
+        $enlace->save();
+        return;
+    }
+    /**
+     * Borrar un enlace
+     */
+    public function destroy($id)
+    {
+        $enlace = Enlace::findOrFail($id);
+        $enlace -> delete();
     }
 }

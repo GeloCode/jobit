@@ -138,13 +138,13 @@ class OfertaController extends Controller
             $ofertas = Oferta::orderBy('created_at', 'DESC')->where(function ($query) use ($buscar){
                 $query->where('titulo', 'like', '%'.$buscar.'%')
                 ->orWhere('descripcion', 'like', '%'.$buscar.'%');})
-                ->where('user_id', $id)->paginate(6); 
+                ->where('user_id', $id)->paginate(4); 
         } else {
             $ofertas = Oferta::orderBy('created_at', 'DESC')->where('provincia_id', '=', $provincia)
             ->where(function ($query) use ($buscar){
                 $query->where('titulo', 'like', '%'.$buscar.'%')
                 ->orWhere('descripcion', 'like', '%'.$buscar.'%');})
-                ->where('user_id', $id)->paginate(6); 
+                ->where('user_id', $id)->paginate(4); 
         }
         return [
             'pagination' => [
@@ -167,6 +167,7 @@ class OfertaController extends Controller
             ->from('inscripcions')
             ->where('user_id', '=', $id)
             ->orderBy('created_at', 'DESC');
-        })->leftJoin('inscripcions', 'ofertas.id', '=', 'inscripcions.oferta_id')->get();
+        })->leftJoin('inscripcions', 'ofertas.id', '=', 'inscripcions.oferta_id')
+        ->select('titulo', 'estado', 'oferta_id')->orderByRAW('inscripcions.created_at DESC')->get();
     }
 }

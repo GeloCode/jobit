@@ -2,5 +2,6 @@
 
 @section('content')
     <!-- {{ $id = app('request')->input('id') }}-->
-        <detail hashid="{{ $id=app('request')->input('id') }}"></detail>
+    asdasdasdasdasdas
+        <detail userid="{{Auth::id()}}" hashid="{{ $id=app('request')->input('id') }}"></detail>
 @endsection

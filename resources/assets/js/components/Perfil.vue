@@ -13,7 +13,9 @@
 				<button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#exampleModal">
 					Editar perfil
 				</button>
-
+				<div  class="mostrarEnlaces">
+					<enlaces :user-id="userId"></enlaces>
+				</div>
 				<!-- Modal -->
 				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
@@ -99,10 +101,12 @@
 	</div>
 </template>
 <script>
+import Enlaces from "./Enlaces.vue";
 export default {
   created: function() {
-    this.getPerfilByUser();
-    this.getProvincias();
+      this.getPerfilByUser();
+      this.getProvincias();
+      $("#exampleModal").modal("show");
   },
   data: function() {
     return {
@@ -128,24 +132,27 @@ export default {
   props: {
     userId: String
   },
+  components: {
+    enlaces: Enlaces
+  },
   methods: {
     getPerfilByUser: function() {
       var url = "perfil/usuario/" + this.userId;
       axios.get(url).then(response => {
-				if(response.data){
-					this.profile = response.data;
-					this.lenguajesArray = this.profile.lenguajes.split(",");
-					this.frameworksArray = this.profile.frameworks.split(",");
-				}
+        if (response.data) {
+          this.profile = response.data;
+          this.lenguajesArray = this.profile.lenguajes.split(",");
+          this.frameworksArray = this.profile.frameworks.split(",");
+        }
       });
     },
     createProfile: function() {
-			var myMethod = "post";
-			var url = "iperfil";
+      var myMethod = "post";
+      var url = "iperfil";
       if (this.profile.id) {
-				myMethod = "put";
-				url += "/" + this.userId;
-			}
+        myMethod = "put";
+        url += "/" + this.userId;
+      }
       axios({
         method: myMethod,
         url: url,
@@ -160,10 +167,12 @@ export default {
           lenguajes: this.profile.lenguajes,
           frameworks: this.profile.frameworks
         }
-      }).then(response => {
-				$("#exampleModal").modal('toggle');
-				this.getPerfilByUser();
-			})
+      })
+        .then(response => {
+          $("#exampleModal").modal("toggle");
+          this.getPerfilByUser();
+					toastr.success("Perfil actualizado correctamente");
+        })
         .catch(function(error) {
           toastr.error(error);
         });
