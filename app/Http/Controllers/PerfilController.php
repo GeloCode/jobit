@@ -15,6 +15,9 @@ class PerfilController extends Controller
     {
         return Perfil::where('user_id', $id)->first();
     }
+    public function getidperfils($authid){
+        return Perfil::where('user_id', $authid)->value('user_id');
+    }
 
     /**
      * Store a newly created resource in storage.

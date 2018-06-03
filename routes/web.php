@@ -196,6 +196,8 @@ Route::get('selectName', 'PortfolioController@getNameUser'); //obtener todos los
 Route::post('crearPortfolio', 'PortfolioController@store'); //crear el portfolio
 Route::get('info/{id}', 'PortfolioController@getInfoPortfolio');
 Route::get('pillaridportf/{id}', 'PortfolioController@getPortfIdJoint'); //esto es para obtener el id del portfolio a traves del id de perfil (para redirigir al user para crear proyectos)
+Route::get('useridProyecto/{id}', 'ProyectosController@getidproyecto');
+Route::get('useridPerfils/{id}', 'PerfilController@getidperfils');
 
 //RUTAS PROYECTOS
 Route::resource('proyectos', 'ProyectosController', ['except' => 'create']); //todas las rutas de proyectos
