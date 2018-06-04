@@ -193,6 +193,7 @@ Route::get('detailProject', function(){
 
 
 //RUTAS PORTFOLIOS
+Route::get('portfoliosPerfil/{id}', 'PortfolioController@getPortfolioByUserId');
 Route::resource('portfolios', 'PortfolioController', ['except' => 'create']); //todas las rutas portfolios
 Route::get('portfolios', 'PortfolioController@getPortfolios'); //obtener todos los portfolios
 Route::get('selectName', 'PortfolioController@getNameUser'); //obtener todos los usuarios para poder printarlos es portfolios
