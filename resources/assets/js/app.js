@@ -7,7 +7,7 @@ Vue.use(VueResource);
 
 Vue.component('project', require('./components/ProjectDetailComponent.vue'));
 Vue.component('portfolios', require('./components/ListaPortfolios.vue'));
-Vue.component('detail', require('./components/RenderProyectos.vue'));
+Vue.component('detail', require('./components/Proyectos.vue'));
 
 Vue.component('login', require('./components/Login.vue'));
 Vue.component('register', require('./components/Register.vue'));

@@ -93,13 +93,10 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12">
-<<<<<<< HEAD
-						<proyectos :userid="userId" :perfil="profile.id" :hashid="portfolio.id"></proyectos><!-- hashid es el id del // -->
-=======
+					<div class="col-md-12" v-if="empresaornot">
+						<proyectos :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
 						<!--Aqui los proyectos-->
 						<span v-text="portfolioId"></span>
->>>>>>> 776067f6f2a0cd7ab33d805895a37af338ac59ef
 					</div>
 				</div>
 			</div>
@@ -108,7 +105,7 @@
 </template>
 <script>
 import Enlaces from "./Enlaces.vue";
-import Proyectos from "./RenderProyectos.vue";
+import Proyectos from "./Proyectos.vue";
 export default {
   created: function() {
 		this.getPerfilByUser();
@@ -124,7 +121,7 @@ export default {
     return {
 			first:false,
 			provincias: [],
-			portfolioId: 0,
+			portfolioId: '',
       profile: {
 				id: "",
         name: "",
@@ -146,8 +143,8 @@ export default {
   },
   props: {
 		userId: String,
-
-  },
+		empresaornot: String
+	},
   components: {
     enlaces: Enlaces,
 		proyectos: Proyectos

@@ -3,5 +3,7 @@
 @section('content')
     <!-- {{ $id = app('request')->input('id') }}-->
         sasdas
-        <detail  perfil="{{Auth::user()->perfil->id}}" userid="{{Auth::id()}}" hashid="{{ $id=app('request')->input('id') }}"></detail>
+        <detail  control="1" idperfil="{{Auth::user()->perfil->id}}" auth="{{Auth::id()}}" portfid="{{ $id=app('request')->input('id') }}"></detail>
+
+        <!--  :auth="userid" :portfid="hashid" :idperfil="perfil" -->
 @endsection

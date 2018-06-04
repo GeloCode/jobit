@@ -2,6 +2,6 @@
 
 @section('content')
 
-<perfil user-id="{{Auth::id()}}" perfil="{{Auth::user()->perfil->id}}"></perfil>
+<perfil empresaornot="{{!Auth::user()->isEmpresa()}}" user-id="{{Auth::id()}}" perfil="{{Auth::user()->perfil->id}}"></perfil>
 
 @endsection
