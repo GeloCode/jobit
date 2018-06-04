@@ -10,18 +10,18 @@
 				</div>
 				<br>
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#exampleModal">
+				<button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#profileModal">
 					Editar perfil
 				</button>
 				<div  class="mostrarEnlaces">
 					<enlaces :user-id="userId"></enlaces>
 				</div>
 				<!-- Modal -->
-				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+								<h5 class="modal-title" id="profileModalLabel">Editar perfil</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
@@ -104,12 +104,17 @@
 import Enlaces from "./Enlaces.vue";
 export default {
   created: function() {
-      this.getPerfilByUser();
-      this.getProvincias();
-      $("#exampleModal").modal("show");
+		this.getPerfilByUser();
+		this.getProvincias();
+		window.addEventListener("load", function(event) {
+		if (window.location.hash === "#execute") {
+			$("#profileModal").modal("toggle");
+		}
+		});
   },
   data: function() {
     return {
+			first:false,
       provincias: [],
       profile: {
         name: "",
@@ -169,9 +174,12 @@ export default {
         }
       })
         .then(response => {
-          $("#exampleModal").modal("toggle");
+         this.openCloseModal();
           this.getPerfilByUser();
 					toastr.success("Perfil actualizado correctamente");
+					if(this.first){
+						 window.location.assign("/perfil")
+					}
         })
         .catch(function(error) {
           toastr.error(error);
@@ -182,7 +190,15 @@ export default {
       axios.get(url).then(response => {
         this.provincias = response.data;
       });
-    }
-  }
+		},
+		openCloseModal: function(){
+			$("#profileModal").modal("toggle");
+		},
+		firstTime: function(){	
+			if(this.first){
+				this.openCloseModal();
+			}
+		}
+	}
 };
 </script>
