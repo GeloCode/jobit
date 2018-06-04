@@ -94,12 +94,8 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-<<<<<<< HEAD
-						<proyectos :userid="userId" :perfil="profile.id" :hashid="portfolio.id"></proyectos><!-- hashid es el id del // -->
-=======
 						<!--Aqui los proyectos-->
 						<span v-text="portfolioId"></span>
->>>>>>> 776067f6f2a0cd7ab33d805895a37af338ac59ef
 					</div>
 				</div>
 			</div>
