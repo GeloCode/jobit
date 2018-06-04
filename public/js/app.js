@@ -66297,6 +66297,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -66317,9 +66335,45 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
             newUser_id: '',
             newPortfolioTitulo: '',
             newPortfolioDescripcion: '',
-            nameUser: []
+            nameUser: [],
+            pagination: {
+                total: 0,
+                current_page: 0,
+                per_page: 0,
+                last_page: 0,
+                from: 0,
+                to: 0
+            },
+            offset: 2 //esta variable decide cuantos numeros habrán despues y antes de la pagina actual
+
 
         };
+    },
+    computed: {
+        isActived: function isActived() {
+            return this.pagination.current_page;
+        },
+        pagesNumber: function pagesNumber() {
+            if (!this.pagination.to) {
+                return [];
+            }
+            var from = this.pagination.current_page - this.offset;
+            if (from < 1) {
+                from = 1;
+            }
+
+            var to = from + this.offset * 2;
+            if (to >= this.pagination.last_page) {
+                to = this.pagination.last_page;
+            }
+
+            var pagesArray = [];
+            while (from <= to) {
+                pagesArray.push(from);
+                from++;
+            }
+            return pagesArray;
+        }
     },
     components: {
         //'proyectos' :Proyectos
@@ -66330,12 +66384,16 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
         since: function since(d) {
             return __WEBPACK_IMPORTED_MODULE_1_moment___default()(d).fromNow();
         },
-        getPortfolios: function getPortfolios() {
+        changePage: function changePage(page) {
+            this.pagination.current_page = page;
+            this.getPortfolios(page);
+        },
+        getPortfolios: function getPortfolios(page) {
             var _this = this;
 
-            var urlPortfolios = 'portfolios';
+            var urlPortfolios = 'portfolios?page=' + page;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(urlPortfolios).then(function (response) {
-                _this.portfolios = response.data;
+                _this.portfolios = response.data.portfolios.data, _this.pagination = response.data.pagination;
             }).catch(function (error) {
                 portfolios = { 'id': 1 };
             });
@@ -66443,7 +66501,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("p", {
                   staticClass: "card-text",
-                  domProps: { textContent: _vm._s(portfolio.descripcion) }
+                  domProps: { textContent: _vm._s(portfolio.text) }
                 }),
                 _vm._v(" "),
                 _c(
@@ -66471,7 +66529,87 @@ var render = function() {
             2
           )
         })
-      )
+      ),
+      _vm._v(" "),
+      _c("nav", [
+        _c(
+          "ul",
+          { staticClass: "pagination" },
+          [
+            _vm.pagination.current_page > 1
+              ? _c("li", { staticClass: "page-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page - 1)
+                        }
+                      }
+                    },
+                    [_c("span", [_vm._v(" Atras")])]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._l(_vm.pagesNumber, function(page) {
+              return _c(
+                "li",
+                {
+                  key: page,
+                  staticClass: "page-item",
+                  class: [page == _vm.isActived ? "active" : ""]
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(page)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                  " +
+                          _vm._s(page) +
+                          "\n              "
+                      )
+                    ]
+                  )
+                ]
+              )
+            }),
+            _vm._v(" "),
+            _vm.pagination.current_page < _vm.pagination.last_page
+              ? _c("li", { staticClass: "page-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page + 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Siguiente")]
+                  )
+                ])
+              : _vm._e()
+          ],
+          2
+        )
+      ])
     ],
     1
   )
@@ -66559,7 +66697,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['hashid', 'userid'], //hashid es el id del porfolio poviniente del proyectos.blade
+    props: ['hashid', 'userid', 'perfil'], //hashid es el id del porfolio poviniente del proyectos.blade
     data: function data() {
         return {};
     },
@@ -66706,6 +66844,62 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -66713,12 +66907,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['portfid', 'auth'],
+    props: ['portfid', 'auth', 'idperfil'],
     created: function created() {
         this.getProyectos(this.portfid);
         this.getInfoPortfolio(this.portfid);
-        this.getUserIdProyecto(this.auth);
-        this.getUserIdPerfils(this.auth);
+        this.getUserIdProyecto(this.portfid);
+        this.getUserIdPerfils(this.idperfil);
     },
     //end
     //aqui almacenamos datos
@@ -66732,27 +66926,63 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
             newPortfolioid: this.portfid,
             newTitle: '',
             newDescription: '',
-            fillProject: { 'titulo': '', 'descripcion': '' }
+            fillProject: { 'id': '', 'titulo': '', 'descripcion': '' },
+            pagination: {
+                total: 0,
+                current_page: 0,
+                per_page: 0,
+                last_page: 0,
+                from: 0,
+                to: 0
+            },
+            offset: 2
         };
+    },
+    computed: {
+        isActived: function isActived() {
+            return this.pagination.current_page;
+        },
+        pagesNumber: function pagesNumber() {
+            if (!this.pagination.to) {
+                return [];
+            }
+            var from = this.pagination.current_page - this.offset;
+            if (from < 1) {
+                from = 1;
+            }
+
+            var to = from + this.offset * 2;
+            if (to >= this.pagination.last_page) {
+                to = this.pagination.last_page;
+            }
+
+            var pagesArray = [];
+            while (from <= to) {
+                pagesArray.push(from);
+                from++;
+            }
+            return pagesArray;
+        }
     },
     methods: {
         since: function since(d) {
             return __WEBPACK_IMPORTED_MODULE_1_moment___default()(d).fromNow();
         },
-        getProyectos: function getProyectos(portf_id) {
+        getProyectos: function getProyectos(portf_id, page) {
             var _this = this;
 
-            var urlProyectos = 'projct/' + portf_id;
+            var urlProyectos = 'projct/' + portf_id + '?page=' + page;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(urlProyectos).then(function (response) {
-                _this.proyectos = response.data;
+                _this.proyectos = response.data.proyectos.data;
+                _this.pagination = response.data.pagination;
             }).catch(function (error) {
                 proyectos = { 'id': 1 };
             });
         },
-        getUserIdProyecto: function getUserIdProyecto(auth) {
+        getUserIdProyecto: function getUserIdProyecto(idportf) {
             var _this2 = this;
 
-            var url = "useridProyecto/" + auth;
+            var url = "useridProyecto/" + idportf;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (response) {
                 _this2.useridProyecto = response.data;
             });
@@ -66786,8 +67016,6 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
                 descripcion: this.newDescription
             }).then(function (response) {
                 _this5.getProyectos(_this5.newPortfolioid);
-                _this5.newUserid = '';
-                _this5.newPortfolioid = '';
                 _this5.newTitle = '';
                 _this5.newDescription = '';
                 _this5.errors = [];
@@ -66802,27 +67030,33 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
             var url = 'proyectos/' + proyecto.id;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(url).then(function (response) {
                 _this6.getProyectos();
-                __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.error('Borrado Correctamente');
+                __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.success('Borrado Correctamente');
+                _this6.getProyectos(_this6.newPortfolioid);
             });
         },
         editProyecto: function editProyecto(proyecto) {
+            this.fillProject.id = proyecto.id;
             this.fillProject.titulo = proyecto.titulo;
             this.fillProject.descripcion = proyecto.descripcion;
+            $('#editProject').modal('show');
         },
 
-        updateProyecto: function updateProyecto(id) {
+        updateProyecto: function updateProyecto(idProject) {
             var _this7 = this;
 
-            var url = 'mobiles/' + id;
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.put(url, this.fillMobile).then(function (response) {
-                _this7.getMobiles();
-                _this7.fillMobile = { 'id': '', 'user_id': '', 'number': '' };
-                _this7.errors = [];
-                $('#edit').modal('hide');
+            var url = 'proyectos/' + idProject;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.put(url, this.fillProject).then(function (response) {
+                _this7.getProyectos(_this7.newPortfolioid);
+                _this7.fillProject = { 'id': '', 'titulo': '', 'descripcion': '' };
+                $('#editProject').modal('hide');
                 __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.success('Actualizado correctamente');
             }).catch(function (error) {
                 _this7.errors = error.response.data;
             });
+        },
+        changePage: function changePage(page) {
+            this.pagination.current_page = page;
+            this.getProyectos(this.newPortfolioid, page);
         }
     }
 
@@ -66863,7 +67097,17 @@ var render = function() {
         })
       ),
       _vm._v(" "),
-      _c("center", [_c("h2", [_vm._v("Proyectos   " + _vm._s(_vm.auth))])]),
+      _c("center", [
+        _c("h2", [
+          _vm._v(
+            "Proyectosssss   " +
+              _vm._s(_vm.idperfil) +
+              " - " +
+              _vm._s(_vm.useridProyecto) +
+              "  "
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c(
         "button",
@@ -66980,6 +67224,118 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "editProject",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    attrs: { method: "POST" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.updateProyecto(_vm.fillProject.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("label", { attrs: { for: "titulo" } }, [
+                        _vm._v("Titulo Proyecto")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.fillProject.titulo,
+                            expression: "fillProject.titulo"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "titulo",
+                          maxlength: "45"
+                        },
+                        domProps: { value: _vm.fillProject.titulo },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.fillProject,
+                              "titulo",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "descripcion" } }, [
+                          _vm._v("Descripcion Proyecto")
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.fillProject.descripcion,
+                              expression: "fillProject.descripcion"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            id: "exampleFormControlTextarea1",
+                            rows: "3"
+                          },
+                          domProps: { value: _vm.fillProject.descripcion },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.fillProject,
+                                "descripcion",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(3)
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
         { staticClass: "row justify-content-between" },
         _vm._l(_vm.proyectos, function(proyecto) {
           return _c("div", { key: proyecto.id, staticClass: "card col-md-4" }, [
@@ -67001,44 +67357,175 @@ var render = function() {
                       [_vm._v("Ver")]
                     ),
                     _vm._v(" "),
-                    _vm.useridPerfils == _vm.auth
-                      ? _c("div", [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-warning btn-sm",
-                              attrs: {
-                                href: "/detailProject?id=" + proyecto.id
-                              }
-                            },
-                            [_vm._v("Editar")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-danger btn-sm",
-                              on: {
-                                click: function($event) {
-                                  _vm.deleteProyecto(proyecto)
+                    _c("div", [
+                      _vm.idperfil == _vm.useridProyecto
+                        ? _c("div", [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-warning btn-sm",
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.editProyecto(proyecto)
+                                  }
                                 }
-                              }
-                            },
-                            [_vm._v("Borrar")]
-                          )
-                        ])
-                      : _vm._e()
+                              },
+                              [_vm._v("Editar Proyecto")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-danger btn-sm",
+                                on: {
+                                  click: function($event) {
+                                    _vm.deleteProyecto(proyecto)
+                                  }
+                                }
+                              },
+                              [_vm._v("Borrar")]
+                            )
+                          ])
+                        : _vm._e()
+                    ])
                   ])
                 ])
               : _vm._e()
           ])
         })
-      )
+      ),
+      _vm._v(" "),
+      _c("nav", [
+        _c(
+          "ul",
+          { staticClass: "pagination" },
+          [
+            _vm.pagination.current_page > 1
+              ? _c("li", { staticClass: "page-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page - 1)
+                        }
+                      }
+                    },
+                    [_c("span", [_vm._v(" Atras")])]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._l(_vm.pagesNumber, function(page) {
+              return _c(
+                "li",
+                {
+                  key: page,
+                  staticClass: "page-item",
+                  class: [page == _vm.isActived ? "active" : ""]
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(page)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(page) +
+                          "\n                            "
+                      )
+                    ]
+                  )
+                ]
+              )
+            }),
+            _vm._v(" "),
+            _vm.pagination.current_page < _vm.pagination.last_page
+              ? _c("li", { staticClass: "page-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page + 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Siguiente")]
+                  )
+                ])
+              : _vm._e()
+          ],
+          2
+        )
+      ])
     ],
     1
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Nuevo Proyecto")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c("input", {
+        staticClass: "btn btn-primary",
+        attrs: { type: "submit", value: "Crear Proyecto" }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -67105,7 +67592,11 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "container" },
-    [_c("proyectos", { attrs: { auth: _vm.userid, portfid: _vm.hashid } })],
+    [
+      _c("proyectos", {
+        attrs: { auth: _vm.userid, portfid: _vm.hashid, idperfil: _vm.perfil }
+      })
+    ],
     1
   )
 }
@@ -68325,11 +68816,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.getOfertasByUserId();
     this.getProvincias();
+    this.getEstadisticasIncripcionOferta();
   },
   props: {
     userId: String
@@ -68362,6 +68857,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         last_page: 0,
         from: 0,
         to: 0
+      },
+      estadisticasInscripcion: {
+        totales: 0,
+        pendientes: 0,
+        aceptados: 0,
+        rechazados: 0
       }
     };
   },
@@ -68470,6 +68971,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     buscarInscripciones: function buscarInscripciones(id) {
       var url = "/vinscripcionesempresa?ofertaId=" + id;
       window.location.href = url;
+    },
+    getEstadisticasIncripcionOferta: function getEstadisticasIncripcionOferta() {
+      var _this6 = this;
+
+      var url = 'inscripciones/estadistica/empresa/' + this.userId;
+      axios.get(url).then(function (response) {
+        _this6.estadisticasInscripcion = response.data;
+        console.log(_this6.estadisticasInscripcion);
+      });
     }
   },
   computed: {
@@ -69155,7 +69665,59 @@ var render = function() {
             )
           }),
           _vm._v(" "),
-          _vm._m(3),
+          !_vm.mensajeNingunaOferta
+            ? _c("div", { staticClass: "col-lg-4" }, [
+                _c("h2", [_vm._v("Inscripciones de todas tus Ofertas")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "inscritos" }, [
+                  _c("p", [_vm._v("Inscritos")]),
+                  _vm._v(" "),
+                  _c("p", {
+                    staticClass: "numero-inscritos",
+                    domProps: {
+                      textContent: _vm._s(_vm.estadisticasInscripcion.totales)
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "pendientes" }, [
+                  _c("p", [_vm._v("Pendientes por gestionar")]),
+                  _vm._v(" "),
+                  _c("p", {
+                    staticClass: "numero-pendientes",
+                    domProps: {
+                      textContent: _vm._s(
+                        _vm.estadisticasInscripcion.pendientes
+                      )
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "aceptados" }, [
+                  _c("p", [_vm._v("Aceptados")]),
+                  _vm._v(" "),
+                  _c("p", {
+                    staticClass: "numero-aceptados",
+                    domProps: {
+                      textContent: _vm._s(_vm.estadisticasInscripcion.aceptados)
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "rechazados" }, [
+                  _c("p", [_vm._v("Rechazados")]),
+                  _vm._v(" "),
+                  _c("p", {
+                    staticClass: "numero-rechazados",
+                    domProps: {
+                      textContent: _vm._s(
+                        _vm.estadisticasInscripcion.rechazados
+                      )
+                    }
+                  })
+                ])
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _c("nav", [
             _c(
@@ -69262,30 +69824,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-text" }, [
       _c("i", { staticClass: "fa fa-map-marker" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4" }, [
-      _c("p", [
-        _vm._v(
-          "Gelo aquí hazme las estadisticas de los inscritos lo gestionados lo que faltan por gestionar etc"
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "inscritos" }, [
-        _c("p", [_vm._v("inscritos")]),
-        _vm._v(" "),
-        _c("p", { staticClass: "numero-inscritos" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "pendientes" }, [
-        _c("p", [_vm._v("pendientes por gestionar")]),
-        _vm._v(" "),
-        _c("p", { staticClass: "numero-pendientes" })
-      ])
     ])
   }
 ]
@@ -71312,6 +71850,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get(url).then(function (response) {
         _this3.provincias = response.data;
       });
+    },
+    processFile: function processFile(event) {
+      this.profile.imagen = event.target.files[0];
+      console.log(this.profile.imagen);
     }
   }
 });
@@ -71947,6 +72489,7 @@ var render = function() {
                     _c(
                       "form",
                       {
+                        attrs: { enctype: "multipart/form-data" },
                         on: {
                           submit: function($event) {
                             $event.preventDefault()
@@ -72245,7 +72788,20 @@ var render = function() {
                           })
                         ]),
                         _vm._v(" "),
-                        _vm._m(2),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "imagen" } }, [
+                            _vm._v("Imagen")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: { type: "file", name: "imagen" },
+                            on: {
+                              change: function($event) {
+                                _vm.processFile($event)
+                              }
+                            }
+                          })
+                        ]),
                         _vm._v(" "),
                         _c(
                           "button",
@@ -72273,7 +72829,7 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _vm._m(3)
+        _vm._m(2)
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-8" }, [
@@ -72312,7 +72868,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm._m(4)
+        _vm._m(3)
       ])
     ])
   ])
@@ -72355,16 +72911,6 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "imagen" } }, [_vm._v("Imagen")]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "file", name: "imagen" } })
     ])
   },
   function() {

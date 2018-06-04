@@ -31,6 +31,7 @@ class PerfilController extends Controller
             'user_id' => 'required',
             'provincia_id' => 'required',
             'name' => 'required',
+            'imagen' => 'required',
             'telefono' => 'required',
             'direccion' => 'required',
             'codigo_postal' => 'required',

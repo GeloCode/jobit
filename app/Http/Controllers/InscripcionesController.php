@@ -65,6 +65,25 @@ class InscripcionesController extends Controller
     }
 
     /**
+     * Devuelve las estadísticas de las Inscripciones
+     */
+    public function getEstadisticasInscripcionesEmpresa($userId){        
+        $totales = Inscripcion::with('oferta:id,user_id')
+        ->whereHas('oferta', function($query) use($userId){
+            $query->where('user_id', '=', $userId);
+        })->count();
+
+        $pendientes = $this->getInscripcionesByEmpresaEstado($userId, '-');
+        $aceptados  = $this->getInscripcionesByEmpresaEstado($userId, 'A');
+        $rechazados = $this->getInscripcionesByEmpresaEstado($userId, 'R');
+
+        return ['totales'   => $totales,   'pendientes' => $pendientes, 
+                'aceptados' => $aceptados, 'rechazados' => $rechazados];
+
+
+    }
+
+    /**
      * Borrar una inscripcion para una inscripcion
      */
     public function deleteInscripcion($id)
@@ -89,5 +108,15 @@ class InscripcionesController extends Controller
     {
         Inscripcion::findOrFail($id)->update(['estado' => 'R']);
         return;
+    }
+
+    /**
+     * Buscar inscripciones de una empresa por usuario
+     */
+    public function getInscripcionesByEmpresaEstado($userId, $letra){
+        return Inscripcion::with('oferta:id,user_id')
+        ->whereHas('oferta', function($query) use($userId){
+            $query->where('user_id', '=', $userId);
+        })->where('estado', '=', $letra)->count();
     }
 }
