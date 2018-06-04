@@ -28,7 +28,7 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form v-on:submit.prevent="createProfile()">
+								<form v-on:submit.prevent="createProfile()" enctype="multipart/form-data">
 									<div class="form-group">
 										<input type="text" class="form-control" id="nameInput" aria-describedby="name"
 										v-model="profile.name">
@@ -66,7 +66,7 @@
 									</div>
 									<div class="form-group">
 										<label for="imagen">Imagen</label>
-										<input type="file" name="imagen">
+										<input type="file" name="imagen" @change="processFile($event)">
 									</div>
 									<button type="submit" class="btn btn-primary">Submit</button>
 									
@@ -179,7 +179,7 @@ export default {
           descripcion: this.profile.descripcion,
           codigo_postal: this.profile.codigo_postal,
           lenguajes: this.profile.lenguajes,
-          frameworks: this.profile.frameworks
+					frameworks: this.profile.frameworks,
         }
       })
         .then(response => {
@@ -200,6 +200,10 @@ export default {
         this.provincias = response.data;
       });
 		},
+		processFile(event) {
+			this.profile.imagen = event.target.files[0];
+			console.log(this.profile.imagen);
+  	},
 		openCloseModal: function(){
 			$("#profileModal").modal("toggle");
 		},

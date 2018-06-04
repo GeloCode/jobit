@@ -125,26 +125,31 @@
             </div>
           </div>
           <hr/>
-            <button class="btn btn-block btn-secondary habilitadoSiempre" v-on:click="buscarInscripciones(oferta.id)">Ver Inscripciones</button>
-            <button class="btn btn-block btn-primary habilitadoSiempre" name="editar" v-on:click="habilitarCampos(oferta.id)">Editar</button>
-            <button class="btn btn-block btn-secondary habilitadoSiempre" name="guardar" v-on:click="editOferta(oferta)" style="display:none;">Guardar</button>
-            <button class="btn btn-block btn-danger habilitadoSiempre" v-on:click="deleteOferta(oferta)">Eliminar</button>
+          <div class="buttons-container">
+            <button class="btn btn-secondary habilitadoSiempre" v-on:click="buscarInscripciones(oferta.id)">Ver Inscripciones</button>
+            <button class="btn btn-primary habilitadoSiempre" name="editar" v-on:click="habilitarCampos(oferta.id)">Editar</button>
+            <button class="btn btn-secondary habilitadoSiempre" name="guardar" v-on:click="editOferta(oferta)" style="display:none;">Guardar</button>
+            <button class="btn btn-danger habilitadoSiempre" v-on:click="deleteOferta(oferta)">Eliminar</button>
+          </div>
         </div>
-        <div class="col-lg-4">
-          <p>Gelo aquí hazme las estadisticas de los inscritos lo gestionados lo que faltan por gestionar etc</p>
+        <div class="col-lg-4" v-if="!mensajeNingunaOferta">
+          <h2>Inscripciones de todas tus Ofertas</h2>
           <div class="inscritos">
-            <p >inscritos</p>
-            <p class="numero-inscritos">
-
-            </p>
+            <p>Inscritos</p>
+            <p class="numero-inscritos" v-text="estadisticasInscripcion.totales"></p>
           </div>
           <div class="pendientes">
-            <p >pendientes por gestionar</p>
-            <p class="numero-pendientes">
-
-            </p>
+            <p>Pendientes por gestionar</p>
+            <p class="numero-pendientes" v-text="estadisticasInscripcion.pendientes"></p>
           </div>
-          
+          <div class="aceptados">
+            <p>Aceptados</p>
+            <p class="numero-aceptados" v-text="estadisticasInscripcion.aceptados"></p>
+          </div>
+          <div class="rechazados">
+            <p>Rechazados</p>
+            <p class="numero-rechazados" v-text="estadisticasInscripcion.rechazados"></p>
+          </div>
         </div>
         <nav>
           <ul class="pagination">
@@ -168,6 +173,7 @@ export default {
   created: function() {
     this.getOfertasByUserId();
     this.getProvincias();
+    this.getEstadisticasIncripcionOferta();
   },
   props: {
     userId: String
@@ -200,6 +206,12 @@ export default {
         last_page: 0,
         from: 0,
         to: 0
+      },
+      estadisticasInscripcion: {
+        totales: 0,
+        pendientes: 0,
+        aceptados: 0,
+        rechazados: 0
       }
     };
   },
@@ -314,6 +326,13 @@ export default {
     buscarInscripciones: function(id) {
       var url = "/vinscripcionesempresa?ofertaId=" + id;
       window.location.href = url;
+    },
+    getEstadisticasIncripcionOferta: function(){
+      var url = 'inscripciones/estadistica/empresa/' + this.userId;
+      axios.get(url).then(response  => {
+        this.estadisticasInscripcion = response.data;
+        console.log(this.estadisticasInscripcion);
+      })
     }
   },
   computed: {

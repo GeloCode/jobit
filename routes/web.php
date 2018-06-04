@@ -161,6 +161,10 @@ Route::get('inscripcion/rechazar/{id}', 'InscripcionesController@rechazarInscrip
  */
 Route::get('inscripcion/empresas', 'InscripcionesController@getInscripcionesEmpresa');
 
+/**
+ * Nos devuelve las estadisticas para una empresa de las inscripciones
+ */
+Route::get('inscripciones/estadistica/empresa/{id}', 'InscripcionesController@getEstadisticasInscripcionesEmpresa');
 
 /*************** ROUTINGS PERFILES ************** */
 /**************************************************** */
