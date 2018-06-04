@@ -55,10 +55,11 @@ class ProyectosController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'user_id' => 'required',
+            'user_id'      => 'required',
             'portfolio_id' => 'required',
-            'titulo' => 'required',
-            'descripcion' => 'required'
+            'titulo'       => 'required',
+            'descripcion'  => 'required',
+            'imagen'       => 'required'
         ]);
         Proyecto::create($request->all());
         return;

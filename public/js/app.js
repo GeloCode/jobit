@@ -66810,6 +66810,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -66837,7 +66846,7 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
             newPortfolioid: this.portfid,
             newTitle: '',
             newDescription: '',
-            fillProject: { 'id': '', 'titulo': '', 'descripcion': '' },
+            fillProject: { 'id': '', 'titulo': '', 'descripcion': '', 'imagen': '' },
             pagination: {
                 total: 0,
                 current_page: 0,
@@ -66927,7 +66936,8 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
                 user_id: this.newUserid,
                 portfolio_id: this.newPortfolioid,
                 titulo: this.newTitle,
-                descripcion: this.newDescription
+                descripcion: this.newDescription,
+                imagen: $("#imgForm").attr("src")
             }).then(function (response) {
                 _this4.getProyectos(_this4.newPortfolioid);
                 _this4.newTitle = '';
@@ -66959,6 +66969,7 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
         updateProyecto: function updateProyecto(idProject) {
             var _this6 = this;
 
+            this.fillProject.imagen = $("#imgForm").attr("src");
             var url = 'proyectos/' + idProject;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.put(url, this.fillProject).then(function (response) {
                 _this6.getProyectos(_this6.newPortfolioid);
@@ -66969,6 +66980,19 @@ __WEBPACK_IMPORTED_MODULE_1_moment___default.a.locale('es');
                 _this6.errors = error.response.data;
             });
         },
+        processFile: function processFile(event) {
+            this.profile.imagen = event.target.files[0];
+            var reader = new FileReader();
+
+            reader.addEventListener("load", function () {
+                document.querySelector('img').src = reader.result;
+            }, false);
+
+            if (this.profile.imagen) {
+                reader.readAsDataURL(this.profile.imagen);
+            }
+        },
+
         changePage: function changePage(page) {
             this.pagination.current_page = page;
             this.getProyectos(this.newPortfolioid, page);
@@ -67007,6 +67031,8 @@ var render = function() {
       })
     ),
     _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
     _vm.idperfil == _vm.useridProyecto
       ? _c(
           "button",
@@ -67040,7 +67066,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "form",
@@ -67107,10 +67133,25 @@ var render = function() {
                           }
                         }
                       })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "imagen" } }, [
+                        _vm._v("Imagen")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: { type: "file", name: "imagen" },
+                        on: {
+                          change: function($event) {
+                            _vm.processFile($event)
+                          }
+                        }
+                      })
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _vm._m(2)
                 ]
               )
             ])
@@ -67137,7 +67178,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _vm._m(3),
               _vm._v(" "),
               _c(
                 "form",
@@ -67212,10 +67253,25 @@ var render = function() {
                           }
                         }
                       })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "imagen" } }, [
+                        _vm._v("Imagen")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: { type: "file", name: "imagen" },
+                        on: {
+                          change: function($event) {
+                            _vm.processFile($event)
+                          }
+                        }
+                      })
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _vm._m(4)
                 ]
               )
             ])
@@ -67369,6 +67425,18 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-none" }, [
+      _c("img", {
+        staticClass: "rounded-circle",
+        staticStyle: { width: "200px" },
+        attrs: { alt: "Image Preview", src: "profile.imagen", id: "imgForm" }
+      })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -71352,9 +71420,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -71426,96 +71491,78 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.authid
-      ? _c("div", [
-          _c("div", [
-            _c(
-              "form",
+    _c("div", [
+      _c(
+        "form",
+        {
+          attrs: { method: "POST" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              _vm.createPortfolio()
+            }
+          }
+        },
+        [
+          _c("label", { attrs: { for: "text" } }, [_vm._v("Titulo")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
               {
-                attrs: { method: "POST" },
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                    _vm.createPortfolio()
-                  }
+                name: "model",
+                rawName: "v-model",
+                value: _vm.newTitle,
+                expression: "newTitle"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", name: "text", maxlength: "45" },
+            domProps: { value: _vm.newTitle },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
                 }
-              },
-              [
-                _c("label", { attrs: { for: "text" } }, [_vm._v("Titulo")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newTitle,
-                      expression: "newTitle"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", name: "text", maxlength: "45" },
-                  domProps: { value: _vm.newTitle },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.newTitle = $event.target.value
-                    }
+                _vm.newTitle = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "exampleFormControlTextarea1" } }, [
+              _vm._v("Descripcion Portfolio")
+            ]),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.newDescription,
+                  expression: "newDescription"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { id: "exampleFormControlTextarea1", rows: "3" },
+              domProps: { value: _vm.newDescription },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    { attrs: { for: "exampleFormControlTextarea1" } },
-                    [_vm._v("Descripcion Portfolio")]
-                  ),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.newDescription,
-                        expression: "newDescription"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { id: "exampleFormControlTextarea1", rows: "3" },
-                    domProps: { value: _vm.newDescription },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.newDescription = $event.target.value
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "btn btn-primary",
-                  attrs: { type: "submit", value: "Crear Portfolio" }
-                })
-              ]
-            )
-          ])
-        ])
-      : _c("div", [
-          _c("h2", [
-            _vm._v("Inicia Sesion Primero!  "),
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-warning btn-sm",
-                attrs: { href: "/login" }
-              },
-              [_vm._v("Log In")]
-            )
-          ])
-        ])
+                  _vm.newDescription = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "btn btn-primary",
+            attrs: { type: "submit", value: "Crear Portfolio" }
+          })
+        ]
+      )
+    ])
   ])
 }
 var staticRenderFns = []

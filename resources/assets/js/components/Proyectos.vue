@@ -13,6 +13,9 @@
                 </div>
             </div>
         </div>
+        <div class="d-none">
+            <img alt="Image Preview" src="profile.imagen" style="width:200px;" class="rounded-circle" id="imgForm">
+        </div>
         <!-- Button trigger modal -->
         
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" v-if="idperfil == useridProyecto">
@@ -37,7 +40,10 @@
                                 <label for="text">Descripcion Proyecto</label>
                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="newDescription"></textarea>
                             </div>
-
+                            <div class="form-group">
+                                <label for="imagen">Imagen</label>
+                                <input type="file" name="imagen" @change="processFile($event)">
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <input type="submit" class="btn btn-primary" value="Crear Proyecto">
@@ -71,7 +77,10 @@
                                 <label for="descripcion">Descripcion Proyecto</label>
                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="fillProject.descripcion"></textarea>
                             </div>
-
+                            <div class="form-group">
+                                <label for="imagen">Imagen</label>
+                                <input type="file" name="imagen" @change="processFile($event)">
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <input type="submit" class="btn btn-primary" value="Crear Proyecto">
@@ -157,7 +166,7 @@
                 newPortfolioid: this.portfid,
                 newTitle: '',
                 newDescription: '',
-                fillProject: { 'id': '', 'titulo': '', 'descripcion': '' },
+                fillProject: { 'id': '', 'titulo': '', 'descripcion': '' , 'imagen': ''},
                 pagination: {
                     total: 0,
                     current_page: 0,
@@ -239,7 +248,8 @@
                     user_id: this.newUserid,
                     portfolio_id: this.newPortfolioid,
                     titulo: this.newTitle,
-                    descripcion: this.newDescription
+                    descripcion: this.newDescription,
+                    imagen: $("#imgForm").attr("src")
                 }).then(response => {
                     this.getProyectos(this.newPortfolioid);
                     this.newTitle = '';
@@ -267,6 +277,7 @@
             },
 
             updateProyecto: function (idProject) {
+                this.fillProject.imagen = $("#imgForm").attr("src");
                 var url = 'proyectos/' + idProject;
                 axios.put(url, this.fillProject).then(response => {
                     this.getProyectos(this.newPortfolioid);
@@ -276,6 +287,20 @@
                 }).catch(error => {
                     this.errors = error.response.data
                 });
+            },
+            processFile(event) {
+                this.profile.imagen = event.target.files[0];
+                var reader = new FileReader();
+
+                reader.addEventListener("load",function() {
+                    document.querySelector('img').src = reader.result;
+                    },
+                    false
+                );
+
+                if (this.profile.imagen) {
+                    reader.readAsDataURL(this.profile.imagen);
+                }
             },
             changePage: function (page) {
                 this.pagination.current_page = page;
