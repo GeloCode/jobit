@@ -26,14 +26,25 @@ class ProyectosController extends Controller
     {
         //
     }
-    public function getProyectosById($id){
-        return Proyecto::where('portfolio_id', $id)->get();
+    public function getProyectosById(Request $request, $id){
+        $proyectos = Proyecto::where('portfolio_id', $id)->paginate(6);
+        return [
+            'pagination' => [
+                'total'         => $proyectos->total(),
+                'current_page'  => $proyectos->currentPage(),
+                'per_page'      => $proyectos->perPage(),
+                'last_page'     => $proyectos->lastPage(),
+                'from'          => $proyectos->firstItem(),
+                'to'            => $proyectos->lastPage(),
+            ],
+            'proyectos' => $proyectos 
+        ];
     }
     public function getDetalleProyectoById($id){
         return Proyecto::where('id', $id)->get();
     }
-    public function getidproyecto($authid){
-        return Proyecto::where('user_id', $authid)->value('user_id');
+    public function getidproyecto($id){
+        return Proyecto::where('portfolio_id', $id)->value('user_id');
     }
     /**
      * Store a newly created resource in storage.
@@ -85,6 +96,7 @@ class ProyectosController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'id' => 'required',
             'titulo' => 'required',
             'descripcion' => 'required'
         ]);

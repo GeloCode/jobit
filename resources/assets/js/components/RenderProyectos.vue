@@ -1,6 +1,7 @@
 <template>
     <div class="container"> 
-        <proyectos :auth="userid" :portfid="hashid"></proyectos>
+        render {{userid}} {{hashid}} {{perfil}}
+        <proyectos :auth="userid" :portfid="hashid" :idperfil="perfil"></proyectos>
     </div>
 </template>
 <script>
@@ -10,7 +11,7 @@
     import Proyectos from './Proyectos.vue';
     moment.locale('es');
     export default {
-        props: ['hashid', 'userid'], //hashid es el id del porfolio poviniente del proyectos.blade
+        props: ['hashid', 'userid', 'perfil'], //hashid es el id del porfolio poviniente del proyectos.blade
         data: function () {
             return {
                }
