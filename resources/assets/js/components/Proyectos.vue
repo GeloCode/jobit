@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <h1>Proyectos</h1> {{portfid}}
         <div class="row">
             <div v-for="portfolio in infoPortfolio" :key="portfolio.id" class="card col-md-12">
                 <div class="card-body">
@@ -139,8 +140,8 @@
         created: function () {
             this.getProyectos(this.portfid);
             this.getInfoPortfolio(this.portfid);
+            console.log(this.portfid);
             this.getUserIdProyecto(this.portfid);
-            this.getUserIdPerfils(this.idperfil);
         },
         //end
         //aqui almacenamos datos
@@ -209,12 +210,6 @@
                 var url = "useridProyecto/" + idportf;
                 axios.get(url).then(response => {
                     this.useridProyecto = response.data;
-                });
-            },
-            getUserIdPerfils: function (auth) {
-                var url = "useridPerfils/" + auth;
-                axios.get(url).then(response => {
-                    this.useridPerfils = response.data;
                 });
             },
             getInfoPortfolio: function (portf_id) {

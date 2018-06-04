@@ -15,7 +15,7 @@ class PortfolioController extends Controller
      */
     public function getPortfolios(Request $request)
     {
-        $portfolios = Portfolio::orderBy('id', 'ASC')->paginate(2);
+        $portfolios = Portfolio::orderBy('id', 'ASC')->paginate(6);
         return [
             'pagination' => [
                 'total' => $portfolios->total(),

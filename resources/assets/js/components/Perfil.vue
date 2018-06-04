@@ -1,3 +1,4 @@
+<!-- ANTONIO -->
 <template>
 	<div class="container">
 		<br>
@@ -93,7 +94,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<!--Aqui los proyectos-->
+						<proyectos :userid="userId" :perfil="profile.id" :hashid="portfolio.id"></proyectos><!-- hashid es el id del // -->
 					</div>
 				</div>
 			</div>
@@ -102,6 +103,7 @@
 </template>
 <script>
 import Enlaces from "./Enlaces.vue";
+import Proyectos from "./RenderProyectos.vue";
 export default {
   created: function() {
       this.getPerfilByUser();
@@ -112,6 +114,7 @@ export default {
     return {
       provincias: [],
       profile: {
+				id: "",
         name: "",
         descripcion: "",
         telefono: "",
@@ -130,10 +133,12 @@ export default {
     };
   },
   props: {
-    userId: String
+		userId: String,
+
   },
   components: {
-    enlaces: Enlaces
+    enlaces: Enlaces,
+		proyectos: Proyectos
   },
   methods: {
     getPerfilByUser: function() {
