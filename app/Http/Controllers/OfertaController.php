@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Oferta;
+use App\Inscripcion;
 
 class OfertaController extends Controller
 {
@@ -121,6 +122,8 @@ class OfertaController extends Controller
      */
     public function destroy($id)
     {
+        $inscripciones = Inscripcion::where('oferta_id', $id);
+        $inscripciones->delete();
         $oferta = Oferta::find($id);
         $oferta->delete();
     }

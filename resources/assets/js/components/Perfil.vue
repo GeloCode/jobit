@@ -93,8 +93,8 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12" v-if="empresaornot">
-						<proyectos :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
+					<div class="col-md-12">
+						<proyectos :control="1" :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
 						<!--Aqui los proyectos-->
 						<span v-text="portfolioId"></span>
 					</div>

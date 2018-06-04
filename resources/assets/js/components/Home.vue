@@ -2,7 +2,7 @@
     <div id="home">
         <header class="header container-fluid">
         <div class="header-img row">
-            <form class="col-lg-12">
+            <form class="col-lg-12 header-form">
                 <div class="form-row align-items-center">
                     <div class="col-auto home-form">
 
@@ -43,11 +43,11 @@
         <div class="row">
             <div class="container rol-container">
                 <div class="row">
-                    <div class="col-lg-12  bs-example" data-example-id="thumbnails-with-custom-content">
+                    <div class="col-lg-12 bs-example " data-example-id="thumbnails-with-custom-content">
                     <h2>APP ROLES</h2>
                         <div class="row">
                             
-                            <div class="col-sm-6 col-md-3">
+                            <div class="box-home col-md-3">
                                 <div class="thumbnail">
                                 <i class="fa fa-user"></i>
                                     <div class="caption">
@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-md-3">
+                            <div class="box-home col-md-3">
                                 <div class="thumbnail">
                                 <i class="fa fa-users"></i>
                                     <div class="caption">
@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-md-3">
+                            <div class="box-home col-md-3">
                                 <div class="thumbnail">
                                 <i class="fa fa-user-secret"></i>
                                     <div class="caption">

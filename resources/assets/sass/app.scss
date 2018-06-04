@@ -44,8 +44,25 @@
     .header-img {
       height:100%;
       display:flex;
-      justify-content:center;
       align-items: center;
+      .header-form{
+        display:flex;
+        justify-content:center;
+        .form-row {
+          @include media-breakpoint-down(sm) {
+            flex-direction: column;
+          }
+          @include media-breakpoint-down(xs) {
+            flex-direction: column;
+          }
+        }
+      }
+    }
+    @include media-breakpoint-down(sm) {
+      height: 400px;
+    }
+    @include media-breakpoint-down(xs) {
+      height: 340px;
     }
   }
 }
@@ -152,10 +169,10 @@
   .filters {
     background-color: $bgP;
     .form-filter {
-
+      padding: 40px 0;
     }
     .add-offer{
-      margin-top:40px;
+      margin-bottom:40px;
       .form-content {
         display: flex;
         flex-direction: row;
@@ -191,6 +208,7 @@
       .form-filter {
         padding: 20px 0;
         .form-row{
+          width:60%;
           justify-content: center;
           .button-2 {
             order:-1;
@@ -199,9 +217,10 @@
       }
     }
     @include media-breakpoint-down(xs) { 
-      .form-filter {
+      .form-filter {        
         padding: 20px 0;
         .form-row{
+          width:60%;
           justify-content: center;
           .button-2 {
             order:-1;
@@ -309,6 +328,26 @@
             button {
               margin: 5px auto;
             }
+          }
+        }
+      }
+      nav {
+        border-top: solid 4px $bgP;
+        padding-top:20px;
+        margin-top:20px;
+        padding-bottom: 60px;
+        .pagination {
+          display:block;
+          .page-link {
+            width:100px;
+            text-align: center;
+            background-color: $bgP;
+          }
+          .next {
+            float:right;
+          }
+          .bef {
+            float: left;
           }
         }
       }
@@ -432,12 +471,13 @@ color:white!important;
       }
       .row {
         justify-content: space-between; 
-        .col-sm-6 {
+        .box-home {
           transition: all .6s;
           box-shadow: 5px 5px 30px 2px $secondary;
           border-radius:10px;
           border:1px solid lightgray;
           justify-content: center;
+          
           .thumbnail {
             padding:20px;
             display: flex;
@@ -484,6 +524,12 @@ color:white!important;
                 text-shadow: 1px 1px 2px $primary;
               }
             }
+          }
+          @include media-breakpoint-down(sm) {
+           margin-top: 30px;
+          }
+          @include media-breakpoint-down(xs) {
+            margin-top: 20px;
           }
         }
       }
@@ -548,3 +594,4 @@ fill:$primary;
 .clear {
   clear:both;
 }
+
