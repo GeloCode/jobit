@@ -1,6 +1,6 @@
 <?php
 Route::get('/', function(){
-    return view('app');
+    return view('home');
 });
 
 Route::get('/portf', function () {
@@ -203,7 +203,6 @@ Route::get('portfolios', 'PortfolioController@getPortfolios'); //obtener todos l
 Route::get('selectName', 'PortfolioController@getNameUser'); //obtener todos los usuarios para poder printarlos es portfolios
 Route::post('crearPortfolio', 'PortfolioController@store'); //crear el portfolio
 Route::get('info/{id}', 'PortfolioController@getInfoPortfolio');
-Route::get('pillaridportf/{id}', 'PortfolioController@getPortfIdJoint'); //esto es para obtener el id del portfolio a traves del id de perfil (para redirigir al user para crear proyectos)
 Route::get('useridProyecto/{id}', 'ProyectosController@getidproyecto');
 Route::get('useridPerfils/{id}', 'PerfilController@getidperfils');
 

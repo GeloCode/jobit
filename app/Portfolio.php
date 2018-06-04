@@ -9,13 +9,13 @@ class Portfolio extends Model
 {
     //use SoftDeletes;
     //protected $dates = ['deleted_at'];
-    protected $fillable = ['perfil_id', 'titulo','text'];
+    protected $fillable = ['user_id', 'titulo','text'];
     /**
      * Hacemos la relación de que un portfolio le pertenece a un usuario con el rol de "solicitante".
      */
-    public function perfil()
+    public function user()
     {
-        return $this->belongsTo(Perfil::class);
+        return $this->belongsTo(User::class);
     }
 
     /**

@@ -18,7 +18,7 @@
         </div>
         <!-- Button trigger modal -->
         
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" v-if="idperfil == useridProyecto">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Crear Proyecto
         </button>
         <!-- Modal -->
@@ -104,7 +104,7 @@
                         <a class="btn btn-success btn-sm" v-bind:href="'/detailProject?id=' + proyecto.id">Ver</a>
                         <div>
                             <!-- CONTROL DE USUARIO !!! -->
-                            <div v-if="idperfil == useridProyecto">
+                            <div>
                                 <a href="#" class="btn btn-warning btn-sm" v-on:click.prevent="editProyecto(proyecto)">Editar Proyecto</a>
                                 <a class="btn btn-danger btn-sm" v-on:click="deleteProyecto(proyecto)">Borrar</a>
                             </div>

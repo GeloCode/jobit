@@ -82,7 +82,7 @@ class User extends Authenticatable
         return $this->hasMany(Portfolio::class);
     }
 
-    /** An user who is authenticated but it is not an admin  */
+    /** Devuelve true si es empresa*/
     public function isEmpresa(){
         return (User::find(Auth::id())->rol_id == 1);
     }
