@@ -1,6 +1,6 @@
 @extends('app') 
 @section('content')
     @if(Auth::id())
-    <formul></formul>
+    <formul user-id="{{Auth::id()}}"></formul>
     @endif
 @endsection

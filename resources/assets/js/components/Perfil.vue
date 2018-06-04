@@ -93,7 +93,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-12" v-if="!isEmpresa">
 						<proyectos :control="1" :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
 						<!--Aqui los proyectos-->
 						<span v-text="portfolioId"></span>
@@ -143,7 +143,7 @@ export default {
   },
   props: {
 		userId: String,
-		empresaornot: String
+		isEmpresa:Boolean
 	},
   components: {
     enlaces: Enlaces,

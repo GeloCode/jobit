@@ -105,9 +105,9 @@
             @csrf
           </form>
           <a class="dropdown-item" href="/perfil">Perfil</a>
-          @if (!Auth::user()->isEmpresa() && App\Portfolio::where('perfil_id', Auth::id())->value('id'))
-          <a class="dropdown-item" href="/projects?id={{App\Portfolio::where('perfil_id', Auth::id())->value('id')}}">Portfolio</a>
-          @elseif (!Auth::user()->isEmpresa() && !App\Portfolio::where('perfil_id', Auth::id())->value('id'))
+          @if (!Auth::user()->isEmpresa() && App\Portfolio::where('user_id', Auth::id())->value('id'))
+          <a class="dropdown-item" href="/projects?id={{App\Portfolio::where('user_id', Auth::id())->value('id')}}">Portfolio</a>
+          @elseif (!Auth::user()->isEmpresa() && !App\Portfolio::where('user_id', Auth::id())->value('id'))
               <a class="dropdown-item" href="/formulario">Portfolio</a>
             @endif
           </li>  
