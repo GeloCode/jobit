@@ -2,6 +2,7 @@
 
 @section('content')
 
-<perfil empresaornot="{{!Auth::user()->isEmpresa()}}" user-id="{{Auth::id()}}" perfil="{{Auth::user()->perfil->id}}"></perfil>
-
+@if(Auth::check())
+<perfil user-id="{{Auth::id()}}"></perfil>
+@endif
 @endsection

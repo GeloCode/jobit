@@ -1,6 +1,5 @@
 <template>
 <div>
-<div v-if="authid">
     <div>
         <form method="POST" v-on:submit.prevent="createPortfolio()">
                 <label for="text">Titulo</label>
@@ -12,8 +11,6 @@
                 <input type="submit" class="btn btn-primary" value="Crear Portfolio">
         </form>
     </div>
-</div>
-<div v-else><h2>Inicia Sesion Primero!  <a class="btn btn-warning btn-sm" v-bind:href="'/login'">Log In</a></h2></div>
 </div>
 </template>
 
