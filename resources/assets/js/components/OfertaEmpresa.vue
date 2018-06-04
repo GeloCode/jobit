@@ -7,13 +7,14 @@
       </div>
     </header>
     <div class="container-fluid filters">
+      <div class="row">
       <div class="container">
         <div class="row">
           <div class="alert alert-info mt-2" role="alert" v-if="mensajeNingunaOferta">
              Aún no tienes ningúna oferta, añade una para que te aparezcan.
           </div>
 
-          <form class="col-lg-12">
+          <form class="col-lg-12 form-filter">
             <div class="form-row align-items-center">
               <div class="col-auto home-form">
                 <button class="btn btn-primary mb-2" @click.prevent="addOtraOferta()">Añadir Oferta</button>
@@ -46,8 +47,8 @@
                 </div>
               </div>
 
-              <div class="col-auto home-form">
-                <button class="btn btn-danger mb-2" @click.prevent="filtrar()" tabindex="3">
+              <div class="col-auto home-form button-2">
+                <button class="btn btn-danger order-xs-first mb-2" @click.prevent="filtrar()" tabindex="3">
                   Filter </button>
               </div>
             </div>
@@ -90,67 +91,72 @@
           </form>
         </div>
       </div>
+      </div>
     </div>
     <hr/>
     <div class="container">
-      <div class="row">
-        <div class="card card-body oferta mb-2 col-md-8" v-bind:key="oferta.id" v-for="oferta in ofertas" v-bind:id="'oferta_' + oferta.id">
-          <div class="form-group ">
-            <label for="Titulo">Título:</label>
-            <input type="text" class="form-control" v-model="oferta.titulo" disabled>
-          </div>
-          <div class="form-group ">
-            <label for="Descripcion">Descripción</label>
-            <textarea class="form-control" v-model="oferta.descripcion" disabled></textarea>
-          </div>
-          <div class="form-group">
-            <label for="Provincia">Provincia</label>
-            <select class="custom-select" name="selectProvincia" v-model="oferta.provincia_id" disabled>
-                <option value="0" disabled>Elige tu Provincia</option>
-                <option v-for="provincia in provincias" :key="provincia.id" :value="provincia.id" v-text="provincia.nombre"></option>
-            </select>
-          </div>
-          <div class="form-group ">
-            <label for="Vacantes">Vacantes</label>
-            <input type="number" class="form-control" v-model="oferta.vacantes" disabled>
-          </div>
-          <div class="form-content">
+      <div class="row oferts">
+        <div class="col-lg-8">
+          <div class="card card-body oferta mb-2" v-bind:key="oferta.id" v-for="oferta in ofertas" v-bind:id="'oferta_' + oferta.id">
             <div class="form-group ">
-              <label for="Sueldo Desde">Sueldo Desde</label>
-              <input type="number" class="form-control" v-bind:value="oferta.sueldo_desde" disabled>
+              <label for="Titulo">Título:</label>
+              <input type="text" class="form-control" v-model="oferta.titulo" disabled>
             </div>
             <div class="form-group ">
-              <label for="Sueldo Hasta">Sueldo hasta</label>
-              <input type="number" class="form-control" v-bind:value="oferta.sueldo_hasta" disabled>
+              <label for="Descripcion">Descripción</label>
+              <textarea class="form-control" v-model="oferta.descripcion" disabled></textarea>
+            </div>
+            <div class="form-group">
+              <label for="Provincia">Provincia</label>
+              <select class="custom-select" name="selectProvincia" v-model="oferta.provincia_id" disabled>
+                  <option value="0" disabled>Elige tu Provincia</option>
+                  <option v-for="provincia in provincias" :key="provincia.id" :value="provincia.id" v-text="provincia.nombre"></option>
+              </select>
+            </div>
+            <div class="form-group ">
+              <label for="Vacantes">Vacantes</label>
+              <input type="number" class="form-control" v-model="oferta.vacantes" disabled>
+            </div>
+            <div class="form-content">
+              <div class="form-group ">
+                <label for="Sueldo Desde">Sueldo Desde</label>
+                <input type="number" class="form-control" v-bind:value="oferta.sueldo_desde" disabled>
+              </div>
+              <div class="form-group ">
+                <label for="Sueldo Hasta">Sueldo hasta</label>
+                <input type="number" class="form-control" v-bind:value="oferta.sueldo_hasta" disabled>
+              </div>
+            </div>
+            <hr/>
+            <div class="buttons-container">
+              <button class="btn btn-secondary habilitadoSiempre" v-on:click="buscarInscripciones(oferta.id)">Ver Inscripciones</button>
+              <button class="btn btn-primary habilitadoSiempre" name="editar" v-on:click="habilitarCampos(oferta.id)">Editar</button>
+              <button class="btn btn-secondary habilitadoSiempre" name="guardar" v-on:click="editOferta(oferta)" style="display:none;">Guardar</button>
+              <button class="btn btn-danger habilitadoSiempre" v-on:click="deleteOferta(oferta)">Eliminar</button>
             </div>
           </div>
-          <hr/>
-          <div class="buttons-container">
-            <button class="btn btn-secondary habilitadoSiempre" v-on:click="buscarInscripciones(oferta.id)">Ver Inscripciones</button>
-            <button class="btn btn-primary habilitadoSiempre" name="editar" v-on:click="habilitarCampos(oferta.id)">Editar</button>
-            <button class="btn btn-secondary habilitadoSiempre" name="guardar" v-on:click="editOferta(oferta)" style="display:none;">Guardar</button>
-            <button class="btn btn-danger habilitadoSiempre" v-on:click="deleteOferta(oferta)">Eliminar</button>
-          </div>
         </div>
-        <div class="col-lg-4" v-if="!mensajeNingunaOferta">
-          <h2>Inscripciones de todas tus Ofertas</h2>
-          <div class="inscritos">
-            <p>Inscritos</p>
-            <p class="numero-inscritos" v-text="estadisticasInscripcion.totales"></p>
+        <aside class="col-lg-4 order-sm-first order-lg-last order-md-first order-xs-first" v-if="!mensajeNingunaOferta">
+          <div class="aside-content card card-body mb-2">
+            <h2>Offerts Stats</h2>
+            <div class="inscritos">
+              <p>Inscritos</p>
+              <p class="numero" v-text="estadisticasInscripcion.totales"></p>
+            </div>
+            <div class="pendientes">
+              <p>Pendientes por gestionar</p>
+              <p class="numero" v-text="estadisticasInscripcion.pendientes"></p>
+            </div>
+            <div class="aceptados">
+              <p>Aceptados</p>
+              <p class="numero" v-text="estadisticasInscripcion.aceptados"></p>
+            </div>
+            <div class="rechazados">
+              <p>Rechazados</p>
+              <p class="numero" v-text="estadisticasInscripcion.rechazados"></p>
+            </div>
           </div>
-          <div class="pendientes">
-            <p>Pendientes por gestionar</p>
-            <p class="numero-pendientes" v-text="estadisticasInscripcion.pendientes"></p>
-          </div>
-          <div class="aceptados">
-            <p>Aceptados</p>
-            <p class="numero-aceptados" v-text="estadisticasInscripcion.aceptados"></p>
-          </div>
-          <div class="rechazados">
-            <p>Rechazados</p>
-            <p class="numero-rechazados" v-text="estadisticasInscripcion.rechazados"></p>
-          </div>
-        </div>
+        </aside>
         <nav>
           <ul class="pagination">
             <li class="page-item" v-if="pagination.current_page > 1">

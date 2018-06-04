@@ -6,7 +6,7 @@
 			<div class="col-md-4">
 				<div class="row">
 					<div class="col-md-12">
-						<img alt="Image Preview" src="../../img/avatar.png" style="width:200px;" class="rounded-circle">
+						<img alt="Image Preview" :src="profile.imagen == '' ? '../../img/avatar.png' : profile.imagen" style="width:200px;" class="rounded-circle" id="imgForm">
 					</div>
 				</div>
 				<br>
@@ -108,14 +108,14 @@ import Enlaces from "./Enlaces.vue";
 import Proyectos from "./Proyectos.vue";
 export default {
   created: function() {
-		this.getPerfilByUser();
-		this.getProvincias();
-		this.getPortfolio();
-		window.addEventListener("load", function(event) {
-		if (window.location.hash === "#execute") {
-			$("#profileModal").modal("toggle");
-		}
-		});
+    this.getPerfilByUser();
+    this.getProvincias();
+    this.getPortfolio();
+    window.addEventListener("load", function(event) {
+      if (window.location.hash === "#execute") {
+        $("#profileModal").modal("toggle");
+      }
+    });
   },
   data: function() {
     return {
@@ -123,7 +123,7 @@ export default {
 			provincias: [],
 			portfolioId: '',
       profile: {
-				id: "",
+        id: "",
         name: "",
         descripcion: "",
         telefono: "",
@@ -147,7 +147,7 @@ export default {
 	},
   components: {
     enlaces: Enlaces,
-		proyectos: Proyectos
+    proyectos: Proyectos
   },
   methods: {
     getPerfilByUser: function() {
@@ -179,48 +179,61 @@ export default {
           descripcion: this.profile.descripcion,
           codigo_postal: this.profile.codigo_postal,
           lenguajes: this.profile.lenguajes,
-					frameworks: this.profile.frameworks,
+          frameworks: this.profile.frameworks,
+          imagen: $("#imgForm").attr("src")
         }
       })
         .then(response => {
-         this.openCloseModal();
+          this.openCloseModal();
           this.getPerfilByUser();
-					toastr.success("Perfil actualizado correctamente");
-					if(this.first){
-						 window.location.assign("/perfil")
-					}
+          toastr.success("Perfil actualizado correctamente");
+          if (this.first) {
+            window.location.assign("/perfil");
+          }
         })
         .catch(function(error) {
           toastr.error(error);
-        });
+				});
     },
     getProvincias: function() {
       var url = "provincias";
       axios.get(url).then(response => {
         this.provincias = response.data;
       });
-		},
-		processFile(event) {
-			this.profile.imagen = event.target.files[0];
-			console.log(this.profile.imagen);
-  	},
-		openCloseModal: function(){
-			$("#profileModal").modal("toggle");
-		},
-		firstTime: function(){	
-			if(this.first){
-				this.openCloseModal();
-			}
-		}, 
-		getPortfolio: function(){
-			var url='portfoliosPerfil/'+this.userId;
-			axios.get(url).then(response => {
-				this.portfolioId = response.data.id;				
-			}).catch(error=>{
-				toastr.error(error);
-			});
-			
-		}
-	}
+    },
+    processFile(event) {
+      this.profile.imagen = event.target.files[0];
+      var reader = new FileReader();
+
+      reader.addEventListener("load",function() {
+         document.querySelector('img').src = reader.result;
+        },
+        false
+      );
+
+      if (this.profile.imagen) {
+        reader.readAsDataURL(this.profile.imagen);
+      }
+    },
+    openCloseModal: function() {
+      $("#profileModal").modal("toggle");
+    },
+    firstTime: function() {
+      if (this.first) {
+        this.openCloseModal();
+      }
+    },
+    getPortfolio: function() {
+      var url = "portfoliosPerfil/" + this.userId;
+      axios
+        .get(url)
+        .then(response => {
+          this.portfolioId = response.data.id;
+        })
+        .catch(error => {
+          toastr.error(error);
+        });
+    }
+  }
 };
 </script>

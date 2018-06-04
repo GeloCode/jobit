@@ -1,8 +1,8 @@
-!<template>
+<template>
     <div id="home">
         <header class="header container-fluid">
         <div class="header-img row">
-            <form>
+            <form class="col-lg-12">
                 <div class="form-row align-items-center">
                     <div class="col-auto home-form">
 
@@ -43,7 +43,7 @@
         <div class="row">
             <div class="container rol-container">
                 <div class="row">
-                    <div class="bs-example" data-example-id="thumbnails-with-custom-content">
+                    <div class="col-lg-12  bs-example" data-example-id="thumbnails-with-custom-content">
                     <h2>APP ROLES</h2>
                         <div class="row">
                             
