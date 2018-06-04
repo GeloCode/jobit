@@ -7,7 +7,7 @@
             <a class="btn btn-warning btn-sm float-right" data-toggle="modal" data-target="#updateEnlace" @click="getEnlaceById(enlace.id)">Editar</a>
         </div>
     </div>
-        <button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#enlacesModal">Añadir Enlace</button>
+        <button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#enlacesModal"  @click="limpiarEnlace();">Añadir Enlace</button>
     <div class="modal fade" id="enlacesModal" tabindex="-1" role="dialog" aria-labelledby="enlacesModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -73,6 +73,7 @@ export default {
     return {
       enlaces: [],
       enlace: {
+        id:0,
         user_id: this.userId,
         web: "",
         enlace: ""
@@ -110,13 +111,13 @@ export default {
         }
       })
         .then(response => {
-          $("#enlaceModal").modal("toggle");
           toastr.success("Enlaces actualizados correctamente");
           this.getLinks();
         })
         .catch(function(error) {
           toastr.error(error);
         });
+          $("#enlacesModal").modal("toggle");          
     },
     deleteEnlace: function(id) {
       if (confirm("¿Estas Seguro?")) {
@@ -141,23 +142,25 @@ export default {
         enlace : this.enlace.enlace
       })
         .then(response => {
-          this.enlace = {};
-          // $("#updateEnlace").modal("toggle");
           toastr.success("Enlaces actualizados correctamente");
           this.getLinks();
         })
         .catch(function(error) {
+          this.getLinks();
           toastr.error(error);
         });
+        $("#updateEnlace").modal("toggle");
     },
     getEnlaceById: function(id){
       var url = "enlace/" + id;
       axios.get(url).then(response => {
         this.enlace = response.data;
-        console.log(this.enlace);
-        $("#updateEnlace").modal("toggle");
       });
+      $("#updateEnlace").modal("toggle");
+    },
+    limpiarEnlace : function(){
+      this.enlace = {};
     }
   }
 };
-</script>
+</script>                    

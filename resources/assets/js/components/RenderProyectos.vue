@@ -1,5 +1,6 @@
 <template>
     <div class="container"> 
+        render {{userid}} {{hashid}} {{perfil}}
         <proyectos :auth="userid" :portfid="hashid" :idperfil="perfil"></proyectos>
     </div>
 </template>

@@ -25,7 +25,7 @@ class EnlacesController extends Controller
      */
     public function getEnlaceById($id)
     {
-        return Enlace::findOrFail($id)->first();
+        return Enlace::where('id', $id)->first();
     }
 
     /**

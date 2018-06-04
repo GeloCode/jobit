@@ -27,7 +27,7 @@ class ProyectosController extends Controller
         //
     }
     public function getProyectosById(Request $request, $id){
-        $proyectos = Proyecto::where('portfolio_id', $id)->paginate(2);
+        $proyectos = Proyecto::where('portfolio_id', $id)->paginate(6);
         return [
             'pagination' => [
                 'total'         => $proyectos->total(),

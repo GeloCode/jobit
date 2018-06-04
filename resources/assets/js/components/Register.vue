@@ -133,7 +133,7 @@
                     axios
                         .post("register", _this.registerData)
                         .then(function (response) {
-                            var redirect = (window.location.href = "/perfil");
+                            var redirect = (window.location.href = "/perfil#execute");
                             axios.get(redirect);
                         })
                         .catch(function (error) {

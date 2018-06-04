@@ -125,10 +125,12 @@
             </div>
           </div>
           <hr/>
-            <button class="btn btn-block btn-secondary habilitadoSiempre" v-on:click="buscarInscripciones(oferta.id)">Ver Inscripciones</button>
-            <button class="btn btn-block btn-primary habilitadoSiempre" name="editar" v-on:click="habilitarCampos(oferta.id)">Editar</button>
-            <button class="btn btn-block btn-secondary habilitadoSiempre" name="guardar" v-on:click="editOferta(oferta)" style="display:none;">Guardar</button>
-            <button class="btn btn-block btn-danger habilitadoSiempre" v-on:click="deleteOferta(oferta)">Eliminar</button>
+          <div class="buttons-container">
+            <button class="btn btn-secondary habilitadoSiempre" v-on:click="buscarInscripciones(oferta.id)">Ver Inscripciones</button>
+            <button class="btn btn-primary habilitadoSiempre" name="editar" v-on:click="habilitarCampos(oferta.id)">Editar</button>
+            <button class="btn btn-secondary habilitadoSiempre" name="guardar" v-on:click="editOferta(oferta)" style="display:none;">Guardar</button>
+            <button class="btn btn-danger habilitadoSiempre" v-on:click="deleteOferta(oferta)">Eliminar</button>
+          </div>
         </div>
         <div class="col-lg-4" v-if="!mensajeNingunaOferta">
           <h2>Inscripciones de todas tus Ofertas</h2>
