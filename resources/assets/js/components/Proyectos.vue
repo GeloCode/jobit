@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1>Proyectos</h1> {{portfid}}
+        <h1>Proyectos</h1>
         <div class="row">
             <div v-for="portfolio in infoPortfolio" :key="portfolio.id" class="card col-md-12">
                 <div class="card-body">
@@ -14,7 +14,8 @@
             </div>
         </div>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" v-if="idperfil == useridProyecto">
             Crear Proyecto
         </button>
         <!-- Modal -->
@@ -136,13 +137,14 @@
 
     moment.locale('es');
     export default {
-        props: ['portfid', 'auth', 'idperfil'],
         created: function () {
-            this.getProyectos(this.portfid);
-            this.getInfoPortfolio(this.portfid);
-            console.log(this.portfid);
-            this.getUserIdProyecto(this.portfid);
+            if(this.control==1){
+              this.getProyectos(this.portfid);
+              this.getInfoPortfolio(this.portfid);
+              this.getUserIdProyecto(this.portfid);
+            }
         },
+        props: ['portfid', 'auth', 'idperfil', 'control'],
         //end
         //aqui almacenamos datos
         data: function () {
@@ -166,6 +168,17 @@
                 },
                 offset: 2,
             }
+        },
+        watch: {
+            //lo que hace es comprobar el props, si cambia el valor del props se ejecuta esta funcion y actualiza los datos.
+            "portfid":function(){
+                this.getProyectos(this.portfid);
+                this.getInfoPortfolio(this.portfid);
+                this.getUserIdProyecto(this.portfid);
+                this.newUserid = this.auth;
+                this.newPortfolioid = this.portfid;
+            },
+            
         },
         computed: {
             isActived: function () {
