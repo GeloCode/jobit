@@ -33,16 +33,16 @@
  .rounded-0 {
    height: 100%;
  }
+ 
 
+//home styles
 #home {
   .header {
     height:600px;
-    width:100%;
     background-image:linear-gradient(to right, rgba(0, 0, 0, .8), rgba(0, 0, 0, .4),rgba(0, 0, 0, .8)), url('../img/pic_1.jpg');
     background-size: cover;
     .header-img {
       height:100%;
-      width:100%;
       display:flex;
       justify-content:center;
       align-items: center;
@@ -50,16 +50,16 @@
   }
 }
 
+
+//Oferta empresa Style
 #ofertaempresa{
   .header {
     height:600px;
-    width:100%;
     background-image:linear-gradient(to right, rgba(0, 0, 0, .8), rgba(0, 0, 0, .4),rgba(0, 0, 0, .8)), url('../img/offer.jpg');
     background-size: cover;
-
+    
     .header-img {
       height:100%;
-      width:100%;
       display:flex;
       justify-content:center;
       align-items: center;
@@ -70,16 +70,90 @@
         text-transform: uppercase;
       }
     }
+    @include media-breakpoint-down(sm) {
+      height: 400px;
+      h2 {
+        font-size: 1.7rem;
+      }
+    }
+    @include media-breakpoint-down(xs) {
+      height: 340px;
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
   }
+  //ofertaempresa > aside
+  aside {
+    
+    .aside-content {
+      height: 555px;
+      h2 {
+        line-height: 1.6;
+        font-size: 1.7rem;
+        font-weight: 900;
+        padding: 0.375rem 0.75rem;
+        border-bottom: 2px solid #4d4f53 !important;
+      }
+      p {
+        line-height: 1.2rem;
+      }
+      div {
+        margin-bottom: 1.5rem;
+        p {
+          &:first-child{
+            font-weight: 900;
+          }
+        }
+      }
+      
+      .inscritos {
+        margin-top: 3rem;
+        color: $bgP;
+      }
+      .pendientes {
+        color: $secondary;
+      }
+      .aceptados {
+        color: $primary;
+      }
+      .rechazados {
+        color: red;
+      }
+    }
+    @include media-breakpoint-down(sm) {
+      .aside-content {
+        padding: 0 30px;
+        height:270px;
+        p {
+          margin-left:.3rem;
+        }
+        div {
+          margin-bottom: 0.5rem!important;
+          display:flex;
+        }
+        .inscritos {
+          margin-top: 1rem;
+        }
+      }
+    }
+    @include media-breakpoint-down(xs) {
+    order:-1;
+    }
+  }
+
   hr {
     height: 12px;
     border: 0;
     box-shadow: inset 0 18px 18px -18px rgba(0, 0, 0, 0.5);
     margin:0;
   }
+  //filters form
   .filters {
     background-color: $bgP;
-  
+    .form-filter {
+
+    }
     .add-offer{
       margin-top:40px;
       .form-content {
@@ -113,9 +187,30 @@
       
       }
     }
+    @include media-breakpoint-down(sm) { 
+      .form-filter {
+        padding: 20px 0;
+        .form-row{
+          justify-content: center;
+          .button-2 {
+            order:-1;
+          }
+        }
+      }
+    }
+    @include media-breakpoint-down(xs) { 
+      .form-filter {
+        padding: 20px 0;
+        .form-row{
+          justify-content: center;
+          .button-2 {
+            order:-1;
+          }
+        }
+      }
+    }
   }
   .container {
-    padding: 50px 0;
     
     &:nth-child(2) {
       padding: 120px 0 50px 0;
@@ -131,76 +226,94 @@
       display: flex;
       justify-content: center;
     }
-    .oferta {
-      display: flex;
-      .form-group {
-        .form-control:disabled, .form-control[readonly] {
-          background-color: white;
-          opacity: 1;
-          border: none;
-        }
-        textarea {
-          resize: none;
-        }
-        select:disabled {
-          background-color: white;
-          opacity: 1;
-          border: none;
-          -webkit-appearance: menuitem;
-          -moz-appearance: menuitem;
-          appearance: menuitem;
-        }
-        label {
-          display:block;
-          padding-left:10px;
-          font-weight:900;
-          font-size:1rem;
-        }
-        
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { 
-          -webkit-appearance: none; 
-          margin: 0; 
-  }
-  input[type=number] {
-    -moz-appearance: textfield;
-  }
-        &:first-child {
-          label {
-            display:none;
-          }
-          input {
-            font-size:1.7rem;
-            font-weight:900;
-            border-bottom: 2px solid $secondary!important;
-          }
-        }
+    .oferts{
+      margin-top:4rem;
+      @include media-breakpoint-down(sm) {
+        margin-top:3rem;
       }
-      .form-content {
+      @include media-breakpoint-down(xs) {
+      margin-top:2rem;
+      }
+      //oferta styles taking out all form styles
+      .oferta {
         display: flex;
-        flex-direction: row;
         .form-group {
+          .form-control:disabled, .form-control[readonly] {
+            background-color: white;
+            opacity: 1;
+            border: none;
+          }
+          textarea {
+            resize: none;
+          }
+          select:disabled {
+            background-color: white;
+            opacity: 1;
+            border: none;
+            -webkit-appearance: menuitem;
+            -moz-appearance: menuitem;
+            appearance: menuitem;
+          }
+          label {
+            display:block;
+            padding-left:10px;
+            font-weight:900;
+            font-size:1rem;
+          }
+          
+          input[type=number]::-webkit-inner-spin-button, 
+          input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+          }
+          input[type=number] {
+            -moz-appearance: textfield;
+          }
           &:first-child {
             label {
-              display:block;
-              font-weight:900;
+              display:none;
             }
             input {
-              font-size: 0.9rem;
-              font-weight:400;
-              border:none!important;
+              font-size:1.7rem;
+              font-weight:900;
+              border-bottom: 2px solid $secondary!important;
             }
           }
         }
-      }
-      .buttons-container {
-        display: flex;
-        justify-content: space-around;
-        button{
-          width:150px;
+        .form-content {
+          display: flex;
+          flex-direction: row;
+          .form-group {
+            &:first-child {
+              label {
+                display:block;
+                font-weight:900;
+              }
+              input {
+                font-size: 0.9rem;
+                font-weight:400;
+                border:none!important;
+              }
+            }
+          }
+        }
+        .buttons-container {
+          display: flex;
+          justify-content: space-around;
+          button{
+            width:150px;
+          }
+          @include media-breakpoint-down(sm) {
+            flex-direction: column;
+            align-items: center;
+            button {
+              margin: 5px auto;
+            }
+          }
         }
       }
     }
+    //styles edit oferta form
     .editandoOferta {
       .buttons-container {
         display: flex;
@@ -246,7 +359,7 @@
 }
 
 #inscripconesempresa {
-  
+
 }
 
 
@@ -287,19 +400,6 @@ color:white!important;
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-.swiper-container {
-  width: 100%;
-  height: 600px;
-  position: absolute;
-  top: 50%;
-  margin-left: -150px;
-  margin-top: -150px;
-}
-.swiper-slide {
-  background-position: center;
-  background-size: cover;
 }
 
 .navbar-brand a {
