@@ -56,7 +56,7 @@
         </div>
         <div class="row">
           <div class="col-lg-2"></div>
-          <form class="card card-body add-offer mb-2 col-lg-8" @submit.prevent="addOferta" v-if="clickAddOferta">
+          <form class="card card-body add-offer col-lg-8" @submit.prevent="addOferta" v-if="clickAddOferta">
             <div class="form-group">
               <label for="titulo">Título</label>
               <input type="text" class="form-control" placeholder="Título" v-model="oferta.titulo">
@@ -135,6 +135,19 @@
               <button class="btn btn-danger habilitadoSiempre" v-on:click="deleteOferta(oferta)">Eliminar</button>
             </div>
           </div>
+          <nav class="col-lg-12">
+        <ul class="pagination">
+          <li class="page-item bef" v-if="pagination.current_page > 1">
+            <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)">Ant</a>
+          </li>
+          <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+            <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page"></a>
+          </li>
+          <li class="page-item next" v-if="pagination.current_page < pagination.last_page">
+            <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)">Sig</a>
+          </li>
+        </ul>
+      </nav>
         </div>
         <aside class="col-lg-4 order-sm-first order-lg-last order-md-first order-xs-first" v-if="!mensajeNingunaOferta">
           <div class="aside-content card card-body mb-2">
@@ -157,19 +170,6 @@
             </div>
           </div>
         </aside>
-        <nav>
-          <ul class="pagination">
-            <li class="page-item" v-if="pagination.current_page > 1">
-              <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)">Ant</a>
-            </li>
-            <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-              <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page"></a>
-            </li>
-            <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-              <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)">Sig</a>
-            </li>
-          </ul>
-        </nav>
       </div>
     </div>
   </div>
