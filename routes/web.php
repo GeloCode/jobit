@@ -1,6 +1,6 @@
 <?php
 Route::get('/', function(){
-    return view('app');
+    return view('home');
 });
 
 Route::get('/portf', function () {
