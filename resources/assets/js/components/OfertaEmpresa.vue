@@ -56,7 +56,7 @@
         </div>
         <div class="row">
           <div class="col-lg-2"></div>
-          <form class="card card-body add-offer mb-2 col-lg-8" @submit.prevent="addOferta" v-if="clickAddOferta">
+          <form class="card card-body add-offer col-lg-8" @submit.prevent="addOferta" v-if="clickAddOferta">
             <div class="form-group">
               <label for="titulo">Título</label>
               <input type="text" class="form-control" placeholder="Título" v-model="oferta.titulo">
@@ -135,6 +135,19 @@
               <button class="btn btn-danger habilitadoSiempre" v-on:click="deleteOferta(oferta)">Eliminar</button>
             </div>
           </div>
+          <nav class="col-lg-12">
+        <ul class="pagination">
+          <li class="page-item bef" v-if="pagination.current_page > 1">
+            <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)">Ant</a>
+          </li>
+          <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+            <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page"></a>
+          </li>
+          <li class="page-item next" v-if="pagination.current_page < pagination.last_page">
+            <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)">Sig</a>
+          </li>
+        </ul>
+      </nav>
         </div>
         <aside class="col-lg-4 order-sm-first order-lg-last order-md-first order-xs-first" v-if="!mensajeNingunaOferta">
           <div class="aside-content card card-body mb-2">
@@ -157,19 +170,6 @@
             </div>
           </div>
         </aside>
-        <nav>
-          <ul class="pagination">
-            <li class="page-item" v-if="pagination.current_page > 1">
-              <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)">Ant</a>
-            </li>
-            <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-              <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page"></a>
-            </li>
-            <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-              <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)">Sig</a>
-            </li>
-          </ul>
-        </nav>
       </div>
     </div>
   </div>
@@ -241,25 +241,29 @@ export default {
       this.clickAddOferta = true;
     },
     addOferta: function(oferta) {
-      var url = "oferta";
-      axios
-        .post(url, {
-          user_id: this.userId,
-          provincia_id: this.oferta.provincia_id,
-          titulo: this.oferta.titulo,
-          descripcion: this.oferta.descripcion,
-          vacantes: this.oferta.vacantes,
-          sueldo_desde: this.oferta.sueldo_desde,
-          sueldo_hasta: this.oferta.sueldo_hasta
-        })
-        .then(response => {
-          this.getOfertasByUserId();
-          this.oferta = {};
-          this.clickAddOferta = false;
-        })
-        .catch(error => {
-          this.errors = error.response.data;
-        });
+      if (this.oferta.titulo != "") {
+        var url = "oferta";
+        axios
+          .post(url, {
+            user_id: this.userId,
+            provincia_id: this.oferta.provincia_id,
+            titulo: this.oferta.titulo,
+            descripcion: this.oferta.descripcion,
+            vacantes: this.oferta.vacantes,
+            sueldo_desde: this.oferta.sueldo_desde,
+            sueldo_hasta: this.oferta.sueldo_hasta
+          })
+          .then(response => {
+            this.getOfertasByUserId();
+            this.oferta = {};
+            this.clickAddOferta = false;
+          })
+          .catch(error => {
+            this.errors = error.response.data;
+          });
+      } else {
+        this.clickAddOferta = false;
+      }
     },
     editOferta: function(oferta) {
       var url = "oferta/" + oferta.id;
@@ -292,30 +296,31 @@ export default {
           jQuery("#oferta_" + oferta.id + " [name=editar]").show();
           this.errors = error.response.data;
         });
-      },     
-      getProvincias: function () {
-        var url = "provincias";
-        axios.get(url).then(response => {
-          this.provincias = response.data;
+    },
+    getProvincias: function() {
+      var url = "provincias";
+      axios.get(url).then(response => {
+        this.provincias = response.data;
+      });
+    },
+    habilitarCampos: function(id) {
+      jQuery("#oferta_" + id + " :input").prop("disabled", false);
+      jQuery("#oferta_" + id).addClass("editandoOferta"); // Aqui le añadimos la clase de editar oferta
+      jQuery("#oferta_" + id).removeClass("oferta"); // Aqui le añadimos la clase de editar oferta
+      //window.scrollTo(jQuery("#oferta_" + id).position());
+      jQuery("#oferta_" + id + " [name=editar]").hide();
+      jQuery("#oferta_" + id + " [name=guardar]").show();
+    },
+    deleteOferta: function(oferta) {
+      if (confirm("Estas Seguro?")) {
+        var url = "ofertas/" + oferta.id;
+        axios.delete(url).then(response => {
+          this.getOfertasByUserId();
+          toastr.success("Oferta eliminada correctamente!");
+          this.getEstadisticasIncripcionOferta();
         });
-      },
-      habilitarCampos: function (id) {
-        jQuery("#oferta_" + id + " :input").prop("disabled", false);
-        jQuery("#oferta_" + id).addClass("editandoOferta"); // Aqui le añadimos la clase de editar oferta
-        jQuery("#oferta_" + id).removeClass("oferta"); // Aqui le añadimos la clase de editar oferta
-        //window.scrollTo(jQuery("#oferta_" + id).position());
-        jQuery("#oferta_" + id + " [name=editar]").hide();
-        jQuery("#oferta_" + id + " [name=guardar]").show();
-      },
-     deleteOferta: function (oferta) {
-        if (confirm("Estas Seguro?")) {
-          var url = "ofertas/" + oferta.id;
-          axios.delete(url).then(response => {
-            this.getOfertasByUserId();
-            toastr.success("Oferta eliminada correctamente!");
-          });
-        }
-      },
+      }
+    },
     cambiarPagina(page) {
       let me = this;
       //Actualiza la página actual
@@ -325,7 +330,7 @@ export default {
     },
     filtrar: function() {
       this.getOfertasByUserId();
-      if(this.search != '' || this.searchProvincia != 0){
+      if (this.search != "" || this.searchProvincia != 0) {
         toastr.success("Filtrado Con Éxito!");
       }
     },
@@ -333,12 +338,11 @@ export default {
       var url = "/vinscripcionesempresa?ofertaId=" + id;
       window.location.href = url;
     },
-    getEstadisticasIncripcionOferta: function(){
-      var url = 'inscripciones/estadistica/empresa/' + this.userId;
-      axios.get(url).then(response  => {
+    getEstadisticasIncripcionOferta: function() {
+      var url = "inscripciones/estadistica/empresa/" + this.userId;
+      axios.get(url).then(response => {
         this.estadisticasInscripcion = response.data;
-        console.log(this.estadisticasInscripcion);
-      })
+      });
     }
   },
   computed: {
@@ -354,23 +358,23 @@ export default {
         return [];
       }
 
-        var from = this.pagination.current_page - this.offset;
-        if (from < 1) {
-          from = 1;
-        }
-
-        var to = from + this.offset * 2;
-        if (to >= this.pagination.last_page) {
-          to = this.pagination.last_page;
-        }
-
-        var pagesArray = [];
-        while (from <= to) {
-          pagesArray.push(from);
-          from++;
-        }
-        return pagesArray;
+      var from = this.pagination.current_page - this.offset;
+      if (from < 1) {
+        from = 1;
       }
+
+      var to = from + this.offset * 2;
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+
+      var pagesArray = [];
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+      return pagesArray;
     }
-  };
+  }
+};
 </script>
