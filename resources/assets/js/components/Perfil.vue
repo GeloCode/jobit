@@ -93,7 +93,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12" v-if="!isEmpresa">
+					<div class="col-md-12" v-if="role.rol_id!=1">
 						<proyectos :control="1" :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
 						<!--Aqui los proyectos-->
 						<span v-text="portfolioId"></span>
@@ -109,8 +109,11 @@ import Proyectos from "./Proyectos.vue";
 export default {
   created: function() {
     this.getPerfilByUser();
+    this.getRole();
     this.getProvincias();
-    this.getPortfolio();
+    if(this.role!=1){
+      this.getPortfolio();
+    }
     window.addEventListener("load", function(event) {
       if (window.location.hash === "#execute") {
         $("#profileModal").modal("toggle");
@@ -121,7 +124,10 @@ export default {
     return {
 			first:false,
 			provincias: [],
-			portfolioId: '',
+      portfolioId: '',
+      role:{
+        rol_id:0
+      },
       profile: {
         id: "",
         name: "",
@@ -143,7 +149,6 @@ export default {
   },
   props: {
 		userId: String,
-		isEmpresa:Boolean
 	},
   components: {
     enlaces: Enlaces,
@@ -233,6 +238,14 @@ export default {
         .catch(error => {
           toastr.error(error);
         });
+    },
+    getRole: function(){
+      var url = "/isEmpleado/" + this.userId;
+      axios.get(url).then(response=>{
+        this.role.rol_id=response.data.rol_id;
+      }).catch(error=>{
+        toastr.error(error);
+      });
     }
   }
 };
