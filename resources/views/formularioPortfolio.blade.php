@@ -1,4 +1,6 @@
 @extends('app') 
 @section('content')
-    <formul authid="{{Auth::id()}}"></formul>
+    @if(Auth::id())
+    <formul></formul>
+    @endif
 @endsection
