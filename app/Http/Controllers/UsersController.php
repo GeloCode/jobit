@@ -25,7 +25,7 @@ class UsersController extends Controller
      */
     public function getRoleUserById($id)
     {
-        return User::find($id)->role->nombre;
+        return User::where('id', $id)->select('rol_id')->first();
     }
 
     /**
