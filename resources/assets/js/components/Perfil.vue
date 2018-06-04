@@ -94,6 +94,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<!--Aqui los proyectos-->
+						<span v-text="portfolioId"></span>
 					</div>
 				</div>
 			</div>
@@ -106,6 +107,7 @@ export default {
   created: function() {
 		this.getPerfilByUser();
 		this.getProvincias();
+		this.getPortfolio();
 		window.addEventListener("load", function(event) {
 		if (window.location.hash === "#execute") {
 			$("#profileModal").modal("toggle");
@@ -115,7 +117,8 @@ export default {
   data: function() {
     return {
 			first:false,
-      provincias: [],
+			provincias: [],
+			portfolioId: 0,
       profile: {
         name: "",
         descripcion: "",
@@ -198,6 +201,15 @@ export default {
 			if(this.first){
 				this.openCloseModal();
 			}
+		}, 
+		getPortfolio: function(){
+			var url='portfoliosPerfil/'+this.userId;
+			axios.get(url).then(response => {
+				this.portfolioId = response.data.id;				
+			}).catch(error=>{
+				toastr.error(error);
+			});
+			
 		}
 	}
 };
