@@ -7,7 +7,7 @@
             <div class="badge badge-pill badge-dark">
               <div class="pill">
                 <i class="fa fa-pencil" data-toggle="modal" data-target="#updateEnlace" @click="getEnlaceById(enlace.id)" v-if="controlarenlaces !=1"></i>
-                <a class="link"  v-text="enlace.web" :href="enlace.enlace"></a>
+                <a class="link"  target="_blank" v-text="enlace.web" :href="enlace.enlace"></a> 
                 <i class="fa fa-times-circle" @click="deleteEnlace(enlace.id)" v-if="controlarenlaces !=1"></i>
               </div>
             </div>
