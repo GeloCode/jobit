@@ -8,7 +8,7 @@
               <div class="img-perfil" v-bind:style="{ 'background-image': 'url(' +profile.imagen+ ')' }" id="cambiarImagen"></div>
               </div>
             </div>
-            <button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#profileModal">
+            <button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#profileModal" v-if="perfildesdeempresa !=1">
               Editar perfil
             </button>
         </div>
@@ -18,7 +18,7 @@
     </div>
     <div class="container-fluid enlace-container">
 				<div  class="mostrarEnlaces">
-					<enlaces :user-id="userId"></enlaces>
+					<enlaces :controlarenlaces="perfildesdeempresa" :user-id="userId"></enlaces>
 				</div>
     </div>
 			<div class="container datos-personales">
@@ -37,9 +37,8 @@
 				</div>
 			</div>
 					<div>
-						<proyectos :control="1" :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
+						<proyectos :control="2" :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
 						<!--Aqui los proyectos-->
-						<span v-text="portfolioId"></span>
         </div>
 			</div>
 </template>
@@ -74,6 +73,7 @@ export default {
   },
   props: {
 		userId: String,
+    perfildesdeempresa: String
 	},
   components: {
     enlaces: Enlaces,
