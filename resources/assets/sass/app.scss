@@ -512,10 +512,137 @@
   }
 }
 
-#inscripconesempresa {
+#inscripcionesempresa {
+  .header {
+    height:600px;
+    background-image:linear-gradient(to right, rgba(0, 0, 0, .8), rgba(0, 0, 0, .4),rgba(0, 0, 0, .8)), url('../img/pic_3.jpg');
+    background-size: cover;
+    
+    .header-img {
+      height:100%;
+      display:flex;
+      justify-content:center;
+      align-items: center;
+      h2 {
+        text-align: center;
+        color:white;
+        text-shadow: 1px 2px 3px $primary;
+        text-transform: uppercase;
+      }
+    }
+    @include media-breakpoint-down(sm) {
+      height: 400px;
+      h2 {
+        font-size: 1.7rem;
+      }
+    }
+    @include media-breakpoint-down(xs) {
+      height: 340px;
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  table {
+    thead {
+      tr{
+        border: 1px solid $primary;
+        background-color: $bgP;
+        color: $primary; 
+        text-align: center;
+        th {
+          border-right: 1px solid white;
+        }
+      }
+    }
+    tr {
+      border: 1px solid $secondary;
+      background-color: $bgP;
+      color: $secondary; 
+      
+      &:nth-child(2n) {
+        border: 1px solid $primary;
+        background-color: $bgP;
+        color: primary; 
+      }
+      &:nth-child(2n+1) {
 
+      }
+    }
+  }
 }
 
+#inscripciones-solicitante {
+  .header {
+    height:600px;
+    background-image:linear-gradient(to right, rgba(0, 0, 0, .8), rgba(0, 0, 0, .4),rgba(0, 0, 0, .8)), url('../img/pic_5.jpg');
+    background-size: cover;
+    background-position: 50% 60%;
+    
+    .header-img {
+      height:100%;
+      display:flex;
+      justify-content:center;
+      align-items: center;
+      h2 {
+        text-align: center;
+        color:white;
+        text-shadow: 1px 2px 3px $primary;
+        text-transform: uppercase;
+      }
+    }
+    @include media-breakpoint-down(sm) {
+      height: 400px;
+      h2 {
+        font-size: 1.7rem;
+      }
+    }
+    @include media-breakpoint-down(xs) {
+      height: 340px;
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  .general-container {
+    padding: 100px 0;
+  
+    table {
+        .bg-success {
+          background-color: $secondary!important;
+          td {
+            color: white;
+            text-align: center;
+            i {
+              font-size: 1.3rem;
+              &:first-child {
+                margin-right:10px;
+              }
+            }
+            &:nth-child(2) {
+              background-color: $primary;
+            }
+          }
+        }
+        .bg-danger {
+          background-color: $secondary!important;
+          td {
+            color: white;
+            text-align: center;
+            i {
+              font-size: 1.3rem;
+              &:first-child {
+                margin-right:10px;
+              }
+            }
+            &:nth-child(2) {
+              background-color: red;
+            }
+          }
+        }
+      }
+  }
+}
 #perfil {
   .header {
     height:600px;
@@ -547,6 +674,14 @@
             background-position: 50% 50%;
             border-radius: 50%;
             border: 2px solid $bgS;
+            @include media-breakpoint-down(sm) {
+              height: 200px;
+              width:200px
+            }
+            @include media-breakpoint-down(xs) {
+              height: 100px;
+              width:100px;
+            }
           }
         }
       }
@@ -832,6 +967,7 @@ fill:$primary;
 #proyectos-view {
   background-color: $bgP;
   .first {
+    padding-top: 50px;
     border-bottom: 10px solid #2f2f31;
     padding-bottom: 25px;
     color: white;
@@ -937,6 +1073,12 @@ fill:$primary;
       height:100%;
       display:flex;
       align-items: center;
+    }
+    @include media-breakpoint-down(sm) {
+      height: 400px;
+    }
+    @include media-breakpoint-down(xs) {
+      height: 340px;
     }
   }
   .box-port {

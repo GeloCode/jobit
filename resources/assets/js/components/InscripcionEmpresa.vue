@@ -1,13 +1,19 @@
 <template>
-  <div class="container-fluid" id="inscripcionesempresa">
-    <div class="row">
-      <h2>Inscripciones Component</h2>
-      <button class="btn btn-primary" @click="filtrarPendientePorGestionar()">Pendientes Gestión</button>
-      <button class="btn btn-primary" @click="filtrarAceptados()">Aceptados</button>
-      <button class="btn btn-primary" @click="filtrarRechazados()">Rechazados</button>
+  <div  id="inscripcionesempresa">
+    <header class="header container-fluid">
+      <div class="header-img row">
+        <h2>Start building
+          <br>Your team</h2>
+      </div>
+    </header>
       <div class="container">
         <div class="row">
-          <table class="table col-md-12">
+          <div class="col-md-4">
+        <button class="btn btn-primary" @click="filtrarPendientePorGestionar()">Pendientes Gestión</button>
+        <button class="btn btn-primary" @click="filtrarAceptados()">Aceptados</button>
+        <button class="btn btn-primary" @click="filtrarRechazados()">Rechazados</button>
+      </div>
+          <table class="col-md-8">
             <thead>
               <tr>
                 <th>Titulo</th>
@@ -24,8 +30,8 @@
                     : inscOferta.estado == 'A' ? 'Aceptado' : 'Rechazado'"></td>
                 <td>
                   <button class="btn btn-primary" @click.prevent="verPortfolio(inscOferta.user.id)">Ver Portfolio</button>
-                  <button class="btn btn-primary" @click.prevent="aceptarInscripcion(inscOferta.id)" v-if="inscOferta.estado != 'A'">Aceptar</button>
-                  <button class="btn btn-danger" @click.prevent="rechazarInscripcion(inscOferta.id)" v-if="inscOferta.estado != 'R'">Rechazar</button>
+                  <i class="fa fa-check-circle" @click.prevent="aceptarInscripcion(inscOferta.id)" v-if="inscOferta.estado != 'A'"></i>
+                  <i class="fa fa-times-circle" @click.prevent="rechazarInscripcion(inscOferta.id)" v-if="inscOferta.estado != 'R'"></i>
                 </td>
               </tr>
             </tbody>
@@ -33,7 +39,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 <script>
   export default {
