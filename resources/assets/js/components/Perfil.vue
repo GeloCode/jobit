@@ -95,15 +95,15 @@
             <span v-for="framework in frameworksArray" :key="framework" class="badge badge-pill badge-dark" v-text="framework"></span>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-12" v-if="role.rol_id!=1">
+			</div>
+      
+					<div v-if="role.rol_id!=1">
 						<proyectos :control="1" :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
 						<!--Aqui los proyectos-->
 						<span v-text="portfolioId"></span>
-					</div>
-				</div>
+					
+        </div>
 			</div>
-		</div>
 </template>
 <script>
 import Enlaces from "./Enlaces.vue";

@@ -1,7 +1,16 @@
 <template>
-    <div class="container" id="inscripciones-solicitante">
-        <h2>Inscripciones</h2>
-        <table class="table">
+    <div id="inscripciones-solicitante">
+      <header class="header container-fluid">
+        <div class="header-img row">
+          <h2>Do not run away
+            <br>from your destiny</h2>
+        </div>
+      </header>
+        
+      <div class="container general-container">
+        <div class="row">
+          <h2>Inscripciones</h2>
+        <table class="table col-md-12">
             <thead>
                 <tr>
                     <th>Titulo</th>
@@ -16,13 +25,16 @@
                     <td v-text="oferta.estado == '-' ? 'Aún no la han visto' 
                     : oferta.estado == 'A' ? 'Aceptado' : 'Rechazado'"></td>
                     <td>
-                        <button class="btn btn-secondary" data-toggle="modal" data-target="#Oferta" 
-                        @click="verOferta(oferta.oferta_id)">Ver Oferta</button>
-                        <button class="btn btn-secondary" @click.prevent="eliminarInscripcion(oferta.id)">Eliminar</button>
+                      
+                        <i class="fa fa-eye" data-toggle="modal" data-target="#Oferta" 
+                        @click="verOferta(oferta.oferta_id)"></i>
+                        <i class="fa fa-times-circle" @click.prevent="eliminarInscripcion(oferta.id)"></i>
                     </td>
                 </tr>
             </tbody>
         </table>
+        </div>
+        </div>
 
         <!-- Modal -->
 				<div class="modal fade" id="Oferta" tabindex="-1" role="dialog" aria-labelledby="OfertaLabel" aria-hidden="true">
