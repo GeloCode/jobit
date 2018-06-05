@@ -131,21 +131,23 @@
         }
       },
       getIdPortfolio: function (userId) {
-        var url = "pillaridportf/" + userId;
+        var devolver = "";
+        var url = "portfoliosPerfil/" + userId;
         axios
           .get(url)
           .then(response => {
-            this.portfolioId = response.data.id;
+            devolver = response.data.id;
           })
           .catch(error => {
             portfolios = {
               id: 1
             };
           });
+          return devolver
       },
       verPortfolio: function (userId) {
-        this.getIdPortfolio(userId);
-        window.location.href = "/projects?id=" + this.idPortfolio;
+        var url = "/projects?id=" + userId;
+        window.location.href = url;
       }
     }
   };
