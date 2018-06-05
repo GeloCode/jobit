@@ -1,5 +1,6 @@
 <!-- ANTONIO -->
 <template>
+<<<<<<< HEAD
  <div id="perfil">
 		<header class="header container-fluid">
         <div class="header-img row">
@@ -14,6 +15,18 @@
         </div>
     </header>
     <div class="container-fluid enlace-container">
+=======
+	<div class="container">
+		<br>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="row">
+					<div class="col-md-12">
+						<img alt="Image Preview" :src="profile.imagen == '' ? 'https://cdn2.thelineofbestfit.com/images/remote/http_cdn2.thelineofbestfit.com/media/2013/09/Willis-Earl-Beal-Nobody-Knows.jpg' : profile.imagen" style="width:200px;" class="rounded-circle" id="imgForm">
+					</div>
+				</div>
+				<br>
+>>>>>>> 4b9a409544fa1fefc03a8f572422d9a17ee99757
 				<!-- Button trigger modal -->
 				<div  class="mostrarEnlaces">
 					<enlaces :user-id="userId"></enlaces>
@@ -93,8 +106,8 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12" v-if="empresaornot">
-						<proyectos :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
+					<div class="col-md-12" v-if="role.rol_id!=1">
+						<proyectos :control="1" :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
 						<!--Aqui los proyectos-->
 						<span v-text="portfolioId"></span>
 					</div>
@@ -109,8 +122,11 @@ import Proyectos from "./Proyectos.vue";
 export default {
   created: function() {
     this.getPerfilByUser();
+    this.getRole();
     this.getProvincias();
-    this.getPortfolio();
+    if(this.role!=1){
+      this.getPortfolio();
+    }
     window.addEventListener("load", function(event) {
       if (window.location.hash === "#execute") {
         $("#profileModal").modal("toggle");
@@ -121,7 +137,10 @@ export default {
     return {
 			first:false,
 			provincias: [],
-			portfolioId: '',
+      portfolioId: '',
+      role:{
+        rol_id:0
+      },
       profile: {
         id: "",
         name: "",
@@ -143,7 +162,6 @@ export default {
   },
   props: {
 		userId: String,
-		empresaornot: String
 	},
   components: {
     enlaces: Enlaces,
@@ -206,7 +224,7 @@ export default {
       var reader = new FileReader();
 
       reader.addEventListener("load",function() {
-         document.querySelector('img').src = reader.result;
+         $('#imgForm').attr('src', reader.result);
         },
         false
       );
@@ -233,6 +251,14 @@ export default {
         .catch(error => {
           toastr.error(error);
         });
+    },
+    getRole: function(){
+      var url = "/isEmpleado/" + this.userId;
+      axios.get(url).then(response=>{
+        this.role.rol_id=response.data.rol_id;
+      }).catch(error=>{
+        toastr.error(error);
+      });
     }
   }
 };

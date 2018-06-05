@@ -57,18 +57,13 @@ class PortfolioController extends Controller
     }
 
     public function getPortfolioByUserId($id){
-        return Portfolio::where('perfil_id', $id)->first();
+        return Portfolio::where('user_id', $id)->first();
     }
 
     public function getInfoPortfolio($id_seleccionado){
         return Portfolio::where('id', $id_seleccionado)->get();
     }
-    public function getPortfIdJoint($id_perfil){
-       return Portfolio::where('perfil_id', function ($query) use ($id_perfil) {
-            $query->select('id')->from('perfils')->where('user_id', '=', $id_perfil);
-       })->select('id')->first();
-    }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -78,7 +73,6 @@ class PortfolioController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'perfil_id' => 'required',
             'titulo' => 'required',
             'text' => 'required'
         ]);
