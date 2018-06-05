@@ -47,4 +47,11 @@ class PerfilController extends Controller
         }
         return;
     }
+    public function getPerfilSolicitante($id){
+        return view('perfilSolicitante', $id);
+    }
+    public function getPerfilByUserIdArray($id)
+    {
+        return Perfil::where('user_id', $id)->first();
+    }
 }

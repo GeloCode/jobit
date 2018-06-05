@@ -21,6 +21,7 @@ Vue.component('inscripcion-solicitante', require('./components/InscripcionSolici
 Vue.component('inscripcion-empresa', require('./components/InscripcionEmpresa.vue'));
 
 Vue.component('perfil', require('./components/Perfil.vue'));
+Vue.component('perfil-solicitante', require('./components/perfilSolicitante.vue'));
 Vue.component('enlaces', require('./components/Enlaces.vue'));
 
 Vue.component('home', require('./components/Home.vue'));

@@ -35,7 +35,7 @@ class PortfolioController extends Controller
      */
     public function getNameUser()
     {
-        return User::get();
+        return Perfil::get();
         // find($id_portfolio)
         /*// find a specific user and see their attributes
             App\User::where('username', 'samuel')->first();
