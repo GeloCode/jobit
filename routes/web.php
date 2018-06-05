@@ -7,9 +7,6 @@ Route::get('/portf', function () {
     return view('portfolio');
 }); 
 
-Route::get('/dash', function () {
-    return view('crudUsuarioProyectos');
-}); 
 Route::get('/pruebaRegistro', function () {
     return view('includes.register');
 }); 
