@@ -38,10 +38,18 @@
 										<input type="text" class="form-control" id="nameInput" aria-describedby="name"
 										v-model="profile.name">
 										<small id="name" class="form-text text-muted">Ej. Antonio</small>
+                    <br>
+                    <span v-if="msg.name">
+                        <small v-text="msg.name" class="text-danger"></small>
+                    </span>
 									</div>
 									<div class="form-group">
 										<textarea name="descripcion" rows="4" cols="60" v-model="profile.descripcion"></textarea>
 										<small id="name" class="form-text text-muted">Pequeña descripción del usuario</small>
+                    <br>
+                    <span v-if="msg.descripcion">
+                        <small v-text="msg.descripcion" class="text-danger"></small>
+                    </span>
 									</div>
 									<div class="form-group">
 										<select class="custom-select mb-1" name="selectProvincia" v-model="profile.provincia_id">
@@ -52,14 +60,26 @@
 									<div class="form-group">
 										<label for="telefono">Telefono</label>
 										<input type="text" name="telefono" v-model="profile.telefono">
+                    <br>
+                    <span v-if="msg.telefono">
+                        <small v-text="msg.telefono" class="text-danger"></small>
+                    </span>
 									</div>
 									<div class="form-group">
 										<label for="direccion">Direccion</label>
 										<input type="text" name="direccion" v-model="profile.direccion">
+                    <br>
+                    <span v-if="msg.direccion">
+                        <small v-text="msg.direccion" class="text-danger"></small>
+                    </span>
 									</div>
 									<div class="form-group">
 										<label for="codigo_postal">Codigo postal</label>
 										<input type="text" name="codigo_postal" v-model="profile.codigo_postal">
+                    <br>
+                    <span v-if="msg.codigo_postal">
+                        <small v-text="msg.codigo_postal" class="text-danger"></small>
+                    </span>
 									</div>
 									<div class="form-group">
 										<label for="lenguajes">Lenguajes</label>
@@ -147,6 +167,7 @@ export default {
       frameworksArray: [],
       frameworks: "",
       provinciaId: 0,
+      msg: []
     };
   },
   props: {
@@ -160,8 +181,25 @@ export default {
     'profile.imagen': function(){
         $('#cambiarImagen').css('background-image', this.profile.imagen);
     },
-    'profile.name': function(){
-      
+    'profile.name': function(value){
+        this.profile.name = value;
+        this.checkLengthMax(value, 45, "name");
+    },
+    'profile.descripcion': function(value){
+        this.profile.descripcion = value;
+        this.checkLengthMax(value, 255, "descripcion");
+    },
+    'profile.telefono': function(value){
+        this.profile.telefono = value;
+        this.checkTelefono(value);
+    },
+    'profile.direccion': function(value){
+        this.profile.direccion = value;
+        this.checkLengthMax(value, 120, "direccion");
+    },
+    'profile.codigo_postal': function(value){
+        this.profile.codigo_postal = value;
+        this.checkCodigoPostal(value);
     }
   },
   methods: {
@@ -176,39 +214,42 @@ export default {
       });
     },
     createProfile: function() {
-      var myMethod = "post";
-      var url = "iperfil";
-      if (this.profile.id) {
-        myMethod = "put";
-        url += "/" + this.userId;
-      }
-      axios({
-        method: myMethod,
-        url: url,
-        data: {
-          user_id: this.userId,
-          provincia_id: this.profile.provincia_id,
-          name: this.profile.name,
-          telefono: this.profile.telefono,
-          direccion: this.profile.direccion,
-          descripcion: this.profile.descripcion,
-          codigo_postal: this.profile.codigo_postal,
-          lenguajes: this.profile.lenguajes,
-          frameworks: this.profile.frameworks,
-          imagen: $("#imgForm").attr("src")
+      if(this.checkValidaciones()){
+        var myMethod = "post";
+        var url = "iperfil";
+        if (this.profile.id) {
+          myMethod = "put";
+          url += "/" + this.userId;
         }
-      })
-        .then(response => {
-          this.openCloseModal();
-          this.getPerfilByUser();
-          toastr.success("Perfil actualizado correctamente");
-          if (this.first) {
-            window.location.assign("/perfil");
-          }
+        axios({
+          method: myMethod,
+          url: url,
+          data: {
+            user_id: this.userId,
+            provincia_id: this.profile.provincia_id,
+            name: this.profile.name,
+            telefono: this.profile.telefono,
+            direccion: this.profile.direccion,
+            descripcion: this.profile.descripcion,
+            codigo_postal: this.profile.codigo_postal,
+            lenguajes: this.profile.lenguajes,
+            frameworks: this.profile.frameworks,
+            imagen: $("#imgForm").attr("src")
+          },
+          msg: [],
         })
-        .catch(function(error) {
-          toastr.error(error);
-				});
+          .then(response => {
+            this.openCloseModal();
+            this.getPerfilByUser();
+            toastr.success("Perfil actualizado correctamente");
+            if (this.first) {
+              window.location.assign("/perfil");
+            }
+          })
+          .catch(function(error) {
+            toastr.error(error);
+          });
+        }
     },
     getProvincias: function() {
       var url = "provincias";
@@ -256,6 +297,61 @@ export default {
       }).catch(error=>{
         toastr.error(error);
       });
+    },
+    checkLengthMax(value, longitud, nombre) {
+        if (value.length > longitud) {
+            this.msg[nombre] =
+                "La longitud máxima de este campo es " +
+                longitud;
+        } else {
+            this.msg[nombre] = "";
+            return true;
+        }
+    },
+    checkTelefono(value) {
+        if(/^[\d]{3}[-]*([\d]{2}[-]*){2}[\d]{2}$/.test(value)){
+          this.msg["telefono"] = "";
+        } else {
+          this.msg["telefono"] = "El número introducido está en un formato incorrecto";
+        }
+    },
+    checkCodigoPostal(value){
+      if(/^(?:0[1-9]|[1-4]\d|5[0-2])\d{3}$/.test(value)){
+        this.msg["codigo_postal"] = "";
+      } else {
+        this.msg["codigo_postal"] = "El código postal está en un formato incorrecto";
+      }
+    },
+    checkValidaciones(){
+      var errores = "";
+      if(this.msg["name"] != ""){
+        errores += "El nombre es incorrecto <br>";
+      }
+      if(this.msg["descripcion"] != ""){
+        errores += "La descripción es incorrecta <br>";
+      }
+      if(this.msg["telefono"] != ""){
+        errores += "El telefono es incorrecto <br>";
+      }
+      if(this.msg["direccion"] != ""){
+        errores += "La direccion es incorrecta <br>";
+      }
+      if(this.msg["codigo_postal"] != ""){
+        errores += "El código postal es incorrecto <br>";
+      }
+      if(this.profile.lenguajes == ""){
+        errores += "Introduce lenguajes <br>"
+      }
+      if(this.profile.frameworks == ""){
+        errores += "Introduce frameworks <br>"
+      }
+      if(this.profile.provincia_id == 0){
+        errores += "Porfavor, elige una provincia <br>";
+      }
+      toastr.error(errores);
+      if(errores.length > 0){
+        return false;
+      }
     }
   }
 };
