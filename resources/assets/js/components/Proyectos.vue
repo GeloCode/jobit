@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="row first">
                     <h1>Proyectos</h1>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" v-if="auth &&  (control===2)">
                         Crear Proyecto
                     </button>
                 </div>
@@ -113,8 +113,10 @@
                             <!-- CONTROL DE USUARIO !!! -->
                             <div class="buttons col-lg-12">
                                 <a class="btn btn-success btn-sm" v-bind:href="'/detailProject?id=' + proyecto.id">Ver</a>
+                                <div v-if="auth && (control===2)">
                                 <a href="#" class="btn btn-warning btn-sm" v-on:click.prevent="editProyecto(proyecto)">Editar Proyecto</a>
                                 <a class="btn btn-danger btn-sm" v-on:click="deleteProyecto(proyecto)">Borrar</a>
+                                </div>
                             </div>
                             <!-- FIN CONTROL DE USUARIO !!! -->
                         </div>

@@ -5,79 +5,22 @@
         <div class="header-img row">
             <div class="col-md-12 img-perfil-container">
               <div class="img-perfil-box">
-              <div class="img-perfil" v-bind:style="{ 'background-image': 'url(' +profile.imagen+ ')' }" ></div>
+              <div class="img-perfil" v-bind:style="{ 'background-image': 'url(' +profile.imagen+ ')' }" id="cambiarImagen"></div>
               </div>
             </div>
-            <button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#profileModal">
+            <button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#profileModal" v-if="perfildesdeempresa !=1">
               Editar perfil
             </button>
         </div>
     </header>
+    <div class="d-none">
+        <img alt="Image Preview" src="" style="width:200px;" class="rounded-circle" id="imgForm">
+    </div>
     <div class="container-fluid enlace-container">
-				<!-- Button trigger modal -->
 				<div  class="mostrarEnlaces">
-					<enlaces :user-id="userId"></enlaces>
+					<enlaces :controlarenlaces="perfildesdeempresa" :user-id="userId"></enlaces>
 				</div>
     </div>
-				<!-- Modal -->
-				<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="profileModalLabel">Editar perfil</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<form v-on:submit.prevent="createProfile()" enctype="multipart/form-data">
-									<div class="form-group">
-										<input type="text" class="form-control" id="nameInput" aria-describedby="name"
-										v-model="profile.name">
-										<small id="name" class="form-text text-muted">Ej. Antonio</small>
-									</div>
-									<div class="form-group">
-										<textarea name="descripcion" rows="4" cols="60" v-model="profile.descripcion"></textarea>
-										<small id="name" class="form-text text-muted">Pequeña descripción del usuario</small>
-									</div>
-									<div class="form-group">
-										<select class="custom-select mb-1" name="selectProvincia" v-model="profile.provincia_id">
-											<option value="0">Elige tu Provincia</option>
-											<option v-for="provincia in provincias" :key="provincia.id" :value="provincia.id" v-text="provincia.nombre"></option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label for="telefono">Telefono</label>
-										<input type="text" name="telefono" v-model="profile.telefono">
-									</div>
-									<div class="form-group">
-										<label for="direccion">Direccion</label>
-										<input type="text" name="direccion" v-model="profile.direccion">
-									</div>
-									<div class="form-group">
-										<label for="codigo_postal">Codigo postal</label>
-										<input type="text" name="codigo_postal" v-model="profile.codigo_postal">
-									</div>
-									<div class="form-group">
-										<label for="lenguajes">Lenguajes</label>
-										<input type="text" name="lenguajes" v-model="profile.lenguajes">
-									</div>
-									<div class="form-group">
-										<label for="frameworks">Frameworks</label>
-										<input type="text" name="frameworks" v-model="profile.frameworks">
-									</div>
-									<div class="form-group">
-										<label for="imagen">Imagen</label>
-										<input type="file" name="imagen" @change="processFile($event)">
-									</div>
-									<button type="submit" class="btn btn-primary">Submit</button>
-									
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
 			<div class="container datos-personales">
 				<div class="row">
 					<div class="col-md-8">
@@ -92,15 +35,12 @@
             <span v-for="framework in frameworksArray" :key="framework" class="badge badge-pill badge-dark" v-text="framework"></span>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<proyectos :control="1" :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
-						<!--Aqui los proyectos-->
-						<span v-text="portfolioId"></span>
-					</div>
-				</div>
 			</div>
-		</div>
+					<div>
+						<proyectos :control="2" :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
+						<!--Aqui los proyectos-->
+        </div>
+			</div>
 </template>
 <script>
 import Enlaces from "./Enlaces.vue";
@@ -133,6 +73,7 @@ export default {
   },
   props: {
 		userId: String,
+    perfildesdeempresa: String
 	},
   components: {
     enlaces: Enlaces,
