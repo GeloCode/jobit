@@ -58,8 +58,7 @@ class ProyectosController extends Controller
             'user_id'      => 'required',
             'portfolio_id' => 'required',
             'titulo'       => 'required',
-            'descripcion'  => 'required',
-            'imagen'       => 'required'
+            'descripcion'  => 'required'
         ]);
         Proyecto::create($request->all());
         return;
@@ -100,7 +99,6 @@ class ProyectosController extends Controller
             'id' => 'required',
             'titulo' => 'required',
             'descripcion' => 'required',
-            'imagen' => 'required'
         ]);
 
         Proyecto::find($id)->update($request->all());
