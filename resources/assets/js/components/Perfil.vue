@@ -219,6 +219,9 @@ export default {
         if (this.profile.id) {
           myMethod = "put";
           url += "/" + this.userId;
+          if($("#imgForm").attr("src") == ""){
+            $("#imgForm").attr("src", this.profile.imagen);
+          }
         }
         axios({
           method: myMethod,
@@ -342,9 +345,12 @@ export default {
       if(this.profile.provincia_id == 0){
         errores += "Porfavor, elige una provincia <br>";
       }
-      toastr.error(errores);
+      
       if(errores.length > 0){
+        toastr.error(errores);
         return false;
+      } else {
+        return true;
       }
     }
   }

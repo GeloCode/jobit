@@ -56,6 +56,7 @@
                                 <small v-if="msg.password_confirmation">
                                     <strong>{{msg.password_confirmation}}</strong>
                                 </small>
+                                <br>
                             <button type="submit" class="btn btn-primary" @click.prevent="registerPost()" :disabled="disableSubmitButton">Create Account</button>
                         </form>
                     </div>
