@@ -169,7 +169,7 @@ Route::get('inscripciones/estadistica/empresa/{id}', 'InscripcionesController@ge
 /**
  * Nos devuelve nuestro perfil (Por el id de usuario)
  */
-Route::get('perfil/solicitante/{idUser}', 'PerfilController@getPerfilByUserId');
+Route::get('perfil/usuario/{idUser}', 'PerfilController@getPerfilByUserId');
 Route::get('perfilSolicitante/{id}', 'PerfilController@getPerfilSolicitante');
 
 
