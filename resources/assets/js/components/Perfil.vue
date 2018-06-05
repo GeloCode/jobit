@@ -5,7 +5,7 @@
         <div class="header-img row">
             <div class="col-md-12 img-perfil-container">
               <div class="img-perfil-box">
-              <div class="img-perfil" v-bind:style="{ 'background-image': 'url(' +profile.imagen+ ')' }" ></div>
+              <div class="img-perfil" v-bind:style="{ 'background-image': 'url(' +profile.imagen+ ')' }" id="cambiarImagen"></div>
               </div>
             </div>
             <button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#profileModal">
@@ -13,6 +13,9 @@
             </button>
         </div>
     </header>
+    <div class="d-none">
+        <img alt="Image Preview" src="" style="width:200px;" class="rounded-circle" id="imgForm">
+    </div>
     <div class="container-fluid enlace-container">
 				<!-- Button trigger modal -->
 				<div  class="mostrarEnlaces">
@@ -152,6 +155,11 @@ export default {
   components: {
     enlaces: Enlaces,
     proyectos: Proyectos
+  },
+  watch: {
+    'profile.imagen': function(){
+        $('#cambiarImagen').css('background-image', this.profile.imagen);
+    }
   },
   methods: {
     getPerfilByUser: function() {

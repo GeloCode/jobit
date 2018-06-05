@@ -130,7 +130,7 @@
                     </a>
                 </li>
 
-                <li class="page-item" v-for="page in pagesNumber" :key="page" v-bind:class="[ page == isActived ? 'active' : '']">
+                <li class="page-item" v-for="page in pagesNumber" :key="page" v-bind:class="[ page == isActived ? 'active' : '']" v-if="page != 1">
                     <a class="page-link" href="#" @click.prevent="changePage(page)">
                         {{page}}
                     </a>
