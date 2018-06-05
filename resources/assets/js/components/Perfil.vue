@@ -1,6 +1,5 @@
 <!-- ANTONIO -->
 <template>
-<<<<<<< HEAD
  <div id="perfil">
 		<header class="header container-fluid">
         <div class="header-img row">
@@ -15,18 +14,6 @@
         </div>
     </header>
     <div class="container-fluid enlace-container">
-=======
-	<div class="container">
-		<br>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="row">
-					<div class="col-md-12">
-						<img alt="Image Preview" :src="profile.imagen == '' ? 'https://cdn2.thelineofbestfit.com/images/remote/http_cdn2.thelineofbestfit.com/media/2013/09/Willis-Earl-Beal-Nobody-Knows.jpg' : profile.imagen" style="width:200px;" class="rounded-circle" id="imgForm">
-					</div>
-				</div>
-				<br>
->>>>>>> 4b9a409544fa1fefc03a8f572422d9a17ee99757
 				<!-- Button trigger modal -->
 				<div  class="mostrarEnlaces">
 					<enlaces :user-id="userId"></enlaces>
