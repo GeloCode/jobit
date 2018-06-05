@@ -8,9 +8,6 @@
               <div class="img-perfil" v-bind:style="{ 'background-image': 'url(' +profile.imagen+ ')' }" id="cambiarImagen"></div>
               </div>
             </div>
-            <button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#profileModal">
-              Editar perfil
-            </button>
         </div>
     </header>
     <div class="d-none">
@@ -38,7 +35,6 @@
 			</div>
 					<div>
 						<proyectos :control="1" :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
-						<!--Aqui los proyectos-->
 						<span v-text="portfolioId"></span>
         </div>
 			</div>
