@@ -1,20 +1,23 @@
 <template>
 
     <div id="project-detail">
-      <header class="header container-fluid" v-bind:style="{'background-image': 'url('+detalle.imagen+')'}">
-        <div class="header-img row" >
-          <h2>{{detalle.titulo}}</h2>
-        </div>
-      </header>
-      
-             <div class="row">
-                <div class="card-body col-md-6 offset-md-3">
+                <div>
                       <div v-for="detalle in proyecto" :key="detalle.id"> 
-                          <p>{{detalle.titulo}}</p>
-                          <p>{{detalle.descripcion}}</p>
+                          <header class="header container-fluid" v-bind:style="{'background-image': 'url('+detalle.imagen+')'}">
+                            <div class="header-img row" >
+                            <h2>{{detalle.titulo}}</h2>
+                            </div>
+                        </header>
+                        <div class="container ">
+                            <div class="row project">
+                                <h2>{{detalle.titulo}}</h2>
+                                <div class="card">
+                                    <div class="card-body">{{detalle.descripcion}}</div>
+                                </div>
+                          </div>
+                          </div>
                       </div>
                 </div>
-            </div>
 
     </div>
 
