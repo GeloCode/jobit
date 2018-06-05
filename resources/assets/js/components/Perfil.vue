@@ -1,22 +1,24 @@
 <!-- ANTONIO -->
 <template>
-	<div class="container">
-		<br>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="row">
-					<div class="col-md-12">
-						<img alt="Image Preview" :src="profile.imagen == '' ? '../../img/avatar.png' : profile.imagen" style="width:200px;" class="rounded-circle" id="imgForm">
-					</div>
-				</div>
-				<br>
+ <div id="perfil">
+		<header class="header container-fluid">
+        <div class="header-img row">
+            <div class="col-md-12 img-perfil-container">
+              <div class="img-perfil-box">
+              <div class="img-perfil" v-bind:style="{ 'background-image': 'url(' +profile.imagen+ ')' }" ></div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#profileModal">
+              Editar perfil
+            </button>
+        </div>
+    </header>
+    <div class="container-fluid enlace-container">
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#profileModal">
-					Editar perfil
-				</button>
 				<div  class="mostrarEnlaces">
 					<enlaces :user-id="userId"></enlaces>
 				</div>
+    </div>
 				<!-- Modal -->
 				<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
@@ -76,20 +78,18 @@
 						</div>
 					</div>
 				</div>
+			<div class="container datos-personales">
 				<div class="row">
-					<div class="col-md-12">
-					</div>
-				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-8">
 						<h2 v-text="profile.name"></h2>
 						<p v-text="profile.descripcion"></p>
-						<span v-for="lenguaje in lenguajesArray" :key="lenguaje" class="badge badge-pill badge-dark" v-text="lenguaje"></span>
+						
 					</div>
-					<div class="col-md-12">
-						<span v-for="framework in frameworksArray" :key="framework" class="badge badge-pill badge-dark" v-text="framework"></span>
+					<div class="col-md-4">
+            <h3>Lenguajes:</h3>
+            <span v-for="lenguaje in lenguajesArray" :key="lenguaje" class="badge badge-pill badge-dark" v-text="lenguaje"></span>
+						<h3>Frameworks:</h3>
+            <span v-for="framework in frameworksArray" :key="framework" class="badge badge-pill badge-dark" v-text="framework"></span>
 					</div>
 				</div>
 				<div class="row">
