@@ -675,13 +675,21 @@
             border-radius: 50%;
             border: 2px solid $bgS;
             @include media-breakpoint-down(sm) {
-              height: 200px;
-              width:200px
+              height: 100px;
+              width:100px
             }
             @include media-breakpoint-down(xs) {
-              height: 100px;
-              width:100px;
+              height: 50px;
+              width:50px;
             }
+          }
+          @include media-breakpoint-down(sm) {
+            height: 200px;
+            width:200px
+          }
+          @include media-breakpoint-down(xs) {
+            height: 100px;
+            width:100px;
           }
         }
       }
@@ -914,7 +922,7 @@ fill:$primary;
   }
 
   .datos-personales {
-    padding: 100px 0;
+    padding: 100px 15px;
     h3,h2 {
       margin: 2rem 0 1.3rem 0;
       border-bottom: 2px solid $bgP;

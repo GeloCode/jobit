@@ -1,12 +1,16 @@
 <template>
 
-    <div class="container">
-            <center><h2>Proyecto Vista</h2></center>
+    <div id="project-detail">
+      <header class="header container-fluid" v-bind:style="{'background-image': 'url('+detalle.imagen+')'}">
+        <div class="header-img row" >
+          <h2>{{detalle.titulo}}</h2>
+        </div>
+      </header>
+      
              <div class="row">
                 <div class="card-body col-md-6 offset-md-3">
                       <div v-for="detalle in proyecto" :key="detalle.id"> 
                           <p>{{detalle.titulo}}</p>
-                          <img :src="detalle.imagen" alt="Imagen del proyecto" class="img-fluid">
                           <p>{{detalle.descripcion}}</p>
                       </div>
                 </div>

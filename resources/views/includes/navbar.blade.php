@@ -3,7 +3,7 @@
   <div class="navbar-brand">
     <a href="{{ url('/home') }}">
       <svg version="1.1" id="OTM-Logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-        width="50px" height="50px" viewBox="-25 -25 -50 -30" enable-background="new -25 -25 0 0" xml:space="preserve">
+        width="50px" height="50px" enable-background="new -25 -25 0 0" xml:space="preserve">
         <!-- Filters -->
         <defs>
           <filter id="glow">
@@ -67,7 +67,7 @@
         @endif
         @if (Auth::user()->isEmpresa())
         <li class="nav-item">
-          <a class="nav-link" href="/vofertasempresa">Tus Ofertas (Ofertas Empresa)</a>
+          <a class="nav-link" href="/vofertasempresa">Tus Ofertas</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/vinscripcionesempresa">Solicitantes</a>
@@ -96,10 +96,6 @@
         </a>
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-            {{ __('Logout') }}
-          </a>
 
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
@@ -110,6 +106,11 @@
           @elseif (!Auth::user()->isEmpresa() && !App\Portfolio::where('user_id', Auth::id())->value('id'))
               <a class="dropdown-item" href="/formulario">Portfolio</a>
             @endif
+            <!--LOGOUT SIEMPRE EL ULTIMO-->
+            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+          </a>
           </li>  
         </div>
       </li>
