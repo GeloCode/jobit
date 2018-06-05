@@ -6,7 +6,7 @@
                 <div class="card-body col-md-6 offset-md-3">
                       <div v-for="detalle in proyecto" :key="detalle.id"> 
                           <p>{{detalle.titulo}}</p>
-                          <p>IMAGEN: ----{{detalle.imagen}}</p>
+                          <img :src="detalle.imagen" alt="Imagen del proyecto" class="img-fluid">
                           <p>{{detalle.descripcion}}</p>
                       </div>
                 </div>

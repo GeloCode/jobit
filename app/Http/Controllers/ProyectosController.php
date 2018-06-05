@@ -99,7 +99,8 @@ class ProyectosController extends Controller
         $this->validate($request, [
             'id' => 'required',
             'titulo' => 'required',
-            'descripcion' => 'required'
+            'descripcion' => 'required',
+            'imagen' => 'required'
         ]);
 
         Proyecto::find($id)->update($request->all());

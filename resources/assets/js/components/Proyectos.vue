@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="d-none">
-            <img alt="Image Preview" src="profile.imagen" style="width:200px;" class="rounded-circle" id="imgForm">
+            <img alt="Image Preview" src="" style="width:200px;" class="rounded-circle" id="imgFormProyectos">
         </div>
         <!-- Button trigger modal -->
         
@@ -99,7 +99,7 @@
                     <!-- <p v-if="proyecto.portfolio_id == '3'">-->
                     <div class="card-body">
                         <h5>{{proyecto.titulo}}</h5>
-                        <p>{{proyecto.imagen}}</p>
+                        <img :src="proyecto.imagen" alt="Imagen del proyecto" class="img-fluid">
                         <p>{{proyecto.descripcion}}</p>
                         <a class="btn btn-success btn-sm" v-bind:href="'/detailProject?id=' + proyecto.id">Ver</a>
                         <div>
@@ -160,7 +160,6 @@
             return {
                 proyectos: [],
                 useridProyecto: '',
-                useridPerfils: '',
                 infoPortfolio: [],
                 newUserid: this.auth,
                 newPortfolioid: this.portfid,
@@ -249,7 +248,7 @@
                     portfolio_id: this.newPortfolioid,
                     titulo: this.newTitle,
                     descripcion: this.newDescription,
-                    imagen: $("#imgForm").attr("src")
+                    imagen: $("#imgFormProyectos").attr("src")
                 }).then(response => {
                     this.getProyectos(this.newPortfolioid);
                     this.newTitle = '';
@@ -277,7 +276,7 @@
             },
 
             updateProyecto: function (idProject) {
-                this.fillProject.imagen = $("#imgForm").attr("src");
+                this.fillProject.imagen = $("#imgFormProyectos").attr("src");
                 var url = 'proyectos/' + idProject;
                 axios.put(url, this.fillProject).then(response => {
                     this.getProyectos(this.newPortfolioid);
@@ -289,17 +288,17 @@
                 });
             },
             processFile(event) {
-                this.profile.imagen = event.target.files[0];
+                this.fillProject.imagen = event.target.files[0];
                 var reader = new FileReader();
 
                 reader.addEventListener("load",function() {
-                    document.querySelector('img').src = reader.result;
+                    $('#imgFormProyectos').attr('src', reader.result);
                     },
                     false
                 );
 
-                if (this.profile.imagen) {
-                    reader.readAsDataURL(this.profile.imagen);
+                if (this.fillProject.imagen) {
+                    reader.readAsDataURL(this.fillProject.imagen);
                 }
             },
             changePage: function (page) {
