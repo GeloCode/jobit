@@ -146,7 +146,7 @@ export default {
       lenguajes: "",
       frameworksArray: [],
       frameworks: "",
-      provinciaId: 0
+      provinciaId: 0,
     };
   },
   props: {
@@ -159,6 +159,9 @@ export default {
   watch: {
     'profile.imagen': function(){
         $('#cambiarImagen').css('background-image', this.profile.imagen);
+    },
+    'profile.name': function(){
+      
     }
   },
   methods: {
