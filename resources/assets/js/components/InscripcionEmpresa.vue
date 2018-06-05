@@ -29,7 +29,7 @@
                 <td v-text="inscOferta.estado == '-' ? 'Pendiente por Gestionar' 
                     : inscOferta.estado == 'A' ? 'Aceptado' : 'Rechazado'"></td>
                 <td>
-                  <button class="btn btn-primary" @click.prevent="verPortfolio(inscOferta.user.id)">Ver Portfolio</button>
+                  <button class="btn btn-primary" v-bind:href="'/perfilSolicitante?id=' + inscOferta.user.id">Ver Portfolio</button>
                   <i class="fa fa-check-circle" @click.prevent="aceptarInscripcion(inscOferta.id)" v-if="inscOferta.estado != 'A'"></i>
                   <i class="fa fa-times-circle" @click.prevent="rechazarInscripcion(inscOferta.id)" v-if="inscOferta.estado != 'R'"></i>
                 </td>
