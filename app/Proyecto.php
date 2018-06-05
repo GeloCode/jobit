@@ -9,7 +9,7 @@ class Proyecto extends Model
     /**
      * Hacemos la relación de que muchas ofertas  le pertenecen a un usuario con el rol "Empresa" .
      */
-    protected $fillable = ['user_id', 'portfolio_id', 'titulo', 'descripcion'];
+    protected $fillable = ['user_id', 'portfolio_id', 'titulo', 'descripcion', 'imagen'];
     public function user()
     {
         return $this->belongsTo(User::class);

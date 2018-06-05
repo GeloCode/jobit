@@ -1,13 +1,20 @@
 <template>
-<div>
-	<div v-for="enlace in enlaces" :key="enlace.id"  class="list-group">
-        <div class="list-group-item">
-            <a   v-text="enlace.web" :href="enlace.enlace"></a>
-            <a class="btn btn-danger btn-sm float-right" @click="deleteEnlace(enlace.id)">Borrar</a>
-            <a class="btn btn-warning btn-sm float-right" data-toggle="modal" data-target="#updateEnlace" @click="getEnlaceById(enlace.id)">Editar</a>
+<div class="enlaces-component">
+  <div class="badge badge-pill badge-light center" data-toggle="modal" data-target="#enlacesModal"  @click="limpiarEnlace();">Añadir Enlace</div>
+	  
+    <div class="link-group row">
+        <div v-for="enlace in enlaces" :key="enlace.id"  class="link-group-item col-lg-2 col-md-3 col-sm-4 col-xs-6">    
+            <div class="badge badge-pill badge-dark">
+              <div class="pill">
+                <i class="fa fa-pencil" data-toggle="modal" data-target="#updateEnlace" @click="getEnlaceById(enlace.id)"></i>
+                <a class="link"  v-text="enlace.web" :href="enlace.enlace"></a>
+                <i class="fa fa-times-circle" @click="deleteEnlace(enlace.id)"></i>
+              </div>
+            </div>
+            
         </div>
     </div>
-        <button type="button" class="btn btn-xl btn-primary" data-toggle="modal" data-target="#enlacesModal"  @click="limpiarEnlace();">Añadir Enlace</button>
+        
     <div class="modal fade" id="enlacesModal" tabindex="-1" role="dialog" aria-labelledby="enlacesModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
