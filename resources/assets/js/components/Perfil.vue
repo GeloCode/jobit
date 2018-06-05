@@ -124,7 +124,6 @@ export default {
   },
   data: function() {
     return {
-			first:false,
 			provincias: [],
       portfolioId: '',
       role:{
@@ -199,9 +198,6 @@ export default {
           this.openCloseModal();
           this.getPerfilByUser();
           toastr.success("Perfil actualizado correctamente");
-          if (this.first) {
-            window.location.assign("/perfil");
-          }
         })
         .catch(function(error) {
           toastr.error(error);
@@ -229,11 +225,6 @@ export default {
     },
     openCloseModal: function() {
       $("#profileModal").modal("toggle");
-    },
-    firstTime: function() {
-      if (this.first) {
-        this.openCloseModal();
-      }
     },
     getPortfolio: function() {
       var url = "portfoliosPerfil/" + this.userId;
