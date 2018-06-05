@@ -3,6 +3,6 @@
 @section('content')
 
 @if(Auth::check())
-<perfil user-id="{{Auth::id()}}" isEmpresa="{{Auth::user()->isEmpresa()}}"></perfil>
+<perfil user-id="{{Auth::id()}}"></perfil>
 @endif
 @endsection

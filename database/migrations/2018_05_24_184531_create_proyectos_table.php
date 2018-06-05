@@ -19,8 +19,8 @@ class CreateProyectosTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
             $table->integer('portfolio_id')->unsigned();
             $table->foreign('portfolio_id')->references('id')->on('portfolios')->onUpdate('cascade');
-            $table->string('titulo');
-            $table->string('descripcion');
+            $table->string('titulo', 255);
+            $table->string('descripcion', 255);
             $table->longText('imagen')->nullable();
             $table->timestamps();
              });
