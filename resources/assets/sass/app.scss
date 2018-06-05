@@ -1162,3 +1162,33 @@ fill:$primary;
     }
   }
 }
+
+#project-detail {
+  .project {
+    display: flex;
+    justify-content: center;
+  }
+  .header {
+    height:600px;
+    background-image:linear-gradient(to right, rgba(0, 0, 0, .8), rgba(0, 0, 0, .4),rgba(0, 0, 0, .8)), url('../img/pic_1.jpg');
+    background-size: cover;
+    .header-img {
+      height:100%;
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      h2 {
+        font-weight: 900!important;
+        color:white;
+        
+      }
+     
+    }
+    @include media-breakpoint-down(sm) {
+      height: 400px;
+    }
+    @include media-breakpoint-down(xs) {
+      height: 340px;
+    }
+  }
+}
