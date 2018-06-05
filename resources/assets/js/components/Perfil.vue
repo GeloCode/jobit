@@ -101,7 +101,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 </template>
 <script>
 import Enlaces from "./Enlaces.vue";

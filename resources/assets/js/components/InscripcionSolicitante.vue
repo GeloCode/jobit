@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        <h2>Inscripciones Component</h2>
+    <div class="container" id="inscripciones-solicitante">
+        <h2>Inscripciones</h2>
         <table class="table">
             <thead>
                 <tr>

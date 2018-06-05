@@ -1,26 +1,23 @@
 <template>
-    <div class="container">
-        <h1>Proyectos</h1>
+    <div class="container-fluid" id="proyectos-view">
+        
         <div class="row">
-            <div v-for="portfolio in infoPortfolio" :key="portfolio.id" class="card col-md-12">
-                <div class="card-body">
-                    <center>
-                        <h4>{{portfolio.titulo}}</h4>
-                    </center>
-                    <center>
-                        <p>{{portfolio.text}}</p>
-                    </center>
+            <div class="container">
+                <div class="row first">
+                    <h1>Proyectos</h1>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Crear Proyecto
+                    </button>
                 </div>
             </div>
+
         </div>
         <div class="d-none">
             <img alt="Image Preview" src="" style="width:200px;" class="rounded-circle" id="imgFormProyectos">
         </div>
         <!-- Button trigger modal -->
-        
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Crear Proyecto
-        </button>
+
+
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -93,28 +90,39 @@
         </div>
         <!-- END MODAL!!!!! -->
 
-        <div class="row">
-            <div v-for="proyecto in proyectos" :key="proyecto.id" class="card col-md-4">
+        <div class="container box-port" v-for="portfolio in infoPortfolio" :key="portfolio.id">
+            <div class="row">
+                <div class="title col-md-12">
+                    <h2>{{portfolio.titulo}}</h2>
+                    <h4>{{portfolio.text}}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+        <div class="row portfolio-group row-eq-height">
+            <div v-for="proyecto in proyectos" :key="proyecto.id" class="portfolio-item col-md-4 ">
                 <div v-if="proyecto.portfolio_id == portfid">
-                    <!-- <p v-if="proyecto.portfolio_id == '3'">-->
-                    <div class="card-body">
-                        <h5>{{proyecto.titulo}}</h5>
-                        <img :src="proyecto.imagen" alt="Imagen del proyecto" class="img-fluid">
-                        <p>{{proyecto.descripcion}}</p>
-                        <a class="btn btn-success btn-sm" v-bind:href="'/detailProject?id=' + proyecto.id">Ver</a>
-                        <div>
+                    <div class="card ">
+                        <!-- <p v-if="proyecto.portfolio_id == '3'">-->
+                        <div class="card-body">
+
+                            <div class="image" v-bind:style="{ 'background-image': 'url(' +proyecto.imagen+ ')' }"></div>
+                            <p>{{proyecto.titulo}}</p>
+                            <span>{{proyecto.descripcion}}</span>
+
                             <!-- CONTROL DE USUARIO !!! -->
-                            <div>
+                            <div class="buttons col-lg-12">
+                                <a class="btn btn-success btn-sm" v-bind:href="'/detailProject?id=' + proyecto.id">Ver</a>
                                 <a href="#" class="btn btn-warning btn-sm" v-on:click.prevent="editProyecto(proyecto)">Editar Proyecto</a>
                                 <a class="btn btn-danger btn-sm" v-on:click="deleteProyecto(proyecto)">Borrar</a>
                             </div>
+                            <!-- FIN CONTROL DE USUARIO !!! -->
                         </div>
-                        <!-- FIN CONTROL DE USUARIO !!! -->
                     </div>
                 </div>
             </div>
         </div>
-        <nav>
+        <nav class="navigation row">
             <ul class="pagination">
                 <li class="page-item" v-if="pagination.current_page > 1">
                     <a class="page-link" href="#" @click.prevent="changePage(pagination.current_page - 1)">
@@ -132,6 +140,7 @@
                 </li>
             </ul>
         </nav>
+        </div>
 
     </div>
 </template>
@@ -147,10 +156,10 @@
     moment.locale('es');
     export default {
         created: function () {
-            if(this.control==1){
-              this.getProyectos(this.portfid);
-              this.getInfoPortfolio(this.portfid);
-              this.getUserIdProyecto(this.portfid);
+            if (this.control == 1) {
+                this.getProyectos(this.portfid);
+                this.getInfoPortfolio(this.portfid);
+                this.getUserIdProyecto(this.portfid);
             }
         },
         props: ['portfid', 'auth', 'idperfil', 'control'],
@@ -165,7 +174,12 @@
                 newPortfolioid: this.portfid,
                 newTitle: '',
                 newDescription: '',
-                fillProject: { 'id': '', 'titulo': '', 'descripcion': '' , 'imagen': ''},
+                fillProject: {
+                    'id': '',
+                    'titulo': '',
+                    'descripcion': '',
+                    'imagen': ''
+                },
                 pagination: {
                     total: 0,
                     current_page: 0,
@@ -179,14 +193,14 @@
         },
         watch: {
             //lo que hace es comprobar el props, si cambia el valor del props se ejecuta esta funcion y actualiza los datos.
-            "portfid":function(){
+            "portfid": function () {
                 this.getProyectos(this.portfid);
                 this.getInfoPortfolio(this.portfid);
                 this.getUserIdProyecto(this.portfid);
                 this.newUserid = this.auth;
                 this.newPortfolioid = this.portfid;
             },
-            
+
         },
         computed: {
             isActived: function () {
@@ -224,7 +238,9 @@
                     this.proyectos = response.data.proyectos.data;
                     this.pagination = response.data.pagination
                 }).catch(error => {
-                    proyectos = { 'id': 1 };
+                    proyectos = {
+                        'id': 1
+                    };
                 });
             },
             getUserIdProyecto: function (idportf) {
@@ -238,7 +254,9 @@
                 axios.get(urlPortfolio).then(response => {
                     this.infoPortfolio = response.data;
                 }).catch(error => {
-                    proyectos = { 'id': 1 };
+                    proyectos = {
+                        'id': 1
+                    };
                 });
             },
             createProyecto: function () {
@@ -280,7 +298,11 @@
                 var url = 'proyectos/' + idProject;
                 axios.put(url, this.fillProject).then(response => {
                     this.getProyectos(this.newPortfolioid);
-                    this.fillProject = { 'id': '', 'titulo': '', 'descripcion': '' };
+                    this.fillProject = {
+                        'id': '',
+                        'titulo': '',
+                        'descripcion': ''
+                    };
                     $('#editProject').modal('hide');
                     toastr.success('Actualizado correctamente');
                 }).catch(error => {
@@ -291,8 +313,8 @@
                 this.fillProject.imagen = event.target.files[0];
                 var reader = new FileReader();
 
-                reader.addEventListener("load",function() {
-                    $('#imgFormProyectos').attr('src', reader.result);
+                reader.addEventListener("load", function () {
+                        $('#imgFormProyectos').attr('src', reader.result);
                     },
                     false
                 );
