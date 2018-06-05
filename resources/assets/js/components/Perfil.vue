@@ -118,7 +118,7 @@
 			</div>
       
 					<div v-if="role.rol_id!=1">
-						<proyectos :control="1" :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
+						<proyectos :control="2" :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
 						<!--Aqui los proyectos-->
 						<span v-text="portfolioId"></span>
 					
@@ -144,7 +144,6 @@ export default {
   },
   data: function() {
     return {
-			first:false,
 			provincias: [],
       portfolioId: '',
       role:{
@@ -273,11 +272,6 @@ export default {
     },
     openCloseModal: function() {
       $("#profileModal").modal("toggle");
-    },
-    firstTime: function() {
-      if (this.first) {
-        this.openCloseModal();
-      }
     },
     getPortfolio: function() {
       var url = "portfoliosPerfil/" + this.userId;
