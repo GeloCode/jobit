@@ -1,14 +1,14 @@
 <template>
 <div class="enlaces-component">
-  <div class="badge badge-pill badge-light center" data-toggle="modal" data-target="#enlacesModal"  @click="limpiarEnlace();">Añadir Enlace</div>
+  <div class="badge badge-pill badge-light center" data-toggle="modal" data-target="#enlacesModal"  @click="limpiarEnlace();" v-if="controlarenlaces !=1">Añadir Enlace</div>
 	  
     <div class="link-group row">
         <div v-for="enlace in enlaces" :key="enlace.id"  class="link-group-item col-lg-2 col-md-3 col-sm-4 col-xs-6">    
             <div class="badge badge-pill badge-dark">
               <div class="pill">
-                <i class="fa fa-pencil" data-toggle="modal" data-target="#updateEnlace" @click="getEnlaceById(enlace.id)"></i>
+                <i class="fa fa-pencil" data-toggle="modal" data-target="#updateEnlace" @click="getEnlaceById(enlace.id)" v-if="controlarenlaces !=1"></i>
                 <a class="link"  v-text="enlace.web" :href="enlace.enlace"></a>
-                <i class="fa fa-times-circle" @click="deleteEnlace(enlace.id)"></i>
+                <i class="fa fa-times-circle" @click="deleteEnlace(enlace.id)" v-if="controlarenlaces !=1"></i>
               </div>
             </div>
             
@@ -88,7 +88,8 @@ export default {
     };
   },
   props: {
-    userId: String
+    userId: String,
+    controlarenlaces: String
   },
   methods: {
     openLink: function(url) {

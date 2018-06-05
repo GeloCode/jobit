@@ -29,7 +29,7 @@
                 <td v-text="inscOferta.estado == '-' ? 'Pendiente por Gestionar' 
                     : inscOferta.estado == 'A' ? 'Aceptado' : 'Rechazado'"></td>
                 <td>
-                  <a class="btn btn-primary" v-bind:href="'/perfilSolicitante?id=' + inscOferta.user.id">Ver Portfolio</a>
+                  <a class="btn btn-primary" v-bind:href="'/perfilSolicitante?id=' + inscOferta.user.id + '&verenlace=' + verenlace">Ver Portfolio</a>
                   <i class="fa fa-check-circle" @click.prevent="aceptarInscripcion(inscOferta.id)" v-if="inscOferta.estado != 'A'"></i>
                   <i class="fa fa-times-circle" @click.prevent="rechazarInscripcion(inscOferta.id)" v-if="inscOferta.estado != 'R'"></i>
                 </td>
@@ -47,7 +47,8 @@
     },
     props: {
       userId: String,
-      ofertaId: String
+      ofertaId: String,
+      verenlace: String
     },
     data: function () {
       return {

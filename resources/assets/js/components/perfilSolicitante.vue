@@ -15,7 +15,7 @@
     </div>
     <div class="container-fluid enlace-container">
 				<div  class="mostrarEnlaces">
-					<enlaces :user-id="userId"></enlaces>
+					<enlaces :controlarenlaces="perfildesdeempresa" :user-id="userId"></enlaces>
 				</div>
     </div>
 			<div class="container datos-personales">
@@ -34,8 +34,7 @@
 				</div>
 			</div>
 					<div>
-						<proyectos :control="1" :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
-						<span v-text="portfolioId"></span>
+						<proyectos :control="2" :auth="userId" :idperfil="profile.id" :portfid="portfolioId"></proyectos><!-- hashid es el id del // -->
         </div>
 			</div>
 </template>
@@ -70,6 +69,7 @@ export default {
   },
   props: {
 		userId: String,
+    perfildesdeempresa: String
 	},
   components: {
     enlaces: Enlaces,
